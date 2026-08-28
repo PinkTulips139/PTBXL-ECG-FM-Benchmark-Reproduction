@@ -1,0 +1,894 @@
+FORMAL_GATE3_START=2026-08-16T19:41:41+08:00
+PID_PENDING
+COMMIT=238409835ef55358a10bbc3459dfa9aaa91ad5e5
+COMMAND=/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/bin/python /root/autodl-tmp/ecg_ptbxl_reproduction/ecg-fm-benchmarking/code/main_lite.py --data /root/autodl-tmp/ecg_ptbxl_reproduction/data/processed/ptb-xl/records500 --fs-data 500 --finetune-dataset ptbxl_all --architecture s4 --input-size 2.5 --fs-model 100 --input-channels 12 --s4-n 8 --s4-h 512 --s4-layers 4 --precision 32 --epochs 100 --modality ecg --lr 0.001 --wd 0.001 --optimizer adam --batch-size 64 --finetune --eval-mode frozen --gpus 1 --output-path /root/autodl-tmp/ecg_ptbxl_reproduction/outputs/formal_s4_ptbxl_all --prediction-path /root/autodl-tmp/ecg_ptbxl_reproduction/predictions/s4 --export-predictions
+TRAIN_PID=9716
+CUDA extension for cauchy multiplication not found. Install by going to extensions/cauchy/ and running `python setup.py install`. This should speed up end-to-end training by 10-50%
+[KeOps] Compiling cuda jit compiler engine ... OK
+[pyKeOps] Compiling nvrtc binder for python ... OK
+CUDA extension for cauchy multiplication not found. Install by going to extensions/cauchy/ and running `python setup.py install`. This should speed up end-to-end training by 10-50%
+Namespace(data='/root/autodl-tmp/ecg_ptbxl_reproduction/data/processed/ptb-xl/records500', epochs=100, batch_size=64, lr=0.001, weight_decay=0.001, resume='', pretrained='', optimizer='adam', output_path='/root/autodl-tmp/ecg_ptbxl_reproduction/outputs/formal_s4_ptbxl_all', metadata='', gpus=1, num_nodes=1, precision='32', distributed_backend=None, accumulate=1, input_size=2.5, train_head_only=False, finetune=True, linear_eval=False, lr_schedule='const', lr_num_warmup_steps=1000, discriminative_lr_factor=0.1, lr_find=False, auto_batch_size=False, auc_maximization=False, refresh_rate=0, mlflow=False, mlflow_experiment_name='fm-benchmarking', mlflow_run_name='run', fs_model=100.0, fs_data=500.0, input_channels=12, architecture='s4', s4_n=8, s4_h=512, s4_layers=4, s4_batchnorm=False, s4_prenorm=False, merl_backbone='resnet', modality='ecg', normalize=False, finetune_dataset='ptbxl_all', chunk_length_train=1.0, stride_fraction_train=1.0, stride_fraction_valtest=1.0, chunkify_train=False, segmentation=False, eval_only='', export_predictions=True, prediction_path='/root/autodl-tmp/ecg_ptbxl_reproduction/predictions/s4', eval_mode='frozen', label_ratio=1, executable='main_lite_ecg', revision='')
+Output directory: /root/autodl-tmp/ecg_ptbxl_reproduction/outputs/formal_s4_ptbxl_all/version_0
+2026/08/16 19:41:56 INFO mlflow.tracking.fluent: Experiment with name 'fm-benchmarking' does not exist. Creating a new experiment.
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+HPU available: False, using: 0 HPUs
+You are using a CUDA device ('NVIDIA GeForce RTX 4090') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/lightning/pytorch/callbacks/model_checkpoint.py:658: Checkpoint directory /root/autodl-tmp/ecg_ptbxl_reproduction/outputs/formal_s4_ptbxl_all/version_0 exists and is not empty.
+Folder: /root/autodl-tmp/ecg_ptbxl_reproduction/data/processed/ptb-xl/records500 Samples: 21799
+
+ /root/autodl-tmp/ecg_ptbxl_reproduction/data/processed/ptb-xl/records500
+train dataset: 17418 samples
+val dataset: 8732 samples
+test dataset: 8792 samples
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+
+  | Name  | Type    | Params | Mode 
+------------------------------------------
+0 | model | S4Model | 2.2 M  | train
+------------------------------------------
+2.2 M     Trainable params
+0         Non-trainable params
+2.2 M     Total params
+8.733     Total estimated model params size (MB)
+46        Modules in train mode
+0         Modules in eval mode
+[KeOps] Generating code for Sum_Reduction reduction (with parameters 0) of formula ComplexMult(Real2Complex(1/ComplexSquareAbs(ComplexMult(b-c,b-Conj(c)))),ComplexMult(b*ComplexReal(a)-Real2Complex(a|c),Conj(ComplexMult(b-c,b-Conj(c))))) with a=Var(0,2,1), b=Var(1,2,0), c=Var(2,2,1) ... OK
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+[KeOps] Generating code for Sum_Reduction reduction (with parameters 1) of formula ComplexAdd(ComplexAdd(ComplexAdd(Zero(2),Zero(2)),ComplexAdd(Zero(2),Zero(2)))*(-1/ComplexSquareAbs(ComplexMult(b-c,b-Conj(c)))**2),ComplexAdd(Real2Complex(ComplexMult(Conj(Conj(ComplexMult(b-c,b-Conj(c)))),ComplexMult(Conj(Real2Complex(1/ComplexSquareAbs(ComplexMult(b-c,b-Conj(c))))),d))|b)-ComplexReal(ComplexMult(Conj(Conj(ComplexMult(b-c,b-Conj(c)))),ComplexMult(Conj(Real2Complex(1/ComplexSquareAbs(ComplexMult(b-c,b-Conj(c))))),d)))*c,ComplexAdd(Zero(2),Zero(2)))) with b=Var(1,2,0), c=Var(2,2,1), d=Var(3,2,0) ... OK
+epoch 0 val noagg: 0.7720854710306991
+epoch 0 val agg: 0.7804301135982681
+Epoch 0, global step 272: 'macro_auc_agg_val0' reached 0.78043 (best 0.78043), saving model to '/root/autodl-tmp/ecg_ptbxl_reproduction/outputs/formal_s4_ptbxl_all/version_0/best_model.ckpt' as top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 1 val noagg: 0.8416760331541692
+epoch 1 val agg: 0.8518190439292543
+Epoch 1, global step 544: 'macro_auc_agg_val0' reached 0.85182 (best 0.85182), saving model to '/root/autodl-tmp/ecg_ptbxl_reproduction/outputs/formal_s4_ptbxl_all/version_0/best_model.ckpt' as top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 2 val noagg: 0.8576587571409162
+epoch 2 val agg: 0.8699883125792215
+Epoch 2, global step 816: 'macro_auc_agg_val0' reached 0.86999 (best 0.86999), saving model to '/root/autodl-tmp/ecg_ptbxl_reproduction/outputs/formal_s4_ptbxl_all/version_0/best_model.ckpt' as top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 3 val noagg: 0.8810899121912497
+epoch 3 val agg: 0.8918273636829823
+Epoch 3, global step 1088: 'macro_auc_agg_val0' reached 0.89183 (best 0.89183), saving model to '/root/autodl-tmp/ecg_ptbxl_reproduction/outputs/formal_s4_ptbxl_all/version_0/best_model.ckpt' as top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 4 val noagg: 0.8938882567469622
+epoch 4 val agg: 0.9046664404686535
+Epoch 4, global step 1360: 'macro_auc_agg_val0' reached 0.90467 (best 0.90467), saving model to '/root/autodl-tmp/ecg_ptbxl_reproduction/outputs/formal_s4_ptbxl_all/version_0/best_model.ckpt' as top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 5 val noagg: 0.9044469681357047
+epoch 5 val agg: 0.9141437325581475
+Epoch 5, global step 1632: 'macro_auc_agg_val0' reached 0.91414 (best 0.91414), saving model to '/root/autodl-tmp/ecg_ptbxl_reproduction/outputs/formal_s4_ptbxl_all/version_0/best_model.ckpt' as top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 6 val noagg: 0.9070564052997462
+epoch 6 val agg: 0.9163501274610901
+Epoch 6, global step 1904: 'macro_auc_agg_val0' reached 0.91635 (best 0.91635), saving model to '/root/autodl-tmp/ecg_ptbxl_reproduction/outputs/formal_s4_ptbxl_all/version_0/best_model.ckpt' as top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 7 val noagg: 0.9138774846212625
+epoch 7 val agg: 0.9239886952596487
+Epoch 7, global step 2176: 'macro_auc_agg_val0' reached 0.92399 (best 0.92399), saving model to '/root/autodl-tmp/ecg_ptbxl_reproduction/outputs/formal_s4_ptbxl_all/version_0/best_model.ckpt' as top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 8 val noagg: 0.9162489871388628
+epoch 8 val agg: 0.9250295495377809
+Epoch 8, global step 2448: 'macro_auc_agg_val0' reached 0.92503 (best 0.92503), saving model to '/root/autodl-tmp/ecg_ptbxl_reproduction/outputs/formal_s4_ptbxl_all/version_0/best_model.ckpt' as top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 9 val noagg: 0.9170990205804166
+epoch 9 val agg: 0.9254759813030325
+Epoch 9, global step 2720: 'macro_auc_agg_val0' reached 0.92548 (best 0.92548), saving model to '/root/autodl-tmp/ecg_ptbxl_reproduction/outputs/formal_s4_ptbxl_all/version_0/best_model.ckpt' as top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 10 val noagg: 0.9164272903538027
+epoch 10 val agg: 0.9247246936426343
+Epoch 10, global step 2992: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 11 val noagg: 0.9184931325430323
+epoch 11 val agg: 0.9273682083006285
+Epoch 11, global step 3264: 'macro_auc_agg_val0' reached 0.92737 (best 0.92737), saving model to '/root/autodl-tmp/ecg_ptbxl_reproduction/outputs/formal_s4_ptbxl_all/version_0/best_model.ckpt' as top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 12 val noagg: 0.9198122954784955
+epoch 12 val agg: 0.9280486396618036
+Epoch 12, global step 3536: 'macro_auc_agg_val0' reached 0.92805 (best 0.92805), saving model to '/root/autodl-tmp/ecg_ptbxl_reproduction/outputs/formal_s4_ptbxl_all/version_0/best_model.ckpt' as top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 13 val noagg: 0.922247570288639
+epoch 13 val agg: 0.9309362873656425
+Epoch 13, global step 3808: 'macro_auc_agg_val0' reached 0.93094 (best 0.93094), saving model to '/root/autodl-tmp/ecg_ptbxl_reproduction/outputs/formal_s4_ptbxl_all/version_0/best_model.ckpt' as top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 14 val noagg: 0.9229021336490738
+epoch 14 val agg: 0.9312053540585659
+Epoch 14, global step 4080: 'macro_auc_agg_val0' reached 0.93121 (best 0.93121), saving model to '/root/autodl-tmp/ecg_ptbxl_reproduction/outputs/formal_s4_ptbxl_all/version_0/best_model.ckpt' as top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 15 val noagg: 0.9237882665542236
+epoch 15 val agg: 0.9319499621043213
+Epoch 15, global step 4352: 'macro_auc_agg_val0' reached 0.93195 (best 0.93195), saving model to '/root/autodl-tmp/ecg_ptbxl_reproduction/outputs/formal_s4_ptbxl_all/version_0/best_model.ckpt' as top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 16 val noagg: 0.9233097821559656
+epoch 16 val agg: 0.93259746535214
+Epoch 16, global step 4624: 'macro_auc_agg_val0' reached 0.93260 (best 0.93260), saving model to '/root/autodl-tmp/ecg_ptbxl_reproduction/outputs/formal_s4_ptbxl_all/version_0/best_model.ckpt' as top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 17 val noagg: 0.9243241058547299
+epoch 17 val agg: 0.9336836287241347
+Epoch 17, global step 4896: 'macro_auc_agg_val0' reached 0.93368 (best 0.93368), saving model to '/root/autodl-tmp/ecg_ptbxl_reproduction/outputs/formal_s4_ptbxl_all/version_0/best_model.ckpt' as top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 18 val noagg: 0.9264143141325514
+epoch 18 val agg: 0.9347548318154125
+Epoch 18, global step 5168: 'macro_auc_agg_val0' reached 0.93475 (best 0.93475), saving model to '/root/autodl-tmp/ecg_ptbxl_reproduction/outputs/formal_s4_ptbxl_all/version_0/best_model.ckpt' as top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 19 val noagg: 0.9278278847524183
+epoch 19 val agg: 0.9365934787684929
+Epoch 19, global step 5440: 'macro_auc_agg_val0' reached 0.93659 (best 0.93659), saving model to '/root/autodl-tmp/ecg_ptbxl_reproduction/outputs/formal_s4_ptbxl_all/version_0/best_model.ckpt' as top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 20 val noagg: 0.9255305736018781
+epoch 20 val agg: 0.9348741091746077
+Epoch 20, global step 5712: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 21 val noagg: 0.9243272880999094
+epoch 21 val agg: 0.9344013685208523
+Epoch 21, global step 5984: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 22 val noagg: 0.9265183559420025
+epoch 22 val agg: 0.9359124539444502
+Epoch 22, global step 6256: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 23 val noagg: 0.9281496939574791
+epoch 23 val agg: 0.9374146621693894
+Epoch 23, global step 6528: 'macro_auc_agg_val0' reached 0.93741 (best 0.93741), saving model to '/root/autodl-tmp/ecg_ptbxl_reproduction/outputs/formal_s4_ptbxl_all/version_0/best_model.ckpt' as top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 24 val noagg: 0.9276426160865681
+epoch 24 val agg: 0.9360028975444754
+Epoch 24, global step 6800: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 25 val noagg: 0.9266295742371103
+epoch 25 val agg: 0.9362311455775113
+Epoch 25, global step 7072: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 26 val noagg: 0.9286594032192578
+epoch 26 val agg: 0.9376895273667041
+Epoch 26, global step 7344: 'macro_auc_agg_val0' reached 0.93769 (best 0.93769), saving model to '/root/autodl-tmp/ecg_ptbxl_reproduction/outputs/formal_s4_ptbxl_all/version_0/best_model.ckpt' as top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 27 val noagg: 0.9267548991223757
+epoch 27 val agg: 0.9365467542742921
+Epoch 27, global step 7616: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 28 val noagg: 0.9245087618219565
+epoch 28 val agg: 0.9355097735110692
+Epoch 28, global step 7888: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 29 val noagg: 0.9235850454084166
+epoch 29 val agg: 0.9356394799424573
+Epoch 29, global step 8160: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 30 val noagg: 0.9294221593593816
+epoch 30 val agg: 0.9386861705857827
+Epoch 30, global step 8432: 'macro_auc_agg_val0' reached 0.93869 (best 0.93869), saving model to '/root/autodl-tmp/ecg_ptbxl_reproduction/outputs/formal_s4_ptbxl_all/version_0/best_model.ckpt' as top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 31 val noagg: 0.9273861172326116
+epoch 31 val agg: 0.9360284616052231
+Epoch 31, global step 8704: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 32 val noagg: 0.9276203030843967
+epoch 32 val agg: 0.9360886132304409
+Epoch 32, global step 8976: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 33 val noagg: 0.9262546849918195
+epoch 33 val agg: 0.9359753475375179
+Epoch 33, global step 9248: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 34 val noagg: 0.9255843332011281
+epoch 34 val agg: 0.935258929311932
+Epoch 34, global step 9520: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 35 val noagg: 0.9284109581540803
+epoch 35 val agg: 0.9382031519360612
+Epoch 35, global step 9792: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 36 val noagg: 0.9284129630705781
+epoch 36 val agg: 0.9385202586474078
+Epoch 36, global step 10064: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 37 val noagg: 0.9277433544747292
+epoch 37 val agg: 0.9377302951116927
+Epoch 37, global step 10336: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 38 val noagg: 0.9258960286446648
+epoch 38 val agg: 0.9356680419187944
+Epoch 38, global step 10608: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 39 val noagg: 0.9257984488459978
+epoch 39 val agg: 0.9360631482431591
+Epoch 39, global step 10880: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 40 val noagg: 0.9233760959849321
+epoch 40 val agg: 0.9344720718410463
+Epoch 40, global step 11152: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 41 val noagg: 0.9254444339134719
+epoch 41 val agg: 0.9373425108841358
+Epoch 41, global step 11424: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 42 val noagg: 0.9264729590978981
+epoch 42 val agg: 0.9370946087301787
+Epoch 42, global step 11696: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 43 val noagg: 0.9256415083044706
+epoch 43 val agg: 0.9362287656911303
+Epoch 43, global step 11968: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 44 val noagg: 0.9285806625731649
+epoch 44 val agg: 0.9385730338680177
+Epoch 44, global step 12240: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 45 val noagg: 0.9278245510415438
+epoch 45 val agg: 0.9385820218873624
+Epoch 45, global step 12512: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 46 val noagg: 0.9257043666108642
+epoch 46 val agg: 0.9349952976079792
+Epoch 46, global step 12784: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 47 val noagg: 0.9251627068080112
+epoch 47 val agg: 0.9350186373319116
+Epoch 47, global step 13056: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 48 val noagg: 0.9254981234773035
+epoch 48 val agg: 0.9352590995361604
+Epoch 48, global step 13328: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 49 val noagg: 0.9251359799900422
+epoch 49 val agg: 0.9354430637827402
+Epoch 49, global step 13600: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 50 val noagg: 0.9273089409074481
+epoch 50 val agg: 0.936320470418206
+Epoch 50, global step 13872: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 51 val noagg: 0.9253366765252754
+epoch 51 val agg: 0.9344112369056607
+Epoch 51, global step 14144: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 52 val noagg: 0.9224806242804727
+epoch 52 val agg: 0.931819637543777
+Epoch 52, global step 14416: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 53 val noagg: 0.9243763323381714
+epoch 53 val agg: 0.9339767193493368
+Epoch 53, global step 14688: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 54 val noagg: 0.9235346734491025
+epoch 54 val agg: 0.9325170679067294
+Epoch 54, global step 14960: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 55 val noagg: 0.9228968040011095
+epoch 55 val agg: 0.9335273988367455
+Epoch 55, global step 15232: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 56 val noagg: 0.9214985549526447
+epoch 56 val agg: 0.9317380912775759
+Epoch 56, global step 15504: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 57 val noagg: 0.9208987602333703
+epoch 57 val agg: 0.9312035192586606
+Epoch 57, global step 15776: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 58 val noagg: 0.9237036556663523
+epoch 58 val agg: 0.9334890260101865
+Epoch 58, global step 16048: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 59 val noagg: 0.9253682164140493
+epoch 59 val agg: 0.9354335068485634
+Epoch 59, global step 16320: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 60 val noagg: 0.9222612363848864
+epoch 60 val agg: 0.9325931422741924
+Epoch 60, global step 16592: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 61 val noagg: 0.9222068545528755
+epoch 61 val agg: 0.9330947407402786
+Epoch 61, global step 16864: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 62 val noagg: 0.9208733248693228
+epoch 62 val agg: 0.9311153460842976
+Epoch 62, global step 17136: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 63 val noagg: 0.9223627165552502
+epoch 63 val agg: 0.931423110039925
+Epoch 63, global step 17408: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 64 val noagg: 0.9204167784570986
+epoch 64 val agg: 0.9310293323373727
+Epoch 64, global step 17680: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 65 val noagg: 0.9216002465863989
+epoch 65 val agg: 0.9322454641745804
+Epoch 65, global step 17952: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 66 val noagg: 0.9182540349038052
+epoch 66 val agg: 0.929091617705973
+Epoch 66, global step 18224: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 67 val noagg: 0.9200042166258019
+epoch 67 val agg: 0.9297878141226574
+Epoch 67, global step 18496: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 68 val noagg: 0.9189627083410566
+epoch 68 val agg: 0.9287520518606239
+Epoch 68, global step 18768: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 69 val noagg: 0.9202866896660198
+epoch 69 val agg: 0.9302083032088767
+Epoch 69, global step 19040: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 70 val noagg: 0.9190973652926451
+epoch 70 val agg: 0.9287718820299977
+Epoch 70, global step 19312: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 71 val noagg: 0.9190967661686515
+epoch 71 val agg: 0.9289727958001343
+Epoch 71, global step 19584: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 72 val noagg: 0.918009450497786
+epoch 72 val agg: 0.9280277189784264
+Epoch 72, global step 19856: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 73 val noagg: 0.9154635641777128
+epoch 73 val agg: 0.9262835289399095
+Epoch 73, global step 20128: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 74 val noagg: 0.9193110933510207
+epoch 74 val agg: 0.9300397874427702
+Epoch 74, global step 20400: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 75 val noagg: 0.9180194449530121
+epoch 75 val agg: 0.9281359867351389
+Epoch 75, global step 20672: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 76 val noagg: 0.9180711909290287
+epoch 76 val agg: 0.9283672754684468
+Epoch 76, global step 20944: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 77 val noagg: 0.9198054815079091
+epoch 77 val agg: 0.9303733801678871
+Epoch 77, global step 21216: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 78 val noagg: 0.9215801059222205
+epoch 78 val agg: 0.9309759384114898
+Epoch 78, global step 21488: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 79 val noagg: 0.9200192259705384
+epoch 79 val agg: 0.9298048606640332
+Epoch 79, global step 21760: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 80 val noagg: 0.9200768659501398
+epoch 80 val agg: 0.9300321846210586
+Epoch 80, global step 22032: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 81 val noagg: 0.9176293751572819
+epoch 81 val agg: 0.9273418875043724
+Epoch 81, global step 22304: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 82 val noagg: 0.9179082805287289
+epoch 82 val agg: 0.9279941462288664
+Epoch 82, global step 22576: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 83 val noagg: 0.9169184037497267
+epoch 83 val agg: 0.9266878682981452
+Epoch 83, global step 22848: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 84 val noagg: 0.9185570258439898
+epoch 84 val agg: 0.9284158421638243
+Epoch 84, global step 23120: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 85 val noagg: 0.9182132581976574
+epoch 85 val agg: 0.928567507857856
+Epoch 85, global step 23392: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 86 val noagg: 0.9176215196879357
+epoch 86 val agg: 0.9281374369901806
+Epoch 86, global step 23664: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 87 val noagg: 0.9149100741747505
+epoch 87 val agg: 0.9259264826035511
+Epoch 87, global step 23936: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 88 val noagg: 0.916172935061662
+epoch 88 val agg: 0.9267740274129952
+Epoch 88, global step 24208: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 89 val noagg: 0.9126578318527149
+epoch 89 val agg: 0.9236731139071294
+Epoch 89, global step 24480: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 90 val noagg: 0.9146010674886371
+epoch 90 val agg: 0.9253961363103194
+Epoch 90, global step 24752: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 91 val noagg: 0.9145250115820119
+epoch 91 val agg: 0.9249346003734601
+Epoch 91, global step 25024: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 92 val noagg: 0.9145368394634514
+epoch 92 val agg: 0.9252866087381175
+Epoch 92, global step 25296: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 93 val noagg: 0.9126547523031241
+epoch 93 val agg: 0.9235374945057845
+Epoch 93, global step 25568: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 94 val noagg: 0.9116143456818391
+epoch 94 val agg: 0.9222092523705541
+Epoch 94, global step 25840: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 95 val noagg: 0.9103316738620832
+epoch 95 val agg: 0.9209839813345285
+Epoch 95, global step 26112: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 96 val noagg: 0.9135450497423552
+epoch 96 val agg: 0.9242099487399267
+Epoch 96, global step 26384: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 97 val noagg: 0.911757079648845
+epoch 97 val agg: 0.922112738457193
+Epoch 97, global step 26656: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 98 val noagg: 0.9112096762941376
+epoch 98 val agg: 0.922078568349775
+Epoch 98, global step 26928: 'macro_auc_agg_val0' was not in top 1
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+epoch 99 val noagg: 0.9127017824883901
+epoch 99 val agg: 0.9221703563949993
+Epoch 99, global step 27200: 'macro_auc_agg_val0' was not in top 1
+`Trainer.fit` stopped: `max_epochs=100` reached.
+Folder: /root/autodl-tmp/ecg_ptbxl_reproduction/data/processed/ptb-xl/records500 Samples: 21799
+
+ /root/autodl-tmp/ecg_ptbxl_reproduction/data/processed/ptb-xl/records500
+train dataset: 17418 samples
+val dataset: 8732 samples
+test dataset: 8792 samples
+Restoring states from the checkpoint path at /root/autodl-tmp/ecg_ptbxl_reproduction/outputs/formal_s4_ptbxl_all/version_0/best_model.ckpt
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loaded model weights from the checkpoint at /root/autodl-tmp/ecg_ptbxl_reproduction/outputs/formal_s4_ptbxl_all/version_0/best_model.ckpt
+/root/autodl-tmp/ecg_ptbxl_reproduction/conda_envs/lightning3/lib/python3.13/site-packages/torch/nn/functional.py:1545: dropout2d: Received a 3D input to dropout2d and assuming that channel-wise 1D dropout behavior is desired - input is interpreted as shape (N, C, L), where C is the channel dim. This behavior will change in a future release to interpret the input as one without a batch dimension, i.e. shape (C, H, W). To maintain the 1D channel-wise dropout behavior, please switch to using dropout1d instead.
+  0%|          | 0/20 [00:00<?, ?it/s]  5%|▌         | 1/20 [00:05<01:43,  5.46s/it] 10%|█         | 2/20 [00:11<01:40,  5.59s/it] 15%|█▌        | 3/20 [00:16<01:35,  5.59s/it] 20%|██        | 4/20 [00:22<01:31,  5.71s/it] 25%|██▌       | 5/20 [00:28<01:25,  5.72s/it] 30%|███       | 6/20 [00:34<01:20,  5.75s/it] 35%|███▌      | 7/20 [00:39<01:14,  5.72s/it] 40%|████      | 8/20 [00:45<01:09,  5.81s/it] 45%|████▌     | 9/20 [00:51<01:04,  5.85s/it] 50%|█████     | 10/20 [00:57<00:59,  5.95s/it] 55%|█████▌    | 11/20 [01:04<00:53,  6.00s/it] 60%|██████    | 12/20 [01:09<00:47,  5.91s/it] 65%|██████▌   | 13/20 [01:15<00:41,  5.94s/it] 70%|███████   | 14/20 [01:21<00:35,  5.89s/it] 75%|███████▌  | 15/20 [01:27<00:29,  5.86s/it] 80%|████████  | 16/20 [01:33<00:23,  5.91s/it] 85%|████████▌ | 17/20 [01:39<00:17,  5.93s/it] 90%|█████████ | 18/20 [01:45<00:11,  5.95s/it] 95%|█████████▌| 19/20 [01:51<00:05,  5.88s/it]100%|██████████| 20/20 [01:56<00:00,  5.85s/it]100%|██████████| 20/20 [01:56<00:00,  5.84s/it]
+epoch 100 test noagg: 0.9292052900788725
+  0%|          | 0/20 [00:00<?, ?it/s]  5%|▌         | 1/20 [00:04<01:16,  4.05s/it] 10%|█         | 2/20 [00:08<01:14,  4.13s/it] 15%|█▌        | 3/20 [00:12<01:08,  4.03s/it] 20%|██        | 4/20 [00:16<01:04,  4.02s/it] 25%|██▌       | 5/20 [00:20<01:00,  4.05s/it] 30%|███       | 6/20 [00:24<00:56,  4.07s/it] 35%|███▌      | 7/20 [00:28<00:53,  4.11s/it] 40%|████      | 8/20 [00:32<00:49,  4.14s/it] 45%|████▌     | 9/20 [00:36<00:45,  4.15s/it] 50%|█████     | 10/20 [00:40<00:41,  4.11s/it] 55%|█████▌    | 11/20 [00:45<00:37,  4.13s/it] 60%|██████    | 12/20 [00:49<00:33,  4.19s/it] 65%|██████▌   | 13/20 [00:53<00:29,  4.19s/it] 70%|███████   | 14/20 [00:58<00:25,  4.26s/it] 75%|███████▌  | 15/20 [01:02<00:21,  4.27s/it] 80%|████████  | 16/20 [01:06<00:17,  4.37s/it] 85%|████████▌ | 17/20 [01:11<00:13,  4.40s/it] 90%|█████████ | 18/20 [01:15<00:08,  4.35s/it] 95%|█████████▌| 19/20 [01:20<00:04,  4.36s/it]100%|██████████| 20/20 [01:24<00:00,  4.43s/it]100%|██████████| 20/20 [01:24<00:00,  4.23s/it]
+epoch 100 test agg: 0.9408470693532922
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃         Test metric          ┃         DataLoader 0         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│      1AVB_auc_agg_test0      │      0.9747133851051331      │
+│     1AVB_auc_noagg_test0     │      0.9682655930519104      │
+│   1AVB_high_auc_agg_test0    │      0.9824528098106384      │
+│  1AVB_high_auc_noagg_test0   │      0.9729271531105042      │
+│    1AVB_low_auc_agg_test0    │      0.9658323526382446      │
+│   1AVB_low_auc_noagg_test0   │      0.9629567265510559      │
+│      2AVB_auc_agg_test0      │      0.9349112510681152      │
+│     2AVB_auc_noagg_test0     │      0.8912721872329712      │
+│   2AVB_high_auc_agg_test0    │             nan              │
+│  2AVB_high_auc_noagg_test0   │             nan              │
+│    2AVB_low_auc_agg_test0    │             nan              │
+│   2AVB_low_auc_noagg_test0   │             nan              │
+│      3AVB_auc_agg_test0      │      0.994990885257721       │
+│     3AVB_auc_noagg_test0     │      0.9812443256378174      │
+│   3AVB_high_auc_agg_test0    │             nan              │
+│  3AVB_high_auc_noagg_test0   │      0.9975549578666687      │
+│    3AVB_low_auc_agg_test0    │             nan              │
+│   3AVB_low_auc_noagg_test0   │      0.962380588054657       │
+│     ABQRS_auc_agg_test0      │      0.8550007343292236      │
+│    ABQRS_auc_noagg_test0     │      0.8508750796318054      │
+│   ABQRS_high_auc_agg_test0   │      0.8770973086357117      │
+│  ABQRS_high_auc_noagg_test0  │      0.8623462915420532      │
+│   ABQRS_low_auc_agg_test0    │      0.8312389254570007      │
+│  ABQRS_low_auc_noagg_test0   │      0.8386367559432983      │
+│      AFIB_auc_agg_test0      │      0.985144317150116       │
+│     AFIB_auc_noagg_test0     │      0.9802080988883972      │
+│   AFIB_high_auc_agg_test0    │      0.9947874546051025      │
+│  AFIB_high_auc_noagg_test0   │      0.9864314198493958      │
+│    AFIB_low_auc_agg_test0    │      0.9724327921867371      │
+│   AFIB_low_auc_noagg_test0   │      0.9732345938682556      │
+│      AFLT_auc_agg_test0      │      0.9865684509277344      │
+│     AFLT_auc_noagg_test0     │      0.9863320589065552      │
+│   AFLT_high_auc_agg_test0    │             1.0              │
+│  AFLT_high_auc_noagg_test0   │      0.9940096139907837      │
+│    AFLT_low_auc_agg_test0    │      0.9668802618980408      │
+│   AFLT_low_auc_noagg_test0   │      0.9773720502853394      │
+│      ALMI_auc_agg_test0      │      0.9786580801010132      │
+│     ALMI_auc_noagg_test0     │      0.9781441688537598      │
+│   ALMI_high_auc_agg_test0    │      0.989573061466217       │
+│  ALMI_high_auc_noagg_test0   │      0.983955979347229       │
+│    ALMI_low_auc_agg_test0    │      0.9653438329696655      │
+│   ALMI_low_auc_noagg_test0   │      0.9715005159378052      │
+│      AMI_auc_agg_test0       │      0.9316954016685486      │
+│     AMI_auc_noagg_test0      │      0.9193150997161865      │
+│    AMI_high_auc_agg_test0    │      0.9625495672225952      │
+│   AMI_high_auc_noagg_test0   │      0.9389221668243408      │
+│    AMI_low_auc_agg_test0     │      0.8968524932861328      │
+│   AMI_low_auc_noagg_test0    │      0.8987271785736084      │
+│     ANEUR_auc_agg_test0      │      0.949999988079071       │
+│    ANEUR_auc_noagg_test0     │      0.9491344690322876      │
+│   ANEUR_high_auc_agg_test0   │      0.9882634282112122      │
+│  ANEUR_high_auc_noagg_test0  │      0.9721904397010803      │
+│   ANEUR_low_auc_agg_test0    │      0.8926177620887756      │
+│  ANEUR_low_auc_noagg_test0   │      0.9203805923461914      │
+│      ASMI_auc_agg_test0      │      0.9765000939369202      │
+│     ASMI_auc_noagg_test0     │      0.974043071269989       │
+│   ASMI_high_auc_agg_test0    │      0.9842287302017212      │
+│  ASMI_high_auc_noagg_test0   │      0.9788321256637573      │
+│    ASMI_low_auc_agg_test0    │      0.966303288936615       │
+│   ASMI_low_auc_noagg_test0   │      0.9688850045204163      │
+│      BIGU_auc_agg_test0      │      0.9634703397750854      │
+│     BIGU_auc_noagg_test0     │      0.9248216152191162      │
+│   BIGU_high_auc_agg_test0    │             nan              │
+│  BIGU_high_auc_noagg_test0   │      0.9615640044212341      │
+│    BIGU_low_auc_agg_test0    │             nan              │
+│   BIGU_low_auc_noagg_test0   │      0.8736717700958252      │
+│     CLBBB_auc_agg_test0      │      0.9974433183670044      │
+│    CLBBB_auc_noagg_test0     │      0.9972938299179077      │
+│   CLBBB_high_auc_agg_test0   │      0.9991243481636047      │
+│  CLBBB_high_auc_noagg_test0  │      0.9982792735099792      │
+│   CLBBB_low_auc_agg_test0    │      0.9951003789901733      │
+│  CLBBB_low_auc_noagg_test0   │      0.9962953329086304      │
+│     CRBBB_auc_agg_test0      │      0.9978147745132446      │
+│    CRBBB_auc_noagg_test0     │      0.9975119233131409      │
+│   CRBBB_high_auc_agg_test0   │      0.999206006526947       │
+│  CRBBB_high_auc_noagg_test0  │      0.9983410835266113      │
+│   CRBBB_low_auc_agg_test0    │      0.9961333870887756      │
+│  CRBBB_low_auc_noagg_test0   │      0.9966336488723755      │
+│      DIG_auc_agg_test0       │      0.9621304869651794      │
+│     DIG_auc_noagg_test0      │      0.960921585559845       │
+│    DIG_high_auc_agg_test0    │      0.9761564135551453      │
+│   DIG_high_auc_noagg_test0   │      0.9685298800468445      │
+│    DIG_low_auc_agg_test0     │      0.945572018623352       │
+│   DIG_low_auc_noagg_test0    │      0.9523276090621948      │
+│       EL_auc_agg_test0       │      0.927059531211853       │
+│      EL_auc_noagg_test0      │      0.9218536019325256      │
+│    EL_high_auc_agg_test0     │      0.9797071218490601      │
+│   EL_high_auc_noagg_test0    │      0.9506469964981079      │
+│     EL_low_auc_agg_test0     │      0.855800449848175       │
+│    EL_low_auc_noagg_test0    │      0.8920854926109314      │
+│     HVOLT_auc_agg_test0      │      0.9609184861183167      │
+│    HVOLT_auc_noagg_test0     │      0.9518466591835022      │
+│   HVOLT_high_auc_agg_test0   │             nan              │
+│  HVOLT_high_auc_noagg_test0  │      0.9668437838554382      │
+│   HVOLT_low_auc_agg_test0    │             nan              │
+│  HVOLT_low_auc_noagg_test0   │      0.9364910125732422      │
+│     ILBBB_auc_agg_test0      │      0.9327625632286072      │
+│    ILBBB_auc_noagg_test0     │      0.9284960031509399      │
+│   ILBBB_high_auc_agg_test0   │      0.9936218857765198      │
+│  ILBBB_high_auc_noagg_test0  │      0.970796525478363       │
+│   ILBBB_low_auc_agg_test0    │      0.8373688459396362      │
+│  ILBBB_low_auc_noagg_test0   │      0.8780264258384705      │
+│      ILMI_auc_agg_test0      │      0.9553875923156738      │
+│     ILMI_auc_noagg_test0     │      0.9531134963035583      │
+│   ILMI_high_auc_agg_test0    │      0.9823326468467712      │
+│  ILMI_high_auc_noagg_test0   │      0.967712938785553       │
+│    ILMI_low_auc_agg_test0    │      0.9190219044685364      │
+│   ILMI_low_auc_noagg_test0   │      0.9358178377151489      │
+│      IMI_auc_agg_test0       │      0.9349544048309326      │
+│     IMI_auc_noagg_test0      │      0.9316418170928955      │
+│    IMI_high_auc_agg_test0    │      0.9465669989585876      │
+│   IMI_high_auc_noagg_test0   │      0.9379460215568542      │
+│    IMI_low_auc_agg_test0     │      0.920772910118103       │
+│   IMI_low_auc_noagg_test0    │      0.9254021644592285      │
+│     INJAL_auc_agg_test0      │      0.9839743375778198      │
+│    INJAL_auc_noagg_test0     │      0.9814090132713318      │
+│   INJAL_high_auc_agg_test0   │      0.994877815246582       │
+│  INJAL_high_auc_noagg_test0  │      0.9886382222175598      │
+│   INJAL_low_auc_agg_test0    │      0.9694564342498779      │
+│  INJAL_low_auc_noagg_test0   │      0.974514365196228       │
+│     INJAS_auc_agg_test0      │      0.9924381971359253      │
+│    INJAS_auc_noagg_test0     │      0.9918180108070374      │
+│   INJAS_high_auc_agg_test0   │      0.9970074892044067      │
+│  INJAS_high_auc_noagg_test0  │      0.9942156076431274      │
+│   INJAS_low_auc_agg_test0    │      0.9861078858375549      │
+│  INJAS_low_auc_noagg_test0   │      0.9891135692596436      │
+│     INJIL_auc_agg_test0      │      0.9628870487213135      │
+│    INJIL_auc_noagg_test0     │      0.9480162858963013      │
+│   INJIL_high_auc_agg_test0   │             nan              │
+│  INJIL_high_auc_noagg_test0  │             nan              │
+│   INJIL_low_auc_agg_test0    │             nan              │
+│  INJIL_low_auc_noagg_test0   │             nan              │
+│     INJIN_auc_agg_test0      │      0.9972677826881409      │
+│    INJIN_auc_noagg_test0     │      0.9968124032020569      │
+│   INJIN_high_auc_agg_test0   │             nan              │
+│  INJIN_high_auc_noagg_test0  │             nan              │
+│   INJIN_low_auc_agg_test0    │             nan              │
+│  INJIN_low_auc_noagg_test0   │             nan              │
+│     INJLA_auc_agg_test0      │      0.8014571666717529      │
+│    INJLA_auc_noagg_test0     │      0.8092412352561951      │
+│   INJLA_high_auc_agg_test0   │             nan              │
+│  INJLA_high_auc_noagg_test0  │      0.8409286141395569      │
+│   INJLA_low_auc_agg_test0    │             nan              │
+│  INJLA_low_auc_noagg_test0   │      0.7734809517860413      │
+│      INVT_auc_agg_test0      │      0.9650561809539795      │
+│     INVT_auc_noagg_test0     │      0.9605063796043396      │
+│   INVT_high_auc_agg_test0    │      0.9769803881645203      │
+│  INVT_high_auc_noagg_test0   │      0.9679111242294312      │
+│    INVT_low_auc_agg_test0    │      0.9505101442337036      │
+│   INVT_low_auc_noagg_test0   │      0.953026533126831       │
+│     IPLMI_auc_agg_test0      │       0.84149569272995       │
+│    IPLMI_auc_noagg_test0     │       0.81097811460495       │
+│   IPLMI_high_auc_agg_test0   │             nan              │
+│  IPLMI_high_auc_noagg_test0  │      0.9082553386688232      │
+│   IPLMI_low_auc_agg_test0    │             nan              │
+│  IPLMI_low_auc_noagg_test0   │      0.7054452300071716      │
+│      IPMI_auc_agg_test0      │      0.9439635276794434      │
+│     IPMI_auc_noagg_test0     │      0.944646954536438       │
+│   IPMI_high_auc_agg_test0    │             nan              │
+│  IPMI_high_auc_noagg_test0   │      0.9803959727287292      │
+│    IPMI_low_auc_agg_test0    │             nan              │
+│   IPMI_low_auc_noagg_test0   │      0.8972481489181519      │
+│     IRBBB_auc_agg_test0      │      0.9803537130355835      │
+│    IRBBB_auc_noagg_test0     │      0.9766615033149719      │
+│   IRBBB_high_auc_agg_test0   │      0.9867831468582153      │
+│  IRBBB_high_auc_noagg_test0  │      0.9808980226516724      │
+│   IRBBB_low_auc_agg_test0    │      0.9736894369125366      │
+│  IRBBB_low_auc_noagg_test0   │      0.9720770716667175      │
+│     ISCAL_auc_agg_test0      │      0.9553982615470886      │
+│    ISCAL_auc_noagg_test0     │      0.9526801705360413      │
+│   ISCAL_high_auc_agg_test0   │      0.9686173796653748      │
+│  ISCAL_high_auc_noagg_test0  │      0.9599388241767883      │
+│   ISCAL_low_auc_agg_test0    │      0.9385984539985657      │
+│  ISCAL_low_auc_noagg_test0   │      0.944586992263794       │
+│     ISCAN_auc_agg_test0      │      0.9404056668281555      │
+│    ISCAN_auc_noagg_test0     │      0.9413243532180786      │
+│   ISCAN_high_auc_agg_test0   │             nan              │
+│  ISCAN_high_auc_noagg_test0  │      0.9796894192695618      │
+│   ISCAN_low_auc_agg_test0    │             nan              │
+│  ISCAN_low_auc_noagg_test0   │      0.8957905769348145      │
+│     ISCAS_auc_agg_test0      │      0.978126585483551       │
+│    ISCAS_auc_noagg_test0     │      0.9772129654884338      │
+│   ISCAS_high_auc_agg_test0   │      0.9884796738624573      │
+│  ISCAS_high_auc_noagg_test0  │       0.98277747631073       │
+│   ISCAS_low_auc_agg_test0    │      0.966408908367157       │
+│  ISCAS_low_auc_noagg_test0   │      0.9706119894981384      │
+│     ISCIL_auc_agg_test0      │      0.9659786224365234      │
+│    ISCIL_auc_noagg_test0     │      0.9623503088951111      │
+│   ISCIL_high_auc_agg_test0   │      0.9870514273643494      │
+│  ISCIL_high_auc_noagg_test0  │      0.9748775959014893      │
+│   ISCIL_low_auc_agg_test0    │      0.9391298294067383      │
+│  ISCIL_low_auc_noagg_test0   │      0.9464496374130249      │
+│     ISCIN_auc_agg_test0      │      0.954670786857605       │
+│    ISCIN_auc_noagg_test0     │      0.9522280693054199      │
+│   ISCIN_high_auc_agg_test0   │      0.9857755899429321      │
+│  ISCIN_high_auc_noagg_test0  │      0.9710626602172852      │
+│   ISCIN_low_auc_agg_test0    │      0.9071674942970276      │
+│  ISCIN_low_auc_noagg_test0   │      0.9285667538642883      │
+│     ISCLA_auc_agg_test0      │      0.9415947794914246      │
+│    ISCLA_auc_noagg_test0     │      0.9410446882247925      │
+│   ISCLA_high_auc_agg_test0   │      0.9691075682640076      │
+│  ISCLA_high_auc_noagg_test0  │      0.955790638923645       │
+│   ISCLA_low_auc_agg_test0    │      0.9106649160385132      │
+│  ISCLA_low_auc_noagg_test0   │      0.9281784892082214      │
+│      ISC__auc_agg_test0      │      0.9704710245132446      │
+│     ISC__auc_noagg_test0     │      0.9695026874542236      │
+│   ISC__high_auc_agg_test0    │      0.9806713461875916      │
+│  ISC__high_auc_noagg_test0   │      0.9749645590782166      │
+│    ISC__low_auc_agg_test0    │      0.9572861790657043      │
+│   ISC__low_auc_noagg_test0   │      0.963547945022583       │
+│      IVCD_auc_agg_test0      │      0.7439441680908203      │
+│     IVCD_auc_noagg_test0     │      0.7387911081314087      │
+│   IVCD_high_auc_agg_test0    │      0.8054443001747131      │
+│  IVCD_high_auc_noagg_test0   │      0.7693970203399658      │
+│    IVCD_low_auc_agg_test0    │      0.6782439351081848      │
+│   IVCD_low_auc_noagg_test0   │      0.7094264030456543      │
+│      LAFB_auc_agg_test0      │      0.9870237112045288      │
+│     LAFB_auc_noagg_test0     │      0.9858469367027283      │
+│   LAFB_high_auc_agg_test0    │      0.9914302825927734      │
+│  LAFB_high_auc_noagg_test0   │      0.9880204200744629      │
+│    LAFB_low_auc_agg_test0    │      0.9821592569351196      │
+│   LAFB_low_auc_noagg_test0   │      0.9832605719566345      │
+│    LAO/LAE_auc_agg_test0     │      0.8269281983375549      │
+│   LAO/LAE_auc_noagg_test0    │      0.8206568956375122      │
+│  LAO/LAE_high_auc_agg_test0  │      0.8793550133705139      │
+│ LAO/LAE_high_auc_noagg_test0 │      0.8477986454963684      │
+│  LAO/LAE_low_auc_agg_test0   │      0.7723836302757263      │
+│ LAO/LAE_low_auc_noagg_test0  │      0.7952872514724731      │
+│      LMI_auc_agg_test0       │      0.9438934922218323      │
+│     LMI_auc_noagg_test0      │      0.9365042448043823      │
+│    LMI_high_auc_agg_test0    │      0.9612489938735962      │
+│   LMI_high_auc_noagg_test0   │      0.945988118648529       │
+│    LMI_low_auc_agg_test0     │      0.9250447750091553      │
+│   LMI_low_auc_noagg_test0    │      0.9252551198005676      │
+│     LNGQT_auc_agg_test0      │      0.8676061034202576      │
+│    LNGQT_auc_noagg_test0     │      0.8626517057418823      │
+│   LNGQT_high_auc_agg_test0   │      0.9659845232963562      │
+│  LNGQT_high_auc_noagg_test0  │      0.9132407903671265      │
+│   LNGQT_low_auc_agg_test0    │      0.7488539814949036      │
+│  LNGQT_low_auc_noagg_test0   │      0.8074533939361572      │
+│      LOWT_auc_agg_test0      │      0.9361547231674194      │
+│     LOWT_auc_noagg_test0     │      0.9323556423187256      │
+│   LOWT_high_auc_agg_test0    │      0.9554824233055115      │
+│  LOWT_high_auc_noagg_test0   │      0.9426575899124146      │
+│    LOWT_low_auc_agg_test0    │      0.9150412678718567      │
+│   LOWT_low_auc_noagg_test0   │      0.9219513535499573      │
+│      LPFB_auc_agg_test0      │      0.9805810451507568      │
+│     LPFB_auc_noagg_test0     │      0.9776949286460876      │
+│   LPFB_high_auc_agg_test0    │      0.9935170412063599      │
+│  LPFB_high_auc_noagg_test0   │      0.9862247109413147      │
+│    LPFB_low_auc_agg_test0    │      0.9636303782463074      │
+│   LPFB_low_auc_noagg_test0   │      0.9669711589813232      │
+│      LPR_auc_agg_test0       │      0.9834185242652893      │
+│     LPR_auc_noagg_test0      │      0.9771766662597656      │
+│    LPR_high_auc_agg_test0    │      0.9895617365837097      │
+│   LPR_high_auc_noagg_test0   │      0.9821233153343201      │
+│    LPR_low_auc_agg_test0     │      0.9760351777076721      │
+│   LPR_low_auc_noagg_test0    │      0.9718384146690369      │
+│      LVH_auc_agg_test0       │      0.956853449344635       │
+│     LVH_auc_noagg_test0      │      0.9545252323150635      │
+│    LVH_high_auc_agg_test0    │      0.9667054414749146      │
+│   LVH_high_auc_noagg_test0   │      0.9600592851638794      │
+│    LVH_low_auc_agg_test0     │      0.9460068345069885      │
+│   LVH_low_auc_noagg_test0    │      0.9486796259880066      │
+│     LVOLT_auc_agg_test0      │      0.942278265953064       │
+│    LVOLT_auc_noagg_test0     │      0.9355775117874146      │
+│   LVOLT_high_auc_agg_test0   │      0.9705323576927185      │
+│  LVOLT_high_auc_noagg_test0  │      0.9528016448020935      │
+│   LVOLT_low_auc_agg_test0    │      0.9065399169921875      │
+│  LVOLT_low_auc_noagg_test0   │      0.9154871106147766      │
+│      NDT_auc_agg_test0       │      0.9298714399337769      │
+│     NDT_auc_noagg_test0      │      0.9244663715362549      │
+│    NDT_high_auc_agg_test0    │      0.9448838233947754      │
+│   NDT_high_auc_noagg_test0   │      0.9324345588684082      │
+│    NDT_low_auc_agg_test0     │      0.9130256175994873      │
+│   NDT_low_auc_noagg_test0    │      0.9157758951187134      │
+│      NORM_auc_agg_test0      │      0.954093337059021       │
+│     NORM_auc_noagg_test0     │      0.9506542682647705      │
+│   NORM_high_auc_agg_test0    │      0.9612448811531067      │
+│  NORM_high_auc_noagg_test0   │      0.9547175765037537      │
+│    NORM_low_auc_agg_test0    │      0.9460141062736511      │
+│   NORM_low_auc_noagg_test0   │      0.946744978427887       │
+│      NST__auc_agg_test0      │      0.8583123683929443      │
+│     NST__auc_noagg_test0     │      0.8535298705101013      │
+│   NST__high_auc_agg_test0    │      0.893670380115509       │
+│  NST__high_auc_noagg_test0   │      0.8722084164619446      │
+│    NST__low_auc_agg_test0    │      0.819351851940155       │
+│   NST__low_auc_noagg_test0   │      0.833858847618103       │
+│      NT__auc_agg_test0       │      0.9466384053230286      │
+│     NT__auc_noagg_test0      │      0.9398605227470398      │
+│    NT__high_auc_agg_test0    │      0.9683181643486023      │
+│   NT__high_auc_noagg_test0   │      0.9513683319091797      │
+│    NT__low_auc_agg_test0     │      0.9217697381973267      │
+│   NT__low_auc_noagg_test0    │      0.927287757396698       │
+│      PACE_auc_agg_test0      │      0.9605168104171753      │
+│     PACE_auc_noagg_test0     │      0.9481978416442871      │
+│   PACE_high_auc_agg_test0    │      0.9870618581771851      │
+│  PACE_high_auc_noagg_test0   │      0.9676318764686584      │
+│    PACE_low_auc_agg_test0    │      0.9263401627540588      │
+│   PACE_low_auc_noagg_test0   │      0.9282220005989075      │
+│      PAC_auc_agg_test0       │      0.9427363276481628      │
+│     PAC_auc_noagg_test0      │      0.8285840749740601      │
+│    PAC_high_auc_agg_test0    │      0.9731937646865845      │
+│   PAC_high_auc_noagg_test0   │      0.8646030426025391      │
+│    PAC_low_auc_agg_test0     │      0.9022786617279053      │
+│   PAC_low_auc_noagg_test0    │      0.7914804816246033      │
+│      PMI_auc_agg_test0       │      0.9881603121757507      │
+│     PMI_auc_noagg_test0      │      0.9844319224357605      │
+│    PMI_high_auc_agg_test0    │             nan              │
+│   PMI_high_auc_noagg_test0   │      0.9901906251907349      │
+│    PMI_low_auc_agg_test0     │             nan              │
+│   PMI_low_auc_noagg_test0    │      0.978116512298584       │
+│     PRC_S__auc_agg_test0     │      0.9426490664482117      │
+│    PRC_S__auc_noagg_test0    │      0.8310195803642273      │
+│  PRC_S__high_auc_agg_test0   │             nan              │
+│ PRC_S__high_auc_noagg_test0  │             nan              │
+│   PRC_S__low_auc_agg_test0   │             nan              │
+│  PRC_S__low_auc_noagg_test0  │             nan              │
+│      PSVT_auc_agg_test0      │      0.9972677826881409      │
+│     PSVT_auc_noagg_test0     │      0.9972392916679382      │
+│   PSVT_high_auc_agg_test0    │             nan              │
+│  PSVT_high_auc_noagg_test0   │      0.9994998574256897      │
+│    PSVT_low_auc_agg_test0    │             nan              │
+│   PSVT_low_auc_noagg_test0   │      0.9945657253265381      │
+│      PVC_auc_agg_test0       │      0.9885636568069458      │
+│     PVC_auc_noagg_test0      │      0.8659255504608154      │
+│    PVC_high_auc_agg_test0    │      0.9923359155654907      │
+│   PVC_high_auc_noagg_test0   │      0.8874546885490417      │
+│    PVC_low_auc_agg_test0     │       0.98438960313797       │
+│   PVC_low_auc_noagg_test0    │      0.8449095487594604      │
+│     QWAVE_auc_agg_test0      │      0.868171215057373       │
+│    QWAVE_auc_noagg_test0     │      0.8548684120178223      │
+│   QWAVE_high_auc_agg_test0   │      0.9091227054595947      │
+│  QWAVE_high_auc_noagg_test0  │      0.877124547958374       │
+│   QWAVE_low_auc_agg_test0    │       0.82647705078125       │
+│  QWAVE_low_auc_noagg_test0   │      0.8313143253326416      │
+│    RAO/RAE_auc_agg_test0     │      0.9680530428886414      │
+│   RAO/RAE_auc_noagg_test0    │      0.9678959250450134      │
+│  RAO/RAE_high_auc_agg_test0  │             nan              │
+│ RAO/RAE_high_auc_noagg_test0 │      0.9803948998451233      │
+│  RAO/RAE_low_auc_agg_test0   │             nan              │
+│ RAO/RAE_low_auc_noagg_test0  │      0.9527367353439331      │
+│      RVH_auc_agg_test0       │      0.9606968760490417      │
+│     RVH_auc_noagg_test0      │      0.9581308364868164      │
+│    RVH_high_auc_agg_test0    │      0.9910690784454346      │
+│   RVH_high_auc_noagg_test0   │      0.9785706400871277      │
+│    RVH_low_auc_agg_test0     │      0.9163616895675659      │
+│   RVH_low_auc_noagg_test0    │      0.9324589371681213      │
+│     SARRH_auc_agg_test0      │      0.8459498882293701      │
+│    SARRH_auc_noagg_test0     │      0.7538724541664124      │
+│   SARRH_high_auc_agg_test0   │      0.8867928981781006      │
+│  SARRH_high_auc_noagg_test0  │      0.7820157408714294      │
+│   SARRH_low_auc_agg_test0    │      0.8001992106437683      │
+│  SARRH_low_auc_noagg_test0   │      0.7266140580177307      │
+│     SBRAD_auc_agg_test0      │      0.9546772241592407      │
+│    SBRAD_auc_noagg_test0     │      0.9477959871292114      │
+│   SBRAD_high_auc_agg_test0   │      0.9746695756912231      │
+│  SBRAD_high_auc_noagg_test0  │      0.9605079889297485      │
+│   SBRAD_low_auc_agg_test0    │      0.9252406358718872      │
+│  SBRAD_low_auc_noagg_test0   │      0.9342330694198608      │
+│     SEHYP_auc_agg_test0      │      0.9888433218002319      │
+│    SEHYP_auc_noagg_test0     │      0.9798639416694641      │
+│   SEHYP_high_auc_agg_test0   │             nan              │
+│  SEHYP_high_auc_noagg_test0  │      0.9974991679191589      │
+│   SEHYP_low_auc_agg_test0    │             nan              │
+│  SEHYP_low_auc_noagg_test0   │      0.9501301050186157      │
+│       SR_auc_agg_test0       │      0.8966376185417175      │
+│      SR_auc_noagg_test0      │      0.8728401064872742      │
+│    SR_high_auc_agg_test0     │      0.9121899604797363      │
+│   SR_high_auc_noagg_test0    │      0.8826515078544617      │
+│     SR_low_auc_agg_test0     │      0.8791196942329407      │
+│    SR_low_auc_noagg_test0    │      0.8632257580757141      │
+│     STACH_auc_agg_test0      │      0.9944326877593994      │
+│    STACH_auc_noagg_test0     │      0.9935393333435059      │
+│   STACH_high_auc_agg_test0   │      0.997161328792572       │
+│  STACH_high_auc_noagg_test0  │      0.9952226877212524      │
+│   STACH_low_auc_agg_test0    │      0.9912065267562866      │
+│  STACH_low_auc_noagg_test0   │      0.9917278289794922      │
+│      STD__auc_agg_test0      │      0.9049797654151917      │
+│     STD__auc_noagg_test0     │      0.8997088074684143      │
+│   STD__high_auc_agg_test0    │      0.926226019859314       │
+│  STD__high_auc_noagg_test0   │      0.9109615683555603      │
+│    STD__low_auc_agg_test0    │      0.8814712166786194      │
+│   STD__low_auc_noagg_test0   │      0.8879148960113525      │
+│      STE__auc_agg_test0      │      0.9063022136688232      │
+│     STE__auc_noagg_test0     │      0.8945804834365845      │
+│   STE__high_auc_agg_test0    │             nan              │
+│  STE__high_auc_noagg_test0   │      0.9236302375793457      │
+│    STE__low_auc_agg_test0    │             nan              │
+│   STE__low_auc_noagg_test0   │      0.8681479692459106      │
+│     SVARR_auc_agg_test0      │      0.9687663316726685      │
+│    SVARR_auc_noagg_test0     │      0.9649418592453003      │
+│   SVARR_high_auc_agg_test0   │      0.9945782423019409      │
+│  SVARR_high_auc_noagg_test0  │      0.9824823141098022      │
+│   SVARR_low_auc_agg_test0    │      0.919579803943634       │
+│  SVARR_low_auc_noagg_test0   │      0.9435248374938965      │
+│     SVTAC_auc_agg_test0      │      0.9703872203826904      │
+│    SVTAC_auc_noagg_test0     │      0.9650246500968933      │
+│   SVTAC_high_auc_agg_test0   │             nan              │
+│  SVTAC_high_auc_noagg_test0  │      0.9919722080230713      │
+│   SVTAC_low_auc_agg_test0    │             nan              │
+│  SVTAC_low_auc_noagg_test0   │      0.9317704439163208      │
+│      TAB__auc_agg_test0      │      0.7737281918525696      │
+│     TAB__auc_noagg_test0     │       0.77471524477005       │
+│   TAB__high_auc_agg_test0    │             nan              │
+│  TAB__high_auc_noagg_test0   │      0.8323252201080322      │
+│    TAB__low_auc_agg_test0    │             nan              │
+│   TAB__low_auc_noagg_test0   │      0.7162479162216187      │
+│     TRIGU_auc_agg_test0      │      0.9770036339759827      │
+│    TRIGU_auc_noagg_test0     │      0.9725922346115112      │
+│   TRIGU_high_auc_agg_test0   │             nan              │
+│  TRIGU_high_auc_noagg_test0  │      0.9849673509597778      │
+│   TRIGU_low_auc_agg_test0    │             nan              │
+│  TRIGU_low_auc_noagg_test0   │      0.9583043456077576      │
+│     VCLVH_auc_agg_test0      │      0.9213261604309082      │
+│    VCLVH_auc_noagg_test0     │      0.918350338935852       │
+│   VCLVH_high_auc_agg_test0   │      0.9419586062431335      │
+│  VCLVH_high_auc_noagg_test0  │      0.9291701912879944      │
+│   VCLVH_low_auc_agg_test0    │      0.8957347273826599      │
+│  VCLVH_low_auc_noagg_test0   │      0.9066529273986816      │
+│      WPW_auc_agg_test0       │      0.8470319509506226      │
+│     WPW_auc_noagg_test0      │      0.8463969826698303      │
+│    WPW_high_auc_agg_test0    │             nan              │
+│   WPW_high_auc_noagg_test0   │      0.923309326171875       │
+│    WPW_low_auc_agg_test0     │             nan              │
+│   WPW_low_auc_noagg_test0    │      0.7626124620437622      │
+│     macro_auc_agg_test0      │      0.9408470988273621      │
+│    macro_auc_noagg_test0     │      0.9292052984237671      │
+│   macro_high_auc_agg_test0   │      0.9427845478057861      │
+│  macro_high_auc_noagg_test0  │      0.9329653382301331      │
+│   macro_low_auc_agg_test0    │      0.9101668000221252      │
+│  macro_low_auc_noagg_test0   │      0.9241208434104919      │
+│     micro_auc_agg_test0      │      0.9786216616630554      │
+│    micro_auc_noagg_test0     │      0.9760617613792419      │
+│   micro_high_auc_agg_test0   │      0.9802913069725037      │
+│  micro_high_auc_noagg_test0  │      0.977027416229248       │
+│   micro_low_auc_agg_test0    │      0.9767389893531799      │
+│  micro_low_auc_noagg_test0   │      0.9751517176628113      │
+└──────────────────────────────┴──────────────────────────────┘

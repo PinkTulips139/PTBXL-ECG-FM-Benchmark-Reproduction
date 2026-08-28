@@ -1,0 +1,33 @@
+diff --git a/code/main_lite.py b/code/main_lite.py
+--- a/code/main_lite.py
++++ b/code/main_lite.py
+@@ -471,6 +471,8 @@ def add_application_specific_args(parser):
+     parser.add_argument("--eval-only", type=str, help="path to model checkpoint for evaluation", default="")
+ 
+     parser.add_argument("--export-predictions", action="store_true", help="Export predictions in npz format")
++    parser.add_argument("--bootstrap", action="store_true",
++                        help="Run bootstrap confidence-interval computation during test")
+     parser.add_argument('--prediction-path', default='.', type=str, dest="prediction_path", help='prediction path')
+     parser.add_argument("--eval-mode", type=str, help="finetuning_linear/finetuning_nonlinear/frozen/linear", default="finetuning_linear")
+ 
+diff --git a/code/main_lite_base.py b/code/main_lite_base.py
+--- a/code/main_lite_base.py
++++ b/code/main_lite_base.py
+@@ -184,4 +184,7 @@ def on_valtest_epoch_eval(self, outputs_all, dataloader_idx, test=False):
+         # Non-aggregated
+ 
+-        res = self.eval_scores(targs_all, preds_all, self.lbl_itos, bootstrap=test)
++        res = self.eval_scores(
++            targs_all, preds_all, self.lbl_itos,
++            bootstrap=test and self.hparams.bootstrap
++        )
+         if self.task == "classification_and_regression":
+@@ -199,4 +202,7 @@ def on_valtest_epoch_eval(self, outputs_all, dataloader_idx, test=False):
+         # Aggregated
+         preds_all_agg,targs_all_agg = self.val_datasets[0].aggregate_predictions(preds_all,targs_all,self.test_idmaps[dataloader_idx] if test else self.val_idmaps[dataloader_idx],aggregate_fn=np.mean)
+-        res_agg = self.eval_scores(targs_all_agg, preds_all_agg, self.lbl_itos, bootstrap=test)
++        res_agg = self.eval_scores(
++            targs_all_agg, preds_all_agg, self.lbl_itos,
++            bootstrap=test and self.hparams.bootstrap
++        )
+         if self.task == "classification_and_regression":

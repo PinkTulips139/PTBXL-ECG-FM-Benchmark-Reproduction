@@ -1,0 +1,21 @@
+# HUMAN_APPROVED_MINIMAL_STMEM_OPTIMIZER_GROUPING_REMEDIATION
+# Scoped minimal ST-MEM remediation. No unrelated working-tree changes included.
+--- a/code/clinical_ts/models/fm_ecg.py
++++ b/code/clinical_ts/models/fm_ecg.py
+@@ -410,13 +410,13 @@ class StMemWrapper(FMWrapperBase):
+         for name, param in self.model.encoder.named_parameters():
+-            if name in ["encoder.pos_embedding", "encoder.sep_embedding"]:
++            if name in ["pos_embedding", "sep_embedding"]:
+                 encoder_params.append(param)
+-            elif name.startswith(("encoder.lead_embeddings", "encoder.to_patch_embedding")):
++            elif name.startswith(("lead_embeddings", "to_patch_embedding")):
+                 encoder_params.append(param)
+-            elif any(name.startswith(f"encoder.block{i}.") for i in [0, 1, 2]):
++            elif any(name.startswith(f"block{i}.") for i in [0, 1, 2]):
+                 encoder_params.append(param)
+-            elif any(name.startswith(f"encoder.block{i}.") for i in range(3, 12)):
++            elif any(name.startswith(f"block{i}.") for i in range(3, 12)):
+                 predictor_params.append(param)
+-            elif name.startswith(("encoder.norm", "encoder.dropout")):
++            elif name.startswith(("norm", "dropout")):
+                 predictor_params.append(param)

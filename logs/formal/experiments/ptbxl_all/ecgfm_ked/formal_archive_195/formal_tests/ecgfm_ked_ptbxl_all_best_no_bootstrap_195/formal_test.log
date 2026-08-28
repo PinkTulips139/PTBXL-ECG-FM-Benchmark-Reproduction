@@ -1,0 +1,183 @@
+CUDA extension for cauchy multiplication not found. Install by going to extensions/cauchy/ and running `python setup.py install`. This should speed up end-to-end training by 10-50%
+[KeOps] Compiling cuda jit compiler engine ... 
+[KeOps] Warning : There were warnings or errors :
+/usr/bin/ld: cannot find -lnvrtc: No such file or directory
+collect2: error: ld returned 1 exit status
+
+OK
+[pyKeOps] Compiling nvrtc binder for python ... 
+[KeOps] Warning : There were warnings or errors :
+/usr/bin/ld: cannot find -lnvrtc: No such file or directory
+collect2: error: ld returned 1 exit status
+
+OK
+CUDA extension for cauchy multiplication not found. Install by going to extensions/cauchy/ and running `python setup.py install`. This should speed up end-to-end training by 10-50%
+Using 16bit Automatic Mixed Precision (AMP)
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+HPU available: False, using: 0 HPUs
+You are using a CUDA device ('NVIDIA GeForce RTX 4090') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+Restoring states from the checkpoint path at /root/autodl-tmp/ECG/formal_runs/ecgfm_ked_ptbxl_all_100e_195/output/version_0/best_model.ckpt
+/root/autodl-tmp/ECG/environments/ecgfm_ked_195/lib/python3.13/site-packages/lightning/pytorch/callbacks/model_checkpoint.py:366: The dirpath has changed from '/root/autodl-tmp/ECG/formal_runs/ecgfm_ked_ptbxl_all_100e_195/output/version_0' to '/root/autodl-tmp/ECG/formal_tests/ecgfm_ked_ptbxl_all_best_no_bootstrap_195/output/version_0', therefore `best_model_score`, `kth_best_model_path`, `kth_value`, `last_model_path` and `best_k_models` won't be reloaded. Only `best_model_path` will be reloaded.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loaded model weights from the checkpoint at /root/autodl-tmp/ECG/formal_runs/ecgfm_ked_ptbxl_all_100e_195/output/version_0/best_model.ckpt
+Namespace(data='/root/autodl-tmp/ECG/data/processed/ptb-xl/records500', epochs=100, batch_size=64, lr=0.001, weight_decay=0.001, resume='', pretrained='/root/autodl-tmp/ECG/checkpoints/ecgfm_ked/best_valid_all_increase_with_augment_epoch_3.pt', optimizer='adam', output_path='/root/autodl-tmp/ECG/formal_tests/ecgfm_ked_ptbxl_all_best_no_bootstrap_195/output', metadata='', gpus=1, num_nodes=1, precision='16-mixed', distributed_backend=None, accumulate=1, input_size=10.0, train_head_only=False, finetune=True, linear_eval=False, lr_schedule='const', lr_num_warmup_steps=1000, discriminative_lr_factor=0.1, lr_find=False, auto_batch_size=False, auc_maximization=False, refresh_rate=0, mlflow=False, mlflow_experiment_name='fm-benchmarking', mlflow_run_name='run', fs_model=500.0, fs_data=500.0, input_channels=12, architecture='ecgfm_ked', s4_n=8, s4_h=512, s4_layers=4, s4_batchnorm=False, s4_prenorm=False, merl_backbone='resnet', modality='ecg', normalize=False, finetune_dataset='ptbxl_all', chunk_length_train=1.0, stride_fraction_train=1.0, stride_fraction_valtest=1.0, chunkify_train=False, segmentation=False, eval_only='/root/autodl-tmp/ECG/formal_runs/ecgfm_ked_ptbxl_all_100e_195/output/version_0/best_model.ckpt', skip_test_after_fit=False, skip_bootstrap=True, export_predictions=True, prediction_path='/root/autodl-tmp/ECG/formal_tests/ecgfm_ked_ptbxl_all_best_no_bootstrap_195/predictions', eval_mode='finetuning_linear', label_ratio=1, executable='main_lite_ecg', revision='')
+Output directory: /root/autodl-tmp/ECG/formal_tests/ecgfm_ked_ptbxl_all_best_no_bootstrap_195/output/version_0
+Folder: /root/autodl-tmp/ECG/data/processed/ptb-xl/records500 Samples: 21799
+
+ /root/autodl-tmp/ECG/data/processed/ptb-xl/records500
+train dataset: 17418 samples
+val dataset: 2183 samples
+test dataset: 2198 samples
+epoch 0 test noagg: 0.9046777481903444
+epoch 0 test agg: 0.9046777481903444
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃        Test metric        ┃       DataLoader 0        ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│    1AVB_auc_agg_test0     │    0.9640653133392334     │
+│   1AVB_auc_noagg_test0    │    0.9640653133392334     │
+│    2AVB_auc_agg_test0     │    0.9223941564559937     │
+│   2AVB_auc_noagg_test0    │    0.9223941564559937     │
+│    3AVB_auc_agg_test0     │    0.9902094602584839     │
+│   3AVB_auc_noagg_test0    │    0.9902094602584839     │
+│    ABQRS_auc_agg_test0    │     0.822514533996582     │
+│   ABQRS_auc_noagg_test0   │     0.822514533996582     │
+│    AFIB_auc_agg_test0     │    0.9756456613540649     │
+│   AFIB_auc_noagg_test0    │    0.9756456613540649     │
+│    AFLT_auc_agg_test0     │    0.9247245192527771     │
+│   AFLT_auc_noagg_test0    │    0.9247245192527771     │
+│    ALMI_auc_agg_test0     │    0.9561645984649658     │
+│   ALMI_auc_noagg_test0    │    0.9561645984649658     │
+│     AMI_auc_agg_test0     │    0.9225150346755981     │
+│    AMI_auc_noagg_test0    │    0.9225150346755981     │
+│    ANEUR_auc_agg_test0    │    0.9428930282592773     │
+│   ANEUR_auc_noagg_test0   │    0.9428930282592773     │
+│    ASMI_auc_agg_test0     │    0.9696459174156189     │
+│   ASMI_auc_noagg_test0    │    0.9696459174156189     │
+│    BIGU_auc_agg_test0     │    0.8607020378112793     │
+│   BIGU_auc_noagg_test0    │    0.8607020378112793     │
+│    CLBBB_auc_agg_test0    │    0.9971842169761658     │
+│   CLBBB_auc_noagg_test0   │    0.9971842169761658     │
+│    CRBBB_auc_agg_test0    │    0.9982120394706726     │
+│   CRBBB_auc_noagg_test0   │    0.9982120394706726     │
+│     DIG_auc_agg_test0     │    0.8687818646430969     │
+│    DIG_auc_noagg_test0    │    0.8687818646430969     │
+│     EL_auc_agg_test0      │     0.892518162727356     │
+│    EL_auc_noagg_test0     │     0.892518162727356     │
+│    HVOLT_auc_agg_test0    │    0.9567366242408752     │
+│   HVOLT_auc_noagg_test0   │    0.9567366242408752     │
+│    ILBBB_auc_agg_test0    │    0.8813356161117554     │
+│   ILBBB_auc_noagg_test0   │    0.8813356161117554     │
+│    ILMI_auc_agg_test0     │    0.9509689807891846     │
+│   ILMI_auc_noagg_test0    │    0.9509689807891846     │
+│     IMI_auc_agg_test0     │    0.9031861424446106     │
+│    IMI_auc_noagg_test0    │    0.9031861424446106     │
+│    INJAL_auc_agg_test0    │    0.9517268538475037     │
+│   INJAL_auc_noagg_test0   │    0.9517268538475037     │
+│    INJAS_auc_agg_test0    │    0.9833096861839294     │
+│   INJAS_auc_noagg_test0   │    0.9833096861839294     │
+│    INJIL_auc_agg_test0    │      0.9426229596138      │
+│   INJIL_auc_noagg_test0   │      0.9426229596138      │
+│    INJIN_auc_agg_test0    │    0.9981784820556641     │
+│   INJIN_auc_noagg_test0   │    0.9981784820556641     │
+│    INJLA_auc_agg_test0    │    0.7863160371780396     │
+│   INJLA_auc_noagg_test0   │    0.7863160371780396     │
+│    INVT_auc_agg_test0     │    0.9454062581062317     │
+│   INVT_auc_noagg_test0    │    0.9454062581062317     │
+│    IPLMI_auc_agg_test0    │     0.690652072429657     │
+│   IPLMI_auc_noagg_test0   │     0.690652072429657     │
+│    IPMI_auc_agg_test0     │    0.9630979299545288     │
+│   IPMI_auc_noagg_test0    │    0.9630979299545288     │
+│    IRBBB_auc_agg_test0    │    0.9542250037193298     │
+│   IRBBB_auc_noagg_test0   │    0.9542250037193298     │
+│    ISCAL_auc_agg_test0    │    0.9223235845565796     │
+│   ISCAL_auc_noagg_test0   │    0.9223235845565796     │
+│    ISCAN_auc_agg_test0    │    0.9271878004074097     │
+│   ISCAN_auc_noagg_test0   │    0.9271878004074097     │
+│    ISCAS_auc_agg_test0    │    0.9536909461021423     │
+│   ISCAS_auc_noagg_test0   │    0.9536909461021423     │
+│    ISCIL_auc_agg_test0    │     0.947719156742096     │
+│   ISCIL_auc_noagg_test0   │     0.947719156742096     │
+│    ISCIN_auc_agg_test0    │     0.846371591091156     │
+│   ISCIN_auc_noagg_test0   │     0.846371591091156     │
+│    ISCLA_auc_agg_test0    │    0.9167752265930176     │
+│   ISCLA_auc_noagg_test0   │    0.9167752265930176     │
+│    ISC__auc_agg_test0     │     0.960648775100708     │
+│   ISC__auc_noagg_test0    │     0.960648775100708     │
+│    IVCD_auc_agg_test0     │    0.7320834398269653     │
+│   IVCD_auc_noagg_test0    │    0.7320834398269653     │
+│    LAFB_auc_agg_test0     │    0.9804597496986389     │
+│   LAFB_auc_noagg_test0    │    0.9804597496986389     │
+│   LAO/LAE_auc_agg_test0   │     0.832665205001831     │
+│  LAO/LAE_auc_noagg_test0  │     0.832665205001831     │
+│     LMI_auc_agg_test0     │    0.9205578565597534     │
+│    LMI_auc_noagg_test0    │    0.9205578565597534     │
+│    LNGQT_auc_agg_test0    │    0.8232738971710205     │
+│   LNGQT_auc_noagg_test0   │    0.8232738971710205     │
+│    LOWT_auc_agg_test0     │    0.9123353958129883     │
+│   LOWT_auc_noagg_test0    │    0.9123353958129883     │
+│    LPFB_auc_agg_test0     │    0.9574158787727356     │
+│   LPFB_auc_noagg_test0    │    0.9574158787727356     │
+│     LPR_auc_agg_test0     │    0.9677000641822815     │
+│    LPR_auc_noagg_test0    │    0.9677000641822815     │
+│     LVH_auc_agg_test0     │    0.9404170513153076     │
+│    LVH_auc_noagg_test0    │    0.9404170513153076     │
+│    LVOLT_auc_agg_test0    │    0.9329637885093689     │
+│   LVOLT_auc_noagg_test0   │    0.9329637885093689     │
+│     NDT_auc_agg_test0     │    0.9156214594841003     │
+│    NDT_auc_noagg_test0    │    0.9156214594841003     │
+│    NORM_auc_agg_test0     │    0.9306464791297913     │
+│   NORM_auc_noagg_test0    │    0.9306464791297913     │
+│    NST__auc_agg_test0     │    0.8437150120735168     │
+│   NST__auc_noagg_test0    │    0.8437150120735168     │
+│     NT__auc_agg_test0     │    0.9372239112854004     │
+│    NT__auc_noagg_test0    │    0.9372239112854004     │
+│    PACE_auc_agg_test0     │    0.9678324460983276     │
+│   PACE_auc_noagg_test0    │    0.9678324460983276     │
+│     PAC_auc_agg_test0     │    0.7297787070274353     │
+│    PAC_auc_noagg_test0    │    0.7297787070274353     │
+│     PMI_auc_agg_test0     │     0.942736804485321     │
+│    PMI_auc_noagg_test0    │     0.942736804485321     │
+│   PRC_S__auc_agg_test0    │    0.8846153616905212     │
+│  PRC_S__auc_noagg_test0   │    0.8846153616905212     │
+│    PSVT_auc_agg_test0     │     0.998406171798706     │
+│   PSVT_auc_noagg_test0    │     0.998406171798706     │
+│     PVC_auc_agg_test0     │    0.9060721397399902     │
+│    PVC_auc_noagg_test0    │    0.9060721397399902     │
+│    QWAVE_auc_agg_test0    │    0.8233996629714966     │
+│   QWAVE_auc_noagg_test0   │    0.8233996629714966     │
+│   RAO/RAE_auc_agg_test0   │    0.9216636419296265     │
+│  RAO/RAE_auc_noagg_test0  │    0.9216636419296265     │
+│     RVH_auc_agg_test0     │    0.9670631289482117     │
+│    RVH_auc_noagg_test0    │    0.9670631289482117     │
+│    SARRH_auc_agg_test0    │    0.6224918365478516     │
+│   SARRH_auc_noagg_test0   │    0.6224918365478516     │
+│    SBRAD_auc_agg_test0    │    0.9448548555374146     │
+│   SBRAD_auc_noagg_test0   │    0.9448548555374146     │
+│    SEHYP_auc_agg_test0    │    0.9336293339729309     │
+│   SEHYP_auc_noagg_test0   │    0.9336293339729309     │
+│     SR_auc_agg_test0      │    0.8370839953422546     │
+│    SR_auc_noagg_test0     │    0.8370839953422546     │
+│    STACH_auc_agg_test0    │    0.9887356758117676     │
+│   STACH_auc_noagg_test0   │    0.9887356758117676     │
+│    STD__auc_agg_test0     │    0.8737399578094482     │
+│   STD__auc_noagg_test0    │    0.8737399578094482     │
+│    STE__auc_agg_test0     │    0.8440394997596741     │
+│   STE__auc_noagg_test0    │    0.8440394997596741     │
+│    SVARR_auc_agg_test0    │    0.9084412455558777     │
+│   SVARR_auc_noagg_test0   │    0.9084412455558777     │
+│    SVTAC_auc_agg_test0    │    0.9848139882087708     │
+│   SVTAC_auc_noagg_test0   │    0.9848139882087708     │
+│    TAB__auc_agg_test0     │    0.6463932991027832     │
+│   TAB__auc_noagg_test0    │    0.6463932991027832     │
+│    TRIGU_auc_agg_test0    │    0.7336065769195557     │
+│   TRIGU_auc_noagg_test0   │    0.7336065769195557     │
+│    VCLVH_auc_agg_test0    │    0.9128974080085754     │
+│   VCLVH_auc_noagg_test0   │    0.9128974080085754     │
+│     WPW_auc_agg_test0     │    0.8420947194099426     │
+│    WPW_auc_noagg_test0    │    0.8420947194099426     │
+│    macro_auc_agg_test0    │    0.9046777486801147     │
+│   macro_auc_noagg_test0   │    0.9046777486801147     │
+│    micro_auc_agg_test0    │     0.967885434627533     │
+│   micro_auc_noagg_test0   │     0.967885434627533     │
+└───────────────────────────┴───────────────────────────┘

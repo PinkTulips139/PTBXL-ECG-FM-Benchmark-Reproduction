@@ -1,0 +1,60 @@
+--- a/code/clinical_ts/models/fm_ecg.py
++++ b/code/clinical_ts/models/fm_ecg.py
+@@ -1,5 +1,6 @@
+ from dataclasses import dataclass
+ from itertools import chain
++import sys
+ 
+ import numpy as np
+ import torch
+@@ -11,22 +12,29 @@
+ 
+ from main_lite_base import FMWrapperBase
+ 
+-from clinical_ts.models.ecg_foundation_models.ecg_founder import Net1D
+-from clinical_ts.models.ecg_foundation_models.ecg_jepa.ecg_jepa import ecg_jepa
+-from clinical_ts.models.ecg_foundation_models.ecg_jepa.ecg_jepa_utils import load_encoder
+ from clinical_ts.models.ecg_foundation_models.st_mem.st_mem import st_mem_vit_base_dec256d4b
+ 
+-from clinical_ts.models.ecg_foundation_models.merl.resnet1d import ResNet18
+-from clinical_ts.models.ecg_foundation_models.merl.vit1d import vit_tiny
+-
+-from clinical_ts.models.ecg_foundation_models.ecgfm_ked import xresnet1d101
+-
+-from clinical_ts.models.ecg_foundation_models.hubert_ecg.hubert_ecg import HuBERTECG
+-from clinical_ts.models.ecg_foundation_models.hubert_ecg.hubert_ecg_classification import HuBERTForECGClassification
+-from clinical_ts.models.ecg_foundation_models.hubert_ecg.utils import ecg_preprocessing
+-from clinical_ts.models.ecg_foundation_models.hubert_ecg.config import hubert_config
+-
+-from clinical_ts.models.ecg_foundation_models.ecg_cpc.basic_io import load_model_from_config
++def _is_st_mem_runtime():
++    for index, arg in enumerate(sys.argv):
++        if arg == "--architecture" and index + 1 < len(sys.argv):
++            return sys.argv[index + 1] == "st_mem"
++        if arg.startswith("--architecture="):
++            return arg.split("=", 1)[1] == "st_mem"
++    return False
++
++
++if not _is_st_mem_runtime():
++    from clinical_ts.models.ecg_foundation_models.ecg_founder import Net1D
++    from clinical_ts.models.ecg_foundation_models.ecg_jepa.ecg_jepa import ecg_jepa
++    from clinical_ts.models.ecg_foundation_models.ecg_jepa.ecg_jepa_utils import load_encoder
++    from clinical_ts.models.ecg_foundation_models.merl.resnet1d import ResNet18
++    from clinical_ts.models.ecg_foundation_models.merl.vit1d import vit_tiny
++    from clinical_ts.models.ecg_foundation_models.ecgfm_ked import xresnet1d101
++    from clinical_ts.models.ecg_foundation_models.hubert_ecg.hubert_ecg import HuBERTECG
++    from clinical_ts.models.ecg_foundation_models.hubert_ecg.hubert_ecg_classification import HuBERTForECGClassification
++    from clinical_ts.models.ecg_foundation_models.hubert_ecg.utils import ecg_preprocessing
++    from clinical_ts.models.ecg_foundation_models.hubert_ecg.config import hubert_config
++    from clinical_ts.models.ecg_foundation_models.ecg_cpc.basic_io import load_model_from_config
+ 
+ 
+ class ECGFounderWrapper(FMWrapperBase):
+@@ -1084,4 +1092,4 @@
+ #             pooled_features = sequence_features.mean(dim=1)
+ #             x = self.head(pooled_features)
+ 
+-#         return torch.nan_to_num(x)
+\ No newline at end of file
++#         return torch.nan_to_num(x)

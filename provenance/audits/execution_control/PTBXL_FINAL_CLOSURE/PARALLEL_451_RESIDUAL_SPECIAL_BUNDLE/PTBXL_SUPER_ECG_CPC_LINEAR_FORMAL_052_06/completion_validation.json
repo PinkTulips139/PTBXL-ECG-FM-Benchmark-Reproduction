@@ -1,0 +1,23 @@
+{
+  "aggregate_shapes": [
+    [
+      2198,
+      5
+    ],
+    [
+      2198,
+      5
+    ],
+    [
+      5
+    ],
+    []
+  ],
+  "best_checkpoint": "/root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_CPC_LINEAR_FORMAL_052_06/output/version_0/best_model.ckpt",
+  "errors": [],
+  "last_checkpoint": "/root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_CPC_LINEAR_FORMAL_052_06/output/version_0/last.ckpt",
+  "return_code": 0,
+  "status": "PASS",
+  "test_macro_auroc": 0.8624813556671143,
+  "validated_at_utc": "2026-08-21T03:11:32.102712+00:00"
+}

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PTB-XL ECG FM Reproduction — Sample Reviewer</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div>
+      <p class="eyebrow">Private mentor review · static inspection interface</p>
+      <h1>PTB-XL ECG Foundation Model Reproduction</h1>
+      <p class="lede">Stored record-level probabilities and ground truth for the finalized 78-run benchmark. This reviewer is an inspection interface, not a new evaluation pipeline.</p>
+    </div>
+    <div class="commit-card"><span>Locked executable authority</span><code>238409835ef…</code></div>
+  </header>
+
+  <main>
+    <section class="summary-grid" aria-label="Project closure summary">
+      <article><strong>78/78</strong><span>Formal experiments</span></article>
+      <article><strong>76/78</strong><span>Physical sample bundles</span></article>
+      <article><strong>77 + 1</strong><span>Mapping PASS + historical blocker</span></article>
+      <article><strong>72 + 5 + 1</strong><span>Bootstrap complete + blocked + not eligible</span></article>
+      <article><strong>2,198</strong><span>Test ECG records per available run</span></article>
+    </section>
+
+    <section class="panel selector-panel">
+      <div class="section-heading">
+        <div><p class="eyebrow">Run selector</p><h2>Select a formal experiment</h2></div>
+        <span id="load-status" class="status-pill neutral">Ready</span>
+      </div>
+      <div class="controls-grid">
+        <label>Model<select id="model-select"></select></label>
+        <label>Granularity<select id="granularity-select"></select></label>
+        <label>Mode<select id="mode-select"></select></label>
+        <label>Run ID<select id="run-select"></select></label>
+      </div>
+      <div id="run-summary" class="run-summary" aria-live="polite"></div>
+    </section>
+
+    <section id="missing-card" class="panel warning-panel hidden" aria-live="polite"></section>
+
+    <section id="sample-browser" class="panel hidden">
+      <div class="section-heading">
+        <div><p class="eyebrow">Sample browser</p><h2>Inspect one ECG record</h2></div>
+        <span id="sample-position" class="mono"></span>
+      </div>
+      <div class="sample-controls">
+        <label class="search-label">ECG ID<input id="ecg-search" type="search" inputmode="numeric" placeholder="Enter an ECG ID"></label>
+        <button id="search-button" type="button">Find</button>
+        <button id="previous-button" type="button">Previous</button>
+        <button id="next-button" type="button">Next</button>
+        <button id="random-button" type="button">Random</button>
+      </div>
+      <p id="sample-message" class="message" aria-live="polite"></p>
+      <div class="sample-meta">
+        <div><span>ECG ID</span><strong id="current-ecg-id">—</strong></div>
+        <div><span>Positive ground-truth labels</span><strong id="positive-labels">—</strong></div>
+      </div>
+
+      <div class="viewer-toolbar">
+        <label>Rows<select id="topk-select"><option value="5">Top 5</option><option value="10" selected>Top 10</option><option value="all">All labels</option></select></label>
+        <label>Sort<select id="sort-select"><option value="probability">Probability</option><option value="label">Label</option></select></label>
+        <label class="checkbox-label"><input id="positive-only" type="checkbox"> Ground-truth positive only</label>
+      </div>
+      <p class="protocol-note">Prediction probabilities are shown with ground truth. No fixed classification threshold is part of the formal Macro AUROC protocol.</p>
+      <div class="table-wrap"><table class="probability-table"><thead><tr><th>Label</th><th>Ground truth</th><th>Probability</th><th>Visual scale</th></tr></thead><tbody id="probability-body"></tbody></table></div>
+    </section>
+
+    <section id="comparison-panel" class="panel hidden">
+      <div class="section-heading"><div><p class="eyebrow">Comparison view</p><h2>Same model · same granularity · same ECG</h2></div></div>
+      <p class="muted">Compares available Finetuning, Frozen, and Linear probabilities without mixing label spaces. Missing physical bundles remain marked “Not packaged.”</p>
+      <label class="comparison-label">Label<select id="comparison-label-select"></select></label>
+      <div id="comparison-grid" class="comparison-grid"></div>
+    </section>
+
+    <section class="panel">
+      <div class="section-heading"><div><p class="eyebrow">Provenance</p><h2>Run evidence and limitations</h2></div></div>
+      <dl id="provenance-grid" class="provenance-grid"></dl>
+      <div class="limitations">
+        <h3>Known limitations</h3>
+        <ul>
+          <li>Two of 78 physical canonical sample bundles are unavailable and are shown as provenance-only entries.</li>
+          <li>One run has a historical strict-mapping blocker; five runs have Bootstrap provenance blockers.</li>
+          <li>Checkpoint binaries are not packaged.</li>
+          <li>Reviewer shards are serialized inspection data, not independent scientific results.</li>
+          <li>No fixed classification threshold defines “correct” or “incorrect” here.</li>
+          <li>Larger paper-versus-ours differences are not assigned unproven causal explanations.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>Offline static reviewer · no network, analytics, backend, database, or data upload</footer>
+  <script src="data/manifest.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

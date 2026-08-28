@@ -1,0 +1,31 @@
+diff --git a/code/main_lite.py b/code/main_lite.py
+--- a/code/main_lite.py
++++ b/code/main_lite.py
+@@ -472,5 +472,6 @@ def add_application_specific_args(parser):
+     parser.add_argument("--eval-only", type=str, help="path to model checkpoint for evaluation", default="")
+     parser.add_argument("--skip-test-after-fit", action="store_true", help="stop after trainer.fit; default preserves the locked post-fit test")
++    parser.add_argument("--skip-bootstrap", action="store_true", help="execute test point estimates without bootstrap; default preserves bootstrap")
+ 
+     parser.add_argument("--export-predictions", action="store_true", help="Export predictions in npz format")
+     parser.add_argument('--prediction-path', default='.', type=str, dest="prediction_path", help='prediction path')
+diff --git a/code/main_lite_base.py b/code/main_lite_base.py
+--- a/code/main_lite_base.py
++++ b/code/main_lite_base.py
+@@ -183,7 +183,7 @@ class Main_Lite(lp.LightningModule):
+ 
+         # Non-aggregated
+ 
+-        res = self.eval_scores(targs_all, preds_all, self.lbl_itos, bootstrap=test)
++        res = self.eval_scores(targs_all, preds_all, self.lbl_itos, bootstrap=test and not self.hparams.skip_bootstrap)
+         if self.task == "classification_and_regression":
+             res = {k+"_noagg_"+("test" if test else "val")+str(dataloader_idx): v for k, v in res.items()}
+             res = {k.replace("(","_").replace(")","_"):v for k,v in res.items()}
+@@ -198,7 +198,7 @@ class Main_Lite(lp.LightningModule):
+ 
+         # Aggregated
+         preds_all_agg,targs_all_agg = self.val_datasets[0].aggregate_predictions(preds_all,targs_all,self.test_idmaps[dataloader_idx] if test else self.val_idmaps[dataloader_idx],aggregate_fn=np.mean)
+-        res_agg = self.eval_scores(targs_all_agg, preds_all_agg, self.lbl_itos, bootstrap=test)
++        res_agg = self.eval_scores(targs_all_agg, preds_all_agg, self.lbl_itos, bootstrap=test and not self.hparams.skip_bootstrap)
+         if self.task == "classification_and_regression":
+             res_agg = {k+"_agg_"+("test" if test else "val")+str(dataloader_idx): v for k, v in res_agg.items()}
+             res_agg = {k.replace("(","_").replace(")","_"):v for k,v in res_agg.items()}

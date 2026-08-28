@@ -1,0 +1,2 @@
+client_loop: send disconnect: Connection reset
+C:\Windows\System32\OpenSSH\scp.exe: Couldn't send packet: Broken pipe

@@ -1,0 +1,443 @@
+diff --git a/code/clinical_ts/models/ecg_foundation_models/ecg_fm_config.py b/code/clinical_ts/models/ecg_foundation_models/ecg_fm_config.py
+index 7c4d5fd..34fdf6f 100644
+--- a/code/clinical_ts/models/ecg_foundation_models/ecg_fm_config.py
++++ b/code/clinical_ts/models/ecg_foundation_models/ecg_fm_config.py
+@@ -1,43 +1,43 @@
+-# from fairseq_signals.models.ecg_transformer import ECGTransformerFinetuningConfig
++from fairseq_signals.models.ecg_transformer import ECGTransformerFinetuningConfig
+ 
+-# ECG_FM_CONFIG = ECGTransformerFinetuningConfig(
+-#     data="",
+-#     model_path="",
+-#     normalize=False,
+-#     filter=False,
+-#     all_gather=False,
+-#     encoder_layers=12,
+-#     encoder_embed_dim=768,
+-#     encoder_ffn_embed_dim=3072,
+-#     encoder_attention_heads=12,
+-#     layer_norm_first=False,
+-#     dropout=0.0,
+-#     attention_dropout=0.0,
+-#     activation_dropout=0.1,
+-#     encoder_layerdrop=0.0,
+-#     dropout_input=0.0,
+-#     dropout_features=0.0,
+-#     apply_mask=False,
+-#     mask_length=10,
+-#     mask_prob=0.0,
+-#     mask_selection="static",
+-#     mask_other=0.0,
+-#     no_mask_overlap=False,
+-#     mask_min_space=1,
+-#     mask_channel_length=10,
+-#     mask_channel_prob=0.0,
+-#     mask_channel_selection="static",
+-#     mask_channel_other=0.0,
+-#     no_mask_channel_overlap=False,
+-#     mask_channel_min_space=1,
+-#     extractor_mode="default",
+-#     conv_feature_layers=[(256, 2, 2)] * 4,
+-#     in_d=12,
+-#     conv_bias=False,
+-#     feature_grad_mult=0.0,
+-#     conv_pos=128,
+-#     conv_pos_groups=16,
+-#     no_pretrained_weights=False,
+-#     freeze_finetune_updates=0,
+-#     final_dropout=0.0
+-# )
+\ No newline at end of file
++ECG_FM_CONFIG = ECGTransformerFinetuningConfig(
++    data="",
++    model_path="",
++    normalize=False,
++    filter=False,
++    all_gather=False,
++    encoder_layers=12,
++    encoder_embed_dim=768,
++    encoder_ffn_embed_dim=3072,
++    encoder_attention_heads=12,
++    layer_norm_first=False,
++    dropout=0.0,
++    attention_dropout=0.0,
++    activation_dropout=0.1,
++    encoder_layerdrop=0.0,
++    dropout_input=0.0,
++    dropout_features=0.0,
++    apply_mask=False,
++    mask_length=10,
++    mask_prob=0.0,
++    mask_selection="static",
++    mask_other=0.0,
++    no_mask_overlap=False,
++    mask_min_space=1,
++    mask_channel_length=10,
++    mask_channel_prob=0.0,
++    mask_channel_selection="static",
++    mask_channel_other=0.0,
++    no_mask_channel_overlap=False,
++    mask_channel_min_space=1,
++    extractor_mode="default",
++    conv_feature_layers=[(256, 2, 2)] * 4,
++    in_d=12,
++    conv_bias=False,
++    feature_grad_mult=0.0,
++    conv_pos=128,
++    conv_pos_groups=16,
++    no_pretrained_weights=False,
++    freeze_finetune_updates=0,
++    final_dropout=0.0
++)
+\ No newline at end of file
+diff --git a/code/clinical_ts/models/fm_ecg.py b/code/clinical_ts/models/fm_ecg.py
+index a2ae161..ea44050 100644
+--- a/code/clinical_ts/models/fm_ecg.py
++++ b/code/clinical_ts/models/fm_ecg.py
+@@ -1,4 +1,4 @@
+-from dataclasses import dataclass
++from dataclasses import dataclass, replace
+ from itertools import chain
+ 
+ import numpy as np
+@@ -11,22 +11,28 @@ from clinical_ts.utils.heads import LearnableQueryAttentionPoolingHead, Learnabl
+ 
+ from main_lite_base import FMWrapperBase
+ 
+-from clinical_ts.models.ecg_foundation_models.ecg_founder import Net1D
+-from clinical_ts.models.ecg_foundation_models.ecg_jepa.ecg_jepa import ecg_jepa
+-from clinical_ts.models.ecg_foundation_models.ecg_jepa.ecg_jepa_utils import load_encoder
+-from clinical_ts.models.ecg_foundation_models.st_mem.st_mem import st_mem_vit_base_dec256d4b
++# Optional non-ECG-FM model families are imported lazily at module scope.  They
++# remain available when their dependencies are installed, but cannot block the
++# ECG-FM architecture path merely by being present in this monolithic module.
++try:
++    from clinical_ts.models.ecg_foundation_models.ecg_founder import Net1D
++    from clinical_ts.models.ecg_foundation_models.ecg_jepa.ecg_jepa import ecg_jepa
++    from clinical_ts.models.ecg_foundation_models.ecg_jepa.ecg_jepa_utils import load_encoder
++    from clinical_ts.models.ecg_foundation_models.st_mem.st_mem import st_mem_vit_base_dec256d4b
+ 
+-from clinical_ts.models.ecg_foundation_models.merl.resnet1d import ResNet18
+-from clinical_ts.models.ecg_foundation_models.merl.vit1d import vit_tiny
++    from clinical_ts.models.ecg_foundation_models.merl.resnet1d import ResNet18
++    from clinical_ts.models.ecg_foundation_models.merl.vit1d import vit_tiny
+ 
+-from clinical_ts.models.ecg_foundation_models.ecgfm_ked import xresnet1d101
++    from clinical_ts.models.ecg_foundation_models.ecgfm_ked import xresnet1d101
+ 
+-from clinical_ts.models.ecg_foundation_models.hubert_ecg.hubert_ecg import HuBERTECG
+-from clinical_ts.models.ecg_foundation_models.hubert_ecg.hubert_ecg_classification import HuBERTForECGClassification
+-from clinical_ts.models.ecg_foundation_models.hubert_ecg.utils import ecg_preprocessing
+-from clinical_ts.models.ecg_foundation_models.hubert_ecg.config import hubert_config
++    from clinical_ts.models.ecg_foundation_models.hubert_ecg.hubert_ecg import HuBERTECG
++    from clinical_ts.models.ecg_foundation_models.hubert_ecg.hubert_ecg_classification import HuBERTForECGClassification
++    from clinical_ts.models.ecg_foundation_models.hubert_ecg.utils import ecg_preprocessing
++    from clinical_ts.models.ecg_foundation_models.hubert_ecg.config import hubert_config
+ 
+-from clinical_ts.models.ecg_foundation_models.ecg_cpc.basic_io import load_model_from_config
++    from clinical_ts.models.ecg_foundation_models.ecg_cpc.basic_io import load_model_from_config
++except ModuleNotFoundError:
++    pass
+ 
+ 
+ class ECGFounderWrapper(FMWrapperBase):
+@@ -981,107 +987,107 @@ class HubertEcgWrapper(FMWrapperBase):
+         return torch.nan_to_num(x)
+ 
+ 
+-# from clinical_ts.models.ecg_foundation_models.ecg_fm_config import ECG_FM_CONFIG
+-# from fairseq_signals.models.ecg_transformer import ECGTransformerFinetuningModel
+-
+-# class ECG_FM_Wrapper(FMWrapperBase):
+-#     def __init__(self, num_classes, num_output_tokens, pretrained_path=None, eval_mode="finetuning_linear", lr=1e-3, discriminative_lr_factor=0.1):
+-#         super().__init__(num_classes, num_output_tokens)
+-
+-#         assert eval_mode in ["finetuning_linear", "finetuning_nonlinear", "frozen", "linear"]
+-#         self.eval_mode = eval_mode
+-#         self.lr = lr
+-#         self.discriminative_lr_factor = discriminative_lr_factor
+-
+-#         if pretrained_path:
+-#             cfg = replace(ECG_FM_CONFIG, model_path=pretrained_path)
+-#             print(f"Model path: {cfg.model_path}")
+-
+-#             self.model = ECGTransformerFinetuningModel.build_model(cfg, task=None)
+-#             self.feature_dim = 768
+-#         else:
+-#             raise ValueError("ECG_FM_Wrapper requires a valid `pretrained_path` to load the encoder.")
+-
+-#         # Nonlinear head configuration
+-#         nonlinear_head_config = LearnableQueryAttentionPoolingHeadConfig(
+-#             multi_prediction=False,
+-#             heads=16,
+-#             bias=False
+-#         )
+-
+-#         @dataclass
+-#         class InputShape:
+-#             channels: int
+-#             length: int
+-#             static_dim: int
+-
+-#         input_shape = InputShape(channels=self.feature_dim, length=0, static_dim=0)
+-
+-#         self.nonlinear_head = LearnableQueryAttentionPoolingHead(
+-#             hparams_head=nonlinear_head_config,
+-#             hparams_input_shape=input_shape,
+-#             target_dim=num_classes
+-#         )
+-
+-#         # Set evaluation mode
+-#         if self.eval_mode == "finetuning_linear":
+-#             self.head = nn.Linear(self.feature_dim, num_classes)
+-#         elif self.eval_mode == "finetuning_nonlinear":
+-#             self.head = self.nonlinear_head
+-#         elif self.eval_mode == "frozen":
+-#             self.head = self.nonlinear_head
+-#             for p in self.model.parameters():
+-#                 p.requires_grad = False
+-#             self.model.eval()
+-#         else:
+-#             self.head = nn.Linear(self.feature_dim, num_classes)
+-#             for p in self.model.parameters():
+-#                 p.requires_grad = False
+-#             self.model.eval()
++from clinical_ts.models.ecg_foundation_models.ecg_fm_config import ECG_FM_CONFIG
++from fairseq_signals.models.ecg_transformer import ECGTransformerFinetuningModel
++
++class ECG_FM_Wrapper(FMWrapperBase):
++    def __init__(self, num_classes, num_output_tokens, pretrained_path=None, eval_mode="finetuning_linear", lr=1e-3, discriminative_lr_factor=0.1):
++        super().__init__(num_classes, num_output_tokens)
++
++        assert eval_mode in ["finetuning_linear", "finetuning_nonlinear", "frozen", "linear"]
++        self.eval_mode = eval_mode
++        self.lr = lr
++        self.discriminative_lr_factor = discriminative_lr_factor
++
++        if pretrained_path:
++            cfg = replace(ECG_FM_CONFIG, model_path=pretrained_path)
++            print(f"Model path: {cfg.model_path}")
++
++            self.model = ECGTransformerFinetuningModel.build_model(cfg, task=None)
++            self.feature_dim = 768
++        else:
++            raise ValueError("ECG_FM_Wrapper requires a valid `pretrained_path` to load the encoder.")
++
++        # Nonlinear head configuration
++        nonlinear_head_config = LearnableQueryAttentionPoolingHeadConfig(
++            multi_prediction=False,
++            heads=16,
++            bias=False
++        )
++
++        @dataclass
++        class InputShape:
++            channels: int
++            length: int
++            static_dim: int
++
++        input_shape = InputShape(channels=self.feature_dim, length=0, static_dim=0)
++
++        self.nonlinear_head = LearnableQueryAttentionPoolingHead(
++            hparams_head=nonlinear_head_config,
++            hparams_input_shape=input_shape,
++            target_dim=num_classes
++        )
++
++        # Set evaluation mode
++        if self.eval_mode == "finetuning_linear":
++            self.head = nn.Linear(self.feature_dim, num_classes)
++        elif self.eval_mode == "finetuning_nonlinear":
++            self.head = self.nonlinear_head
++        elif self.eval_mode == "frozen":
++            self.head = self.nonlinear_head
++            for p in self.model.parameters():
++                p.requires_grad = False
++            self.model.eval()
++        else:
++            self.head = nn.Linear(self.feature_dim, num_classes)
++            for p in self.model.parameters():
++                p.requires_grad = False
++            self.model.eval()
+     
+-#     def get_params(self):
+-#         head_params = list(self.head.parameters())
++    def get_params(self):
++        head_params = list(self.head.parameters())
+ 
+-#         if self.eval_mode in ["frozen", "linear"]:
+-#             return [{"params": head_params, "lr": self.lr}]
+-        
+-#         encoder_params = []
+-#         predictor_params = []
+-#         feature_extractor_params = []
+-        
+-#         for name, param in self.model.named_parameters():
+-#             if "feature_extractor" in name:
+-#                 feature_extractor_params.append(param)
+-#             elif "encoder.layers" in name:
+-#                 layer_num = int(name.split(".layers.")[1].split(".")[0])
+-#                 if layer_num < 6:
+-#                     encoder_params.append(param)
+-#                 else:
+-#                     predictor_params.append(param)
+-#             elif "encoder.layer_norm" in name or "post_extract_proj" in name or "conv_pos" in name:
+-#                 encoder_params.append(param)
+-#             elif "layer_norm" in name or "quantizer" in name or "project_q" in name or "final_proj" in name:
+-#                 predictor_params.append(param)
+-        
+-#         print("Returning layer dependent learning rate from ECG_FM_Wrapper...")
+-        
+-#         return [
+-#             {"params": head_params, "lr": self.lr},
+-#             {"params": predictor_params, "lr": self.lr * self.discriminative_lr_factor},
+-#             {"params": encoder_params, "lr": self.lr * self.discriminative_lr_factor * self.discriminative_lr_factor},
+-#             {"params": feature_extractor_params, "lr": self.lr * self.discriminative_lr_factor * self.discriminative_lr_factor}
+-#         ]
+-
+-#     def forward(self, x, **kwargs):
+-#         x = torch.nan_to_num(x)
+-#         output_dict = self.model.extract_features(x, padding_mask=None)
+-#         sequence_features = output_dict["x"]
+-
+-#         if self.eval_mode in ["frozen", "finetuning_nonlinear"]:
+-#             output_dict = self.head(seq=sequence_features)
+-#             x = output_dict["seq"]
+-#         else:
+-#             pooled_features = sequence_features.mean(dim=1)
+-#             x = self.head(pooled_features)
+-
+-#         return torch.nan_to_num(x)
+\ No newline at end of file
++        if self.eval_mode in ["frozen", "linear"]:
++            return [{"params": head_params, "lr": self.lr}]
++
++        encoder_params = []
++        predictor_params = []
++        feature_extractor_params = []
++
++        for name, param in self.model.named_parameters():
++            if "feature_extractor" in name:
++                feature_extractor_params.append(param)
++            elif "encoder.layers" in name:
++                layer_num = int(name.split(".layers.")[1].split(".")[0])
++                if layer_num < 6:
++                    encoder_params.append(param)
++                else:
++                    predictor_params.append(param)
++            elif "encoder.layer_norm" in name or "post_extract_proj" in name or "conv_pos" in name:
++                encoder_params.append(param)
++            elif "layer_norm" in name or "quantizer" in name or "project_q" in name or "final_proj" in name:
++                predictor_params.append(param)
++
++        print("Returning layer dependent learning rate from ECG_FM_Wrapper...")
++
++        return [
++            {"params": head_params, "lr": self.lr},
++            {"params": predictor_params, "lr": self.lr * self.discriminative_lr_factor},
++            {"params": encoder_params, "lr": self.lr * self.discriminative_lr_factor * self.discriminative_lr_factor},
++            {"params": feature_extractor_params, "lr": self.lr * self.discriminative_lr_factor * self.discriminative_lr_factor}
++        ]
++
++    def forward(self, x, **kwargs):
++        x = torch.nan_to_num(x)
++        output_dict = self.model.extract_features(x, padding_mask=None)
++        sequence_features = output_dict["x"]
++
++        if self.eval_mode in ["frozen", "finetuning_nonlinear"]:
++            output_dict = self.head(seq=sequence_features)
++            x = output_dict["seq"]
++        else:
++            pooled_features = sequence_features.mean(dim=1)
++            x = self.head(pooled_features)
++
++        return torch.nan_to_num(x)
+\ No newline at end of file
+diff --git a/code/main_lite.py b/code/main_lite.py
+index 19a9cc1..a9d8fa4 100644
+--- a/code/main_lite.py
++++ b/code/main_lite.py
+@@ -14,7 +14,6 @@ from lightning.pytorch.loggers import TensorBoardLogger
+ from lightning.pytorch.callbacks import ModelCheckpoint, LearningRateMonitor, TQDMProgressBar
+ from clinical_ts.models.xresnet1d import xresnet1d50,xresnet1d101
+ from clinical_ts.models.inception1d import inception1d
+-from clinical_ts.models.s4_model import S4Model
+ from clinical_ts.utils.misc_utils import LRMonitorCallback
+ #################
+ #specific
+@@ -472,6 +471,8 @@ def add_application_specific_args(parser):
+     parser.add_argument("--eval-only", type=str, help="path to model checkpoint for evaluation", default="")
+ 
+     parser.add_argument("--export-predictions", action="store_true", help="Export predictions in npz format")
++    parser.add_argument("--bootstrap", action="store_true",
++                        help="Run bootstrap confidence-interval computation during test")
+     parser.add_argument('--prediction-path', default='.', type=str, dest="prediction_path", help='prediction path')
+     parser.add_argument("--eval-mode", type=str, help="finetuning_linear/finetuning_nonlinear/frozen/linear", default="finetuning_linear")
+ 
+diff --git a/code/main_lite_base.py b/code/main_lite_base.py
+index 6d73769..245f12f 100644
+--- a/code/main_lite_base.py
++++ b/code/main_lite_base.py
+@@ -183,7 +183,10 @@ class Main_Lite(lp.LightningModule):
+ 
+         # Non-aggregated
+ 
+-        res = self.eval_scores(targs_all, preds_all, self.lbl_itos, bootstrap=test)
++        res = self.eval_scores(
++            targs_all, preds_all, self.lbl_itos,
++            bootstrap=test and self.hparams.bootstrap
++        )
+         if self.task == "classification_and_regression":
+             res = {k+"_noagg_"+("test" if test else "val")+str(dataloader_idx): v for k, v in res.items()}
+             res = {k.replace("(","_").replace(")","_"):v for k,v in res.items()}
+@@ -198,7 +201,10 @@ class Main_Lite(lp.LightningModule):
+ 
+         # Aggregated
+         preds_all_agg,targs_all_agg = self.val_datasets[0].aggregate_predictions(preds_all,targs_all,self.test_idmaps[dataloader_idx] if test else self.val_idmaps[dataloader_idx],aggregate_fn=np.mean)
+-        res_agg = self.eval_scores(targs_all_agg, preds_all_agg, self.lbl_itos, bootstrap=test)
++        res_agg = self.eval_scores(
++            targs_all_agg, preds_all_agg, self.lbl_itos,
++            bootstrap=test and self.hparams.bootstrap
++        )
+         if self.task == "classification_and_regression":
+             res_agg = {k+"_agg_"+("test" if test else "val")+str(dataloader_idx): v for k, v in res_agg.items()}
+             res_agg = {k.replace("(","_").replace(")","_"):v for k,v in res_agg.items()}
+diff --git a/code/main_lite_ecg.py b/code/main_lite_ecg.py
+index f5884f4..d2ada88 100644
+--- a/code/main_lite_ecg.py
++++ b/code/main_lite_ecg.py
+@@ -7,7 +7,6 @@ import torch
+ import torch.nn.functional as F
+ 
+ from main_lite_base import Main_Lite, multihot_encode
+-from clinical_ts.models.s4_model import S4Model
+ from clinical_ts.utils.schedulers import (
+     get_constant_schedule,
+     get_constant_schedule_with_warmup,
+@@ -18,7 +17,7 @@ from clinical_ts.utils.schedulers import (
+     get_invsqrt_decay_schedule_with_warmup,
+ )
+ from clinical_ts.models.ecg_foundation_models.ecg_founder import Net1D
+-from clinical_ts.models.fm_ecg import ECGFounderWrapper, ECGJEPAWrapper, StMemWrapper, MerlWrapper, EcgFmKEDWrapper, HubertEcgWrapper, CPCWrapper, ECG_JEPA_Scratch
++from clinical_ts.models.fm_ecg import ECGFounderWrapper, ECGJEPAWrapper, StMemWrapper, MerlWrapper, EcgFmKEDWrapper, HubertEcgWrapper, CPCWrapper, ECG_JEPA_Scratch, ECG_FM_Wrapper
+ from clinical_ts.utils.stratify import stratified_subset
+ 
+ 
+@@ -188,7 +187,17 @@ class Main_Lite_ECG(Main_Lite):
+                 lr=self.lr,
+                 discriminative_lr_factor=hparams.discriminative_lr_factor
+             )
++        elif(hparams.architecture=="ecg_fm"):
++            self.model = ECG_FM_Wrapper(
++                num_classes=num_classes,
++                num_output_tokens=input_size_model,
++                pretrained_path=hparams.pretrained,
++                eval_mode=hparams.eval_mode,
++                lr=self.lr,
++                discriminative_lr_factor=hparams.discriminative_lr_factor
++            )
+         elif(hparams.architecture=="s4"):
++            from clinical_ts.models.s4_model import S4Model
+             self.model = S4Model(
+                 d_input=hparams.input_channels,
+                 d_output=num_classes,

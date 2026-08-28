@@ -1,0 +1,29 @@
+diff --git a/code/main_lite.py b/code/main_lite.py
+--- a/code/main_lite.py
++++ b/code/main_lite.py
+@@ -114,14 +114,14 @@ class Main_Lite(lp.LightningModule):
+             preds_all = preds_all.numpy()
+             targs_all = targs_all.numpy()
+             #instance level score
+-            res = self.eval_scores(targs_all,preds_all,classes=self.lbl_itos,bootstrap=test)
++            res = self.eval_scores(targs_all,preds_all,classes=self.lbl_itos,bootstrap=test and self.hparams.bootstrap)
+             res = {k+"_auc_noagg_"+("test" if test else "val")+str(dataloader_idx):v for k,v in res.items()}
+             res = {k.replace("(","_").replace(")","_"):v for k,v in res.items()}#avoid () for mlflow
+             self.log_dict(res)
+             print("epoch",self.current_epoch,"test" if test else "val","noagg:",res["macro_auc_noagg_"+("test" if test else "val")+str(dataloader_idx)])#,"agg:",res_agg)
+             
+             preds_all_agg,targs_all_agg = self.val_datasets[0].aggregate_predictions(preds_all,targs_all,self.test_idmaps[dataloader_idx] if test else self.val_idmaps[dataloader_idx],aggregate_fn=np.mean)
+-            res_agg = self.eval_scores(targs_all_agg,preds_all_agg,classes=self.lbl_itos,bootstrap=test)
++            res_agg = self.eval_scores(targs_all_agg,preds_all_agg,classes=self.lbl_itos,bootstrap=test and self.hparams.bootstrap)
+             res_agg = {k+"_auc_agg_"+("test" if test else "val")+str(dataloader_idx):v for k,v in res_agg.items()}
+             res_agg = {k.replace("(","_").replace(")","_"):v for k,v in res_agg.items()}
+             self.log_dict(res_agg)
+ 
+@@ -470,6 +470,7 @@ def add_application_specific_args(parser):
+     parser.add_argument("--segmentation", action='store_true')
+     
+     parser.add_argument("--eval-only", type=str, help="path to model checkpoint for evaluation", default="")
++    parser.add_argument("--bootstrap", action="store_true", help="Run the existing 1000-iteration bootstrap during test evaluation")
+ 
+     parser.add_argument("--export-predictions", action="store_true", help="Export predictions in npz format")
+     parser.add_argument('--prediction-path', default='.', type=str, dest="prediction_path", help='prediction path')

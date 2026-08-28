@@ -1,0 +1,36 @@
+{
+  "aggregate_shapes": [
+    [
+      2198,
+      5
+    ],
+    [
+      2198,
+      5
+    ],
+    [
+      5
+    ],
+    []
+  ],
+  "best_checkpoint": "/root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER/PTBXL_SUPER_07_ST_MEM_FINETUNING_FORMAL_RETRY_03/output/version_0/best_model.ckpt",
+  "errors": [],
+  "last_checkpoint": "/root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER/PTBXL_SUPER_07_ST_MEM_FINETUNING_FORMAL_RETRY_03/output/version_0/last.ckpt",
+  "primary_test_macro_auroc": 0.9276266098022461,
+  "raw_shapes": [
+    [
+      8792,
+      5
+    ],
+    [
+      8792,
+      5
+    ],
+    [
+      5
+    ],
+    []
+  ],
+  "status": "PASS",
+  "validated_at_utc": "2026-08-21T17:33:03.063362+00:00"
+}

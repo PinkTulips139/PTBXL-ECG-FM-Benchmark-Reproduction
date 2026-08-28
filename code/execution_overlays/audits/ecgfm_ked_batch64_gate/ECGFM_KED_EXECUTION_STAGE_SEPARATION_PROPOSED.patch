@@ -1,0 +1,21 @@
+diff --git a/code/main_lite.py b/code/main_lite.py
+--- a/code/main_lite.py
++++ b/code/main_lite.py
+@@ -469,6 +469,7 @@ def add_application_specific_args(parser):
+     parser.add_argument("--segmentation", action='store_true')
+ 
+     parser.add_argument("--eval-only", type=str, help="path to model checkpoint for evaluation", default="")
++    parser.add_argument("--skip-test-after-fit", action="store_true", help="stop after trainer.fit; default preserves the locked post-fit test")
+ 
+     parser.add_argument("--export-predictions", action="store_true", help="Export predictions in npz format")
+     parser.add_argument('--prediction-path', default='.', type=str, dest="prediction_path", help='prediction path')
+@@ -574,7 +575,8 @@ if __name__ == '__main__':
+ 
+     if(hparams.epochs > 0 and hparams.eval_only == ""):
+         trainer.fit(model, ckpt_path=None if hparams.resume == "" else hparams.resume)
+-        trainer.test(model, ckpt_path="best")
++        if not hparams.skip_test_after_fit:
++            trainer.test(model, ckpt_path="best")
+ 
+     elif(hparams.eval_only!=""):#eval only
+         trainer.test(model,ckpt_path=hparams.eval_only)

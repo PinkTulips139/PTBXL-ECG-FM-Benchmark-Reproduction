@@ -1,0 +1,708 @@
+CUDA extension for cauchy multiplication not found. Install by going to extensions/cauchy/ and running `python setup.py install`. This should speed up end-to-end training by 10-50%
+CUDA extension for cauchy multiplication not found. Install by going to extensions/cauchy/ and running `python setup.py install`. This should speed up end-to-end training by 10-50%
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+HPU available: False, using: 0 HPUs
+You are using a CUDA device ('NVIDIA GeForce RTX 4090') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+/root/autodl-tmp/ECG/environments/common_hubert_052/lib/python3.13/site-packages/lightning/pytorch/callbacks/model_checkpoint.py:658: Checkpoint directory /root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0 exists and is not empty.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+
+  | Name  | Type       | Params | Mode 
+---------------------------------------------
+0 | model | CPCWrapper | 2.9 M  | train
+---------------------------------------------
+2.9 M     Trainable params
+0         Non-trainable params
+2.9 M     Total params
+11.778    Total estimated model params size (MB)
+70        Modules in train mode
+0         Modules in eval mode
+Namespace(data='/root/autodl-tmp/ECG/data/processed/ptb-xl/records500', epochs=100, batch_size=64, lr=0.001, weight_decay=0.001, resume='', pretrained='/root/autodl-tmp/ECG/checkpoints/cpc/config_last_11597276_ckpt.yaml', optimizer='adam', output_path='/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output', metadata='', gpus=1, num_nodes=1, precision='32', distributed_backend=None, accumulate=1, input_size=2.5, train_head_only=False, finetune=True, linear_eval=False, lr_schedule='const', lr_num_warmup_steps=1000, discriminative_lr_factor=0.1, lr_find=False, auto_batch_size=False, auc_maximization=False, refresh_rate=0, mlflow=False, mlflow_experiment_name='fm-benchmarking', mlflow_run_name='run', fs_model=240.0, fs_data=500.0, input_channels=12, architecture='cpc', s4_n=8, s4_h=512, s4_layers=4, s4_batchnorm=False, s4_prenorm=False, merl_backbone='resnet', modality='ecg', normalize=False, finetune_dataset='ptbxl_sub', chunk_length_train=1.0, stride_fraction_train=1.0, stride_fraction_valtest=1.0, chunkify_train=False, segmentation=False, eval_only='', export_predictions=True, prediction_path='/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/predictions', eval_mode='finetuning_linear', label_ratio=1, executable='main_lite_ecg', revision='')
+Loaded config:
+base:
+  optimizer: adam
+  auc_maximization: false
+  lr:
+  - 0.001
+  weight_decay: 0.001
+  lr_schedule: const
+  lr_num_warmup_steps: 1000
+  discriminative_lr_factor: 0.1
+  train_head_only: false
+  linear_eval: false
+  batch_size: 32
+  metric_checkpointing: ''
+  aggregate_strided_multi_predictions: true
+  fs: 240.0
+  input_size: 2.5
+  input_size_dl: -1
+  chunk_length_train: 0
+  chunk_length_val: -1
+  chunk_length_valtest: -1
+  stride_train: -1
+  stride_val: -1
+  stride_valtest: -1
+  stride_export: -1
+  input_channels: 12
+  freq_bins: 0
+  input_channels_cat: 0
+  input_channels_cont: 0
+  normalize: false
+  label_aggregation_epoch_length: -1
+  label_aggregation_majority_vote: false
+  label_aggregation_binary: false
+  return_idxs: false
+  sample_items_per_record: 1
+data0:
+  _target_: clinical_ts.models.ecg_foundation_models.ecg_cpc.config.BaseConfigData
+  name: ptbxl_all
+  path: /path/to/ptb-xl/records500
+  df_filename: df_memmap.pkl
+  path_label: ''
+  fs: 500.0
+  col_lbl: label
+  cols_static: []
+  cols_static_cat: []
+  col_train_fold: strat_fold
+  col_val_fold: strat_fold
+  col_test_fold: strat_fold
+  train_fold_ids:
+  - x-1
+  - x-2
+  val_fold_ids:
+  - '-2'
+  test_fold_ids:
+  - '-1'
+  input_channels_filter: []
+  label_filter: []
+  annotation: false
+  fs_annotation: -1.0
+  allow_multiple_keys: false
+ts:
+  _target_: clinical_ts.template_modules.TimeSeriesEncoder
+  timesteps_per_token: 1
+  input_format_seq_last: true
+  name: tsenc
+  enc:
+    _target_: clinical_ts.ts.encoder.RNNEncoder
+    timesteps_per_token: 1
+    input_format_seq_last: true
+    multi_prediction: false
+    local_pool_max: false
+    local_pool_kernel_size: 0
+    local_pool_stride: 0
+    strides:
+    - 2
+    - 1
+    - 1
+    - 1
+    kss:
+    - 3
+    - 1
+    - 1
+    - 1
+    features:
+    - 512
+    - 512
+    - 512
+    - 512
+    dilations:
+    - 1
+    - 1
+    - 1
+    - 1
+    normalization: true
+    layer_norm: false
+  pred:
+    _target_: clinical_ts.ts.s4.S4Predictor
+    model_dim: 512
+    causal: true
+    state_dim: 8
+    layers: 4
+    dropout: 0.2
+    tie_dropout: true
+    prenorm: false
+    batchnorm: false
+    backbone: s42
+  head:
+    _target_: ''
+    multi_prediction: false
+  pre:
+    _target_: ''
+  post:
+    _target_: ''
+  head_ssl:
+    _target_: ''
+    multi_prediction: false
+  static:
+    _target_: ''
+  quant:
+    _target_: ''
+    embedding_dim: 128
+    vocab_size: 320
+    target_dim: 0
+    num_codebooks: 2
+  mask:
+    _target_: ''
+    mask_probability: 0.065
+    mask_span: 10
+  loss:
+    _target_: ''
+    loss_type: ''
+    pretraining_targets: 0
+  ema:
+    _target_: ''
+  pass_static: true
+static:
+  _target_: ''
+head:
+  _target_: ''
+  multi_prediction: false
+loss:
+  _target_: clinical_ts.loss.supervised.BinaryCrossEntropyLoss
+  loss_type: supervised
+  supervised_type: classification_multi
+  pos_weight: []
+  ignore_nans: false
+trainer:
+  executable: ''
+  revision: ''
+  username: user
+  export_features: ''
+  export_predictions: false
+  epochs: 200
+  frozen_epochs: 0
+  num_workers: 4
+  resume: ''
+  pretrained: /path/to/last_11597276.ckpt
+  pretrained_keys_filter:
+  - ts_encoder.encoder.
+  - ts_encoder.predictor.
+  eval_only: ''
+  output_path: .
+  metadata: ''
+  gpus: 1
+  num_nodes: 1
+  precision: 32
+  strategy: auto
+  accumulate: 1
+  checkpoint_every_n_train_steps: 0
+  checkpoint_every_n_epochs: 1
+  fp32_matmul_precision: highest
+  lr_find: false
+  auto_batch_size: false
+  refresh_rate: 1
+task:
+  mainclass: clinical_ts.task.ecg.ECGModel
+metric:
+  _target_: clinical_ts.metric.base.MetricAUROC
+  name: auroc
+  aggregation: mean
+  key_summary_metric: macro
+  mode_summary_metric: max
+  verbose: macro
+  bootstrap_report_nans: true
+  bootstrap_iterations: 0
+  bootstrap_alpha: 0.95
+  precision_recall: false
+
+MODEL ARCHITECTURE:
+Input shape: [ch=12,seq=600]
+
+
+TS ENCODER:
+TimeSeriesEncoder	output shape:[seq=300,ch=512]
+[
+-encoder:	RNNEncoder	output shape:[seq=300,ch=512]
+-predictor:	S4Predictor	output shape:[seq=300,ch=512]
+]
+
+
+
+
+Loading pretrained weights from /path/to/last_11597276.ckpt pretrained_keys_filter: ['ts_encoder.encoder.', 'ts_encoder.predictor.']
+Warning: Safe weights-only loading failed ( Weights only load failed. This file can still be loaded, to do so you have two options, [1mdo those steps only if you trust the source of the checkpoint[0m. 
+	(1) In PyTorch 2.6, we changed the default value of the `weights_only` argument in `torch.load` from `False` to `True`. Re-running `torch.load` with `weights_only` set to `False` will likely succeed, but it can result in arbitrary code execution. Do it only if you got the file from a trusted source.
+	(2) Alternatively, to load with `weights_only=True` please check the recommended steps in the following error message.
+	WeightsUnpickler error: Unsupported global: GLOBAL omegaconf.base.ContainerMetadata was not an allowed global by default. Please use `torch.serialization.add_safe_globals([omegaconf.base.ContainerMetadata])` or the `torch.serialization.safe_globals([omegaconf.base.ContainerMetadata])` context manager to allowlist this global if you trust this class/function.
+
+Check the documentation of torch.load to learn more about types accepted by default with weights_only https://pytorch.org/docs/stable/generated/torch.load.html. ) — falling back to weights_only=False. Only do this if you trust the checkpoint source.
+pretrained modules: ['ts_encoder.encoder' 'ts_encoder.head_ssl' 'ts_encoder.predictor']
+model modules: ['ts_encoder.encoder' 'ts_encoder.predictor']
+Output directory: /root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0
+Folder: /root/autodl-tmp/ECG/data/processed/ptb-xl/records500 Samples: 21799
+
+ /root/autodl-tmp/ECG/data/processed/ptb-xl/records500
+train dataset: 17418 samples
+val dataset: 8732 samples
+test dataset: 8792 samples
+I am here.
+[KeOps] Generating code for Sum_Reduction reduction (with parameters 1) of formula ComplexAdd(ComplexAdd(ComplexAdd(Zero(2),Zero(2)),ComplexAdd(Zero(2),Zero(2)))*(-1/ComplexSquareAbs(ComplexMult(b-c,b-Conj(c)))**2),ComplexAdd(Real2Complex(ComplexMult(Conj(Conj(ComplexMult(b-c,b-Conj(c)))),ComplexMult(Conj(Real2Complex(1/ComplexSquareAbs(ComplexMult(b-c,b-Conj(c))))),d))|b)-ComplexReal(ComplexMult(Conj(Conj(ComplexMult(b-c,b-Conj(c)))),ComplexMult(Conj(Real2Complex(1/ComplexSquareAbs(ComplexMult(b-c,b-Conj(c))))),d)))*c,ComplexAdd(Zero(2),Zero(2)))) with b=Var(1,2,0), c=Var(2,2,1), d=Var(3,2,0) ... OK
+Epoch 0, global step 272: 'macro_auc_agg_val0' reached 0.74731 (best 0.74731), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 0 val noagg: 0.7399484181071578
+epoch 0 val agg: 0.7473141936241691
+Epoch 1, global step 544: 'macro_auc_agg_val0' reached 0.81653 (best 0.81653), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 1 val noagg: 0.8098936377186867
+epoch 1 val agg: 0.8165288892775251
+Epoch 2, global step 816: 'macro_auc_agg_val0' reached 0.84837 (best 0.84837), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 2 val noagg: 0.8429155410099629
+epoch 2 val agg: 0.8483696311351632
+Epoch 3, global step 1088: 'macro_auc_agg_val0' reached 0.86535 (best 0.86535), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 3 val noagg: 0.8610336697968769
+epoch 3 val agg: 0.8653505412920224
+Epoch 4, global step 1360: 'macro_auc_agg_val0' reached 0.87560 (best 0.87560), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 4 val noagg: 0.8717372385325477
+epoch 4 val agg: 0.8756034861582391
+Epoch 5, global step 1632: 'macro_auc_agg_val0' reached 0.88659 (best 0.88659), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 5 val noagg: 0.8822912556287799
+epoch 5 val agg: 0.8865896435353114
+Epoch 6, global step 1904: 'macro_auc_agg_val0' reached 0.89026 (best 0.89026), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 6 val noagg: 0.8862667623288274
+epoch 6 val agg: 0.8902579113214901
+Epoch 7, global step 2176: 'macro_auc_agg_val0' reached 0.89680 (best 0.89680), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 7 val noagg: 0.8928686433867506
+epoch 7 val agg: 0.8968000970993873
+Epoch 8, global step 2448: 'macro_auc_agg_val0' reached 0.90149 (best 0.90149), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 8 val noagg: 0.8977491709224448
+epoch 8 val agg: 0.9014865250036145
+Epoch 9, global step 2720: 'macro_auc_agg_val0' reached 0.90547 (best 0.90547), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 9 val noagg: 0.9019547956907479
+epoch 9 val agg: 0.9054743260343037
+Epoch 10, global step 2992: 'macro_auc_agg_val0' reached 0.90902 (best 0.90902), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 10 val noagg: 0.9055340412502156
+epoch 10 val agg: 0.9090179420139599
+Epoch 11, global step 3264: 'macro_auc_agg_val0' reached 0.91057 (best 0.91057), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 11 val noagg: 0.9072860494104076
+epoch 11 val agg: 0.9105733138215022
+Epoch 12, global step 3536: 'macro_auc_agg_val0' reached 0.91212 (best 0.91212), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 12 val noagg: 0.9089704647391015
+epoch 12 val agg: 0.9121241661936722
+Epoch 13, global step 3808: 'macro_auc_agg_val0' reached 0.91457 (best 0.91457), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 13 val noagg: 0.9113384465104961
+epoch 13 val agg: 0.9145666366587498
+Epoch 14, global step 4080: 'macro_auc_agg_val0' was not in top 1
+epoch 14 val noagg: 0.91131747296842
+epoch 14 val agg: 0.9142473193394989
+Epoch 15, global step 4352: 'macro_auc_agg_val0' reached 0.91562 (best 0.91562), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 15 val noagg: 0.9127899757833676
+epoch 15 val agg: 0.9156203285604627
+Epoch 16, global step 4624: 'macro_auc_agg_val0' was not in top 1
+epoch 16 val noagg: 0.912801345665965
+epoch 16 val agg: 0.9154351545124196
+Epoch 17, global step 4896: 'macro_auc_agg_val0' reached 0.91628 (best 0.91628), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 17 val noagg: 0.9136473134883897
+epoch 17 val agg: 0.9162775094864628
+Epoch 18, global step 5168: 'macro_auc_agg_val0' reached 0.91681 (best 0.91681), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 18 val noagg: 0.9142587348418622
+epoch 18 val agg: 0.9168068721048195
+Epoch 19, global step 5440: 'macro_auc_agg_val0' reached 0.91784 (best 0.91784), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 19 val noagg: 0.9151110785307566
+epoch 19 val agg: 0.9178416119276839
+Epoch 20, global step 5712: 'macro_auc_agg_val0' reached 0.91963 (best 0.91963), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 20 val noagg: 0.9171830091184754
+epoch 20 val agg: 0.9196341417826883
+Epoch 21, global step 5984: 'macro_auc_agg_val0' was not in top 1
+epoch 21 val noagg: 0.9164679176462122
+epoch 21 val agg: 0.9187082105471928
+Epoch 22, global step 6256: 'macro_auc_agg_val0' was not in top 1
+epoch 22 val noagg: 0.9167304915163355
+epoch 22 val agg: 0.9191678707609892
+Epoch 23, global step 6528: 'macro_auc_agg_val0' reached 0.91973 (best 0.91973), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 23 val noagg: 0.9173496353669984
+epoch 23 val agg: 0.9197341529243827
+Epoch 24, global step 6800: 'macro_auc_agg_val0' reached 0.91974 (best 0.91974), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 24 val noagg: 0.9169618024125963
+epoch 24 val agg: 0.9197437698463845
+Epoch 25, global step 7072: 'macro_auc_agg_val0' reached 0.92098 (best 0.92098), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 25 val noagg: 0.9184361854160076
+epoch 25 val agg: 0.9209812953498251
+Epoch 26, global step 7344: 'macro_auc_agg_val0' was not in top 1
+epoch 26 val noagg: 0.9171478494518321
+epoch 26 val agg: 0.9197636647964191
+Epoch 27, global step 7616: 'macro_auc_agg_val0' reached 0.92189 (best 0.92189), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 27 val noagg: 0.9190557732069277
+epoch 27 val agg: 0.9218850887558545
+Epoch 28, global step 7888: 'macro_auc_agg_val0' was not in top 1
+epoch 28 val noagg: 0.9192738518367305
+epoch 28 val agg: 0.921863268494488
+Epoch 29, global step 8160: 'macro_auc_agg_val0' reached 0.92342 (best 0.92342), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 29 val noagg: 0.920920160348849
+epoch 29 val agg: 0.923422344008037
+Epoch 30, global step 8432: 'macro_auc_agg_val0' reached 0.92473 (best 0.92473), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 30 val noagg: 0.922060872691483
+epoch 30 val agg: 0.9247325323097703
+Epoch 31, global step 8704: 'macro_auc_agg_val0' was not in top 1
+epoch 31 val noagg: 0.9218393723136514
+epoch 31 val agg: 0.9243818207283871
+Epoch 32, global step 8976: 'macro_auc_agg_val0' reached 0.92514 (best 0.92514), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 32 val noagg: 0.9224480132634069
+epoch 32 val agg: 0.9251427448430413
+Epoch 33, global step 9248: 'macro_auc_agg_val0' was not in top 1
+epoch 33 val noagg: 0.9220962874435041
+epoch 33 val agg: 0.9248494128398207
+Epoch 34, global step 9520: 'macro_auc_agg_val0' reached 0.92541 (best 0.92541), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 34 val noagg: 0.9227130812062354
+epoch 34 val agg: 0.9254078686603008
+Epoch 35, global step 9792: 'macro_auc_agg_val0' reached 0.92644 (best 0.92644), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 35 val noagg: 0.9233177929953121
+epoch 35 val agg: 0.9264396192800298
+Epoch 36, global step 10064: 'macro_auc_agg_val0' was not in top 1
+epoch 36 val noagg: 0.9228490250863374
+epoch 36 val agg: 0.9257821695244164
+Epoch 37, global step 10336: 'macro_auc_agg_val0' was not in top 1
+epoch 37 val noagg: 0.9229070681182151
+epoch 37 val agg: 0.9261817859725199
+Epoch 38, global step 10608: 'macro_auc_agg_val0' reached 0.92688 (best 0.92688), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 38 val noagg: 0.9239214771027572
+epoch 38 val agg: 0.9268849780298999
+Epoch 39, global step 10880: 'macro_auc_agg_val0' was not in top 1
+epoch 39 val noagg: 0.9230672009193619
+epoch 39 val agg: 0.9264396838014612
+Epoch 40, global step 11152: 'macro_auc_agg_val0' was not in top 1
+epoch 40 val noagg: 0.9228186889811765
+epoch 40 val agg: 0.9262991921971988
+Epoch 41, global step 11424: 'macro_auc_agg_val0' was not in top 1
+epoch 41 val noagg: 0.9222285597992044
+epoch 41 val agg: 0.9254394878542255
+Epoch 42, global step 11696: 'macro_auc_agg_val0' reached 0.92741 (best 0.92741), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 42 val noagg: 0.9245791076289116
+epoch 42 val agg: 0.9274103484791862
+Epoch 43, global step 11968: 'macro_auc_agg_val0' reached 0.92809 (best 0.92809), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 43 val noagg: 0.9249651939430202
+epoch 43 val agg: 0.9280905988485264
+Epoch 44, global step 12240: 'macro_auc_agg_val0' reached 0.92852 (best 0.92852), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 44 val noagg: 0.9250377696358534
+epoch 44 val agg: 0.9285151169959422
+Epoch 45, global step 12512: 'macro_auc_agg_val0' reached 0.92941 (best 0.92941), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 45 val noagg: 0.9258358636423375
+epoch 45 val agg: 0.9294078333633198
+Epoch 46, global step 12784: 'macro_auc_agg_val0' was not in top 1
+epoch 46 val noagg: 0.9253942833325504
+epoch 46 val agg: 0.9287950622186266
+Epoch 47, global step 13056: 'macro_auc_agg_val0' was not in top 1
+epoch 47 val noagg: 0.9253908586363668
+epoch 47 val agg: 0.9287648391484125
+Epoch 48, global step 13328: 'macro_auc_agg_val0' was not in top 1
+epoch 48 val noagg: 0.9259656111778113
+epoch 48 val agg: 0.9293172601617387
+Epoch 49, global step 13600: 'macro_auc_agg_val0' was not in top 1
+epoch 49 val noagg: 0.9255750529657891
+epoch 49 val agg: 0.9286753491974583
+Epoch 50, global step 13872: 'macro_auc_agg_val0' reached 0.92949 (best 0.92949), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 50 val noagg: 0.9260672949532993
+epoch 50 val agg: 0.9294895125856015
+Epoch 51, global step 14144: 'macro_auc_agg_val0' was not in top 1
+epoch 51 val noagg: 0.9247325611094748
+epoch 51 val agg: 0.9280138900468309
+Epoch 52, global step 14416: 'macro_auc_agg_val0' reached 0.93048 (best 0.93048), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 52 val noagg: 0.9275186274757121
+epoch 52 val agg: 0.930480137810344
+Epoch 53, global step 14688: 'macro_auc_agg_val0' was not in top 1
+epoch 53 val noagg: 0.9264218432575361
+epoch 53 val agg: 0.9294939452711717
+Epoch 54, global step 14960: 'macro_auc_agg_val0' reached 0.93216 (best 0.93216), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 54 val noagg: 0.929337160355483
+epoch 54 val agg: 0.9321585679768255
+Epoch 55, global step 15232: 'macro_auc_agg_val0' was not in top 1
+epoch 55 val noagg: 0.9278499721595699
+epoch 55 val agg: 0.9309144897737702
+Epoch 56, global step 15504: 'macro_auc_agg_val0' reached 0.93253 (best 0.93253), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 56 val noagg: 0.9294012307701288
+epoch 56 val agg: 0.9325349680417234
+Epoch 57, global step 15776: 'macro_auc_agg_val0' was not in top 1
+epoch 57 val noagg: 0.9284477705412477
+epoch 57 val agg: 0.9313226410373872
+Epoch 58, global step 16048: 'macro_auc_agg_val0' was not in top 1
+epoch 58 val noagg: 0.9282107719642267
+epoch 58 val agg: 0.9314184451558836
+Epoch 59, global step 16320: 'macro_auc_agg_val0' was not in top 1
+epoch 59 val noagg: 0.9268209161136487
+epoch 59 val agg: 0.9305893692792868
+Epoch 60, global step 16592: 'macro_auc_agg_val0' reached 0.93263 (best 0.93263), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 60 val noagg: 0.929654051550506
+epoch 60 val agg: 0.9326285520707652
+Epoch 61, global step 16864: 'macro_auc_agg_val0' was not in top 1
+epoch 61 val noagg: 0.9284609221836075
+epoch 61 val agg: 0.931782736882991
+Epoch 62, global step 17136: 'macro_auc_agg_val0' was not in top 1
+epoch 62 val noagg: 0.9273106486811752
+epoch 62 val agg: 0.9308601725169747
+Epoch 63, global step 17408: 'macro_auc_agg_val0' was not in top 1
+epoch 63 val noagg: 0.9281728281274605
+epoch 63 val agg: 0.9311291314039273
+Epoch 64, global step 17680: 'macro_auc_agg_val0' reached 0.93269 (best 0.93269), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 64 val noagg: 0.929013062730699
+epoch 64 val agg: 0.9326906832961173
+Epoch 65, global step 17952: 'macro_auc_agg_val0' was not in top 1
+epoch 65 val noagg: 0.9284284937922213
+epoch 65 val agg: 0.9321311921703633
+Epoch 66, global step 18224: 'macro_auc_agg_val0' was not in top 1
+epoch 66 val noagg: 0.9275823534393193
+epoch 66 val agg: 0.9310715225998838
+Epoch 67, global step 18496: 'macro_auc_agg_val0' was not in top 1
+epoch 67 val noagg: 0.9283613377841352
+epoch 67 val agg: 0.931255394942146
+Epoch 68, global step 18768: 'macro_auc_agg_val0' reached 0.93287 (best 0.93287), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 68 val noagg: 0.9298507986810255
+epoch 68 val agg: 0.9328682360718075
+Epoch 69, global step 19040: 'macro_auc_agg_val0' reached 0.93339 (best 0.93339), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 69 val noagg: 0.9302588231142902
+epoch 69 val agg: 0.9333921729862353
+Epoch 70, global step 19312: 'macro_auc_agg_val0' reached 0.93422 (best 0.93422), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 70 val noagg: 0.9305839580336779
+epoch 70 val agg: 0.9342215783507599
+Epoch 71, global step 19584: 'macro_auc_agg_val0' reached 0.93476 (best 0.93476), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 71 val noagg: 0.9313920301308656
+epoch 71 val agg: 0.9347597983131852
+Epoch 72, global step 19856: 'macro_auc_agg_val0' was not in top 1
+epoch 72 val noagg: 0.930369307950918
+epoch 72 val agg: 0.9332313742247185
+Epoch 73, global step 20128: 'macro_auc_agg_val0' reached 0.93484 (best 0.93484), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 73 val noagg: 0.9315460304590014
+epoch 73 val agg: 0.9348448067609256
+Epoch 74, global step 20400: 'macro_auc_agg_val0' was not in top 1
+epoch 74 val noagg: 0.9299531004322298
+epoch 74 val agg: 0.9334947294250513
+Epoch 75, global step 20672: 'macro_auc_agg_val0' was not in top 1
+epoch 75 val noagg: 0.9302787585098232
+epoch 75 val agg: 0.9335896421498646
+Epoch 76, global step 20944: 'macro_auc_agg_val0' was not in top 1
+epoch 76 val noagg: 0.9319451256320448
+epoch 76 val agg: 0.9348203142265262
+Epoch 77, global step 21216: 'macro_auc_agg_val0' was not in top 1
+epoch 77 val noagg: 0.9279080227467518
+epoch 77 val agg: 0.9319410761224952
+Epoch 78, global step 21488: 'macro_auc_agg_val0' was not in top 1
+epoch 78 val noagg: 0.9298724353465957
+epoch 78 val agg: 0.9337307778432795
+Epoch 79, global step 21760: 'macro_auc_agg_val0' was not in top 1
+epoch 79 val noagg: 0.9301577848843288
+epoch 79 val agg: 0.9340771873747377
+Epoch 80, global step 22032: 'macro_auc_agg_val0' was not in top 1
+epoch 80 val noagg: 0.9296916577098763
+epoch 80 val agg: 0.9336955366040306
+Epoch 81, global step 22304: 'macro_auc_agg_val0' was not in top 1
+epoch 81 val noagg: 0.9284495859312806
+epoch 81 val agg: 0.9322970389315716
+Epoch 82, global step 22576: 'macro_auc_agg_val0' was not in top 1
+epoch 82 val noagg: 0.9290008477942215
+epoch 82 val agg: 0.9328476087435951
+Epoch 83, global step 22848: 'macro_auc_agg_val0' was not in top 1
+epoch 83 val noagg: 0.9302325469762956
+epoch 83 val agg: 0.9337623416633921
+Epoch 84, global step 23120: 'macro_auc_agg_val0' was not in top 1
+epoch 84 val noagg: 0.9283458830640832
+epoch 84 val agg: 0.9328660305859992
+Epoch 85, global step 23392: 'macro_auc_agg_val0' was not in top 1
+epoch 85 val noagg: 0.9271040781112636
+epoch 85 val agg: 0.931008703214603
+Epoch 86, global step 23664: 'macro_auc_agg_val0' was not in top 1
+epoch 86 val noagg: 0.9289260743654552
+epoch 86 val agg: 0.9326337378856426
+Epoch 87, global step 23936: 'macro_auc_agg_val0' was not in top 1
+epoch 87 val noagg: 0.9313108987598079
+epoch 87 val agg: 0.93464168726729
+Epoch 88, global step 24208: 'macro_auc_agg_val0' reached 0.93514 (best 0.93514), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt' as top 1
+epoch 88 val noagg: 0.9310207342843542
+epoch 88 val agg: 0.9351390333859875
+Epoch 89, global step 24480: 'macro_auc_agg_val0' was not in top 1
+epoch 89 val noagg: 0.9286536689822766
+epoch 89 val agg: 0.9330350287195407
+Epoch 90, global step 24752: 'macro_auc_agg_val0' was not in top 1
+epoch 90 val noagg: 0.9286699259511135
+epoch 90 val agg: 0.9329940588665333
+Epoch 91, global step 25024: 'macro_auc_agg_val0' was not in top 1
+epoch 91 val noagg: 0.9276349674162236
+epoch 91 val agg: 0.9318889454660612
+Epoch 92, global step 25296: 'macro_auc_agg_val0' was not in top 1
+epoch 92 val noagg: 0.9293936985855986
+epoch 92 val agg: 0.9334627347451461
+Epoch 93, global step 25568: 'macro_auc_agg_val0' was not in top 1
+epoch 93 val noagg: 0.9290169000372761
+epoch 93 val agg: 0.9336283353966076
+Epoch 94, global step 25840: 'macro_auc_agg_val0' was not in top 1
+epoch 94 val noagg: 0.9284899703418504
+epoch 94 val agg: 0.9328002194360236
+Epoch 95, global step 26112: 'macro_auc_agg_val0' was not in top 1
+epoch 95 val noagg: 0.9273277899702004
+epoch 95 val agg: 0.9317484912322026
+Epoch 96, global step 26384: 'macro_auc_agg_val0' was not in top 1
+epoch 96 val noagg: 0.927837369495429
+epoch 96 val agg: 0.9317642753077255
+Epoch 97, global step 26656: 'macro_auc_agg_val0' was not in top 1
+epoch 97 val noagg: 0.9272139331189677
+epoch 97 val agg: 0.9313956518431914
+Epoch 98, global step 26928: 'macro_auc_agg_val0' was not in top 1
+epoch 98 val noagg: 0.9283405830056255
+epoch 98 val agg: 0.9331266598488052
+Epoch 99, global step 27200: 'macro_auc_agg_val0' was not in top 1
+`Trainer.fit` stopped: `max_epochs=100` reached.
+Restoring states from the checkpoint path at /root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loaded model weights from the checkpoint at /root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_CPC_FINETUNING_FORMAL_052_01/output/version_0/best_model.ckpt
+epoch 99 val noagg: 0.9280291436422928
+epoch 99 val agg: 0.932166842424176
+Folder: /root/autodl-tmp/ECG/data/processed/ptb-xl/records500 Samples: 21799
+
+ /root/autodl-tmp/ECG/data/processed/ptb-xl/records500
+train dataset: 17418 samples
+val dataset: 8732 samples
+test dataset: 8792 samples
+  0%|          | 0/20 [00:00<?, ?it/s]  5%|▌         | 1/20 [00:05<01:47,  5.67s/it] 10%|█         | 2/20 [00:11<01:43,  5.74s/it] 15%|█▌        | 3/20 [00:17<01:39,  5.86s/it] 20%|██        | 4/20 [00:23<01:36,  6.04s/it] 25%|██▌       | 5/20 [00:29<01:30,  6.06s/it] 30%|███       | 6/20 [00:36<01:25,  6.11s/it] 35%|███▌      | 7/20 [00:42<01:18,  6.07s/it] 40%|████      | 8/20 [00:47<01:12,  6.02s/it] 45%|████▌     | 9/20 [00:53<01:05,  5.92s/it] 50%|█████     | 10/20 [01:00<01:01,  6.16s/it] 55%|█████▌    | 11/20 [01:06<00:56,  6.29s/it] 60%|██████    | 12/20 [01:13<00:52,  6.51s/it] 65%|██████▌   | 13/20 [01:20<00:45,  6.53s/it] 70%|███████   | 14/20 [01:27<00:39,  6.52s/it] 75%|███████▌  | 15/20 [01:33<00:32,  6.57s/it] 80%|████████  | 16/20 [01:40<00:26,  6.56s/it] 85%|████████▌ | 17/20 [01:46<00:19,  6.36s/it] 90%|█████████ | 18/20 [01:52<00:12,  6.31s/it] 95%|█████████▌| 19/20 [01:58<00:06,  6.28s/it]100%|██████████| 20/20 [02:04<00:00,  6.13s/it]100%|██████████| 20/20 [02:04<00:00,  6.22s/it]
+epoch 100 test noagg: 0.9341539383485725
+  0%|          | 0/20 [00:00<?, ?it/s]  5%|▌         | 1/20 [00:05<01:39,  5.23s/it] 10%|█         | 2/20 [00:10<01:34,  5.27s/it] 15%|█▌        | 3/20 [00:15<01:29,  5.29s/it] 20%|██        | 4/20 [00:21<01:24,  5.29s/it] 25%|██▌       | 5/20 [00:26<01:20,  5.37s/it] 30%|███       | 6/20 [00:31<01:14,  5.35s/it] 35%|███▌      | 7/20 [00:37<01:09,  5.33s/it] 40%|████      | 8/20 [00:42<01:03,  5.32s/it] 45%|████▌     | 9/20 [00:47<00:58,  5.34s/it] 50%|█████     | 10/20 [00:53<00:53,  5.37s/it] 55%|█████▌    | 11/20 [00:59<00:50,  5.65s/it] 60%|██████    | 12/20 [01:05<00:46,  5.84s/it] 65%|██████▌   | 13/20 [01:11<00:41,  5.86s/it] 70%|███████   | 14/20 [01:17<00:35,  5.87s/it] 75%|███████▌  | 15/20 [01:24<00:30,  6.03s/it] 80%|████████  | 16/20 [01:30<00:24,  6.09s/it] 85%|████████▌ | 17/20 [01:36<00:17,  6.00s/it] 90%|█████████ | 18/20 [01:42<00:12,  6.05s/it] 95%|█████████▌| 19/20 [01:48<00:05,  5.95s/it]100%|██████████| 20/20 [01:53<00:00,  5.82s/it]100%|██████████| 20/20 [01:53<00:00,  5.68s/it]
+epoch 100 test agg: 0.939355526159927
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃          Test metric           ┃          DataLoader 0          ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│       AMI_auc_agg_test0        │       0.9691062569618225       │
+│      AMI_auc_noagg_test0       │       0.9654026627540588       │
+│     AMI_high_auc_agg_test0     │       0.9772913455963135       │
+│    AMI_high_auc_noagg_test0    │       0.9697564840316772       │
+│     AMI_low_auc_agg_test0      │       0.9600417017936707       │
+│    AMI_low_auc_noagg_test0     │       0.9603671431541443       │
+│      CLBBB_auc_agg_test0       │       0.9954135417938232       │
+│     CLBBB_auc_noagg_test0      │       0.9955169558525085       │
+│    CLBBB_high_auc_agg_test0    │       0.999187707901001        │
+│   CLBBB_high_auc_noagg_test0   │       0.9978445768356323       │
+│    CLBBB_low_auc_agg_test0     │       0.9884631037712097       │
+│   CLBBB_low_auc_noagg_test0    │       0.9926336407661438       │
+│      CRBBB_auc_agg_test0       │       0.9978492856025696       │
+│     CRBBB_auc_noagg_test0      │       0.9977602362632751       │
+│    CRBBB_high_auc_agg_test0    │       0.9992608428001404       │
+│   CRBBB_high_auc_noagg_test0   │       0.9985173344612122       │
+│    CRBBB_low_auc_agg_test0     │       0.9961065053939819       │
+│   CRBBB_low_auc_noagg_test0    │       0.9969038367271423       │
+│      ILBBB_auc_agg_test0       │       0.8928653001785278       │
+│     ILBBB_auc_noagg_test0      │       0.8855379819869995       │
+│    ILBBB_high_auc_agg_test0    │       0.9874457716941833       │
+│   ILBBB_high_auc_noagg_test0   │       0.9615902900695801       │
+│    ILBBB_low_auc_agg_test0     │       0.7136867642402649       │
+│   ILBBB_low_auc_noagg_test0    │       0.7943984270095825       │
+│       IMI_auc_agg_test0        │       0.9458383917808533       │
+│      IMI_auc_noagg_test0       │       0.9383894205093384       │
+│     IMI_high_auc_agg_test0     │       0.9560548663139343       │
+│    IMI_high_auc_noagg_test0    │       0.9442538619041443       │
+│     IMI_low_auc_agg_test0      │       0.9342882037162781       │
+│    IMI_low_auc_noagg_test0     │       0.9323109984397888       │
+│      IRBBB_auc_agg_test0       │       0.982921838760376        │
+│     IRBBB_auc_noagg_test0      │       0.9794195294380188       │
+│    IRBBB_high_auc_agg_test0    │       0.9884176850318909       │
+│   IRBBB_high_auc_noagg_test0   │       0.9830127358436584       │
+│    IRBBB_low_auc_agg_test0     │       0.975676953792572        │
+│   IRBBB_low_auc_noagg_test0    │       0.9753488302230835       │
+│       ISCA_auc_agg_test0       │       0.9459505081176758       │
+│      ISCA_auc_noagg_test0      │       0.9432865977287292       │
+│    ISCA_high_auc_agg_test0     │       0.9602913856506348       │
+│   ISCA_high_auc_noagg_test0    │       0.9509442448616028       │
+│     ISCA_low_auc_agg_test0     │       0.9301366209983826       │
+│    ISCA_low_auc_noagg_test0    │       0.9355567097663879       │
+│       ISCI_auc_agg_test0       │       0.9422382116317749       │
+│      ISCI_auc_noagg_test0      │       0.9367020726203918       │
+│    ISCI_high_auc_agg_test0     │       0.9696146249771118       │
+│   ISCI_high_auc_noagg_test0    │       0.9523898959159851       │
+│     ISCI_low_auc_agg_test0     │       0.9026845693588257       │
+│    ISCI_low_auc_noagg_test0    │       0.918754518032074        │
+│       ISC__auc_agg_test0       │       0.9679158926010132       │
+│      ISC__auc_noagg_test0      │       0.9656535387039185       │
+│    ISC__high_auc_agg_test0     │       0.9782513380050659       │
+│   ISC__high_auc_noagg_test0    │       0.9715684652328491       │
+│     ISC__low_auc_agg_test0     │       0.9559775590896606       │
+│    ISC__low_auc_noagg_test0    │       0.9591516852378845       │
+│       IVCD_auc_agg_test0       │       0.7968769669532776       │
+│      IVCD_auc_noagg_test0      │       0.7878947854042053       │
+│    IVCD_high_auc_agg_test0     │       0.8489838242530823       │
+│   IVCD_high_auc_noagg_test0    │       0.8149795532226562       │
+│     IVCD_low_auc_agg_test0     │       0.7338150143623352       │
+│    IVCD_low_auc_noagg_test0    │        0.75972980260849        │
+│    LAFB/LPFB_auc_agg_test0     │       0.9692779183387756       │
+│   LAFB/LPFB_auc_noagg_test0    │       0.9666502475738525       │
+│  LAFB/LPFB_high_auc_agg_test0  │       0.980859637260437        │
+│ LAFB/LPFB_high_auc_noagg_test0 │       0.9728980660438538       │
+│  LAFB/LPFB_low_auc_agg_test0   │       0.9558519721031189       │
+│ LAFB/LPFB_low_auc_noagg_test0  │       0.9599675536155701       │
+│     LAO/LAE_auc_agg_test0      │       0.8500861525535583       │
+│    LAO/LAE_auc_noagg_test0     │       0.8436616659164429       │
+│   LAO/LAE_high_auc_agg_test0   │       0.8988243341445923       │
+│  LAO/LAE_high_auc_noagg_test0  │       0.8695107698440552       │
+│   LAO/LAE_low_auc_agg_test0    │       0.7960711717605591       │
+│  LAO/LAE_low_auc_noagg_test0   │       0.8145290017127991       │
+│       LMI_auc_agg_test0        │       0.9141414165496826       │
+│      LMI_auc_noagg_test0       │       0.8997316956520081       │
+│     LMI_high_auc_agg_test0     │       0.9432904124259949       │
+│    LMI_high_auc_noagg_test0    │       0.9179316163063049       │
+│     LMI_low_auc_agg_test0      │       0.8837134838104248       │
+│    LMI_low_auc_noagg_test0     │       0.8802749514579773       │
+│       LVH_auc_agg_test0        │       0.951685905456543        │
+│      LVH_auc_noagg_test0       │       0.9467030167579651       │
+│     LVH_high_auc_agg_test0     │       0.9632373452186584       │
+│    LVH_high_auc_noagg_test0    │       0.953201413154602        │
+│     LVH_low_auc_agg_test0      │       0.9382695555686951       │
+│    LVH_low_auc_noagg_test0     │       0.9400245547294617       │
+│       NORM_auc_agg_test0       │       0.9527278542518616       │
+│      NORM_auc_noagg_test0      │       0.9486634135246277       │
+│    NORM_high_auc_agg_test0     │       0.9600370526313782       │
+│   NORM_high_auc_noagg_test0    │       0.9525507688522339       │
+│     NORM_low_auc_agg_test0     │       0.9448301196098328       │
+│    NORM_low_auc_noagg_test0    │       0.9446703195571899       │
+│       NST__auc_agg_test0       │       0.8681337237358093       │
+│      NST__auc_noagg_test0      │       0.859893262386322        │
+│    NST__high_auc_agg_test0     │       0.8975982069969177       │
+│   NST__high_auc_noagg_test0    │       0.8758835196495056       │
+│     NST__low_auc_agg_test0     │       0.8324788212776184       │
+│    NST__low_auc_noagg_test0    │       0.8417264819145203       │
+│       PMI_auc_agg_test0        │       0.9016393423080444       │
+│      PMI_auc_noagg_test0       │       0.8898850083351135       │
+│     PMI_high_auc_agg_test0     │              nan               │
+│    PMI_high_auc_noagg_test0    │       0.9689212441444397       │
+│     PMI_low_auc_agg_test0      │              nan               │
+│    PMI_low_auc_noagg_test0     │       0.7984331846237183       │
+│     RAO/RAE_auc_agg_test0      │       0.9807129502296448       │
+│    RAO/RAE_auc_noagg_test0     │       0.9745829701423645       │
+│   RAO/RAE_high_auc_agg_test0   │       0.995491623878479        │
+│  RAO/RAE_high_auc_noagg_test0  │       0.9864040017127991       │
+│   RAO/RAE_low_auc_agg_test0    │       0.9540910124778748       │
+│  RAO/RAE_low_auc_noagg_test0   │       0.9619061350822449       │
+│       RVH_auc_agg_test0        │       0.9513952136039734       │
+│      RVH_auc_noagg_test0       │       0.9493557214736938       │
+│     RVH_high_auc_agg_test0     │       0.9861347079277039       │
+│    RVH_high_auc_noagg_test0    │       0.9707121849060059       │
+│     RVH_low_auc_agg_test0      │       0.9017548561096191       │
+│    RVH_low_auc_noagg_test0     │       0.9257327318191528       │
+│      SEHYP_auc_agg_test0       │       0.999316930770874        │
+│     SEHYP_auc_noagg_test0      │       0.9983634948730469       │
+│    SEHYP_high_auc_agg_test0    │              nan               │
+│   SEHYP_high_auc_noagg_test0   │       0.9993801116943359       │
+│    SEHYP_low_auc_agg_test0     │              nan               │
+│   SEHYP_low_auc_noagg_test0    │       0.9969282746315002       │
+│       STTC_auc_agg_test0       │       0.9088385105133057       │
+│      STTC_auc_noagg_test0      │       0.9026796817779541       │
+│    STTC_high_auc_agg_test0     │       0.9242669939994812       │
+│   STTC_high_auc_noagg_test0    │       0.9110987782478333       │
+│     STTC_low_auc_agg_test0     │       0.8925722241401672       │
+│    STTC_low_auc_noagg_test0    │       0.8942950367927551       │
+│       WPW_auc_agg_test0        │       0.942808210849762        │
+│      WPW_auc_noagg_test0       │       0.9361408352851868       │
+│     WPW_high_auc_agg_test0     │       0.9994292259216309       │
+│    WPW_high_auc_noagg_test0    │       0.9741575121879578       │
+│     WPW_low_auc_agg_test0      │       0.8233855962753296       │
+│    WPW_low_auc_noagg_test0     │       0.8900824189186096       │
+│       _AVB_auc_agg_test0       │       0.9774367213249207       │
+│      _AVB_auc_noagg_test0      │       0.973665714263916        │
+│    _AVB_high_auc_agg_test0     │       0.9844380021095276       │
+│   _AVB_high_auc_noagg_test0    │       0.9779501557350159       │
+│     _AVB_low_auc_agg_test0     │       0.9696918725967407       │
+│    _AVB_low_auc_noagg_test0    │       0.9692685008049011       │
+│      macro_auc_agg_test0       │       0.9393555521965027       │
+│     macro_auc_noagg_test0      │       0.9341539144515991       │
+│    macro_high_auc_agg_test0    │       0.9494579434394836       │
+│   macro_high_auc_noagg_test0   │       0.9402145147323608       │
+│    macro_low_auc_agg_test0     │       0.9061769843101501       │
+│   macro_low_auc_noagg_test0    │       0.9276334047317505       │
+│      micro_auc_agg_test0       │       0.9729629755020142       │
+│     micro_auc_noagg_test0      │       0.9705637693405151       │
+│    micro_high_auc_agg_test0    │       0.975638210773468        │
+│   micro_high_auc_noagg_test0   │       0.9720091819763184       │
+│    micro_low_auc_agg_test0     │       0.970069944858551        │
+│   micro_low_auc_noagg_test0    │       0.9690102934837341       │
+└────────────────────────────────┴────────────────────────────────┘

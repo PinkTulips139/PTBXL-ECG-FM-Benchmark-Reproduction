@@ -1,0 +1,214 @@
+{
+  "stage": "FINAL_REPORT_TEXTUAL_REMEDIATION_V2",
+  "generated_at": "2026-08-29T00:00:29.9530770+08:00",
+  "report_remediation_status": "PASS",
+  "source_report": {
+    "path": "D:\\桌面文件\\ECG\\Final Report.doc",
+    "detected_format": "LEGACY_OLE_DOC",
+    "size_bytes": 215040,
+    "sha256": "A7489A668D4036CA19AEB559A22C47E0382C79B3B090C344D316F245A8EF53C7",
+    "mtime_before": "2026-08-23T02:55:43.7920000+08:00",
+    "mtime_after": "2026-08-23T02:55:43.7920000+08:00",
+    "opened_read_only": true,
+    "macro_execution_disabled": true,
+    "external_link_updates_disabled": true,
+    "unchanged": true
+  },
+  "output_report": {
+    "path": "D:\\桌面文件\\ECG\\Final Report_V2.docx",
+    "format": "WORD_OPEN_XML_DOCUMENT",
+    "size_bytes": 44707,
+    "sha256": "CF2BBB5FB0F1236154B9559F0440640FD3BA79E1CC55D7E3795CDBB589851BFE",
+    "valid": true,
+    "pages": 14,
+    "paragraphs": 779,
+    "tables": 14,
+    "inline_shapes": 0,
+    "floating_shapes": 0,
+    "comments": 0,
+    "revisions": 0,
+    "ooxml_zip_valid": true,
+    "document_xml_present": true
+  },
+  "structural_changes": [
+    "added explicit nine-part report hierarchy",
+    "added compact Model Overview and 30/24/24 formal matrix statement",
+    "added label-space and shared-test-set statement",
+    "separated Results from Paper vs Ours Difference Analysis",
+    "added Implementation Challenges and Scientific Preservation section",
+    "expanded Prediction-Level Evidence and Reproducibility Validation section",
+    "replaced limitations with finalized comprehensive limitations",
+    "replaced takeaway with concise bounded final takeaway",
+    "preserved the original 12-row largest-difference table",
+    "removed inherited list numbering while retaining five Bootstrap blocker bullets"
+  ],
+  "scientific_claim_changes": [
+    "qualified locked-source language using commit identity, current worktree state, and formal-execution provenance as separate propositions",
+    "removed unsupported causal implication between ST-MEM runtime remediation and Finetuning AUROC deviation",
+    "added finalized mapping, Bootstrap, worker-evidence, and training-metadata closure counts",
+    "made blocker-versus-failure distinctions explicit",
+    "bounded the 65/72 CI observation as descriptive rather than equivalence evidence"
+  ],
+  "wording_changes": {
+    "targeted_textual_remediation": true,
+    "source_report_rewritten_from_scratch": false,
+    "informal_language_removed_or_avoided": true,
+    "unsupported_root_cause_claims_removed": true
+  },
+  "report_structure": {
+    "status": "PASS",
+    "sections": [
+      "Benchmark / Task",
+      "Official Experimental Protocol",
+      "Reproduction Setup",
+      "Results",
+      "Paper vs Ours Difference Analysis",
+      "Implementation Challenges and Scientific Preservation",
+      "Prediction-Level Evidence and Reproducibility Validation",
+      "Limitations",
+      "Takeaway"
+    ]
+  },
+  "closure_counts_added": {
+    "formal_runs": "78/78",
+    "matrix": "30_FINETUNING_24_FROZEN_24_LINEAR",
+    "mapping": "77_PASS_1_HISTORICAL_BLOCKER_0_MISSING",
+    "bootstrap": "72_COMPLETE_5_PROVENANCE_BLOCKED_0_FAILED_1_MAPPING_NOT_ELIGIBLE",
+    "emergency_worker_bundles": "22/22",
+    "emergency_worker_mapping": "22/22_PASS",
+    "emergency_worker_sha256": "88/88_PASS",
+    "best_checkpoint_reference": "78/78_RECOVERED",
+    "best_epoch": "50_RECOVERED_28_NOT_RECOVERED",
+    "runtime": "15_RECOVERED_63_NOT_RECOVERED",
+    "local_checkpoint_binary": "10_AVAILABLE_68_NOT_LOCALLY_RETAINED_0_UNPROVEN"
+  },
+  "locked_upstream_qualification": {
+    "status": "PASS",
+    "commit": "238409835ef55358a10bbc3459dfa9aaa91ad5e5",
+    "head_matches": true,
+    "current_local_worktree_clean": false,
+    "tracked_python_modifications": 4,
+    "tracked_deletions": 1,
+    "formal_use_of_current_dirty_windows_worktree": "NOT_PROVEN",
+    "equivalent_formal_code_changes": "DOCUMENTED_ACCEPTED_EXECUTION_REMEDIATION",
+    "new_scientific_result_contradiction": false
+  },
+  "st_mem_causal_language": {
+    "status": "PASS",
+    "dependency_or_runtime_remediation_claimed_as_cause": false,
+    "root_cause_status": "NOT_PROVEN",
+    "clean_retry_supersession_recorded": true
+  },
+  "mapping_status_text": "PASS",
+  "bootstrap_status_text": "PASS",
+  "worker_evidence_text": "PASS",
+  "training_metadata_text": "PASS",
+  "accepted_remediation_coverage": {
+    "status": "PASS",
+    "covered": 9,
+    "expected": 9,
+    "topics": [
+      "ST-MEM runtime dependency closure",
+      "ECG-CPC compatibility route",
+      "ECG-FM Python 3.9 compatibility overlay",
+      "ECG-JEPA identity aggregation adjudication",
+      "MERL/ECGFM-KED execution-only BN guard",
+      "052 to 451 provenance",
+      "573/871 to 780/775 predecessor-successor provenance",
+      "emergency-worker evidence recovery",
+      "minimal scientific evidence bundle strategy"
+    ]
+  },
+  "limitations_coverage": {
+    "status": "PASS",
+    "historical_mapping_blocker": true,
+    "bootstrap_provenance_blockers": true,
+    "best_epoch_incompleteness": true,
+    "runtime_incompleteness": true,
+    "checkpoint_binary_retention": true,
+    "current_dirty_worktree": true,
+    "formal_dirty_windows_worktree_use_not_proven": true,
+    "accepted_remediation_provenance": true,
+    "unresolved_outlier_root_causes": true
+  },
+  "numeric_consistency_audit": {
+    "status": "PASS",
+    "overall_statistics": "PASS",
+    "difference_distribution": "PASS",
+    "mode_summary_tables": "3/3_PASS",
+    "dataset_summary_table": "3/3_PASS",
+    "largest_difference_rows": "12/12_PASS",
+    "ci_table_rows": "7/7_PASS",
+    "key_outliers": "PASS",
+    "panel_top_models": "8_OF_9_WITH_EXPECTED_FROZEN_ALL_EXCEPTION",
+    "ci_descriptive_observation": "65/72_DESCRIPTIVE_NOT_EQUIVALENCE"
+  },
+  "cleanliness_audit": {
+    "todo_placeholder_count": 0,
+    "comments": 0,
+    "tracked_insertions": 0,
+    "tracked_deletions": 0,
+    "unresolved_placeholders": 0,
+    "unsupported_causal_attribution_count": 0
+  },
+  "visual_qa": {
+    "packaged_render_docx_status": "BLOCKED_MISSING_PREINSTALLED_PDF2IMAGE",
+    "dependency_installed": false,
+    "fallback": "WORD_NATIVE_PDF_EXPORT_PLUS_EXISTING_PYMUPDF_RASTERIZATION",
+    "pages_rendered": 14,
+    "pages_inspected": 14,
+    "resolution_scale": 2.0,
+    "clipping_found": false,
+    "overlap_found": false,
+    "broken_tables_found": false,
+    "missing_glyphs_found": false,
+    "anomalous_blank_pages_found": false,
+    "status": "PASS"
+  },
+  "final_table_integrity": {
+    "unchanged": true,
+    "files": [
+      {
+        "path": "D:\\桌面文件\\ECG\\tables\\FINAL_TABLE3_FINETUNING.csv",
+        "sha256_before": "063C3BCB747731F66682E74466CFD82DEBD61106BCF0FA45CB6A478DA8E8B8A3",
+        "sha256_after": "063C3BCB747731F66682E74466CFD82DEBD61106BCF0FA45CB6A478DA8E8B8A3"
+      },
+      {
+        "path": "D:\\桌面文件\\ECG\\tables\\FINAL_TABLE4_FROZEN.csv",
+        "sha256_before": "FB2C8F84FC1543EC3ADD0911CEDF253761B103149DAC73796D3F63F103988F5C",
+        "sha256_after": "FB2C8F84FC1543EC3ADD0911CEDF253761B103149DAC73796D3F63F103988F5C"
+      },
+      {
+        "path": "D:\\桌面文件\\ECG\\tables\\FINAL_TABLE5_LINEAR.csv",
+        "sha256_before": "D213E99E5BDBD0F4BFE40B71CCBF20724237B22EDCD5E6930DC4AD143154DAE5",
+        "sha256_after": "D213E99E5BDBD0F4BFE40B71CCBF20724237B22EDCD5E6930DC4AD143154DAE5"
+      }
+    ]
+  },
+  "locked_worktree_integrity": {
+    "head_before": "238409835ef55358a10bbc3459dfa9aaa91ad5e5",
+    "head_after": "238409835ef55358a10bbc3459dfa9aaa91ad5e5",
+    "status_before": [
+      " D abstract.svg",
+      " M code/clinical_ts/models/ecg_foundation_models/ecg_fm_config.py",
+      " M code/clinical_ts/models/fm_ecg.py",
+      " M code/main_lite.py",
+      " M code/main_lite_ecg.py"
+    ],
+    "status_after": [
+      " D abstract.svg",
+      " M code/clinical_ts/models/ecg_foundation_models/ecg_fm_config.py",
+      " M code/clinical_ts/models/fm_ecg.py",
+      " M code/main_lite.py",
+      " M code/main_lite_ecg.py"
+    ],
+    "changed_by_report_remediation": false
+  },
+  "scientific_artifact_modified": false,
+  "scientific_result_values_modified": false,
+  "historical_evidence_modified": false,
+  "scientific_artifact_recomputation_required": false,
+  "next_stage_recommendation": "FINAL_HANDOFF_REAUDIT",
+  "next_stage_authorized": false,
+  "github_handoff_allowed_now": false
+}

@@ -1,0 +1,23 @@
+{
+  "checkpoint": "/root/autodl-tmp/ECG/checkpoints/ecg_fm/mimic_iv_ecg_physionet_pretrained.pt",
+  "dataset": "ptbxl_sub",
+  "exact_command": "env PYTHONPATH=/root/autodl-tmp/ECG/execution_overlays/ecg_fm_py39_compat/ecg-fm-benchmarking/code /root/autodl-tmp/ECG/environments/ecg_fm_052/bin/python /root/autodl-tmp/ECG/execution_overlays/ecg_fm_py39_compat/ecg-fm-benchmarking/code/main_lite.py --data /root/autodl-tmp/ECG/data/processed/ptb-xl/records500 --fs-data 500 --finetune-dataset ptbxl_sub --architecture ecg_fm --input-size 5 --fs-model 500 --input-channels 12 --pretrained /root/autodl-tmp/ECG/checkpoints/ecg_fm/mimic_iv_ecg_physionet_pretrained.pt --precision 16-mixed --epochs 100 --modality ecg --lr 0.001 --batch-size 64 --finetune --eval-mode linear --optimizer adam --wd 0.001 --lr-schedule const --gpus 1 --num-nodes 1 --accumulate 1 --refresh-rate 0 --output-path /root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_FM_LINEAR_FORMAL_052_09/output --prediction-path /root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_FM_LINEAR_FORMAL_052_09/predictions --export-predictions > /root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_FM_LINEAR_FORMAL_052_09/formal_training.log 2>&1",
+  "expected_artifact_bytes": 5368709120,
+  "launch_time_utc": "2026-08-21T04:39:02.301826+00:00",
+  "locked_upstream_modified": "NO",
+  "mode": "Linear",
+  "model": "ECG-FM",
+  "order": 11,
+  "output_dim": 23,
+  "run_dir": "/root/autodl-tmp/ECG/formal_runs/PTBXL_SUB_ECG_FM_LINEAR_FORMAL_052_09",
+  "run_id": "PTBXL_SUB_ECG_FM_LINEAR_FORMAL_052_09",
+  "scientific_semantics_changed": "NO",
+  "storage_preflight": {
+    "expected_run_artifact_bytes": 5368709120,
+    "free_bytes": 18578608128,
+    "passed": true,
+    "safety_margin_bytes": 10737418240,
+    "total_bytes": 53687091200,
+    "used_bytes": 35108483072
+  }
+}

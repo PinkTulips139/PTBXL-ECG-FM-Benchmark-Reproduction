@@ -1,0 +1,23 @@
+{
+  "checkpoint": "/root/autodl-tmp/ECG/checkpoints/cpc/config_last_11597276_ckpt.yaml",
+  "dataset": "ptbxl_super",
+  "exact_command": "env CUDA_PATH=/usr/local/cuda-12.4 LD_LIBRARY_PATH=/root/autodl-tmp/ECG/environments/common_hubert_052/lib/python3.13/site-packages/nvidia/cublas/lib:/root/autodl-tmp/ECG/environments/common_hubert_052/lib/python3.13/site-packages/nvidia/cuda_cupti/lib:/root/autodl-tmp/ECG/environments/common_hubert_052/lib/python3.13/site-packages/nvidia/cuda_nvrtc/lib:/root/autodl-tmp/ECG/environments/common_hubert_052/lib/python3.13/site-packages/nvidia/cuda_runtime/lib:/root/autodl-tmp/ECG/environments/common_hubert_052/lib/python3.13/site-packages/nvidia/cudnn/lib:/root/autodl-tmp/ECG/environments/common_hubert_052/lib/python3.13/site-packages/nvidia/cufft/lib:/root/autodl-tmp/ECG/environments/common_hubert_052/lib/python3.13/site-packages/nvidia/cufile/lib:/root/autodl-tmp/ECG/environments/common_hubert_052/lib/python3.13/site-packages/nvidia/curand/lib:/root/autodl-tmp/ECG/environments/common_hubert_052/lib/python3.13/site-packages/nvidia/cusolver/lib:/root/autodl-tmp/ECG/environments/common_hubert_052/lib/python3.13/site-packages/nvidia/cusparse/lib:/root/autodl-tmp/ECG/environments/common_hubert_052/lib/python3.13/site-packages/nvidia/nccl/lib:/root/autodl-tmp/ECG/environments/common_hubert_052/lib/python3.13/site-packages/nvidia/nvjitlink/lib:/root/autodl-tmp/ECG/environments/common_hubert_052/lib/python3.13/site-packages/nvidia/nvtx/lib:/usr/local/cuda-12.4/lib64 /root/autodl-tmp/ECG/environments/common_hubert_052/bin/python /root/autodl-tmp/ECG/upstream/ecg-fm-benchmarking/code/main_lite.py --data /root/autodl-tmp/ECG/data/processed/ptb-xl/records500 --fs-data 500 --finetune-dataset ptbxl_super --architecture cpc --input-size 2.5 --fs-model 240 --input-channels 12 --pretrained /root/autodl-tmp/ECG/checkpoints/cpc/config_last_11597276_ckpt.yaml --precision 32 --epochs 100 --modality ecg --lr 0.001 --batch-size 64 --finetune --eval-mode linear --optimizer adam --wd 0.001 --lr-schedule const --gpus 1 --num-nodes 1 --accumulate 1 --refresh-rate 0 --output-path /root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_CPC_LINEAR_FORMAL_052_06/output --prediction-path /root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_CPC_LINEAR_FORMAL_052_06/predictions --export-predictions > /root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_CPC_LINEAR_FORMAL_052_06/formal_training.log 2>&1",
+  "expected_artifact_bytes": 1073741824,
+  "launch_time_utc": "2026-08-21T01:45:02.006402+00:00",
+  "locked_upstream_modified": "NO",
+  "mode": "Linear",
+  "model": "ECG-CPC",
+  "order": 8,
+  "output_dim": 5,
+  "run_dir": "/root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_CPC_LINEAR_FORMAL_052_06",
+  "run_id": "PTBXL_SUPER_ECG_CPC_LINEAR_FORMAL_052_06",
+  "scientific_semantics_changed": "NO",
+  "storage_preflight": {
+    "expected_run_artifact_bytes": 1073741824,
+    "free_bytes": 21551091712,
+    "passed": true,
+    "safety_margin_bytes": 10737418240,
+    "total_bytes": 53687091200,
+    "used_bytes": 32135999488
+  }
+}

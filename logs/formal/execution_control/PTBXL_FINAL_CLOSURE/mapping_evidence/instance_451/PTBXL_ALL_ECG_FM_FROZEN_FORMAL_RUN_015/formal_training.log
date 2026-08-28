@@ -1,0 +1,16 @@
+CUDA extension for cauchy multiplication not found. Install by going to extensions/cauchy/ and running `python setup.py install`. This should speed up end-to-end training by 10-50%
+Install at least one of pykeops or the cauchy_mult extension.
+CUDA extension for cauchy multiplication not found. Install by going to extensions/cauchy/ and running `python setup.py install`. This should speed up end-to-end training by 10-50%
+Install at least one of pykeops or the cauchy_mult extension.
+Namespace(data='/root/autodl-tmp/ECG/data/processed/ptb-xl/records500', epochs=100, batch_size=64, lr=0.001, weight_decay=0.001, resume='', pretrained='/root/autodl-tmp/ECG/checkpoints/ecg_fm/mimic_iv_ecg_physionet_pretrained.pt', optimizer='adam', output_path='/root/autodl-tmp/ECG/formal_runs/PTBXL_ALL_ECG_FM_FROZEN_FORMAL_RUN_015/output', metadata='', gpus=1, num_nodes=1, precision='16-mixed', distributed_backend=None, accumulate=1, input_size=5.0, train_head_only=False, finetune=True, linear_eval=False, lr_schedule='const', lr_num_warmup_steps=1000, discriminative_lr_factor=0.1, lr_find=False, auto_batch_size=False, auc_maximization=False, refresh_rate=0, mlflow=False, mlflow_experiment_name='fm-benchmarking', mlflow_run_name='run', fs_model=500.0, fs_data=500.0, input_channels=12, architecture='ecg_fm', s4_n=8, s4_h=512, s4_layers=4, s4_batchnorm=False, s4_prenorm=False, merl_backbone='resnet', modality='ecg', normalize=False, finetune_dataset='ptbxl_all', chunk_length_train=1.0, stride_fraction_train=1.0, stride_fraction_valtest=1.0, chunkify_train=False, segmentation=False, eval_only='', export_predictions=True, prediction_path='/root/autodl-tmp/ECG/formal_runs/PTBXL_ALL_ECG_FM_FROZEN_FORMAL_RUN_015/predictions', eval_mode='frozen', label_ratio=1, executable='main_lite_ecg', revision='')
+Model path: /root/autodl-tmp/ECG/checkpoints/ecg_fm/mimic_iv_ecg_physionet_pretrained.pt
+Traceback (most recent call last):
+  File "/root/autodl-tmp/ECG/execution_overlays/ecg_fm_py39_compat/ecg-fm-benchmarking/code/main_lite.py", line 507, in <module>
+    logger = [TensorBoardLogger(
+  File "/root/autodl-tmp/ECG/environments/ecg_fm_052/lib/python3.9/site-packages/lightning/pytorch/loggers/tensorboard.py", line 96, in __init__
+    super().__init__(
+  File "/root/autodl-tmp/ECG/environments/ecg_fm_052/lib/python3.9/site-packages/lightning/fabric/loggers/tensorboard.py", line 93, in __init__
+    raise ModuleNotFoundError(
+ModuleNotFoundError: Neither `tensorboard` nor `tensorboardX` is available. Try `pip install`ing either.
+Requirement 'tensorboardX' not met. HINT: Try running `pip install -U 'tensorboardX'`
+Requirement 'tensorboard' not met. HINT: Try running `pip install -U 'tensorboard'`

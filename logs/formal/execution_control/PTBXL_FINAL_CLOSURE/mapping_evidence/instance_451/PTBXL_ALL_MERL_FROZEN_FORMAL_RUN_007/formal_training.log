@@ -1,0 +1,784 @@
+CUDA extension for cauchy multiplication not found. Install by going to extensions/cauchy/ and running `python setup.py install`. This should speed up end-to-end training by 10-50%
+CUDA extension for cauchy multiplication not found. Install by going to extensions/cauchy/ and running `python setup.py install`. This should speed up end-to-end training by 10-50%
+2026/08/20 12:12:58 INFO mlflow.tracking.fluent: Experiment with name 'fm-benchmarking' does not exist. Creating a new experiment.
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+HPU available: False, using: 0 HPUs
+You are using a CUDA device ('NVIDIA GeForce RTX 4090') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+/root/autodl-tmp/ECG/environments/common_hubert_052/lib/python3.13/site-packages/lightning/pytorch/callbacks/model_checkpoint.py:658: Checkpoint directory /root/autodl-tmp/ECG/formal_runs/PTBXL_ALL_MERL_FROZEN_FORMAL_RUN_007/output/version_0 exists and is not empty.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+
+  | Name  | Type        | Params | Mode 
+----------------------------------------------
+0 | model | MerlWrapper | 4.7 M  | train
+----------------------------------------------
+823 K     Trainable params
+3.9 M     Non-trainable params
+4.7 M     Total params
+18.834    Total estimated model params size (MB)
+7         Modules in train mode
+63        Modules in eval mode
+Namespace(data='/root/autodl-tmp/ECG/data/processed/ptb-xl/records500', epochs=100, batch_size=64, lr=0.001, weight_decay=0.001, resume='', pretrained='/root/autodl-tmp/ECG/checkpoints/merl/res18_best_encoder.pth', optimizer='adam', output_path='/root/autodl-tmp/ECG/formal_runs/PTBXL_ALL_MERL_FROZEN_FORMAL_RUN_007/output', metadata='', gpus=1, num_nodes=1, precision='32', distributed_backend=None, accumulate=1, input_size=2.5, train_head_only=False, finetune=True, linear_eval=False, lr_schedule='const', lr_num_warmup_steps=1000, discriminative_lr_factor=0.1, lr_find=False, auto_batch_size=False, auc_maximization=False, refresh_rate=0, mlflow=False, mlflow_experiment_name='fm-benchmarking', mlflow_run_name='run', fs_model=500.0, fs_data=500.0, input_channels=12, architecture='merl', s4_n=8, s4_h=512, s4_layers=4, s4_batchnorm=False, s4_prenorm=False, merl_backbone='resnet', modality='ecg', normalize=False, finetune_dataset='ptbxl_all', chunk_length_train=1.0, stride_fraction_train=1.0, stride_fraction_valtest=1.0, chunkify_train=False, segmentation=False, eval_only='', export_predictions=True, prediction_path='/root/autodl-tmp/ECG/formal_runs/PTBXL_ALL_MERL_FROZEN_FORMAL_RUN_007/predictions', eval_mode='frozen', label_ratio=1, executable='main_lite_ecg', revision='')
+Output directory: /root/autodl-tmp/ECG/formal_runs/PTBXL_ALL_MERL_FROZEN_FORMAL_RUN_007/output/version_0
+Folder: /root/autodl-tmp/ECG/data/processed/ptb-xl/records500 Samples: 21799
+
+ /root/autodl-tmp/ECG/data/processed/ptb-xl/records500
+train dataset: 17418 samples
+val dataset: 8732 samples
+test dataset: 8792 samples
+Epoch 0, global step 272: 'macro_auc_agg_val0' reached 0.84605 (best 0.84605), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_ALL_MERL_FROZEN_FORMAL_RUN_007/output/version_0/best_model.ckpt' as top 1
+epoch 0 val noagg: 0.8232146828568234
+epoch 0 val agg: 0.8460547105314936
+Epoch 1, global step 544: 'macro_auc_agg_val0' reached 0.88969 (best 0.88969), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_ALL_MERL_FROZEN_FORMAL_RUN_007/output/version_0/best_model.ckpt' as top 1
+epoch 1 val noagg: 0.8704042498756116
+epoch 1 val agg: 0.8896914742242619
+Epoch 2, global step 816: 'macro_auc_agg_val0' reached 0.90645 (best 0.90645), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_ALL_MERL_FROZEN_FORMAL_RUN_007/output/version_0/best_model.ckpt' as top 1
+epoch 2 val noagg: 0.8877581372240274
+epoch 2 val agg: 0.9064507049574821
+Epoch 3, global step 1088: 'macro_auc_agg_val0' reached 0.91380 (best 0.91380), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_ALL_MERL_FROZEN_FORMAL_RUN_007/output/version_0/best_model.ckpt' as top 1
+epoch 3 val noagg: 0.8968788240548814
+epoch 3 val agg: 0.9138022616804463
+Epoch 4, global step 1360: 'macro_auc_agg_val0' was not in top 1
+epoch 4 val noagg: 0.8969866492564814
+epoch 4 val agg: 0.9118619915444074
+Epoch 5, global step 1632: 'macro_auc_agg_val0' reached 0.91818 (best 0.91818), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_ALL_MERL_FROZEN_FORMAL_RUN_007/output/version_0/best_model.ckpt' as top 1
+epoch 5 val noagg: 0.9023311715060383
+epoch 5 val agg: 0.9181822992157735
+Epoch 6, global step 1904: 'macro_auc_agg_val0' reached 0.91999 (best 0.91999), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_ALL_MERL_FROZEN_FORMAL_RUN_007/output/version_0/best_model.ckpt' as top 1
+epoch 6 val noagg: 0.9031471177857737
+epoch 6 val agg: 0.9199923911031886
+Epoch 7, global step 2176: 'macro_auc_agg_val0' reached 0.92016 (best 0.92016), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_ALL_MERL_FROZEN_FORMAL_RUN_007/output/version_0/best_model.ckpt' as top 1
+epoch 7 val noagg: 0.9031758473353301
+epoch 7 val agg: 0.9201581487367997
+Epoch 8, global step 2448: 'macro_auc_agg_val0' was not in top 1
+epoch 8 val noagg: 0.9040180411576135
+epoch 8 val agg: 0.9195671684953526
+Epoch 9, global step 2720: 'macro_auc_agg_val0' reached 0.92018 (best 0.92018), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_ALL_MERL_FROZEN_FORMAL_RUN_007/output/version_0/best_model.ckpt' as top 1
+epoch 9 val noagg: 0.9027392925875856
+epoch 9 val agg: 0.9201840512779005
+Epoch 10, global step 2992: 'macro_auc_agg_val0' was not in top 1
+epoch 10 val noagg: 0.9033196547520751
+epoch 10 val agg: 0.9196970321231436
+Epoch 11, global step 3264: 'macro_auc_agg_val0' was not in top 1
+epoch 11 val noagg: 0.9002317290940317
+epoch 11 val agg: 0.9198542169139096
+Epoch 12, global step 3536: 'macro_auc_agg_val0' was not in top 1
+epoch 12 val noagg: 0.9017835736096437
+epoch 12 val agg: 0.9195951088049572
+Epoch 13, global step 3808: 'macro_auc_agg_val0' reached 0.92108 (best 0.92108), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_ALL_MERL_FROZEN_FORMAL_RUN_007/output/version_0/best_model.ckpt' as top 1
+epoch 13 val noagg: 0.8980519240823223
+epoch 13 val agg: 0.9210817372371501
+Epoch 14, global step 4080: 'macro_auc_agg_val0' was not in top 1
+epoch 14 val noagg: 0.8932540820352176
+epoch 14 val agg: 0.9186648851003842
+Epoch 15, global step 4352: 'macro_auc_agg_val0' was not in top 1
+epoch 15 val noagg: 0.8943124169442077
+epoch 15 val agg: 0.916238683142335
+Epoch 16, global step 4624: 'macro_auc_agg_val0' was not in top 1
+epoch 16 val noagg: 0.8989722893091369
+epoch 16 val agg: 0.9196867215945984
+Epoch 17, global step 4896: 'macro_auc_agg_val0' was not in top 1
+epoch 17 val noagg: 0.8919094804831923
+epoch 17 val agg: 0.9121132393058177
+Epoch 18, global step 5168: 'macro_auc_agg_val0' was not in top 1
+epoch 18 val noagg: 0.8979453645091714
+epoch 18 val agg: 0.9185174166353219
+Epoch 19, global step 5440: 'macro_auc_agg_val0' was not in top 1
+epoch 19 val noagg: 0.8982119526589778
+epoch 19 val agg: 0.9209886541481683
+Epoch 20, global step 5712: 'macro_auc_agg_val0' was not in top 1
+epoch 20 val noagg: 0.8986083320418885
+epoch 20 val agg: 0.9185059966770303
+Epoch 21, global step 5984: 'macro_auc_agg_val0' was not in top 1
+epoch 21 val noagg: 0.8972194382912387
+epoch 21 val agg: 0.9196398569537213
+Epoch 22, global step 6256: 'macro_auc_agg_val0' was not in top 1
+epoch 22 val noagg: 0.8965444657301457
+epoch 22 val agg: 0.9196933201196132
+Epoch 23, global step 6528: 'macro_auc_agg_val0' was not in top 1
+epoch 23 val noagg: 0.8915056818973781
+epoch 23 val agg: 0.9165805930174463
+Epoch 24, global step 6800: 'macro_auc_agg_val0' was not in top 1
+epoch 24 val noagg: 0.8946900049166732
+epoch 24 val agg: 0.916370207536632
+Epoch 25, global step 7072: 'macro_auc_agg_val0' was not in top 1
+epoch 25 val noagg: 0.8954561347845498
+epoch 25 val agg: 0.9175829472274362
+Epoch 26, global step 7344: 'macro_auc_agg_val0' was not in top 1
+epoch 26 val noagg: 0.8952186162919639
+epoch 26 val agg: 0.9171474397669553
+Epoch 27, global step 7616: 'macro_auc_agg_val0' was not in top 1
+epoch 27 val noagg: 0.8937952695196085
+epoch 27 val agg: 0.9185762066253668
+Epoch 28, global step 7888: 'macro_auc_agg_val0' was not in top 1
+epoch 28 val noagg: 0.893466869171365
+epoch 28 val agg: 0.9165117681491685
+Epoch 29, global step 8160: 'macro_auc_agg_val0' was not in top 1
+epoch 29 val noagg: 0.8910270968594852
+epoch 29 val agg: 0.9138522575378573
+Epoch 30, global step 8432: 'macro_auc_agg_val0' was not in top 1
+epoch 30 val noagg: 0.8953248804505891
+epoch 30 val agg: 0.9168730010056033
+Epoch 31, global step 8704: 'macro_auc_agg_val0' was not in top 1
+epoch 31 val noagg: 0.8919672104180036
+epoch 31 val agg: 0.9153397811753274
+Epoch 32, global step 8976: 'macro_auc_agg_val0' was not in top 1
+epoch 32 val noagg: 0.8934023770712487
+epoch 32 val agg: 0.9160522613450305
+Epoch 33, global step 9248: 'macro_auc_agg_val0' was not in top 1
+epoch 33 val noagg: 0.8907126635506104
+epoch 33 val agg: 0.915126082426913
+Epoch 34, global step 9520: 'macro_auc_agg_val0' was not in top 1
+epoch 34 val noagg: 0.8860923138301077
+epoch 34 val agg: 0.9121102493800934
+Epoch 35, global step 9792: 'macro_auc_agg_val0' was not in top 1
+epoch 35 val noagg: 0.8907018799002476
+epoch 35 val agg: 0.9164657412488324
+Epoch 36, global step 10064: 'macro_auc_agg_val0' was not in top 1
+epoch 36 val noagg: 0.8929508543299691
+epoch 36 val agg: 0.9165975829678173
+Epoch 37, global step 10336: 'macro_auc_agg_val0' was not in top 1
+epoch 37 val noagg: 0.8880353213651976
+epoch 37 val agg: 0.9128153361562173
+Epoch 38, global step 10608: 'macro_auc_agg_val0' was not in top 1
+epoch 38 val noagg: 0.8827119232920564
+epoch 38 val agg: 0.9088961738753443
+Epoch 39, global step 10880: 'macro_auc_agg_val0' was not in top 1
+epoch 39 val noagg: 0.8904105499795848
+epoch 39 val agg: 0.91234987918402
+Epoch 40, global step 11152: 'macro_auc_agg_val0' was not in top 1
+epoch 40 val noagg: 0.8869192300625646
+epoch 40 val agg: 0.9122365336416517
+Epoch 41, global step 11424: 'macro_auc_agg_val0' was not in top 1
+epoch 41 val noagg: 0.8874649684508655
+epoch 41 val agg: 0.9099307164719729
+Epoch 42, global step 11696: 'macro_auc_agg_val0' was not in top 1
+epoch 42 val noagg: 0.8818992759735752
+epoch 42 val agg: 0.9087994050827175
+Epoch 43, global step 11968: 'macro_auc_agg_val0' was not in top 1
+epoch 43 val noagg: 0.8856290681635234
+epoch 43 val agg: 0.9083240532733011
+Epoch 44, global step 12240: 'macro_auc_agg_val0' was not in top 1
+epoch 44 val noagg: 0.8809875335273908
+epoch 44 val agg: 0.9102642223349476
+Epoch 45, global step 12512: 'macro_auc_agg_val0' was not in top 1
+epoch 45 val noagg: 0.8803554904803572
+epoch 45 val agg: 0.9094727257763083
+Epoch 46, global step 12784: 'macro_auc_agg_val0' was not in top 1
+epoch 46 val noagg: 0.8803956760727141
+epoch 46 val agg: 0.9082192808787806
+Epoch 47, global step 13056: 'macro_auc_agg_val0' was not in top 1
+epoch 47 val noagg: 0.8822139690613578
+epoch 47 val agg: 0.9095552158435912
+Epoch 48, global step 13328: 'macro_auc_agg_val0' was not in top 1
+epoch 48 val noagg: 0.8828530069386614
+epoch 48 val agg: 0.907443970719551
+Epoch 49, global step 13600: 'macro_auc_agg_val0' was not in top 1
+epoch 49 val noagg: 0.8833073848297198
+epoch 49 val agg: 0.9110002120463795
+Epoch 50, global step 13872: 'macro_auc_agg_val0' was not in top 1
+epoch 50 val noagg: 0.8821156928047388
+epoch 50 val agg: 0.9099892169367239
+Epoch 51, global step 14144: 'macro_auc_agg_val0' was not in top 1
+epoch 51 val noagg: 0.8815734032934892
+epoch 51 val agg: 0.905333039418938
+Epoch 52, global step 14416: 'macro_auc_agg_val0' was not in top 1
+epoch 52 val noagg: 0.8733967685966273
+epoch 52 val agg: 0.9073068588892341
+Epoch 53, global step 14688: 'macro_auc_agg_val0' was not in top 1
+epoch 53 val noagg: 0.8819886501325908
+epoch 53 val agg: 0.9113283473357839
+Epoch 54, global step 14960: 'macro_auc_agg_val0' was not in top 1
+epoch 54 val noagg: 0.880443430769115
+epoch 54 val agg: 0.909475155274976
+Epoch 55, global step 15232: 'macro_auc_agg_val0' was not in top 1
+epoch 55 val noagg: 0.8777069098542799
+epoch 55 val agg: 0.9080431212255088
+Epoch 56, global step 15504: 'macro_auc_agg_val0' was not in top 1
+epoch 56 val noagg: 0.8787636929944309
+epoch 56 val agg: 0.9070751353927733
+Epoch 57, global step 15776: 'macro_auc_agg_val0' was not in top 1
+epoch 57 val noagg: 0.8730975584896601
+epoch 57 val agg: 0.9049973775865858
+Epoch 58, global step 16048: 'macro_auc_agg_val0' was not in top 1
+epoch 58 val noagg: 0.8815518996318775
+epoch 58 val agg: 0.909908082805194
+Epoch 59, global step 16320: 'macro_auc_agg_val0' was not in top 1
+epoch 59 val noagg: 0.8810996248397779
+epoch 59 val agg: 0.9092053795192244
+Epoch 60, global step 16592: 'macro_auc_agg_val0' was not in top 1
+epoch 60 val noagg: 0.8784091534671623
+epoch 60 val agg: 0.904424566255914
+Epoch 61, global step 16864: 'macro_auc_agg_val0' was not in top 1
+epoch 61 val noagg: 0.8780843157436836
+epoch 61 val agg: 0.9055168418248153
+Epoch 62, global step 17136: 'macro_auc_agg_val0' was not in top 1
+epoch 62 val noagg: 0.8714990812868398
+epoch 62 val agg: 0.9018853517814736
+Epoch 63, global step 17408: 'macro_auc_agg_val0' was not in top 1
+epoch 63 val noagg: 0.8801287619682602
+epoch 63 val agg: 0.9074810605219282
+Epoch 64, global step 17680: 'macro_auc_agg_val0' was not in top 1
+epoch 64 val noagg: 0.879543562982213
+epoch 64 val agg: 0.9070268870648134
+Epoch 65, global step 17952: 'macro_auc_agg_val0' was not in top 1
+epoch 65 val noagg: 0.876545843973561
+epoch 65 val agg: 0.9035901252469054
+Epoch 66, global step 18224: 'macro_auc_agg_val0' was not in top 1
+epoch 66 val noagg: 0.8736419639941811
+epoch 66 val agg: 0.9073252483466463
+Epoch 67, global step 18496: 'macro_auc_agg_val0' was not in top 1
+epoch 67 val noagg: 0.873495161266022
+epoch 67 val agg: 0.906095883337021
+Epoch 68, global step 18768: 'macro_auc_agg_val0' was not in top 1
+epoch 68 val noagg: 0.8737067499402794
+epoch 68 val agg: 0.9063165555269315
+Epoch 69, global step 19040: 'macro_auc_agg_val0' was not in top 1
+epoch 69 val noagg: 0.8682939729502037
+epoch 69 val agg: 0.8980130839047485
+Epoch 70, global step 19312: 'macro_auc_agg_val0' was not in top 1
+epoch 70 val noagg: 0.8703472969586612
+epoch 70 val agg: 0.904362789921514
+Epoch 71, global step 19584: 'macro_auc_agg_val0' was not in top 1
+epoch 71 val noagg: 0.8629575982377498
+epoch 71 val agg: 0.8983663259698127
+Epoch 72, global step 19856: 'macro_auc_agg_val0' was not in top 1
+epoch 72 val noagg: 0.8696830303649611
+epoch 72 val agg: 0.8989954729690182
+Epoch 73, global step 20128: 'macro_auc_agg_val0' was not in top 1
+epoch 73 val noagg: 0.8745898086702639
+epoch 73 val agg: 0.9047678299548132
+Epoch 74, global step 20400: 'macro_auc_agg_val0' was not in top 1
+epoch 74 val noagg: 0.8783350256860318
+epoch 74 val agg: 0.9089535128538467
+Epoch 75, global step 20672: 'macro_auc_agg_val0' was not in top 1
+epoch 75 val noagg: 0.8747530045160825
+epoch 75 val agg: 0.9054963732358552
+Epoch 76, global step 20944: 'macro_auc_agg_val0' was not in top 1
+epoch 76 val noagg: 0.8772832456818098
+epoch 76 val agg: 0.9079100643608534
+Epoch 77, global step 21216: 'macro_auc_agg_val0' was not in top 1
+epoch 77 val noagg: 0.8764809724730559
+epoch 77 val agg: 0.9057761552741227
+Epoch 78, global step 21488: 'macro_auc_agg_val0' was not in top 1
+epoch 78 val noagg: 0.8789794151906394
+epoch 78 val agg: 0.9073215510369573
+Epoch 79, global step 21760: 'macro_auc_agg_val0' was not in top 1
+epoch 79 val noagg: 0.8704266188699608
+epoch 79 val agg: 0.9013793066027006
+Epoch 80, global step 22032: 'macro_auc_agg_val0' was not in top 1
+epoch 80 val noagg: 0.8669904120266615
+epoch 80 val agg: 0.9026848024903824
+Epoch 81, global step 22304: 'macro_auc_agg_val0' was not in top 1
+epoch 81 val noagg: 0.874375473721554
+epoch 81 val agg: 0.9048261874641276
+Epoch 82, global step 22576: 'macro_auc_agg_val0' was not in top 1
+epoch 82 val noagg: 0.8771051932665067
+epoch 82 val agg: 0.9076654826697109
+Epoch 83, global step 22848: 'macro_auc_agg_val0' was not in top 1
+epoch 83 val noagg: 0.8767174117183772
+epoch 83 val agg: 0.9067872845016585
+Epoch 84, global step 23120: 'macro_auc_agg_val0' was not in top 1
+epoch 84 val noagg: 0.8723334660703596
+epoch 84 val agg: 0.904588111224759
+Epoch 85, global step 23392: 'macro_auc_agg_val0' was not in top 1
+epoch 85 val noagg: 0.8705707895106864
+epoch 85 val agg: 0.9028788219099194
+Epoch 86, global step 23664: 'macro_auc_agg_val0' was not in top 1
+epoch 86 val noagg: 0.8726567072337151
+epoch 86 val agg: 0.9013453860279824
+Epoch 87, global step 23936: 'macro_auc_agg_val0' was not in top 1
+epoch 87 val noagg: 0.8693162718256618
+epoch 87 val agg: 0.9006174170281391
+Epoch 88, global step 24208: 'macro_auc_agg_val0' was not in top 1
+epoch 88 val noagg: 0.8705974159549168
+epoch 88 val agg: 0.9032412161845584
+Epoch 89, global step 24480: 'macro_auc_agg_val0' was not in top 1
+epoch 89 val noagg: 0.8675007509622685
+epoch 89 val agg: 0.8995157466980435
+Epoch 90, global step 24752: 'macro_auc_agg_val0' was not in top 1
+epoch 90 val noagg: 0.8664425996157422
+epoch 90 val agg: 0.8970775420172618
+Epoch 91, global step 25024: 'macro_auc_agg_val0' was not in top 1
+epoch 91 val noagg: 0.8632650469649021
+epoch 91 val agg: 0.8950462638170591
+Epoch 92, global step 25296: 'macro_auc_agg_val0' was not in top 1
+epoch 92 val noagg: 0.8683387861943
+epoch 92 val agg: 0.9014729334076858
+Epoch 93, global step 25568: 'macro_auc_agg_val0' was not in top 1
+epoch 93 val noagg: 0.8671159985255782
+epoch 93 val agg: 0.9012434947883754
+Epoch 94, global step 25840: 'macro_auc_agg_val0' was not in top 1
+epoch 94 val noagg: 0.8688822791945311
+epoch 94 val agg: 0.9003443624293404
+Epoch 95, global step 26112: 'macro_auc_agg_val0' was not in top 1
+epoch 95 val noagg: 0.8667996336631094
+epoch 95 val agg: 0.9011923254587113
+Epoch 96, global step 26384: 'macro_auc_agg_val0' was not in top 1
+epoch 96 val noagg: 0.8672559390309365
+epoch 96 val agg: 0.8976470193751043
+Epoch 97, global step 26656: 'macro_auc_agg_val0' was not in top 1
+epoch 97 val noagg: 0.8673148404672604
+epoch 97 val agg: 0.9017933748871876
+Epoch 98, global step 26928: 'macro_auc_agg_val0' was not in top 1
+epoch 98 val noagg: 0.8673327314338289
+epoch 98 val agg: 0.9011960495157593
+Epoch 99, global step 27200: 'macro_auc_agg_val0' was not in top 1
+`Trainer.fit` stopped: `max_epochs=100` reached.
+Restoring states from the checkpoint path at /root/autodl-tmp/ECG/formal_runs/PTBXL_ALL_MERL_FROZEN_FORMAL_RUN_007/output/version_0/best_model.ckpt
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loaded model weights from the checkpoint at /root/autodl-tmp/ECG/formal_runs/PTBXL_ALL_MERL_FROZEN_FORMAL_RUN_007/output/version_0/best_model.ckpt
+epoch 99 val noagg: 0.8650351929344535
+epoch 99 val agg: 0.8976715626777556
+Folder: /root/autodl-tmp/ECG/data/processed/ptb-xl/records500 Samples: 21799
+
+ /root/autodl-tmp/ECG/data/processed/ptb-xl/records500
+train dataset: 17418 samples
+val dataset: 8732 samples
+test dataset: 8792 samples
+  0%|          | 0/20 [00:00<?, ?it/s]  5%|▌         | 1/20 [00:09<03:00,  9.49s/it] 10%|█         | 2/20 [00:18<02:41,  8.97s/it] 15%|█▌        | 3/20 [00:24<02:13,  7.85s/it] 20%|██        | 4/20 [00:31<02:00,  7.54s/it] 25%|██▌       | 5/20 [00:38<01:48,  7.25s/it] 30%|███       | 6/20 [00:45<01:41,  7.27s/it] 35%|███▌      | 7/20 [00:51<01:27,  6.72s/it] 40%|████      | 8/20 [00:56<01:16,  6.36s/it] 45%|████▌     | 9/20 [01:03<01:10,  6.38s/it] 50%|█████     | 10/20 [01:10<01:05,  6.57s/it] 55%|█████▌    | 11/20 [01:17<01:00,  6.76s/it] 60%|██████    | 12/20 [01:25<00:55,  6.99s/it] 65%|██████▌   | 13/20 [01:32<00:49,  7.11s/it] 70%|███████   | 14/20 [01:39<00:43,  7.23s/it] 75%|███████▌  | 15/20 [01:46<00:35,  7.16s/it] 80%|████████  | 16/20 [01:53<00:28,  7.02s/it] 85%|████████▌ | 17/20 [02:01<00:21,  7.17s/it] 90%|█████████ | 18/20 [02:09<00:15,  7.54s/it] 95%|█████████▌| 19/20 [02:17<00:07,  7.56s/it]100%|██████████| 20/20 [02:24<00:00,  7.41s/it]100%|██████████| 20/20 [02:24<00:00,  7.21s/it]
+epoch 100 test noagg: 0.8944332094734267
+  0%|          | 0/20 [00:00<?, ?it/s]  5%|▌         | 1/20 [00:05<01:38,  5.19s/it] 10%|█         | 2/20 [00:11<01:40,  5.61s/it] 15%|█▌        | 3/20 [00:16<01:35,  5.65s/it] 20%|██        | 4/20 [00:22<01:33,  5.87s/it] 25%|██▌       | 5/20 [00:28<01:28,  5.88s/it] 30%|███       | 6/20 [00:36<01:32,  6.60s/it] 35%|███▌      | 7/20 [00:42<01:20,  6.21s/it] 40%|████      | 8/20 [00:47<01:12,  6.02s/it] 45%|████▌     | 9/20 [00:53<01:04,  5.91s/it] 50%|█████     | 10/20 [01:00<01:03,  6.31s/it] 55%|█████▌    | 11/20 [01:08<01:00,  6.68s/it] 60%|██████    | 12/20 [01:15<00:54,  6.80s/it] 65%|██████▌   | 13/20 [01:23<00:49,  7.14s/it] 70%|███████   | 14/20 [01:31<00:45,  7.55s/it] 75%|███████▌  | 15/20 [01:37<00:35,  7.14s/it] 80%|████████  | 16/20 [01:44<00:27,  6.83s/it] 85%|████████▌ | 17/20 [01:51<00:21,  7.00s/it] 90%|█████████ | 18/20 [01:58<00:14,  7.15s/it] 95%|█████████▌| 19/20 [02:05<00:07,  7.04s/it]100%|██████████| 20/20 [02:12<00:00,  6.84s/it]100%|██████████| 20/20 [02:12<00:00,  6.61s/it]
+epoch 100 test agg: 0.9113014381097846
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃         Test metric          ┃         DataLoader 0         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│      1AVB_auc_agg_test0      │      0.9622582793235779      │
+│     1AVB_auc_noagg_test0     │      0.951958179473877       │
+│   1AVB_high_auc_agg_test0    │      0.9750251770019531      │
+│  1AVB_high_auc_noagg_test0   │      0.9595595002174377      │
+│    1AVB_low_auc_agg_test0    │      0.9473403096199036      │
+│   1AVB_low_auc_noagg_test0   │      0.9430745840072632      │
+│      2AVB_auc_agg_test0      │      0.9285389184951782      │
+│     2AVB_auc_noagg_test0     │      0.9100762605667114      │
+│   2AVB_high_auc_agg_test0    │             nan              │
+│  2AVB_high_auc_noagg_test0   │             nan              │
+│    2AVB_low_auc_agg_test0    │             nan              │
+│   2AVB_low_auc_noagg_test0   │             nan              │
+│      3AVB_auc_agg_test0      │      0.9895263910293579      │
+│     3AVB_auc_noagg_test0     │      0.9821550250053406      │
+│   3AVB_high_auc_agg_test0    │             nan              │
+│  3AVB_high_auc_noagg_test0   │      0.9935822486877441      │
+│    3AVB_low_auc_agg_test0    │             nan              │
+│   3AVB_low_auc_noagg_test0   │      0.9698699116706848      │
+│     ABQRS_auc_agg_test0      │      0.7942976951599121      │
+│    ABQRS_auc_noagg_test0     │      0.7781214118003845      │
+│   ABQRS_high_auc_agg_test0   │      0.8221806883811951      │
+│  ABQRS_high_auc_noagg_test0  │      0.7924574613571167      │
+│   ABQRS_low_auc_agg_test0    │      0.7657259106636047      │
+│  ABQRS_low_auc_noagg_test0   │      0.7627983093261719      │
+│      AFIB_auc_agg_test0      │      0.9803178310394287      │
+│     AFIB_auc_noagg_test0     │      0.9746277928352356      │
+│   AFIB_high_auc_agg_test0    │      0.9912256002426147      │
+│  AFIB_high_auc_noagg_test0   │      0.9811691641807556      │
+│    AFIB_low_auc_agg_test0    │      0.9661096334457397      │
+│   AFIB_low_auc_noagg_test0   │      0.9670020341873169      │
+│      AFLT_auc_agg_test0      │      0.9451000690460205      │
+│     AFLT_auc_noagg_test0     │      0.9298428893089294      │
+│   AFLT_high_auc_agg_test0    │      0.9998490810394287      │
+│  AFLT_high_auc_noagg_test0   │      0.9712038636207581      │
+│    AFLT_low_auc_agg_test0    │      0.832375168800354       │
+│   AFLT_low_auc_noagg_test0   │      0.8762282729148865      │
+│      ALMI_auc_agg_test0      │      0.9239640235900879      │
+│     ALMI_auc_noagg_test0     │      0.916225254535675       │
+│   ALMI_high_auc_agg_test0    │      0.967668354511261       │
+│  ALMI_high_auc_noagg_test0   │      0.9429379105567932      │
+│    ALMI_low_auc_agg_test0    │      0.8629412055015564      │
+│   ALMI_low_auc_noagg_test0   │      0.8870665431022644      │
+│      AMI_auc_agg_test0       │      0.935975193977356       │
+│     AMI_auc_noagg_test0      │      0.9260930418968201      │
+│    AMI_high_auc_agg_test0    │      0.969362199306488       │
+│   AMI_high_auc_noagg_test0   │      0.9446234703063965      │
+│    AMI_low_auc_agg_test0     │      0.8958243727684021      │
+│   AMI_low_auc_noagg_test0    │      0.9042320847511292      │
+│     ANEUR_auc_agg_test0      │      0.9510968923568726      │
+│    ANEUR_auc_noagg_test0     │      0.9402194023132324      │
+│   ANEUR_high_auc_agg_test0   │      0.9933800101280212      │
+│  ANEUR_high_auc_noagg_test0  │      0.9778440594673157      │
+│   ANEUR_low_auc_agg_test0    │      0.8587641716003418      │
+│  ANEUR_low_auc_noagg_test0   │      0.8886991143226624      │
+│      ASMI_auc_agg_test0      │      0.974311113357544       │
+│     ASMI_auc_noagg_test0     │      0.968934178352356       │
+│   ASMI_high_auc_agg_test0    │      0.9812161922454834      │
+│  ASMI_high_auc_noagg_test0   │      0.9732757210731506      │
+│    ASMI_low_auc_agg_test0    │      0.9654607176780701      │
+│   ASMI_low_auc_noagg_test0   │      0.9643373489379883      │
+│      BIGU_auc_agg_test0      │      0.8648972511291504      │
+│     BIGU_auc_noagg_test0     │      0.804815948009491       │
+│   BIGU_high_auc_agg_test0    │      0.9749764204025269      │
+│  BIGU_high_auc_noagg_test0   │      0.8747819066047668      │
+│    BIGU_low_auc_agg_test0    │      0.7248262763023376      │
+│   BIGU_low_auc_noagg_test0   │      0.7301578521728516      │
+│     CLBBB_auc_agg_test0      │      0.9979875087738037      │
+│    CLBBB_auc_noagg_test0     │      0.9976981282234192      │
+│   CLBBB_high_auc_agg_test0   │      0.9992666244506836      │
+│  CLBBB_high_auc_noagg_test0  │      0.9984665513038635      │
+│   CLBBB_low_auc_agg_test0    │      0.9963358044624329      │
+│  CLBBB_low_auc_noagg_test0   │      0.9968734383583069      │
+│     CRBBB_auc_agg_test0      │      0.9985489249229431      │
+│    CRBBB_auc_noagg_test0     │      0.998221218585968       │
+│   CRBBB_high_auc_agg_test0   │      0.9995940923690796      │
+│  CRBBB_high_auc_noagg_test0  │      0.9988548755645752      │
+│   CRBBB_low_auc_agg_test0    │      0.9970371723175049      │
+│  CRBBB_low_auc_noagg_test0   │       0.99748694896698       │
+│      DIG_auc_agg_test0       │      0.9251019358634949      │
+│     DIG_auc_noagg_test0      │      0.9253376722335815      │
+│    DIG_high_auc_agg_test0    │      0.9582065939903259      │
+│   DIG_high_auc_noagg_test0   │      0.9415094256401062      │
+│    DIG_low_auc_agg_test0     │      0.8863129019737244      │
+│   DIG_low_auc_noagg_test0    │      0.907832145690918       │
+│       EL_auc_agg_test0       │      0.9348256587982178      │
+│      EL_auc_noagg_test0      │      0.9130374193191528      │
+│    EL_high_auc_agg_test0     │      0.9660148620605469      │
+│   EL_high_auc_noagg_test0    │      0.9345826506614685      │
+│     EL_low_auc_agg_test0     │      0.9017422199249268      │
+│    EL_low_auc_noagg_test0    │      0.8879589438438416      │
+│     HVOLT_auc_agg_test0      │      0.9437347650527954      │
+│    HVOLT_auc_noagg_test0     │      0.9184392094612122      │
+│   HVOLT_high_auc_agg_test0   │             nan              │
+│  HVOLT_high_auc_noagg_test0  │      0.9448429346084595      │
+│   HVOLT_low_auc_agg_test0    │             nan              │
+│  HVOLT_low_auc_noagg_test0   │      0.8925795555114746      │
+│     ILBBB_auc_agg_test0      │      0.8968036770820618      │
+│    ILBBB_auc_noagg_test0     │      0.896721601486206       │
+│   ILBBB_high_auc_agg_test0   │             nan              │
+│  ILBBB_high_auc_noagg_test0  │      0.9679883718490601      │
+│   ILBBB_low_auc_agg_test0    │             nan              │
+│  ILBBB_low_auc_noagg_test0   │      0.7983875274658203      │
+│      ILMI_auc_agg_test0      │      0.935203492641449       │
+│     ILMI_auc_noagg_test0     │       0.92775559425354       │
+│   ILMI_high_auc_agg_test0    │      0.967494785785675       │
+│  ILMI_high_auc_noagg_test0   │      0.9456446170806885      │
+│    ILMI_low_auc_agg_test0    │      0.8925111889839172      │
+│   ILMI_low_auc_noagg_test0   │      0.9086630344390869      │
+│      IMI_auc_agg_test0       │      0.8437207341194153      │
+│     IMI_auc_noagg_test0      │      0.8244162797927856      │
+│    IMI_high_auc_agg_test0    │      0.8649766445159912      │
+│   IMI_high_auc_noagg_test0   │      0.836026132106781       │
+│    IMI_low_auc_agg_test0     │      0.8213621377944946      │
+│   IMI_low_auc_noagg_test0    │      0.8117675185203552      │
+│     INJAL_auc_agg_test0      │      0.9750458002090454      │
+│    INJAL_auc_noagg_test0     │      0.9698905944824219      │
+│   INJAL_high_auc_agg_test0   │      0.9947900176048279      │
+│  INJAL_high_auc_noagg_test0  │      0.983700692653656       │
+│   INJAL_low_auc_agg_test0    │      0.941448450088501       │
+│  INJAL_low_auc_noagg_test0   │      0.9533270597457886      │
+│     INJAS_auc_agg_test0      │      0.9894719123840332      │
+│    INJAS_auc_noagg_test0     │      0.9845120906829834      │
+│   INJAS_high_auc_agg_test0   │      0.9963894486427307      │
+│  INJAS_high_auc_noagg_test0  │      0.9896456003189087      │
+│   INJAS_low_auc_agg_test0    │      0.9800682663917542      │
+│  INJAS_low_auc_noagg_test0   │      0.9780539274215698      │
+│     INJIL_auc_agg_test0      │      0.875683069229126       │
+│    INJIL_auc_noagg_test0     │      0.8664759993553162      │
+│   INJIL_high_auc_agg_test0   │             nan              │
+│  INJIL_high_auc_noagg_test0  │             nan              │
+│   INJIL_low_auc_agg_test0    │             nan              │
+│  INJIL_low_auc_noagg_test0   │             nan              │
+│     INJIN_auc_agg_test0      │      0.993624746799469       │
+│    INJIN_auc_noagg_test0     │      0.975196361541748       │
+│   INJIN_high_auc_agg_test0   │             nan              │
+│  INJIN_high_auc_noagg_test0  │      0.9951122403144836      │
+│   INJIN_low_auc_agg_test0    │             nan              │
+│  INJIN_low_auc_noagg_test0   │      0.9446833729743958      │
+│     INJLA_auc_agg_test0      │      0.750910758972168       │
+│    INJLA_auc_noagg_test0     │      0.7637181282043457      │
+│   INJLA_high_auc_agg_test0   │             nan              │
+│  INJLA_high_auc_noagg_test0  │      0.8144067525863647      │
+│   INJLA_low_auc_agg_test0    │             nan              │
+│  INJLA_low_auc_noagg_test0   │      0.7129502296447754      │
+│      INVT_auc_agg_test0      │      0.9469324946403503      │
+│     INVT_auc_noagg_test0     │      0.9363453984260559      │
+│   INVT_high_auc_agg_test0    │      0.9675076603889465      │
+│  INVT_high_auc_noagg_test0   │      0.9480627179145813      │
+│    INVT_low_auc_agg_test0    │      0.9220197200775146      │
+│   INVT_low_auc_noagg_test0   │      0.9228177070617676      │
+│     IPLMI_auc_agg_test0      │      0.800547182559967       │
+│    IPLMI_auc_noagg_test0     │      0.8051869869232178      │
+│   IPLMI_high_auc_agg_test0   │             nan              │
+│  IPLMI_high_auc_noagg_test0  │      0.9058716893196106      │
+│   IPLMI_low_auc_agg_test0    │             nan              │
+│  IPLMI_low_auc_noagg_test0   │      0.7082822322845459      │
+│      IPMI_auc_agg_test0      │      0.9717540144920349      │
+│     IPMI_auc_noagg_test0     │      0.9647019505500793      │
+│   IPMI_high_auc_agg_test0    │             nan              │
+│  IPMI_high_auc_noagg_test0   │      0.9883122444152832      │
+│    IPMI_low_auc_agg_test0    │             nan              │
+│   IPMI_low_auc_noagg_test0   │      0.9383594393730164      │
+│     IRBBB_auc_agg_test0      │       0.97344970703125       │
+│    IRBBB_auc_noagg_test0     │      0.9631974697113037      │
+│   IRBBB_high_auc_agg_test0   │      0.9831821322441101      │
+│  IRBBB_high_auc_noagg_test0  │      0.9703370332717896      │
+│   IRBBB_low_auc_agg_test0    │      0.9616082310676575      │
+│  IRBBB_low_auc_noagg_test0   │      0.9552040696144104      │
+│     ISCAL_auc_agg_test0      │      0.9216840267181396      │
+│    ISCAL_auc_noagg_test0     │      0.9129893779754639      │
+│   ISCAL_high_auc_agg_test0   │      0.9488508701324463      │
+│  ISCAL_high_auc_noagg_test0  │      0.9273838996887207      │
+│   ISCAL_low_auc_agg_test0    │      0.8879310488700867      │
+│  ISCAL_low_auc_noagg_test0   │      0.8963015675544739      │
+│     ISCAN_auc_agg_test0      │      0.837511420249939       │
+│    ISCAN_auc_noagg_test0     │      0.8470473289489746      │
+│   ISCAN_high_auc_agg_test0   │             nan              │
+│  ISCAN_high_auc_noagg_test0  │      0.9121403098106384      │
+│   ISCAN_low_auc_agg_test0    │             nan              │
+│  ISCAN_low_auc_noagg_test0   │      0.7737856507301331      │
+│     ISCAS_auc_agg_test0      │      0.9566038250923157      │
+│    ISCAS_auc_noagg_test0     │      0.9462857842445374      │
+│   ISCAS_high_auc_agg_test0   │      0.9771567583084106      │
+│  ISCAS_high_auc_noagg_test0  │      0.9599862098693848      │
+│   ISCAS_low_auc_agg_test0    │      0.9306970834732056      │
+│  ISCAS_low_auc_noagg_test0   │      0.9298976063728333      │
+│     ISCIL_auc_agg_test0      │      0.9161570072174072      │
+│    ISCIL_auc_noagg_test0     │      0.9056399464607239      │
+│   ISCIL_high_auc_agg_test0   │      0.9734642505645752      │
+│  ISCIL_high_auc_noagg_test0  │      0.938629686832428       │
+│   ISCIL_low_auc_agg_test0    │      0.8347222805023193      │
+│  ISCIL_low_auc_noagg_test0   │      0.8688610792160034      │
+│     ISCIN_auc_agg_test0      │      0.8568265438079834      │
+│    ISCIN_auc_noagg_test0     │      0.8437055945396423      │
+│   ISCIN_high_auc_agg_test0   │      0.9386485815048218      │
+│  ISCIN_high_auc_noagg_test0  │       0.89225834608078       │
+│   ISCIN_low_auc_agg_test0    │      0.7471254467964172      │
+│  ISCIN_low_auc_noagg_test0   │      0.7973669171333313      │
+│     ISCLA_auc_agg_test0      │      0.9136419892311096      │
+│    ISCLA_auc_noagg_test0     │      0.904589831829071       │
+│   ISCLA_high_auc_agg_test0   │      0.962151288986206       │
+│  ISCLA_high_auc_noagg_test0  │      0.9276900887489319      │
+│   ISCLA_low_auc_agg_test0    │      0.8537933230400085      │
+│  ISCLA_low_auc_noagg_test0   │      0.8788677453994751      │
+│      ISC__auc_agg_test0      │      0.959544837474823       │
+│     ISC__auc_noagg_test0     │      0.9569536447525024      │
+│   ISC__high_auc_agg_test0    │      0.9738872051239014      │
+│  ISC__high_auc_noagg_test0   │      0.9650757312774658      │
+│    ISC__low_auc_agg_test0    │      0.9410994052886963      │
+│   ISC__low_auc_noagg_test0   │      0.9471429586410522      │
+│      IVCD_auc_agg_test0      │      0.7364472150802612      │
+│     IVCD_auc_noagg_test0     │      0.729779839515686       │
+│   IVCD_high_auc_agg_test0    │      0.8022881746292114      │
+│  IVCD_high_auc_noagg_test0   │      0.7572975754737854      │
+│    IVCD_low_auc_agg_test0    │      0.6679263114929199      │
+│   IVCD_low_auc_noagg_test0   │      0.6958297491073608      │
+│      LAFB_auc_agg_test0      │      0.9514086246490479      │
+│     LAFB_auc_noagg_test0     │      0.9389427900314331      │
+│   LAFB_high_auc_agg_test0    │      0.9634556174278259      │
+│  LAFB_high_auc_noagg_test0   │      0.9471262097358704      │
+│    LAFB_low_auc_agg_test0    │      0.9390174150466919      │
+│   LAFB_low_auc_noagg_test0   │      0.9305877089500427      │
+│    LAO/LAE_auc_agg_test0     │      0.8403679728507996      │
+│   LAO/LAE_auc_noagg_test0    │      0.8087732195854187      │
+│  LAO/LAE_high_auc_agg_test0  │      0.8925145268440247      │
+│ LAO/LAE_high_auc_noagg_test0 │      0.8431121110916138      │
+│  LAO/LAE_low_auc_agg_test0   │      0.7813891768455505      │
+│ LAO/LAE_low_auc_noagg_test0  │      0.7746917605400085      │
+│      LMI_auc_agg_test0       │      0.7403122186660767      │
+│     LMI_auc_noagg_test0      │      0.7176925539970398      │
+│    LMI_high_auc_agg_test0    │      0.846972644329071       │
+│   LMI_high_auc_noagg_test0   │      0.7756661772727966      │
+│    LMI_low_auc_agg_test0     │      0.6152423024177551      │
+│   LMI_low_auc_noagg_test0    │      0.6519442796707153      │
+│     LNGQT_auc_agg_test0      │      0.9293760657310486      │
+│    LNGQT_auc_noagg_test0     │      0.9006162285804749      │
+│   LNGQT_high_auc_agg_test0   │      0.9877178072929382      │
+│  LNGQT_high_auc_noagg_test0  │      0.9378666281700134      │
+│   LNGQT_low_auc_agg_test0    │      0.8368635177612305      │
+│  LNGQT_low_auc_noagg_test0   │      0.8581505417823792      │
+│      LOWT_auc_agg_test0      │      0.908890426158905       │
+│     LOWT_auc_noagg_test0     │      0.8977220058441162      │
+│   LOWT_high_auc_agg_test0    │      0.9382010698318481      │
+│  LOWT_high_auc_noagg_test0   │      0.9130953550338745      │
+│    LOWT_low_auc_agg_test0    │      0.8770980834960938      │
+│   LOWT_low_auc_noagg_test0   │      0.8811194896697998      │
+│      LPFB_auc_agg_test0      │      0.9780071377754211      │
+│     LPFB_auc_noagg_test0     │      0.972547173500061       │
+│   LPFB_high_auc_agg_test0    │      0.9901944994926453      │
+│  LPFB_high_auc_noagg_test0   │      0.9809849262237549      │
+│    LPFB_low_auc_agg_test0    │      0.9636023044586182      │
+│   LPFB_low_auc_noagg_test0   │      0.962859034538269       │
+│      LPR_auc_agg_test0       │      0.9701533317565918      │
+│     LPR_auc_noagg_test0      │      0.9593736529350281      │
+│    LPR_high_auc_agg_test0    │      0.9818499684333801      │
+│   LPR_high_auc_noagg_test0   │      0.9667676091194153      │
+│    LPR_low_auc_agg_test0     │      0.9554033279418945      │
+│   LPR_low_auc_noagg_test0    │      0.9504437446594238      │
+│      LVH_auc_agg_test0       │      0.9394407868385315      │
+│     LVH_auc_noagg_test0      │      0.9358794093132019      │
+│    LVH_high_auc_agg_test0    │      0.9541968107223511      │
+│   LVH_high_auc_noagg_test0   │      0.9437719583511353      │
+│    LVH_low_auc_agg_test0     │      0.9245861172676086      │
+│   LVH_low_auc_noagg_test0    │      0.9276005029678345      │
+│     LVOLT_auc_agg_test0      │      0.9370030760765076      │
+│    LVOLT_auc_noagg_test0     │      0.9299542903900146      │
+│   LVOLT_high_auc_agg_test0   │      0.9703695774078369      │
+│  LVOLT_high_auc_noagg_test0  │      0.9505248665809631      │
+│   LVOLT_low_auc_agg_test0    │      0.8863937258720398      │
+│  LVOLT_low_auc_noagg_test0   │      0.9068326950073242      │
+│      NDT_auc_agg_test0       │      0.9212127327919006      │
+│     NDT_auc_noagg_test0      │      0.9096181392669678      │
+│    NDT_high_auc_agg_test0    │      0.9364868402481079      │
+│   NDT_high_auc_noagg_test0   │      0.9188381433486938      │
+│    NDT_low_auc_agg_test0     │      0.9029597640037537      │
+│   NDT_low_auc_noagg_test0    │      0.9011163711547852      │
+│      NORM_auc_agg_test0      │      0.9326623678207397      │
+│     NORM_auc_noagg_test0     │      0.9254058599472046      │
+│   NORM_high_auc_agg_test0    │      0.9423957467079163      │
+│  NORM_high_auc_noagg_test0   │      0.9303950071334839      │
+│    NORM_low_auc_agg_test0    │      0.9225789904594421      │
+│   NORM_low_auc_noagg_test0   │      0.9197073578834534      │
+│      NST__auc_agg_test0      │      0.8248069882392883      │
+│     NST__auc_noagg_test0     │      0.8090841174125671      │
+│   NST__high_auc_agg_test0    │      0.861236035823822       │
+│  NST__high_auc_noagg_test0   │      0.8286114931106567      │
+│    NST__low_auc_agg_test0    │      0.7824866771697998      │
+│   NST__low_auc_noagg_test0   │      0.787389874458313       │
+│      NT__auc_agg_test0       │      0.9015593528747559      │
+│     NT__auc_noagg_test0      │      0.8837318420410156      │
+│    NT__high_auc_agg_test0    │      0.9315710663795471      │
+│   NT__high_auc_noagg_test0   │      0.900097131729126       │
+│    NT__low_auc_agg_test0     │      0.8649290204048157      │
+│   NT__low_auc_noagg_test0    │      0.8662864565849304      │
+│      PACE_auc_agg_test0      │      0.9464285969734192      │
+│     PACE_auc_noagg_test0     │      0.918260395526886       │
+│   PACE_high_auc_agg_test0    │      0.9887563586235046      │
+│  PACE_high_auc_noagg_test0   │      0.948154091835022       │
+│    PACE_low_auc_agg_test0    │      0.8912447094917297      │
+│   PACE_low_auc_noagg_test0   │      0.883655309677124       │
+│      PAC_auc_agg_test0       │      0.8325764536857605      │
+│     PAC_auc_noagg_test0      │      0.7313564419746399      │
+│    PAC_high_auc_agg_test0    │      0.9111083149909973      │
+│   PAC_high_auc_noagg_test0   │      0.7768131494522095      │
+│    PAC_low_auc_agg_test0     │      0.7514910101890564      │
+│   PAC_low_auc_noagg_test0    │      0.6852462291717529      │
+│      PMI_auc_agg_test0       │      0.9879326224327087      │
+│     PMI_auc_noagg_test0      │      0.9797216653823853      │
+│    PMI_high_auc_agg_test0    │             nan              │
+│   PMI_high_auc_noagg_test0   │             nan              │
+│    PMI_low_auc_agg_test0     │             nan              │
+│   PMI_low_auc_noagg_test0    │             nan              │
+│     PRC_S__auc_agg_test0     │      0.8507055044174194      │
+│    PRC_S__auc_noagg_test0    │      0.8114474415779114      │
+│  PRC_S__high_auc_agg_test0   │             nan              │
+│ PRC_S__high_auc_noagg_test0  │             nan              │
+│   PRC_S__low_auc_agg_test0   │             nan              │
+│  PRC_S__low_auc_noagg_test0  │             nan              │
+│      PSVT_auc_agg_test0      │      0.9959016442298889      │
+│     PSVT_auc_noagg_test0     │      0.9928990006446838      │
+│   PSVT_high_auc_agg_test0    │             nan              │
+│  PSVT_high_auc_noagg_test0   │             nan              │
+│    PSVT_low_auc_agg_test0    │             nan              │
+│   PSVT_low_auc_noagg_test0   │             nan              │
+│      PVC_auc_agg_test0       │      0.9612123966217041      │
+│     PVC_auc_noagg_test0      │      0.8421056866645813      │
+│    PVC_high_auc_agg_test0    │      0.9754989743232727      │
+│   PVC_high_auc_noagg_test0   │      0.8631325960159302      │
+│    PVC_low_auc_agg_test0     │      0.9439058303833008      │
+│   PVC_low_auc_noagg_test0    │      0.8213016390800476      │
+│     QWAVE_auc_agg_test0      │      0.7957748174667358      │
+│    QWAVE_auc_noagg_test0     │      0.7722638249397278      │
+│   QWAVE_high_auc_agg_test0   │      0.8458151817321777      │
+│  QWAVE_high_auc_noagg_test0  │      0.7980783581733704      │
+│   QWAVE_low_auc_agg_test0    │      0.7445862293243408      │
+│  QWAVE_low_auc_noagg_test0   │      0.7454193830490112      │
+│    RAO/RAE_auc_agg_test0     │      0.9709323644638062      │
+│   RAO/RAE_auc_noagg_test0    │      0.9599948525428772      │
+│  RAO/RAE_high_auc_agg_test0  │      0.9961304664611816      │
+│ RAO/RAE_high_auc_noagg_test0 │      0.9772264957427979      │
+│  RAO/RAE_low_auc_agg_test0   │      0.942703366279602       │
+│ RAO/RAE_low_auc_noagg_test0  │      0.9398561716079712      │
+│      RVH_auc_agg_test0       │      0.9262732267379761      │
+│     RVH_auc_noagg_test0      │      0.9292252659797668      │
+│    RVH_high_auc_agg_test0    │      0.9912412166595459      │
+│   RVH_high_auc_noagg_test0   │      0.9660175442695618      │
+│    RVH_low_auc_agg_test0     │      0.8331190347671509      │
+│   RVH_low_auc_noagg_test0    │      0.884264349937439       │
+│     SARRH_auc_agg_test0      │      0.6928550004959106      │
+│    SARRH_auc_noagg_test0     │      0.6588054299354553      │
+│   SARRH_high_auc_agg_test0   │      0.7559032440185547      │
+│  SARRH_high_auc_noagg_test0  │      0.6916435360908508      │
+│   SARRH_low_auc_agg_test0    │      0.6268056631088257      │
+│  SARRH_low_auc_noagg_test0   │      0.6272619366645813      │
+│     SBRAD_auc_agg_test0      │      0.9362772107124329      │
+│    SBRAD_auc_noagg_test0     │      0.9199296832084656      │
+│   SBRAD_high_auc_agg_test0   │      0.9582446217536926      │
+│  SBRAD_high_auc_noagg_test0  │      0.9316538572311401      │
+│   SBRAD_low_auc_agg_test0    │      0.9115360975265503      │
+│  SBRAD_low_auc_noagg_test0   │      0.9069647192955017      │
+│     SEHYP_auc_agg_test0      │      0.9262295365333557      │
+│    SEHYP_auc_noagg_test0     │      0.7288251519203186      │
+│   SEHYP_high_auc_agg_test0   │             nan              │
+│  SEHYP_high_auc_noagg_test0  │             nan              │
+│   SEHYP_low_auc_agg_test0    │             nan              │
+│  SEHYP_low_auc_noagg_test0   │             nan              │
+│       SR_auc_agg_test0       │      0.854530930519104       │
+│      SR_auc_noagg_test0      │      0.8327370882034302      │
+│    SR_high_auc_agg_test0     │      0.8747678995132446      │
+│   SR_high_auc_noagg_test0    │      0.8434203267097473      │
+│     SR_low_auc_agg_test0     │      0.8349095582962036      │
+│    SR_low_auc_noagg_test0    │      0.8220643401145935      │
+│     STACH_auc_agg_test0      │      0.9868769645690918      │
+│    STACH_auc_noagg_test0     │      0.9800341725349426      │
+│   STACH_high_auc_agg_test0   │      0.9939618706703186      │
+│  STACH_high_auc_noagg_test0  │      0.9847743511199951      │
+│   STACH_low_auc_agg_test0    │      0.977522075176239       │
+│  STACH_low_auc_noagg_test0   │      0.974446177482605       │
+│      STD__auc_agg_test0      │      0.8746677041053772      │
+│     STD__auc_noagg_test0     │      0.8660017251968384      │
+│   STD__high_auc_agg_test0    │      0.9059145450592041      │
+│  STD__high_auc_noagg_test0   │      0.8815831542015076      │
+│    STD__low_auc_agg_test0    │      0.8413760662078857      │
+│   STD__low_auc_noagg_test0   │      0.8491308689117432      │
+│      STE__auc_agg_test0      │      0.8242976665496826      │
+│     STE__auc_noagg_test0     │      0.8263762593269348      │
+│   STE__high_auc_agg_test0    │             nan              │
+│  STE__high_auc_noagg_test0   │      0.8736041784286499      │
+│    STE__low_auc_agg_test0    │             nan              │
+│   STE__low_auc_noagg_test0   │      0.7789270877838135      │
+│     SVARR_auc_agg_test0      │      0.9572213292121887      │
+│    SVARR_auc_noagg_test0     │      0.9447728395462036      │
+│   SVARR_high_auc_agg_test0   │      0.9800061583518982      │
+│  SVARR_high_auc_noagg_test0  │      0.960465133190155       │
+│   SVARR_low_auc_agg_test0    │      0.9277392625808716      │
+│  SVARR_low_auc_noagg_test0   │      0.925580620765686       │
+│     SVTAC_auc_agg_test0      │      0.9805619120597839      │
+│    SVTAC_auc_noagg_test0     │      0.9781890511512756      │
+│   SVTAC_high_auc_agg_test0   │             nan              │
+│  SVTAC_high_auc_noagg_test0  │      0.987514317035675       │
+│   SVTAC_low_auc_agg_test0    │             nan              │
+│  SVTAC_low_auc_noagg_test0   │      0.9690848588943481      │
+│      TAB__auc_agg_test0      │      0.702353835105896       │
+│     TAB__auc_noagg_test0     │      0.7158789038658142      │
+│   TAB__high_auc_agg_test0    │             nan              │
+│  TAB__high_auc_noagg_test0   │      0.8120605945587158      │
+│    TAB__low_auc_agg_test0    │             nan              │
+│   TAB__low_auc_noagg_test0   │      0.6104676723480225      │
+│     TRIGU_auc_agg_test0      │      0.9845172762870789      │
+│    TRIGU_auc_noagg_test0     │      0.9471909403800964      │
+│   TRIGU_high_auc_agg_test0   │             nan              │
+│  TRIGU_high_auc_noagg_test0  │      0.990990161895752       │
+│   TRIGU_low_auc_agg_test0    │             nan              │
+│  TRIGU_low_auc_noagg_test0   │      0.8978532552719116      │
+│     VCLVH_auc_agg_test0      │      0.8913082480430603      │
+│    VCLVH_auc_noagg_test0     │      0.8846232295036316      │
+│   VCLVH_high_auc_agg_test0   │      0.9175254702568054      │
+│  VCLVH_high_auc_noagg_test0  │      0.8990875482559204      │
+│   VCLVH_low_auc_agg_test0    │      0.8621427416801453      │
+│  VCLVH_low_auc_noagg_test0   │      0.8697655200958252      │
+│      WPW_auc_agg_test0       │      0.9457191824913025      │
+│     WPW_auc_noagg_test0      │      0.9338648915290833      │
+│    WPW_high_auc_agg_test0    │             nan              │
+│   WPW_high_auc_noagg_test0   │      0.969335675239563       │
+│    WPW_low_auc_agg_test0     │             nan              │
+│   WPW_low_auc_noagg_test0    │      0.8944035172462463      │
+│     macro_auc_agg_test0      │      0.9113014340400696      │
+│    macro_auc_noagg_test0     │      0.8944332003593445      │
+│   macro_high_auc_agg_test0   │      0.9152024388313293      │
+│  macro_high_auc_noagg_test0  │      0.9000145196914673      │
+│   macro_low_auc_agg_test0    │      0.879852831363678       │
+│  macro_low_auc_noagg_test0   │      0.8875599503517151      │
+│     micro_auc_agg_test0      │      0.969717800617218       │
+│    micro_auc_noagg_test0     │      0.9654065370559692      │
+│   micro_high_auc_agg_test0   │      0.9720603823661804      │
+│  micro_high_auc_noagg_test0  │      0.9666469097137451      │
+│   micro_low_auc_agg_test0    │      0.9674385786056519      │
+│  micro_low_auc_noagg_test0   │      0.964126467704773       │
+└──────────────────────────────┴──────────────────────────────┘

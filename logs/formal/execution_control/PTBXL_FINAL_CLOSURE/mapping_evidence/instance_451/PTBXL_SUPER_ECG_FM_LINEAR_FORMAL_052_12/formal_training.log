@@ -1,0 +1,395 @@
+CUDA extension for cauchy multiplication not found. Install by going to extensions/cauchy/ and running `python setup.py install`. This should speed up end-to-end training by 10-50%
+Install at least one of pykeops or the cauchy_mult extension.
+CUDA extension for cauchy multiplication not found. Install by going to extensions/cauchy/ and running `python setup.py install`. This should speed up end-to-end training by 10-50%
+Install at least one of pykeops or the cauchy_mult extension.
+Using 16bit Automatic Mixed Precision (AMP)
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+HPU available: False, using: 0 HPUs
+You are using a CUDA device ('NVIDIA GeForce RTX 4090') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+/root/autodl-tmp/ECG/environments/ecg_fm_052/lib/python3.9/site-packages/lightning/pytorch/callbacks/model_checkpoint.py:751: Checkpoint directory /root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_FM_LINEAR_FORMAL_052_12/output/version_0 exists and is not empty.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+/root/autodl-tmp/ECG/environments/ecg_fm_052/lib/python3.9/site-packages/lightning/pytorch/utilities/model_summary/model_summary.py:231: Precision 16-mixed is not supported by the model summary.  Estimated model size in MB will not be accurate. Using 32 bits instead.
+
+  | Name  | Type           | Params | Mode 
+-------------------------------------------------
+0 | model | ECG_FM_Wrapper | 92.2 M | train
+-------------------------------------------------
+1.8 M     Trainable params
+90.4 M    Non-trainable params
+92.2 M    Total params
+368.605   Total estimated model params size (MB)
+8         Modules in train mode
+205       Modules in eval mode
+Namespace(data='/root/autodl-tmp/ECG/data/processed/ptb-xl/records500', epochs=100, batch_size=64, lr=0.001, weight_decay=0.001, resume='', pretrained='/root/autodl-tmp/ECG/checkpoints/ecg_fm/mimic_iv_ecg_physionet_pretrained.pt', optimizer='adam', output_path='/root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_FM_LINEAR_FORMAL_052_12/output', metadata='', gpus=1, num_nodes=1, precision='16-mixed', distributed_backend=None, accumulate=1, input_size=5.0, train_head_only=False, finetune=True, linear_eval=False, lr_schedule='const', lr_num_warmup_steps=1000, discriminative_lr_factor=0.1, lr_find=False, auto_batch_size=False, auc_maximization=False, refresh_rate=0, mlflow=False, mlflow_experiment_name='fm-benchmarking', mlflow_run_name='run', fs_model=500.0, fs_data=500.0, input_channels=12, architecture='ecg_fm', s4_n=8, s4_h=512, s4_layers=4, s4_batchnorm=False, s4_prenorm=False, merl_backbone='resnet', modality='ecg', normalize=False, finetune_dataset='ptbxl_super', chunk_length_train=1.0, stride_fraction_train=1.0, stride_fraction_valtest=1.0, chunkify_train=False, segmentation=False, eval_only='', export_predictions=True, prediction_path='/root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_FM_LINEAR_FORMAL_052_12/predictions', eval_mode='linear', label_ratio=1, executable='main_lite_ecg', revision='')
+Model path: /root/autodl-tmp/ECG/checkpoints/ecg_fm/mimic_iv_ecg_physionet_pretrained.pt
+Output directory: /root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_FM_LINEAR_FORMAL_052_12/output/version_0
+Folder: /root/autodl-tmp/ECG/data/processed/ptb-xl/records500 Samples: 21799
+
+ /root/autodl-tmp/ECG/data/processed/ptb-xl/records500
+train dataset: 17418 samples
+val dataset: 4366 samples
+test dataset: 4396 samples
+/root/autodl-tmp/ECG/environments/ecg_fm_052/lib/python3.9/site-packages/lightning/pytorch/loops/fit_loop.py:527: Found 205 module(s) in eval mode at the start of training. This may lead to unexpected behavior during training. If this is intentional, you can ignore this warning.
+/root/autodl-tmp/ECG/environments/ecg_fm_052/lib/python3.9/site-packages/torch/optim/lr_scheduler.py:192: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn(
+Epoch 0, global step 272: 'macro_auc_agg_val0' reached 0.84960 (best 0.84960), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_FM_LINEAR_FORMAL_052_12/output/version_0/best_model.ckpt' as top 1
+epoch 0 val noagg: 0.8488156767847194
+epoch 0 val agg: 0.849602237316739
+Epoch 1, global step 544: 'macro_auc_agg_val0' reached 0.85019 (best 0.85019), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_FM_LINEAR_FORMAL_052_12/output/version_0/best_model.ckpt' as top 1
+epoch 1 val noagg: 0.8492860329663721
+epoch 1 val agg: 0.8501938487969317
+Epoch 2, global step 816: 'macro_auc_agg_val0' reached 0.85648 (best 0.85648), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_FM_LINEAR_FORMAL_052_12/output/version_0/best_model.ckpt' as top 1
+epoch 2 val noagg: 0.8557521499922712
+epoch 2 val agg: 0.8564753762282791
+Epoch 3, global step 1088: 'macro_auc_agg_val0' was not in top 1
+epoch 3 val noagg: 0.8537878407413458
+epoch 3 val agg: 0.854627340393445
+Epoch 4, global step 1360: 'macro_auc_agg_val0' was not in top 1
+epoch 4 val noagg: 0.8553730088898132
+epoch 4 val agg: 0.8561793065867727
+Epoch 5, global step 1632: 'macro_auc_agg_val0' reached 0.85868 (best 0.85868), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_FM_LINEAR_FORMAL_052_12/output/version_0/best_model.ckpt' as top 1
+epoch 5 val noagg: 0.8577989640195742
+epoch 5 val agg: 0.8586783750029603
+Epoch 6, global step 1904: 'macro_auc_agg_val0' was not in top 1
+epoch 6 val noagg: 0.8485793954913865
+epoch 6 val agg: 0.8495415824609905
+Epoch 7, global step 2176: 'macro_auc_agg_val0' was not in top 1
+epoch 7 val noagg: 0.854141776266073
+epoch 7 val agg: 0.8549087589717818
+Epoch 8, global step 2448: 'macro_auc_agg_val0' reached 0.85898 (best 0.85898), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_FM_LINEAR_FORMAL_052_12/output/version_0/best_model.ckpt' as top 1
+epoch 8 val noagg: 0.8580770732580321
+epoch 8 val agg: 0.8589786515070988
+Epoch 9, global step 2720: 'macro_auc_agg_val0' reached 0.86819 (best 0.86819), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_FM_LINEAR_FORMAL_052_12/output/version_0/best_model.ckpt' as top 1
+epoch 9 val noagg: 0.8674483657656445
+epoch 9 val agg: 0.8681942908457969
+Epoch 10, global step 2992: 'macro_auc_agg_val0' reached 0.86892 (best 0.86892), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_FM_LINEAR_FORMAL_052_12/output/version_0/best_model.ckpt' as top 1
+epoch 10 val noagg: 0.8680867753780831
+epoch 10 val agg: 0.8689242804567993
+Epoch 11, global step 3264: 'macro_auc_agg_val0' was not in top 1
+epoch 11 val noagg: 0.8636390653143087
+epoch 11 val agg: 0.8646042328995076
+Epoch 12, global step 3536: 'macro_auc_agg_val0' was not in top 1
+epoch 12 val noagg: 0.8633009603354396
+epoch 12 val agg: 0.8640800909006081
+Epoch 13, global step 3808: 'macro_auc_agg_val0' was not in top 1
+epoch 13 val noagg: 0.8609139290233309
+epoch 13 val agg: 0.8617193856556504
+Epoch 14, global step 4080: 'macro_auc_agg_val0' was not in top 1
+epoch 14 val noagg: 0.852703242745495
+epoch 14 val agg: 0.8536512153130312
+Epoch 15, global step 4352: 'macro_auc_agg_val0' was not in top 1
+epoch 15 val noagg: 0.8675110628482896
+epoch 15 val agg: 0.8682853781559967
+Epoch 16, global step 4624: 'macro_auc_agg_val0' was not in top 1
+epoch 16 val noagg: 0.863066127580594
+epoch 16 val agg: 0.8639165426641234
+Epoch 17, global step 4896: 'macro_auc_agg_val0' was not in top 1
+epoch 17 val noagg: 0.8666609352947084
+epoch 17 val agg: 0.8674489265234605
+Epoch 18, global step 5168: 'macro_auc_agg_val0' was not in top 1
+epoch 18 val noagg: 0.8651764659190402
+epoch 18 val agg: 0.8660067595360207
+Epoch 19, global step 5440: 'macro_auc_agg_val0' was not in top 1
+epoch 19 val noagg: 0.8609310474358353
+epoch 19 val agg: 0.8617492611570233
+Epoch 20, global step 5712: 'macro_auc_agg_val0' was not in top 1
+epoch 20 val noagg: 0.8593646621833937
+epoch 20 val agg: 0.8602326652101933
+Epoch 21, global step 5984: 'macro_auc_agg_val0' was not in top 1
+epoch 21 val noagg: 0.86220251465115
+epoch 21 val agg: 0.8629739987836349
+Epoch 22, global step 6256: 'macro_auc_agg_val0' was not in top 1
+epoch 22 val noagg: 0.8675452471307958
+epoch 22 val agg: 0.8683629514253735
+Epoch 23, global step 6528: 'macro_auc_agg_val0' was not in top 1
+epoch 23 val noagg: 0.8660723226034908
+epoch 23 val agg: 0.866794849024564
+Epoch 24, global step 6800: 'macro_auc_agg_val0' reached 0.87087 (best 0.87087), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_FM_LINEAR_FORMAL_052_12/output/version_0/best_model.ckpt' as top 1
+epoch 24 val noagg: 0.8699266478286745
+epoch 24 val agg: 0.8708697157300905
+Epoch 25, global step 7072: 'macro_auc_agg_val0' was not in top 1
+epoch 25 val noagg: 0.8614730556502543
+epoch 25 val agg: 0.8622992417414495
+Epoch 26, global step 7344: 'macro_auc_agg_val0' was not in top 1
+epoch 26 val noagg: 0.8663409130633741
+epoch 26 val agg: 0.8671994562512484
+Epoch 27, global step 7616: 'macro_auc_agg_val0' was not in top 1
+epoch 27 val noagg: 0.8665258971862935
+epoch 27 val agg: 0.8673076072860255
+Epoch 28, global step 7888: 'macro_auc_agg_val0' was not in top 1
+epoch 28 val noagg: 0.8650958732732519
+epoch 28 val agg: 0.8659320225905999
+Epoch 29, global step 8160: 'macro_auc_agg_val0' reached 0.87669 (best 0.87669), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_FM_LINEAR_FORMAL_052_12/output/version_0/best_model.ckpt' as top 1
+epoch 29 val noagg: 0.8758487354434296
+epoch 29 val agg: 0.8766935774110367
+Epoch 30, global step 8432: 'macro_auc_agg_val0' was not in top 1
+epoch 30 val noagg: 0.8664369205049658
+epoch 30 val agg: 0.8673316174020697
+Epoch 31, global step 8704: 'macro_auc_agg_val0' was not in top 1
+epoch 31 val noagg: 0.8695871141901229
+epoch 31 val agg: 0.8704606256003548
+Epoch 32, global step 8976: 'macro_auc_agg_val0' was not in top 1
+epoch 32 val noagg: 0.865905855345626
+epoch 32 val agg: 0.8667138586122245
+Epoch 33, global step 9248: 'macro_auc_agg_val0' was not in top 1
+epoch 33 val noagg: 0.8632865447389424
+epoch 33 val agg: 0.864080383501245
+Epoch 34, global step 9520: 'macro_auc_agg_val0' was not in top 1
+epoch 34 val noagg: 0.8691126228369195
+epoch 34 val agg: 0.869973503376222
+Epoch 35, global step 9792: 'macro_auc_agg_val0' was not in top 1
+epoch 35 val noagg: 0.8669945869805178
+epoch 35 val agg: 0.8678426900900511
+Epoch 36, global step 10064: 'macro_auc_agg_val0' was not in top 1
+epoch 36 val noagg: 0.8726456388841287
+epoch 36 val agg: 0.8735086637499995
+Epoch 37, global step 10336: 'macro_auc_agg_val0' was not in top 1
+epoch 37 val noagg: 0.8600237521091356
+epoch 37 val agg: 0.8609641526954054
+Epoch 38, global step 10608: 'macro_auc_agg_val0' was not in top 1
+epoch 38 val noagg: 0.8693974210002862
+epoch 38 val agg: 0.870293441533293
+Epoch 39, global step 10880: 'macro_auc_agg_val0' was not in top 1
+epoch 39 val noagg: 0.8689748486166231
+epoch 39 val agg: 0.8697787546515435
+Epoch 40, global step 11152: 'macro_auc_agg_val0' was not in top 1
+epoch 40 val noagg: 0.8686864213031462
+epoch 40 val agg: 0.8695105166587618
+Epoch 41, global step 11424: 'macro_auc_agg_val0' was not in top 1
+epoch 41 val noagg: 0.8716581587162203
+epoch 41 val agg: 0.8725421819910526
+Epoch 42, global step 11696: 'macro_auc_agg_val0' was not in top 1
+epoch 42 val noagg: 0.8670979382543603
+epoch 42 val agg: 0.8681093997476774
+Epoch 43, global step 11968: 'macro_auc_agg_val0' was not in top 1
+epoch 43 val noagg: 0.8752939749209403
+epoch 43 val agg: 0.8761467107537246
+Epoch 44, global step 12240: 'macro_auc_agg_val0' was not in top 1
+epoch 44 val noagg: 0.8706657518557643
+epoch 44 val agg: 0.871446629466823
+Epoch 45, global step 12512: 'macro_auc_agg_val0' was not in top 1
+epoch 45 val noagg: 0.8746124268567474
+epoch 45 val agg: 0.8753899876569975
+Epoch 46, global step 12784: 'macro_auc_agg_val0' was not in top 1
+epoch 46 val noagg: 0.8699390234286677
+epoch 46 val agg: 0.8708501428453662
+Epoch 47, global step 13056: 'macro_auc_agg_val0' was not in top 1
+epoch 47 val noagg: 0.8711444749976346
+epoch 47 val agg: 0.8719191299958682
+Epoch 48, global step 13328: 'macro_auc_agg_val0' was not in top 1
+epoch 48 val noagg: 0.8731680397169617
+epoch 48 val agg: 0.8742036703913841
+Epoch 49, global step 13600: 'macro_auc_agg_val0' was not in top 1
+epoch 49 val noagg: 0.8696725183903457
+epoch 49 val agg: 0.8704912808105931
+Epoch 50, global step 13872: 'macro_auc_agg_val0' was not in top 1
+epoch 50 val noagg: 0.8714523520690566
+epoch 50 val agg: 0.8722367840106717
+Epoch 51, global step 14144: 'macro_auc_agg_val0' was not in top 1
+epoch 51 val noagg: 0.8699254904068088
+epoch 51 val agg: 0.8708503387954686
+Epoch 52, global step 14416: 'macro_auc_agg_val0' was not in top 1
+epoch 52 val noagg: 0.874086844686715
+epoch 52 val agg: 0.8749791632235644
+Epoch 53, global step 14688: 'macro_auc_agg_val0' was not in top 1
+epoch 53 val noagg: 0.8701219652430774
+epoch 53 val agg: 0.8710124492438158
+Epoch 54, global step 14960: 'macro_auc_agg_val0' was not in top 1
+epoch 54 val noagg: 0.8651598230353805
+epoch 54 val agg: 0.8660424724625491
+Epoch 55, global step 15232: 'macro_auc_agg_val0' was not in top 1
+epoch 55 val noagg: 0.8725355752311238
+epoch 55 val agg: 0.8733397440250421
+Epoch 56, global step 15504: 'macro_auc_agg_val0' was not in top 1
+epoch 56 val noagg: 0.8707169877494747
+epoch 56 val agg: 0.8717273601675541
+Epoch 57, global step 15776: 'macro_auc_agg_val0' was not in top 1
+epoch 57 val noagg: 0.8717171793803491
+epoch 57 val agg: 0.8724996904672832
+Epoch 58, global step 16048: 'macro_auc_agg_val0' was not in top 1
+epoch 58 val noagg: 0.8730706753436561
+epoch 58 val agg: 0.8739561156262544
+Epoch 59, global step 16320: 'macro_auc_agg_val0' reached 0.87740 (best 0.87740), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_FM_LINEAR_FORMAL_052_12/output/version_0/best_model.ckpt' as top 1
+epoch 59 val noagg: 0.8764573230521007
+epoch 59 val agg: 0.8773960802295061
+Epoch 60, global step 16592: 'macro_auc_agg_val0' was not in top 1
+epoch 60 val noagg: 0.8735432874173865
+epoch 60 val agg: 0.8743780496795266
+Epoch 61, global step 16864: 'macro_auc_agg_val0' was not in top 1
+epoch 61 val noagg: 0.8752655614639322
+epoch 61 val agg: 0.8762275918964342
+Epoch 62, global step 17136: 'macro_auc_agg_val0' was not in top 1
+epoch 62 val noagg: 0.875249082723372
+epoch 62 val agg: 0.876113688219952
+Epoch 63, global step 17408: 'macro_auc_agg_val0' was not in top 1
+epoch 63 val noagg: 0.8705925695701815
+epoch 63 val agg: 0.8715179728785752
+Epoch 64, global step 17680: 'macro_auc_agg_val0' was not in top 1
+epoch 64 val noagg: 0.8686737048500554
+epoch 64 val agg: 0.8695446048102472
+Epoch 65, global step 17952: 'macro_auc_agg_val0' was not in top 1
+epoch 65 val noagg: 0.8735135157422619
+epoch 65 val agg: 0.8743510864714082
+Epoch 66, global step 18224: 'macro_auc_agg_val0' was not in top 1
+epoch 66 val noagg: 0.8736212796903585
+epoch 66 val agg: 0.8745544781549416
+Epoch 67, global step 18496: 'macro_auc_agg_val0' reached 0.87816 (best 0.87816), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_FM_LINEAR_FORMAL_052_12/output/version_0/best_model.ckpt' as top 1
+epoch 67 val noagg: 0.877247946247089
+epoch 67 val agg: 0.87815884239975
+Epoch 68, global step 18768: 'macro_auc_agg_val0' reached 0.87832 (best 0.87832), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_FM_LINEAR_FORMAL_052_12/output/version_0/best_model.ckpt' as top 1
+epoch 68 val noagg: 0.8773613763089202
+epoch 68 val agg: 0.8783211144729416
+Epoch 69, global step 19040: 'macro_auc_agg_val0' was not in top 1
+epoch 69 val noagg: 0.8723774503121863
+epoch 69 val agg: 0.8732719082103566
+Epoch 70, global step 19312: 'macro_auc_agg_val0' was not in top 1
+epoch 70 val noagg: 0.8732139876483987
+epoch 70 val agg: 0.8739863465880144
+Epoch 71, global step 19584: 'macro_auc_agg_val0' was not in top 1
+epoch 71 val noagg: 0.8738955569566329
+epoch 71 val agg: 0.8747940883319518
+Epoch 72, global step 19856: 'macro_auc_agg_val0' was not in top 1
+epoch 72 val noagg: 0.8713885728090324
+epoch 72 val agg: 0.8722939227496738
+Epoch 73, global step 20128: 'macro_auc_agg_val0' reached 0.87894 (best 0.87894), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_FM_LINEAR_FORMAL_052_12/output/version_0/best_model.ckpt' as top 1
+epoch 73 val noagg: 0.878059811661557
+epoch 73 val agg: 0.8789369691375779
+Epoch 74, global step 20400: 'macro_auc_agg_val0' reached 0.87965 (best 0.87965), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_FM_LINEAR_FORMAL_052_12/output/version_0/best_model.ckpt' as top 1
+epoch 74 val noagg: 0.8788481988778939
+epoch 74 val agg: 0.8796461196350526
+Epoch 75, global step 20672: 'macro_auc_agg_val0' was not in top 1
+epoch 75 val noagg: 0.8771126174155818
+epoch 75 val agg: 0.8780073212005413
+Epoch 76, global step 20944: 'macro_auc_agg_val0' was not in top 1
+epoch 76 val noagg: 0.8777981174358855
+epoch 76 val agg: 0.8786645823320981
+Epoch 77, global step 21216: 'macro_auc_agg_val0' reached 0.88004 (best 0.88004), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_FM_LINEAR_FORMAL_052_12/output/version_0/best_model.ckpt' as top 1
+epoch 77 val noagg: 0.8791516137563425
+epoch 77 val agg: 0.8800428530827347
+Epoch 78, global step 21488: 'macro_auc_agg_val0' was not in top 1
+epoch 78 val noagg: 0.8704800484421623
+epoch 78 val agg: 0.8714634366355021
+Epoch 79, global step 21760: 'macro_auc_agg_val0' was not in top 1
+epoch 79 val noagg: 0.8705585624060166
+epoch 79 val agg: 0.871444234917865
+Epoch 80, global step 22032: 'macro_auc_agg_val0' was not in top 1
+epoch 80 val noagg: 0.870190448312638
+epoch 80 val agg: 0.8711118703367555
+Epoch 81, global step 22304: 'macro_auc_agg_val0' was not in top 1
+epoch 81 val noagg: 0.8711970268461833
+epoch 81 val agg: 0.8719712882450512
+Epoch 82, global step 22576: 'macro_auc_agg_val0' was not in top 1
+epoch 82 val noagg: 0.8765630819705373
+epoch 82 val agg: 0.8773227617926581
+Epoch 83, global step 22848: 'macro_auc_agg_val0' was not in top 1
+epoch 83 val noagg: 0.8762622591186974
+epoch 83 val agg: 0.8771787792137481
+Epoch 84, global step 23120: 'macro_auc_agg_val0' was not in top 1
+epoch 84 val noagg: 0.8740365665245401
+epoch 84 val agg: 0.8748852223006359
+Epoch 85, global step 23392: 'macro_auc_agg_val0' was not in top 1
+epoch 85 val noagg: 0.8769736908421051
+epoch 85 val agg: 0.8777988883504634
+Epoch 86, global step 23664: 'macro_auc_agg_val0' was not in top 1
+epoch 86 val noagg: 0.8788172184647731
+epoch 86 val agg: 0.879729380420651
+Epoch 87, global step 23936: 'macro_auc_agg_val0' was not in top 1
+epoch 87 val noagg: 0.8763274094836708
+epoch 87 val agg: 0.8771860050013804
+Epoch 88, global step 24208: 'macro_auc_agg_val0' was not in top 1
+epoch 88 val noagg: 0.8763101279535215
+epoch 88 val agg: 0.8771456312627224
+Epoch 89, global step 24480: 'macro_auc_agg_val0' was not in top 1
+epoch 89 val noagg: 0.875433371555107
+epoch 89 val agg: 0.8763169539139305
+Epoch 90, global step 24752: 'macro_auc_agg_val0' was not in top 1
+epoch 90 val noagg: 0.8783899765398253
+epoch 90 val agg: 0.8793241795789818
+Epoch 91, global step 25024: 'macro_auc_agg_val0' was not in top 1
+epoch 91 val noagg: 0.8707226108010113
+epoch 91 val agg: 0.8716907075014575
+Epoch 92, global step 25296: 'macro_auc_agg_val0' was not in top 1
+epoch 92 val noagg: 0.8788578964459249
+epoch 92 val agg: 0.8798682598616203
+Epoch 93, global step 25568: 'macro_auc_agg_val0' was not in top 1
+epoch 93 val noagg: 0.8746549526460748
+epoch 93 val agg: 0.8756275629689434
+Epoch 94, global step 25840: 'macro_auc_agg_val0' reached 0.88170 (best 0.88170), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_FM_LINEAR_FORMAL_052_12/output/version_0/best_model.ckpt' as top 1
+epoch 94 val noagg: 0.8807378989162494
+epoch 94 val agg: 0.8816957362491576
+Epoch 95, global step 26112: 'macro_auc_agg_val0' was not in top 1
+epoch 95 val noagg: 0.8727583179607308
+epoch 95 val agg: 0.8737293190087547
+Epoch 96, global step 26384: 'macro_auc_agg_val0' was not in top 1
+epoch 96 val noagg: 0.876366335174272
+epoch 96 val agg: 0.8772335310093939
+Epoch 97, global step 26656: 'macro_auc_agg_val0' was not in top 1
+epoch 97 val noagg: 0.8782818424806441
+epoch 97 val agg: 0.8792305187275449
+Epoch 98, global step 26928: 'macro_auc_agg_val0' was not in top 1
+epoch 98 val noagg: 0.8715002566626516
+epoch 98 val agg: 0.8724515618631518
+Epoch 99, global step 27200: 'macro_auc_agg_val0' reached 0.88194 (best 0.88194), saving model to '/root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_FM_LINEAR_FORMAL_052_12/output/version_0/best_model.ckpt' as top 1
+`Trainer.fit` stopped: `max_epochs=100` reached.
+Restoring states from the checkpoint path at /root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_FM_LINEAR_FORMAL_052_12/output/version_0/best_model.ckpt
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loaded model weights from the checkpoint at /root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_FM_LINEAR_FORMAL_052_12/output/version_0/best_model.ckpt
+epoch 99 val noagg: 0.8810342701347602
+epoch 99 val agg: 0.881941502873042
+Folder: /root/autodl-tmp/ECG/data/processed/ptb-xl/records500 Samples: 21799
+
+ /root/autodl-tmp/ECG/data/processed/ptb-xl/records500
+train dataset: 17418 samples
+val dataset: 4366 samples
+test dataset: 4396 samples
+  0%|          | 0/20 [00:00<?, ?it/s]  5%|▌         | 1/20 [00:04<01:18,  4.15s/it] 10%|█         | 2/20 [00:08<01:20,  4.48s/it] 15%|█▌        | 3/20 [00:13<01:14,  4.39s/it] 20%|██        | 4/20 [00:17<01:09,  4.32s/it] 25%|██▌       | 5/20 [00:21<01:05,  4.38s/it] 30%|███       | 6/20 [00:26<01:01,  4.42s/it] 35%|███▌      | 7/20 [00:30<00:56,  4.38s/it] 40%|████      | 8/20 [00:35<00:52,  4.39s/it] 45%|████▌     | 9/20 [00:39<00:48,  4.43s/it] 50%|█████     | 10/20 [00:44<00:45,  4.51s/it] 55%|█████▌    | 11/20 [00:48<00:40,  4.50s/it] 60%|██████    | 12/20 [00:53<00:35,  4.48s/it] 65%|██████▌   | 13/20 [00:57<00:31,  4.51s/it] 70%|███████   | 14/20 [01:02<00:27,  4.57s/it] 75%|███████▌  | 15/20 [01:07<00:23,  4.61s/it] 80%|████████  | 16/20 [01:11<00:18,  4.60s/it] 85%|████████▌ | 17/20 [01:16<00:13,  4.57s/it] 90%|█████████ | 18/20 [01:20<00:09,  4.58s/it] 95%|█████████▌| 19/20 [01:25<00:04,  4.65s/it]100%|██████████| 20/20 [01:30<00:00,  4.57s/it]100%|██████████| 20/20 [01:30<00:00,  4.50s/it]
+epoch 100 test noagg: 0.8755804402703425
+  0%|          | 0/20 [00:00<?, ?it/s]  5%|▌         | 1/20 [00:04<01:20,  4.22s/it] 10%|█         | 2/20 [00:08<01:18,  4.38s/it] 15%|█▌        | 3/20 [00:13<01:14,  4.39s/it] 20%|██        | 4/20 [00:17<01:09,  4.36s/it] 25%|██▌       | 5/20 [00:21<01:06,  4.40s/it] 30%|███       | 6/20 [00:26<01:01,  4.41s/it] 35%|███▌      | 7/20 [00:30<00:56,  4.37s/it] 40%|████      | 8/20 [00:34<00:52,  4.34s/it] 45%|████▌     | 9/20 [00:39<00:47,  4.36s/it] 50%|█████     | 10/20 [00:43<00:43,  4.38s/it] 55%|█████▌    | 11/20 [00:48<00:39,  4.36s/it] 60%|██████    | 12/20 [00:52<00:35,  4.42s/it] 65%|██████▌   | 13/20 [00:56<00:30,  4.39s/it] 70%|███████   | 14/20 [01:01<00:26,  4.39s/it] 75%|███████▌  | 15/20 [01:05<00:22,  4.45s/it] 80%|████████  | 16/20 [01:10<00:18,  4.53s/it] 85%|████████▌ | 17/20 [01:15<00:13,  4.58s/it] 90%|█████████ | 18/20 [01:20<00:09,  4.61s/it] 95%|█████████▌| 19/20 [01:24<00:04,  4.64s/it]100%|██████████| 20/20 [01:29<00:00,  4.57s/it]100%|██████████| 20/20 [01:29<00:00,  4.46s/it]
+epoch 100 test agg: 0.8763569197393005
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+       Test metric               DataLoader 0
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+     CD_auc_agg_test0         0.8661098480224609
+    CD_auc_noagg_test0        0.8653545379638672
+  CD_high_auc_agg_test0       0.8845259547233582
+ CD_high_auc_noagg_test0      0.8799867033958435
+   CD_low_auc_agg_test0       0.844831645488739
+  CD_low_auc_noagg_test0      0.8506960868835449
+    HYP_auc_agg_test0         0.8198733329772949
+   HYP_auc_noagg_test0        0.8191894888877869
+  HYP_high_auc_agg_test0      0.8462929725646973
+ HYP_high_auc_noagg_test0     0.8383861780166626
+  HYP_low_auc_agg_test0       0.7925810813903809
+ HYP_low_auc_noagg_test0      0.7981586456298828
+     MI_auc_agg_test0         0.8708605766296387
+    MI_auc_noagg_test0        0.8699489831924438
+  MI_high_auc_agg_test0       0.8874273300170898
+ MI_high_auc_noagg_test0      0.8816103339195251
+   MI_low_auc_agg_test0       0.8544886112213135
+  MI_low_auc_noagg_test0      0.8583105206489563
+    NORM_auc_agg_test0        0.9196694493293762
+   NORM_auc_noagg_test0       0.9189739227294922
+ NORM_high_auc_agg_test0      0.9310730695724487
+NORM_high_auc_noagg_test0     0.9264996647834778
+  NORM_low_auc_agg_test0      0.9084486961364746
+ NORM_low_auc_noagg_test0     0.9107017517089844
+    STTC_auc_agg_test0        0.9052714109420776
+   STTC_auc_noagg_test0       0.9044352769851685
+ STTC_high_auc_agg_test0      0.920270562171936
+STTC_high_auc_noagg_test0     0.9142940044403076
+  STTC_low_auc_agg_test0      0.8900361061096191
+ STTC_low_auc_noagg_test0     0.8939834833145142
+   macro_auc_agg_test0        0.8763568997383118
+  macro_auc_noagg_test0       0.8755804300308228
+ macro_high_auc_agg_test0     0.8860448002815247
+macro_high_auc_noagg_test0     0.88202965259552
+ macro_low_auc_agg_test0      0.8675459623336792
+macro_low_auc_noagg_test0     0.8683708310127258
+   micro_auc_agg_test0        0.8999148011207581
+  micro_auc_noagg_test0       0.8991841673851013
+ micro_high_auc_agg_test0     0.9077165126800537
+micro_high_auc_noagg_test0    0.9044719338417053
+ micro_low_auc_agg_test0      0.8927727937698364
+micro_low_auc_noagg_test0     0.8931083083152771
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

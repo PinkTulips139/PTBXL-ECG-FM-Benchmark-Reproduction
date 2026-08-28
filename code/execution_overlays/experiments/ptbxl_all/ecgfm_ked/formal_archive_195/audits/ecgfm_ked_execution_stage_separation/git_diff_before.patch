@@ -1,0 +1,21 @@
+diff --git a/code/clinical_ts/models/fm_ecg.py b/code/clinical_ts/models/fm_ecg.py
+index a2ae161..8b52ff4 100644
+--- a/code/clinical_ts/models/fm_ecg.py
++++ b/code/clinical_ts/models/fm_ecg.py
+@@ -656,15 +656,7 @@ class EcgFmKEDWrapper(FMWrapperBase):
+ 
+         if pretrained_path:
+             checkpoint = torch.load(pretrained_path, map_location="cpu")        
+-            state_dict = {}
+-            for k, v in checkpoint.items():
+-                if k.startswith("ecg_model."):
+-                    state_dict[k.replace("ecg_model.", "")] = v
+-                elif k.startswith("model."):
+-                    continue
+-                else:
+-                    state_dict[k] = v                    
+-            self.model.load_state_dict(state_dict, strict=False)
++            self.model.load_state_dict(checkpoint["ecg_model"], strict=False)
+         else:
+             raise ValueError("EcgFmKEDWrapper requires a valid `pretrained_path` to load the encoder.")
+         

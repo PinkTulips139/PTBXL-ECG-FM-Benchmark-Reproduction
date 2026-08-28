@@ -1,0 +1,170 @@
+Using 16bit Automatic Mixed Precision (AMP)
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+HPU available: False, using: 0 HPUs
+You are using a CUDA device ('NVIDIA GeForce RTX 4080 SUPER') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+Restoring states from the checkpoint path at /root/autodl-tmp/ECG/formal_runs/ecg_fm_ptbxl_all_formal_20260817T104823Z/output/version_0/best_model.ckpt
+/root/autodl-tmp/ECG/environments/ecg_fm_245/lib/python3.9/site-packages/lightning/pytorch/callbacks/model_checkpoint.py:445: The dirpath has changed from '/root/autodl-tmp/ECG/formal_runs/ecg_fm_ptbxl_all_formal_20260817T104823Z/output/version_0' to '/root/autodl-tmp/ECG/formal_runs/ecg_fm_ptbxl_all_formal_20260817T104823Z/test_stage_no_bootstrap_20260817T163225Z/output/version_0', therefore `best_model_score`, `kth_best_model_path`, `kth_value`, `last_model_path` and `best_k_models` won't be reloaded. Only `best_model_path` will be reloaded.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loaded model weights from the checkpoint at /root/autodl-tmp/ECG/formal_runs/ecg_fm_ptbxl_all_formal_20260817T104823Z/output/version_0/best_model.ckpt
+Namespace(data='/root/autodl-tmp/ECG/data/processed/ptb-xl/records500', epochs=100, batch_size=64, lr=0.001, weight_decay=0.001, resume='', pretrained='/root/autodl-tmp/ECG/checkpoints/ecg_fm/mimic_iv_ecg_physionet_pretrained.pt', optimizer='adam', output_path='/root/autodl-tmp/ECG/formal_runs/ecg_fm_ptbxl_all_formal_20260817T104823Z/test_stage_no_bootstrap_20260817T163225Z/output', metadata='', gpus=1, num_nodes=1, precision='16-mixed', distributed_backend=None, accumulate=1, input_size=5.0, train_head_only=False, finetune=True, linear_eval=False, lr_schedule='const', lr_num_warmup_steps=1000, discriminative_lr_factor=0.1, lr_find=False, auto_batch_size=False, auc_maximization=False, refresh_rate=0, mlflow=False, mlflow_experiment_name='fm-benchmarking', mlflow_run_name='run', fs_model=500.0, fs_data=500.0, input_channels=12, architecture='ecg_fm', s4_n=8, s4_h=512, s4_layers=4, s4_batchnorm=False, s4_prenorm=False, merl_backbone='resnet', modality='ecg', normalize=False, finetune_dataset='ptbxl_all', chunk_length_train=1.0, stride_fraction_train=1.0, stride_fraction_valtest=1.0, chunkify_train=False, segmentation=False, eval_only='/root/autodl-tmp/ECG/formal_runs/ecg_fm_ptbxl_all_formal_20260817T104823Z/output/version_0/best_model.ckpt', export_predictions=True, bootstrap=False, prediction_path='/root/autodl-tmp/ECG/formal_runs/ecg_fm_ptbxl_all_formal_20260817T104823Z/test_stage_no_bootstrap_20260817T163225Z/predictions', eval_mode='finetuning_linear', label_ratio=1, executable='main_lite_ecg', revision='')
+Model path: /root/autodl-tmp/ECG/checkpoints/ecg_fm/mimic_iv_ecg_physionet_pretrained.pt
+Output directory: /root/autodl-tmp/ECG/formal_runs/ecg_fm_ptbxl_all_formal_20260817T104823Z/test_stage_no_bootstrap_20260817T163225Z/output/version_0
+Folder: /root/autodl-tmp/ECG/data/processed/ptb-xl/records500 Samples: 21799
+
+ /root/autodl-tmp/ECG/data/processed/ptb-xl/records500
+train dataset: 17418 samples
+val dataset: 4366 samples
+test dataset: 4396 samples
+epoch 0 test noagg: 0.9194254966882293
+epoch 0 test agg: 0.9240472984002527
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+       Test metric             DataLoader 0
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1AVB_auc_agg_test0       0.9785365462303162
+  1AVB_auc_noagg_test0       0.977898895740509
+   2AVB_auc_agg_test0       0.9590350389480591
+  2AVB_auc_noagg_test0      0.9447541832923889
+   3AVB_auc_agg_test0        0.994535505771637
+  3AVB_auc_noagg_test0       0.994763195514679
+   ABQRS_auc_agg_test0      0.8265107274055481
+  ABQRS_auc_noagg_test0     0.8226024508476257
+   AFIB_auc_agg_test0       0.9875559210777283
+  AFIB_auc_noagg_test0      0.9867737889289856
+   AFLT_auc_agg_test0       0.9473169445991516
+  AFLT_auc_noagg_test0      0.9482786655426025
+   ALMI_auc_agg_test0       0.9602504372596741
+  ALMI_auc_noagg_test0      0.9598090052604675
+    AMI_auc_agg_test0       0.8989366888999939
+   AMI_auc_noagg_test0      0.8960868120193481
+   ANEUR_auc_agg_test0       0.959689199924469
+  ANEUR_auc_noagg_test0     0.9593293070793152
+   ASMI_auc_agg_test0       0.9760562181472778
+  ASMI_auc_noagg_test0      0.9754330515861511
+   BIGU_auc_agg_test0       0.9543949961662292
+  BIGU_auc_noagg_test0      0.9556720852851868
+   CLBBB_auc_agg_test0      0.9984970688819885
+  CLBBB_auc_noagg_test0     0.9983859062194824
+   CRBBB_auc_agg_test0      0.9976074695587158
+  CRBBB_auc_noagg_test0      0.997542679309845
+    DIG_auc_agg_test0       0.9330784678459167
+   DIG_auc_noagg_test0      0.9330848455429077
+    EL_auc_agg_test0        0.8475204110145569
+   EL_auc_noagg_test0       0.8447287082672119
+   HVOLT_auc_agg_test0      0.9111161828041077
+  HVOLT_auc_noagg_test0     0.8945407271385193
+   ILBBB_auc_agg_test0      0.9214611649513245
+  ILBBB_auc_noagg_test0     0.9177939295768738
+   ILMI_auc_agg_test0       0.9533042907714844
+  ILMI_auc_noagg_test0      0.9507255554199219
+    IMI_auc_agg_test0       0.9191410541534424
+   IMI_auc_noagg_test0      0.9153123497962952
+   INJAL_auc_agg_test0      0.9688317775726318
+  INJAL_auc_noagg_test0     0.9690688848495483
+   INJAS_auc_agg_test0      0.9939422011375427
+  INJAS_auc_noagg_test0     0.9938482046127319
+   INJIL_auc_agg_test0      0.9788251519203186
+  INJIL_auc_noagg_test0     0.9795651435852051
+   INJIN_auc_agg_test0      0.9881603121757507
+  INJIN_auc_noagg_test0     0.9875625967979431
+   INJLA_auc_agg_test0      0.8019125461578369
+  INJLA_auc_noagg_test0     0.8051571249961853
+   INVT_auc_agg_test0       0.9552948474884033
+  INVT_auc_noagg_test0      0.9537407755851746
+   IPLMI_auc_agg_test0       0.862653911113739
+  IPLMI_auc_noagg_test0     0.8622776865959167
+   IPMI_auc_agg_test0       0.9257403016090393
+  IPMI_auc_noagg_test0      0.9270880818367004
+   IRBBB_auc_agg_test0      0.9686087369918823
+  IRBBB_auc_noagg_test0     0.9654520750045776
+   ISCAL_auc_agg_test0       0.93958580493927
+  ISCAL_auc_noagg_test0     0.9380338788032532
+   ISCAN_auc_agg_test0      0.8049225211143494
+  ISCAN_auc_noagg_test0     0.8040964007377625
+   ISCAS_auc_agg_test0      0.9664751887321472
+  ISCAS_auc_noagg_test0     0.9661784768104553
+   ISCIL_auc_agg_test0      0.9462538361549377
+  ISCIL_auc_noagg_test0     0.9422878623008728
+   ISCIN_auc_agg_test0      0.9313586354255676
+  ISCIN_auc_noagg_test0     0.9278048872947693
+   ISCLA_auc_agg_test0      0.9178313612937927
+  ISCLA_auc_noagg_test0     0.9162647128105164
+   ISC__auc_agg_test0       0.9587862491607666
+  ISC__auc_noagg_test0      0.9580384492874146
+   IVCD_auc_agg_test0       0.7684601545333862
+  IVCD_auc_noagg_test0      0.7659900188446045
+   LAFB_auc_agg_test0       0.9801838397979736
+  LAFB_auc_noagg_test0       0.978567898273468
+  LAO/LAE_auc_agg_test0     0.8278116583824158
+ LAO/LAE_auc_noagg_test0    0.8263663649559021
+    LMI_auc_agg_test0       0.9174701571464539
+   LMI_auc_noagg_test0      0.9156594276428223
+   LNGQT_auc_agg_test0       0.91806960105896
+  LNGQT_auc_noagg_test0     0.9085816740989685
+   LOWT_auc_agg_test0       0.9349413514137268
+  LOWT_auc_noagg_test0      0.9335894584655762
+   LPFB_auc_agg_test0       0.9121814370155334
+  LPFB_auc_noagg_test0      0.9086710214614868
+    LPR_auc_agg_test0        0.981869101524353
+   LPR_auc_noagg_test0       0.979723334312439
+    LVH_auc_agg_test0       0.9196822047233582
+   LVH_auc_noagg_test0      0.9178645014762878
+   LVOLT_auc_agg_test0      0.9064984917640686
+  LVOLT_auc_noagg_test0     0.9044916033744812
+    NDT_auc_agg_test0       0.9283833503723145
+   NDT_auc_noagg_test0      0.9257594347000122
+   NORM_auc_agg_test0        0.944307804107666
+  NORM_auc_noagg_test0      0.9426392912864685
+   NST__auc_agg_test0       0.8533220887184143
+  NST__auc_noagg_test0      0.8519436120986938
+    NT__auc_agg_test0       0.9372073411941528
+   NT__auc_noagg_test0      0.9336472153663635
+   PACE_auc_agg_test0       0.9901744723320007
+  PACE_auc_noagg_test0      0.9846424460411072
+    PAC_auc_agg_test0       0.9327039122581482
+   PAC_auc_noagg_test0       0.89640873670578
+    PMI_auc_agg_test0        0.943989098072052
+   PMI_auc_noagg_test0      0.9427652359008789
+  PRC_S__auc_agg_test0      0.9968138337135315
+ PRC_S__auc_noagg_test0     0.9962449073791504
+   PSVT_auc_agg_test0        0.999544620513916
+  PSVT_auc_noagg_test0       0.999544620513916
+    PVC_auc_agg_test0       0.9839293360710144
+   PVC_auc_noagg_test0      0.9215530157089233
+   QWAVE_auc_agg_test0      0.8721927404403687
+  QWAVE_auc_noagg_test0     0.8668370842933655
+  RAO/RAE_auc_agg_test0     0.9560785889625549
+ RAO/RAE_auc_noagg_test0    0.9542732834815979
+    RVH_auc_agg_test0       0.9575709104537964
+   RVH_auc_noagg_test0      0.9580569267272949
+   SARRH_auc_agg_test0      0.9356710910797119
+  SARRH_auc_noagg_test0     0.8530373573303223
+   SBRAD_auc_agg_test0      0.9264732003211975
+  SBRAD_auc_noagg_test0      0.91874760389328
+   SEHYP_auc_agg_test0      0.9920309782028198
+  SEHYP_auc_noagg_test0     0.9911202192306519
+    SR_auc_agg_test0        0.9070688486099243
+   SR_auc_noagg_test0       0.8904963135719299
+   STACH_auc_agg_test0      0.9865599870681763
+  STACH_auc_noagg_test0     0.9865247011184692
+   STD__auc_agg_test0       0.8926519155502319
+  STD__auc_noagg_test0      0.8913676738739014
+   STE__auc_agg_test0       0.7056947350502014
+  STE__auc_noagg_test0      0.7064730525016785
+   SVARR_auc_agg_test0      0.9501242637634277
+  SVARR_auc_noagg_test0     0.9483418464660645
+   SVTAC_auc_agg_test0      0.9966591000556946
+  SVTAC_auc_noagg_test0      0.996469259262085
+   TAB__auc_agg_test0       0.43052393198013306
+  TAB__auc_noagg_test0      0.42936599254608154
+   TRIGU_auc_agg_test0      0.9587886929512024
+  TRIGU_auc_noagg_test0      0.959272563457489
+   VCLVH_auc_agg_test0      0.8545957803726196
+  VCLVH_auc_noagg_test0     0.8521305918693542
+    WPW_auc_agg_test0       0.8734018206596375
+   WPW_auc_noagg_test0      0.8720604777336121
+   macro_auc_agg_test0      0.9240472912788391
+  macro_auc_noagg_test0     0.9194254875183105
+   micro_auc_agg_test0      0.9739018082618713
+  micro_auc_noagg_test0     0.9722381234169006
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

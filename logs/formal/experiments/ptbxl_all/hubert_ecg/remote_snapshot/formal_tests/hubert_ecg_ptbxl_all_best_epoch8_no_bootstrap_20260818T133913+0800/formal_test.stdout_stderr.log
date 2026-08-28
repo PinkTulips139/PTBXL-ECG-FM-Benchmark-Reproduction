@@ -1,0 +1,183 @@
+CUDA extension for cauchy multiplication not found. Install by going to extensions/cauchy/ and running `python setup.py install`. This should speed up end-to-end training by 10-50%
+[KeOps] Compiling cuda jit compiler engine ... 
+[KeOps] Warning : There were warnings or errors :
+/usr/bin/ld: cannot find -lnvrtc: No such file or directory
+collect2: error: ld returned 1 exit status
+
+OK
+[pyKeOps] Compiling nvrtc binder for python ... 
+[KeOps] Warning : There were warnings or errors :
+/usr/bin/ld: cannot find -lnvrtc: No such file or directory
+collect2: error: ld returned 1 exit status
+
+OK
+CUDA extension for cauchy multiplication not found. Install by going to extensions/cauchy/ and running `python setup.py install`. This should speed up end-to-end training by 10-50%
+Using 16bit Automatic Mixed Precision (AMP)
+GPU available: True (cuda), used: True
+TPU available: False, using: 0 TPU cores
+HPU available: False, using: 0 HPUs
+You are using a CUDA device ('NVIDIA GeForce RTX 4080 SUPER') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+Restoring states from the checkpoint path at /root/autodl-tmp/ECG/formal_runs/hubert_ecg_ptbxl_all_table3_finetuning_linear_restart_epoch0_20260818T102216+0800/outputs/version_0/best_model.ckpt
+/root/autodl-tmp/ECG/environments/hubert_ecg/lib/python3.13/site-packages/lightning/pytorch/callbacks/model_checkpoint.py:366: The dirpath has changed from '/root/autodl-tmp/ECG/formal_runs/hubert_ecg_ptbxl_all_table3_finetuning_linear_restart_epoch0_20260818T102216+0800/outputs/version_0' to '/root/autodl-tmp/ECG/formal_tests/hubert_ecg_ptbxl_all_best_epoch8_no_bootstrap_20260818T133913+0800/outputs/version_0', therefore `best_model_score`, `kth_best_model_path`, `kth_value`, `last_model_path` and `best_k_models` won't be reloaded. Only `best_model_path` will be reloaded.
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+Loaded model weights from the checkpoint at /root/autodl-tmp/ECG/formal_runs/hubert_ecg_ptbxl_all_table3_finetuning_linear_restart_epoch0_20260818T102216+0800/outputs/version_0/best_model.ckpt
+Namespace(data='/root/autodl-tmp/ECG/data/processed/ptb-xl/records500', epochs=0, batch_size=64, lr=0.001, weight_decay=0.001, resume='', pretrained='/root/autodl-tmp/ECG/checkpoints/hubert_ecg/hubert_ecg_base.safetensors', optimizer='adam', output_path='/root/autodl-tmp/ECG/formal_tests/hubert_ecg_ptbxl_all_best_epoch8_no_bootstrap_20260818T133913+0800/outputs', metadata='', gpus=1, num_nodes=1, precision='16-mixed', distributed_backend=None, accumulate=1, input_size=5.0, train_head_only=False, finetune=True, linear_eval=False, lr_schedule='const', lr_num_warmup_steps=1000, discriminative_lr_factor=0.1, lr_find=False, auto_batch_size=False, auc_maximization=False, refresh_rate=0, mlflow=False, mlflow_experiment_name='fm-benchmarking', mlflow_run_name='run', fs_model=100.0, fs_data=500.0, input_channels=12, architecture='hubert_ecg', s4_n=8, s4_h=512, s4_layers=4, s4_batchnorm=False, s4_prenorm=False, merl_backbone='resnet', modality='ecg', normalize=False, finetune_dataset='ptbxl_all', chunk_length_train=1.0, stride_fraction_train=1.0, stride_fraction_valtest=1.0, chunkify_train=False, segmentation=False, eval_only='/root/autodl-tmp/ECG/formal_runs/hubert_ecg_ptbxl_all_table3_finetuning_linear_restart_epoch0_20260818T102216+0800/outputs/version_0/best_model.ckpt', skip_test_after_fit=False, skip_bootstrap=True, export_predictions=True, prediction_path='/root/autodl-tmp/ECG/formal_tests/hubert_ecg_ptbxl_all_best_epoch8_no_bootstrap_20260818T133913+0800/predictions', eval_mode='finetuning_linear', label_ratio=1, executable='main_lite_ecg', revision='')
+Output directory: /root/autodl-tmp/ECG/formal_tests/hubert_ecg_ptbxl_all_best_epoch8_no_bootstrap_20260818T133913+0800/outputs/version_0
+Folder: /root/autodl-tmp/ECG/data/processed/ptb-xl/records500 Samples: 21799
+
+ /root/autodl-tmp/ECG/data/processed/ptb-xl/records500
+train dataset: 17418 samples
+val dataset: 4366 samples
+test dataset: 4396 samples
+epoch 0 test noagg: 0.9061186060298164
+epoch 0 test agg: 0.9130755189920841
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃        Test metric        ┃       DataLoader 0        ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│    1AVB_auc_agg_test0     │    0.9460039138793945     │
+│   1AVB_auc_noagg_test0    │     0.937545895576477     │
+│    2AVB_auc_agg_test0     │    0.8989531397819519     │
+│   2AVB_auc_noagg_test0    │    0.8514451384544373     │
+│    3AVB_auc_agg_test0     │    0.9533241987228394     │
+│   3AVB_auc_noagg_test0    │    0.9397484064102173     │
+│    ABQRS_auc_agg_test0    │    0.8123303055763245     │
+│   ABQRS_auc_noagg_test0   │    0.8058683276176453     │
+│    AFIB_auc_agg_test0     │    0.9834818840026855     │
+│   AFIB_auc_noagg_test0    │    0.9799532890319824     │
+│    AFLT_auc_agg_test0     │     0.955467164516449     │
+│   AFLT_auc_noagg_test0    │    0.9550352096557617     │
+│    ALMI_auc_agg_test0     │    0.9498950839042664     │
+│   ALMI_auc_noagg_test0    │    0.9447451233863831     │
+│     AMI_auc_agg_test0     │    0.9148536920547485     │
+│    AMI_auc_noagg_test0    │    0.9142279028892517     │
+│    ANEUR_auc_agg_test0    │     0.942733108997345     │
+│   ANEUR_auc_noagg_test0   │     0.942258894443512     │
+│    ASMI_auc_agg_test0     │    0.9730098843574524     │
+│   ASMI_auc_noagg_test0    │    0.9713670611381531     │
+│    BIGU_auc_agg_test0     │    0.9754565954208374     │
+│   BIGU_auc_noagg_test0    │    0.9499857425689697     │
+│    CLBBB_auc_agg_test0    │    0.9970201253890991     │
+│   CLBBB_auc_noagg_test0   │    0.9964446425437927     │
+│    CRBBB_auc_agg_test0    │    0.9970028400421143     │
+│   CRBBB_auc_noagg_test0   │    0.9968765377998352     │
+│     DIG_auc_agg_test0     │    0.8573394417762756     │
+│    DIG_auc_noagg_test0    │    0.8590054512023926     │
+│     EL_auc_agg_test0      │     0.860920786857605     │
+│    EL_auc_noagg_test0     │    0.8519998788833618     │
+│    HVOLT_auc_agg_test0    │    0.8020073175430298     │
+│   HVOLT_auc_noagg_test0   │    0.7833314538002014     │
+│    ILBBB_auc_agg_test0    │    0.9256278276443481     │
+│   ILBBB_auc_noagg_test0   │    0.9264269471168518     │
+│    ILMI_auc_agg_test0     │    0.9396511912345886     │
+│   ILMI_auc_noagg_test0    │     0.938225507736206     │
+│     IMI_auc_agg_test0     │    0.9259877800941467     │
+│    IMI_auc_noagg_test0    │    0.9207293391227722     │
+│    INJAL_auc_agg_test0    │    0.9763867259025574     │
+│   INJAL_auc_noagg_test0   │    0.9739297032356262     │
+│    INJAS_auc_agg_test0    │    0.9913937449455261     │
+│   INJAS_auc_noagg_test0   │    0.9901064038276672     │
+│    INJIL_auc_agg_test0    │    0.9448997974395752     │
+│   INJIL_auc_noagg_test0   │    0.9433344602584839     │
+│    INJIN_auc_agg_test0    │            1.0            │
+│   INJIN_auc_noagg_test0   │            1.0            │
+│    INJLA_auc_agg_test0    │    0.8556466102600098     │
+│   INJLA_auc_noagg_test0   │    0.8586065769195557     │
+│    INVT_auc_agg_test0     │     0.938999354839325     │
+│   INVT_auc_noagg_test0    │    0.9378467798233032     │
+│    IPLMI_auc_agg_test0    │    0.7877792716026306     │
+│   IPLMI_auc_noagg_test0   │    0.7919288873672485     │
+│    IPMI_auc_agg_test0     │    0.9324221611022949     │
+│   IPMI_auc_noagg_test0    │    0.9346241354942322     │
+│    IRBBB_auc_agg_test0    │    0.9763816595077515     │
+│   IRBBB_auc_noagg_test0   │    0.9760627746582031     │
+│    ISCAL_auc_agg_test0    │     0.941852867603302     │
+│   ISCAL_auc_noagg_test0   │    0.9365708231925964     │
+│    ISCAN_auc_agg_test0    │    0.9243391156196594     │
+│   ISCAN_auc_noagg_test0   │    0.9240257740020752     │
+│    ISCAS_auc_agg_test0    │    0.9586266279220581     │
+│   ISCAS_auc_noagg_test0   │    0.9534347653388977     │
+│    ISCIL_auc_agg_test0    │     0.945234477519989     │
+│   ISCIL_auc_noagg_test0   │    0.9401885867118835     │
+│    ISCIN_auc_agg_test0    │    0.9607285857200623     │
+│   ISCIN_auc_noagg_test0   │    0.9472760558128357     │
+│    ISCLA_auc_agg_test0    │    0.9024819731712341     │
+│   ISCLA_auc_noagg_test0   │    0.9029132127761841     │
+│    ISC__auc_agg_test0     │    0.9479506611824036     │
+│   ISC__auc_noagg_test0    │    0.9472175240516663     │
+│    IVCD_auc_agg_test0     │    0.7731136679649353     │
+│   IVCD_auc_noagg_test0    │    0.7695159912109375     │
+│    LAFB_auc_agg_test0     │    0.9855714440345764     │
+│   LAFB_auc_noagg_test0    │    0.9846827387809753     │
+│   LAO/LAE_auc_agg_test0   │    0.8273367881774902     │
+│  LAO/LAE_auc_noagg_test0  │    0.8236317038536072     │
+│     LMI_auc_agg_test0     │    0.8538567423820496     │
+│    LMI_auc_noagg_test0    │    0.8528982996940613     │
+│    LNGQT_auc_agg_test0    │    0.8205927610397339     │
+│   LNGQT_auc_noagg_test0   │    0.8143212199211121     │
+│    LOWT_auc_agg_test0     │    0.9078247547149658     │
+│   LOWT_auc_noagg_test0    │    0.9036293625831604     │
+│    LPFB_auc_agg_test0     │    0.9910805225372314     │
+│   LPFB_auc_noagg_test0    │     0.987525463104248     │
+│     LPR_auc_agg_test0     │    0.9281558990478516     │
+│    LPR_auc_noagg_test0    │    0.9147531390190125     │
+│     LVH_auc_agg_test0     │    0.8967157602310181     │
+│    LVH_auc_noagg_test0    │    0.8929964900016785     │
+│    LVOLT_auc_agg_test0    │    0.8767329454421997     │
+│   LVOLT_auc_noagg_test0   │    0.8714768290519714     │
+│     NDT_auc_agg_test0     │    0.9071058034896851     │
+│    NDT_auc_noagg_test0    │    0.9008175134658813     │
+│    NORM_auc_agg_test0     │    0.9411875009536743     │
+│   NORM_auc_noagg_test0    │    0.9387034773826599     │
+│    NST__auc_agg_test0     │    0.8443517684936523     │
+│   NST__auc_noagg_test0    │    0.8363198637962341     │
+│     NT__auc_agg_test0     │    0.9128345847129822     │
+│    NT__auc_noagg_test0    │    0.9087057709693909     │
+│    PACE_auc_agg_test0     │    0.9602040648460388     │
+│   PACE_auc_noagg_test0    │    0.9577065706253052     │
+│     PAC_auc_agg_test0     │    0.9484939575195312     │
+│    PAC_auc_noagg_test0    │     0.902703583240509     │
+│     PMI_auc_agg_test0     │     0.931010901927948     │
+│    PMI_auc_noagg_test0    │    0.9020947217941284     │
+│   PRC_S__auc_agg_test0    │    0.9945380091667175     │
+│  PRC_S__auc_noagg_test0   │    0.9928311109542847     │
+│    PSVT_auc_agg_test0     │     0.999089241027832     │
+│   PSVT_auc_noagg_test0    │     0.998975396156311     │
+│     PVC_auc_agg_test0     │    0.9903736114501953     │
+│    PVC_auc_noagg_test0    │     0.915184497833252     │
+│    QWAVE_auc_agg_test0    │    0.8340134620666504     │
+│   QWAVE_auc_noagg_test0   │    0.8275983333587646     │
+│   RAO/RAE_auc_agg_test0   │    0.9119744300842285     │
+│  RAO/RAE_auc_noagg_test0  │    0.9118258953094482     │
+│     RVH_auc_agg_test0     │    0.9092329740524292     │
+│    RVH_auc_noagg_test0    │    0.9104099869728088     │
+│    SARRH_auc_agg_test0    │    0.8953201174736023     │
+│   SARRH_auc_noagg_test0   │    0.8328878879547119     │
+│    SBRAD_auc_agg_test0    │    0.9416002631187439     │
+│   SBRAD_auc_noagg_test0   │    0.9393066763877869     │
+│    SEHYP_auc_agg_test0    │    0.9959016442298889     │
+│   SEHYP_auc_noagg_test0   │    0.9959585666656494     │
+│     SR_auc_agg_test0      │    0.8998194336891174     │
+│    SR_auc_noagg_test0     │    0.8798103332519531     │
+│    STACH_auc_agg_test0    │    0.9910380840301514     │
+│   STACH_auc_noagg_test0   │    0.9900338053703308     │
+│    STD__auc_agg_test0     │    0.8750596046447754     │
+│   STD__auc_noagg_test0    │    0.8681567907333374     │
+│    STE__auc_agg_test0     │    0.4719817638397217     │
+│   STE__auc_noagg_test0    │    0.4852125942707062     │
+│    SVARR_auc_agg_test0    │    0.9098312258720398     │
+│   SVARR_auc_noagg_test0   │    0.8936829566955566     │
+│    SVTAC_auc_agg_test0    │    0.9913439750671387     │
+│   SVTAC_auc_noagg_test0   │    0.9920273423194885     │
+│    TAB__auc_agg_test0     │    0.5785877108573914     │
+│   TAB__auc_noagg_test0    │    0.5859149694442749     │
+│    TRIGU_auc_agg_test0    │    0.9624316692352295     │
+│   TRIGU_auc_noagg_test0   │     0.95938640832901      │
+│    VCLVH_auc_agg_test0    │     0.809024453163147     │
+│   VCLVH_auc_noagg_test0   │     0.804486095905304     │
+│     WPW_auc_agg_test0     │    0.9648401737213135     │
+│    WPW_auc_noagg_test0    │    0.9649614691734314     │
+│    macro_auc_agg_test0    │    0.9130755066871643     │
+│   macro_auc_noagg_test0   │     0.906118631362915     │
+│    micro_auc_agg_test0    │    0.9715508222579956     │
+│   micro_auc_noagg_test0   │    0.9691588282585144     │
+└───────────────────────────┴───────────────────────────┘

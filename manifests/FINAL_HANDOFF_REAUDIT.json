@@ -1,0 +1,281 @@
+{
+  "stage": "FINAL_HANDOFF_REAUDIT",
+  "audit_status": "PASS_WITH_PACKAGING_FINDINGS",
+  "audit_date": "2026-08-29",
+  "timezone": "Asia/Shanghai",
+  "output_collision": false,
+  "active_project_writer_detected": "NO",
+  "active_writer_preflight": {
+    "background_process_observed": true,
+    "process_id": 6888,
+    "process_name": "powershell.exe",
+    "process_start_time": "2026-08-28T23:49:34.7369860+08:00",
+    "classification": "PRIOR_STAGE_QA_PROCESS_WRITING_ONLY_TO_SYSTEM_TEMP_NOT_PROJECT",
+    "winword_process_count": 0,
+    "exclusive_project_file_lock_count": 0,
+    "observation_windows": 2,
+    "watched_project_files_stable": true,
+    "process_terminated": false
+  },
+  "scientific_critical_finding_count": 0,
+  "report_critical_finding_count": 0,
+  "packaging_finding_count": 3,
+  "scientific_state": {
+    "formal_runs": 78,
+    "formal_complete": 78,
+    "table3_rows": 30,
+    "table4_rows": 24,
+    "table5_rows": 24,
+    "total_table_rows": 78,
+    "unique_experiment_keys": 78,
+    "missing_experiment_keys": 0,
+    "duplicate_experiment_keys": 0,
+    "unexpected_experiment_keys": 0,
+    "forbidden_s4_net1d_frozen_linear_rows": 0,
+    "completion_matrix_numeric_matches_tables": 78,
+    "completion_matrix_numeric_mismatches": 0,
+    "numeric_comparison_tolerance": 1e-12,
+    "training_metadata": {
+      "best_checkpoint_reference_recovered": 78,
+      "best_checkpoint_reference_missing": 0,
+      "best_epoch_recovered": 50,
+      "best_epoch_not_recovered": 28,
+      "runtime_recovered": 15,
+      "runtime_not_recovered": 63,
+      "local_checkpoint_available": 10,
+      "local_checkpoint_not_available": 68
+    },
+    "final_table_hashes": [
+      {
+        "path": "D:\\桌面文件\\ECG\\tables\\FINAL_TABLE3_FINETUNING.csv",
+        "expected_sha256": "063C3BCB747731F66682E74466CFD82DEBD61106BCF0FA45CB6A478DA8E8B8A3",
+        "observed_sha256": "063C3BCB747731F66682E74466CFD82DEBD61106BCF0FA45CB6A478DA8E8B8A3",
+        "unchanged": true
+      },
+      {
+        "path": "D:\\桌面文件\\ECG\\tables\\FINAL_TABLE4_FROZEN.csv",
+        "expected_sha256": "FB2C8F84FC1543EC3ADD0911CEDF253761B103149DAC73796D3F63F103988F5C",
+        "observed_sha256": "FB2C8F84FC1543EC3ADD0911CEDF253761B103149DAC73796D3F63F103988F5C",
+        "unchanged": true
+      },
+      {
+        "path": "D:\\桌面文件\\ECG\\tables\\FINAL_TABLE5_LINEAR.csv",
+        "expected_sha256": "D213E99E5BDBD0F4BFE40B71CCBF20724237B22EDCD5E6930DC4AD143154DAE5",
+        "observed_sha256": "D213E99E5BDBD0F4BFE40B71CCBF20724237B22EDCD5E6930DC4AD143154DAE5",
+        "unchanged": true
+      }
+    ]
+  },
+  "canonical_identity": {
+    "status": "9/9_PASS",
+    "rows": 9,
+    "unique_canonical_keys": 9,
+    "unique_resolved_run_ids": 9,
+    "nonempty_resolution_basis": 9,
+    "scientific_result_changed_false": 9,
+    "historical_evidence_modified_false": 9,
+    "completion_matrix_resolved_v2_matches": 9,
+    "csv_json_linkage_issues": 0
+  },
+  "completion_matrix_v2": {
+    "status": "78/78_PASS",
+    "rows": 78,
+    "unique_keys": 78,
+    "missing": 0,
+    "duplicate": 0,
+    "unexpected": 0,
+    "formal_complete": 78,
+    "csv_json_semantic_issue_count": 0,
+    "mapping": {
+      "pass": 77,
+      "historical_blocked": 1,
+      "missing": 0
+    },
+    "bootstrap": {
+      "complete": 72,
+      "provenance_blocked": 5,
+      "failed": 0,
+      "mapping_not_eligible": 1,
+      "final_bootstrap_summary_linkage_issues": 0
+    },
+    "historical_matrix_preserved": true,
+    "historical_matrix_sha256": "9D495DA244BF9E777D898AB3D3A1E4FBC4E2BEAF0810DDC67C44BC30DBE84B3"
+  },
+  "locked_upstream_qualification": {
+    "status": "PASS",
+    "repo_path": "D:\\桌面文件\\ECG\\upstream\\ecg-fm-benchmarking",
+    "expected_commit": "238409835ef55358a10bbc3459dfa9aaa91ad5e5",
+    "observed_head": "238409835ef55358a10bbc3459dfa9aaa91ad5e5",
+    "head_matches": true,
+    "current_local_worktree_clean": false,
+    "tracked_modified_python_files": 4,
+    "tracked_deleted_files": 1,
+    "formal_execution_used_current_dirty_worktree": "NOT_PROVEN",
+    "formal_execution_used_equivalent_modified_code": "YES_DOCUMENTED_ACCEPTED",
+    "formal_scientific_result_impact": "DOCUMENTED_ACCEPTED_EXECUTION_REMEDIATION_ONLY",
+    "scientific_artifact_recomputation_required": false,
+    "unqualified_claim_in_final_report_count": 0
+  },
+  "final_report_v2": {
+    "status": "PASS",
+    "path": "D:\\桌面文件\\ECG\\Final Report_V2.docx",
+    "exists": true,
+    "size_bytes": 44707,
+    "sha256": "CF2BBB5FB0F1236154B9559F0440640FD3BA79E1CC55D7E3795CDBB589851BFE",
+    "matches_prior_passed_report_audit_hash": true,
+    "valid_ooxml": true,
+    "readable_document_xml": true,
+    "comments": 0,
+    "tracked_revisions": 0,
+    "todo_placeholder_count": 0,
+    "report_structure_complete": true,
+    "numeric_consistency": "PASS",
+    "locked_upstream_qualification": "PASS",
+    "st_mem_causal_language": "PASS",
+    "mapping_status_text": "PASS",
+    "bootstrap_status_text": "PASS",
+    "worker_evidence_text": "PASS",
+    "training_metadata_text": "PASS",
+    "accepted_remediation_coverage": "PASS",
+    "limitations_coverage": "PASS",
+    "unsupported_causal_attribution_count": 0,
+    "ci_descriptive_observation": "65/72_DESCRIPTIVE_NOT_EQUIVALENCE"
+  },
+  "accepted_remediations": {
+    "status": "9/9_PASS",
+    "expected": 9,
+    "present": 9,
+    "items": [
+      "ST-MEM dependency closure",
+      "ECG-CPC compatibility route",
+      "ECG-FM compatibility overlay",
+      "ECG-JEPA identity aggregation",
+      "MERL/ECGFM-KED BN guard",
+      "052 to 451",
+      "573/871 to 780/775",
+      "emergency-worker evidence recovery",
+      "minimal scientific evidence bundle strategy"
+    ]
+  },
+  "delivery_manifest_v2": {
+    "integrity": "PASS",
+    "listed": 44,
+    "json_artifact_records": 44,
+    "existence_pass": 44,
+    "size_pass": 44,
+    "sha256_pass": 44,
+    "sha256_fail": 0,
+    "duplicate_paths": 0,
+    "csv_json_semantic_issues": 0,
+    "manifest_scope": "CURATED_FINAL_HANDOFF_ASSETS",
+    "manifest_is_exhaustive_project_inventory": false,
+    "self_manifest_files_included": false
+  },
+  "mentor_handoff_index_v2": {
+    "base_navigation_status": "PASS",
+    "final_tables": true,
+    "bootstrap_summary": true,
+    "canonical_run_id_map_v2": true,
+    "completion_matrix_v2": true,
+    "training_metadata": true,
+    "worker_evidence": true,
+    "mapping_evidence": true,
+    "delivery_manifest_v2": true,
+    "locked_upstream_qualification": true,
+    "accepted_remediation_summary": true,
+    "audit_v2": true,
+    "forensic_audit": true,
+    "final_report_v2_as_current_final_report": false
+  },
+  "final_report_v2_in_manifest": false,
+  "report_remediation_audit_in_manifest": "NO",
+  "final_report_v2_in_handoff_index": false,
+  "final_manifest_finalization_required": true,
+  "handoff_index_finalization_required": true,
+  "historical_evidence_preservation": {
+    "status": "PASS",
+    "final_report_doc_exists": true,
+    "final_report_doc_unchanged_against_prior_baseline": true,
+    "pre_v2_audit_md_exists": true,
+    "pre_v2_audit_json_exists": true,
+    "historical_completion_matrix_exists": true,
+    "historical_mentor_index_exists": true,
+    "historical_delivery_manifest_csv_exists": true,
+    "historical_delivery_manifest_json_exists": true,
+    "modified_by_this_audit": false
+  },
+  "scientific_handoff_readiness": "PASS",
+  "packaging_handoff_readiness": "FINALIZATION_REQUIRED",
+  "new_scientific_result_contradiction_found": false,
+  "findings": [
+    {
+      "finding_id": "PKG-001",
+      "severity": "PACKAGING",
+      "category": "MANIFEST_COMPLETENESS",
+      "affected_artifact": "D:\\桌面文件\\ECG\\Final Report_V2.docx",
+      "expected": "The current mentor-facing final report is listed in the curated final handoff manifest.",
+      "observed": "The valid, audited report exists but is absent from all 44 FINAL_DELIVERY_MANIFEST_V2 records.",
+      "evidence_paths": [
+        "D:\\桌面文件\\ECG\\Final Report_V2.docx",
+        "D:\\桌面文件\\ECG\\execution_control\\PTBXL_FINAL_CLOSURE\\FINAL_DELIVERY_MANIFEST_V2.csv",
+        "D:\\桌面文件\\ECG\\execution_control\\PTBXL_FINAL_CLOSURE\\FINAL_DELIVERY_MANIFEST_V2.json"
+      ],
+      "scientific_impact": "NONE",
+      "recommended_human_action": "Create an additive versioned manifest finalization asset that lists Final Report_V2.docx; preserve Manifest V2.",
+      "auto_fixed": false
+    },
+    {
+      "finding_id": "PKG-002",
+      "severity": "PACKAGING",
+      "category": "MANIFEST_TRACEABILITY_COMPLETENESS",
+      "affected_artifact": "FINAL_REPORT_TEXTUAL_REMEDIATION_V2.md and FINAL_REPORT_TEXTUAL_REMEDIATION_V2.json",
+      "expected": "Both versioned report-remediation audit files are listed in the curated final handoff manifest.",
+      "observed": "Neither remediation audit file is present in the 44 manifest records.",
+      "evidence_paths": [
+        "D:\\桌面文件\\ECG\\execution_control\\PTBXL_FINAL_CLOSURE\\FINAL_REPORT_TEXTUAL_REMEDIATION_V2.md",
+        "D:\\桌面文件\\ECG\\execution_control\\PTBXL_FINAL_CLOSURE\\FINAL_REPORT_TEXTUAL_REMEDIATION_V2.json",
+        "D:\\桌面文件\\ECG\\execution_control\\PTBXL_FINAL_CLOSURE\\FINAL_DELIVERY_MANIFEST_V2.csv"
+      ],
+      "scientific_impact": "NONE",
+      "recommended_human_action": "Add both files to the next additive, versioned curated manifest after explicit authorization.",
+      "auto_fixed": false
+    },
+    {
+      "finding_id": "PKG-003",
+      "severity": "PACKAGING",
+      "category": "HANDOFF_NAVIGATION",
+      "affected_artifact": "D:\\桌面文件\\ECG\\execution_control\\PTBXL_FINAL_CLOSURE\\MENTOR_HANDOFF_INDEX_V2.md",
+      "expected": "Canonical mentor navigation identifies Final Report_V2.docx as the current final report.",
+      "observed": "The index has no Final Report_V2.docx entry and only notes that Final Report.doc was not modified.",
+      "evidence_paths": [
+        "D:\\桌面文件\\ECG\\execution_control\\PTBXL_FINAL_CLOSURE\\MENTOR_HANDOFF_INDEX_V2.md",
+        "D:\\桌面文件\\ECG\\Final Report_V2.docx"
+      ],
+      "scientific_impact": "NONE",
+      "recommended_human_action": "Create an additive versioned handoff index that designates Final Report_V2.docx as CURRENT_FINAL_REPORT; preserve Index V2.",
+      "auto_fixed": false
+    }
+  ],
+  "evidence_sources": [
+    "D:\\桌面文件\\ECG\\tables\\FINAL_TABLE3_FINETUNING.csv",
+    "D:\\桌面文件\\ECG\\tables\\FINAL_TABLE4_FROZEN.csv",
+    "D:\\桌面文件\\ECG\\tables\\FINAL_TABLE5_LINEAR.csv",
+    "D:\\桌面文件\\ECG\\execution_control\\PTBXL_FINAL_CLOSURE\\FINAL_CANONICAL_RUN_ID_MAP_V2.csv",
+    "D:\\桌面文件\\ECG\\execution_control\\PTBXL_FINAL_CLOSURE\\FINAL_CANONICAL_RUN_ID_MAP_V2.json",
+    "D:\\桌面文件\\ECG\\execution_control\\PTBXL_FINAL_CLOSURE\\PTBXL_GLOBAL_FORMAL_RUN_COMPLETION_MATRIX_V2.csv",
+    "D:\\桌面文件\\ECG\\execution_control\\PTBXL_FINAL_CLOSURE\\PTBXL_GLOBAL_FORMAL_RUN_COMPLETION_MATRIX_V2.json",
+    "D:\\桌面文件\\ECG\\execution_control\\PTBXL_FINAL_CLOSURE\\FINAL_BOOTSTRAP_SUMMARY.csv",
+    "D:\\桌面文件\\ECG\\execution_control\\PTBXL_FINAL_CLOSURE\\FINAL_TRAINING_METADATA_RECOVERY.csv",
+    "D:\\桌面文件\\ECG\\execution_control\\PTBXL_FINAL_CLOSURE\\LOCKED_UPSTREAM_EXECUTION_QUALIFICATION_V1.json",
+    "D:\\桌面文件\\ECG\\execution_control\\PTBXL_FINAL_CLOSURE\\LOCKED_UPSTREAM_DIRTY_WORKTREE_FORENSIC_AUDIT.json",
+    "D:\\桌面文件\\ECG\\Final Report_V2.docx",
+    "D:\\桌面文件\\ECG\\execution_control\\PTBXL_FINAL_CLOSURE\\FINAL_REPORT_TEXTUAL_REMEDIATION_V2.json",
+    "D:\\桌面文件\\ECG\\execution_control\\PTBXL_FINAL_CLOSURE\\ACCEPTED_EXECUTION_REMEDIATIONS_FINAL_V1.md",
+    "D:\\桌面文件\\ECG\\execution_control\\PTBXL_FINAL_CLOSURE\\FINAL_DELIVERY_MANIFEST_V2.csv",
+    "D:\\桌面文件\\ECG\\execution_control\\PTBXL_FINAL_CLOSURE\\FINAL_DELIVERY_MANIFEST_V2.json",
+    "D:\\桌面文件\\ECG\\execution_control\\PTBXL_FINAL_CLOSURE\\MENTOR_HANDOFF_INDEX_V2.md"
+  ],
+  "next_stage_recommendation": "FINAL_HANDOFF_INDEX_AND_MANIFEST_FINALIZATION",
+  "next_stage_authorized": false,
+  "github_handoff_allowed_now": false
+}

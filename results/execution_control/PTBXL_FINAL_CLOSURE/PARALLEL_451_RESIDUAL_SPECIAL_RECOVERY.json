@@ -1,0 +1,48 @@
+{
+  "branch": "RESIDUAL_SPECIAL_RUN_SOURCE_RECOVERY",
+  "scope": "Nine historical 052 residual special runs only; 451 is a read-only clone evidence carrier.",
+  "historical_source_instance": "052",
+  "current_clone_evidence_carrier": "451",
+  "connectivity": "REMOTE_READ_ONLY_ACCESS_PUBLICKEY",
+  "remote_root": "/root/autodl-tmp/ECG/formal_runs",
+  "residual_special_run_count": 9,
+  "runs_found": 9,
+  "bundles_recovered": 9,
+  "artifacts_per_run": ["raw noagg prediction with embedded target", "saved aggregate with embedded target", "completion validation", "exact command", "formal execution metadata", "formal training log"],
+  "remote_local_sha256": {"verified_artifact_count": 54, "result": "PASS"},
+  "strict_mapping": {
+    "attempted": 9,
+    "passed": 9,
+    "method": "Canonical fold-10 metadata order (2198 unique ECG IDs); exact target/group comparison; mean window prediction reconstruction; equality with saved aggregate.",
+    "raw_window_counts": {"ECG-CPC sub": 4, "ECG-FM sub": 2, "ECG-CPC super": 4},
+    "max_abs_diff": 0.0
+  },
+  "release_gate": {
+    "active_training_process_count": 0,
+    "active_controller_process_count": 0,
+    "critical_remote_only_residual_artifact_count_451": 0,
+    "safe_to_power_off_451_global_residual_scope": "YES"
+  },
+  "local_footprint": {
+    "bundle_path": "execution_control/PTBXL_FINAL_CLOSURE/PARALLEL_451_RESIDUAL_SPECIAL_BUNDLE",
+    "total_bytes_transferred": 11442671,
+    "total_bytes_skipped_by_hash_dedup": 0,
+    "local_free_space_before_bytes": "NOT_CAPTURED; shared workspace state makes reconstruction unsafe",
+    "local_free_space_after_bytes": 32706707456,
+    "minimal_local_footprint": "PASS"
+  },
+  "parallel_safety": {
+    "global_canonical_files_modified": "NO",
+    "instance_780_or_775_touched": "NO",
+    "worker_branch_frozen_pending_identity_recovery": "YES",
+    "active_gpu_training_started": "NO",
+    "new_inference_started": "NO",
+    "locked_upstream_modified": "NO",
+    "scientific_semantics_changed": "NO",
+    "new_substantive_discrepancy": "NO"
+  },
+  "detail_files": {
+    "asset_recovery": "PARALLEL_451_RESIDUAL_SPECIAL_RECOVERY.csv",
+    "strict_mapping": "PARALLEL_451_RESIDUAL_STRICT_MAPPING.csv"
+  }
+}

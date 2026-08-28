@@ -1,0 +1,13 @@
+diff --git a/root/autodl-tmp/ECG/audits/ecg_fm_245/test_bootstrap_stage_separation_20260818T000000Z/main_lite.py.pre b/code/main_lite.py
+index 45d6f69..a9d8fa4 100644
+--- a/root/autodl-tmp/ECG/audits/ecg_fm_245/test_bootstrap_stage_separation_20260818T000000Z/main_lite.py.pre
++++ b/code/main_lite.py
+@@ -471,6 +471,8 @@ def add_application_specific_args(parser):
+     parser.add_argument("--eval-only", type=str, help="path to model checkpoint for evaluation", default="")
+ 
+     parser.add_argument("--export-predictions", action="store_true", help="Export predictions in npz format")
++    parser.add_argument("--bootstrap", action="store_true",
++                        help="Run bootstrap confidence-interval computation during test")
+     parser.add_argument('--prediction-path', default='.', type=str, dest="prediction_path", help='prediction path')
+     parser.add_argument("--eval-mode", type=str, help="finetuning_linear/finetuning_nonlinear/frozen/linear", default="finetuning_linear")
+ 

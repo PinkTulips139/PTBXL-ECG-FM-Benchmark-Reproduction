@@ -1,0 +1,49 @@
+diff --git a/code/main_lite.py b/code/main_lite.py
+index 19a9cc1..a9d8fa4 100644
+--- a/code/main_lite.py
++++ b/code/main_lite.py
+@@ -14,7 +14,6 @@ from lightning.pytorch.loggers import TensorBoardLogger
+ from lightning.pytorch.callbacks import ModelCheckpoint, LearningRateMonitor, TQDMProgressBar
+ from clinical_ts.models.xresnet1d import xresnet1d50,xresnet1d101
+ from clinical_ts.models.inception1d import inception1d
+-from clinical_ts.models.s4_model import S4Model
+ from clinical_ts.utils.misc_utils import LRMonitorCallback
+ #################
+ #specific
+@@ -472,6 +471,8 @@ def add_application_specific_args(parser):
+     parser.add_argument("--eval-only", type=str, help="path to model checkpoint for evaluation", default="")
+ 
+     parser.add_argument("--export-predictions", action="store_true", help="Export predictions in npz format")
++    parser.add_argument("--bootstrap", action="store_true",
++                        help="Run bootstrap confidence-interval computation during test")
+     parser.add_argument('--prediction-path', default='.', type=str, dest="prediction_path", help='prediction path')
+     parser.add_argument("--eval-mode", type=str, help="finetuning_linear/finetuning_nonlinear/frozen/linear", default="finetuning_linear")
+ 
+diff --git a/code/main_lite_base.py b/code/main_lite_base.py
+index 6d73769..245f12f 100644
+--- a/code/main_lite_base.py
++++ b/code/main_lite_base.py
+@@ -183,7 +183,10 @@ class Main_Lite(lp.LightningModule):
+ 
+         # Non-aggregated
+ 
+-        res = self.eval_scores(targs_all, preds_all, self.lbl_itos, bootstrap=test)
++        res = self.eval_scores(
++            targs_all, preds_all, self.lbl_itos,
++            bootstrap=test and self.hparams.bootstrap
++        )
+         if self.task == "classification_and_regression":
+             res = {k+"_noagg_"+("test" if test else "val")+str(dataloader_idx): v for k, v in res.items()}
+             res = {k.replace("(","_").replace(")","_"):v for k,v in res.items()}
+@@ -198,7 +201,10 @@ class Main_Lite(lp.LightningModule):
+ 
+         # Aggregated
+         preds_all_agg,targs_all_agg = self.val_datasets[0].aggregate_predictions(preds_all,targs_all,self.test_idmaps[dataloader_idx] if test else self.val_idmaps[dataloader_idx],aggregate_fn=np.mean)
+-        res_agg = self.eval_scores(targs_all_agg, preds_all_agg, self.lbl_itos, bootstrap=test)
++        res_agg = self.eval_scores(
++            targs_all_agg, preds_all_agg, self.lbl_itos,
++            bootstrap=test and self.hparams.bootstrap
++        )
+         if self.task == "classification_and_regression":
+             res_agg = {k+"_agg_"+("test" if test else "val")+str(dataloader_idx): v for k, v in res_agg.items()}
+             res_agg = {k.replace("(","_").replace(")","_"):v for k,v in res_agg.items()}

@@ -1,0 +1,12 @@
+diff --git a/code/main_lite.py b/code/main_lite.py
+--- a/code/main_lite.py
++++ b/code/main_lite.py
+@@ -175,7 +175,7 @@ class Main_Lite(lp.LightningModule):
+             tfms_lst = []
+             
+             memmap_meta = load_memmap_meta_dict(target_folder/"memmap.npy")
+-            if(len(memmap_meta)==0 and self.hparams.fs_model != memmap_meta["fs"]):
++            if(len(memmap_meta)>0 and self.hparams.fs_model != memmap_meta["fs"]):
+                 tfms_lst.append(Resample(memmap_meta["fs"], self.hparams.fs_model))
+             elif(len(memmap_meta)==0 and self.hparams.fs_model != self.hparams.fs_data):
+                 print("legacy mode: please update your memmap files")

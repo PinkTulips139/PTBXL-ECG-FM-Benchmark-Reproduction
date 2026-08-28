@@ -1,0 +1,13 @@
+# Preserve repository bytes across platforms. Scientific artifacts and
+# provenance files are immutable handoff evidence; no line-ending conversion
+# or Git LFS filter is applied during this packaging stage.
+* -text
+
+*.npz binary
+*.docx binary
+*.xlsx binary
+*.xls binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.pdf binary

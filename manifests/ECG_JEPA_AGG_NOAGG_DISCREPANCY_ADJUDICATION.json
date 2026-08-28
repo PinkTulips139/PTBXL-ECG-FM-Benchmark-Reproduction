@@ -1,0 +1,64 @@
+{
+  "scope": "FOCUSED_ECG_JEPA_AGG_NOAGG_DISCREPANCY_ADJUDICATION",
+  "generated_local_date": "2026-08-22",
+  "ecg_jepa_affected_run_count": 6,
+  "path_check": {
+    "agg_noagg_path_identical_count": 0,
+    "finding": "Every run has two distinct absolute paths: sibling agg/ and noagg/ directories with different basenames. The six canonical-run roots are also distinct.",
+    "parser_or_glob_association_error_proven": false
+  },
+  "hash_check": {
+    "agg_noagg_hash_identical_count": 6,
+    "same_file_size_count": 6,
+    "finding": "Each pair is byte-identical, but no pair is the same path."
+  },
+  "locked_implementation_save_semantics_resolved": true,
+  "locked_commit": "238409835ef55358a10bbc3459dfa9aaa91ad5e5",
+  "implementation_provenance": {
+    "code/main_lite.py::setup": "For val/test, chunkify_valtest=True; chunk_length_valtest=input_size_data; stride_valtest=int(stride_fraction_valtest*input_size_data). CLI default stride_fraction_valtest=1.0.",
+    "six_formal_commands": "All use --input-size 10 --fs-data 500, hence input_size_data=5000 and val/test stride=5000. The established records500 contract contains 5000-sample records and fold-10 has 2198 unique ECG IDs.",
+    "code/clinical_ts/data/time_series_dataset.py::TimeSeriesDataset.aggregate_predictions": "If idmap has no duplicate values, it returns preds,targs unchanged. Mean aggregation is only performed when an ECG has multiple test segments.",
+    "code/main_lite_base.py::on_valtest_epoch_eval": "It computes noagg from preds_all/targs_all, computes agg via aggregate_predictions(..., aggregate_fn=np.mean), then exports both when export_predictions and test are true.",
+    "code/main_lite_base.py::_export_predictions": "It always saves two separate NPZ files, selecting sibling directories agg or noagg, and writes the supplied preds/targs/lbl_itos/epoch arrays. It does not make one filename an alias of the other.",
+    "accepted_overlay_review": "The locally visible overlay diff changes only resampling-condition logic and ECG-FM wrapper import/branch. It contains no prediction-export or aggregation change."
+  },
+  "answer_to_semantic_questions": {
+    "noagg": "Per-test-segment prediction and target arrays before record-level aggregation.",
+    "agg": "Mean aggregation of per-test-segment arrays within each ECG identity, retaining one target per ECG.",
+    "normally_different_shape": "Only when a test ECG yields multiple segments. There is no general requirement that they differ.",
+    "legal_same_content": "Yes. With one segment per ECG, aggregate_predictions returns the original arrays, and the exporter serializes two byte-identical but separately named NPZ files.",
+    "only_aggregate_then_double_label": "No. The locked exporter receives and saves both variables separately; equality here follows identity aggregation rather than a provenance label referring twice to a single remote path."
+  },
+  "row_shape_evidence": {
+    "raw_row_count_proven_count": 6,
+    "agg_row_count_proven_count": 6,
+    "raw_agg_shape_distinct_proven_count": 0,
+    "per_run_row_count": 2198,
+    "proof_strength": "Source-and-configuration proof: all six commands use whole-record 10 s test windows, the locked identity-aggregation branch is exact, and canonical fold-10 metadata has 2198 unique ECG IDs. The six remote NPZ bytes were not locally copied or opened.",
+    "supporting_local_historical_artifact": "experiments/ptbxl_all/ecg_jepa/test_0_epoch_100_agg.npz and noagg.npz are distinct paths with identical SHA256 56f20d55fb4f9f496498cf1f5f62799ec1edc901408c49831c18bd493c784915. Read-only NPZ metadata shows both contain preds/targs (2198,71), lbl_itos (71,), epoch scalar. This is the same locked ECG-JEPA 10 s route and corroborates the semantics; it is not substituted for the six source artifacts."
+  },
+  "classification": {
+    "A_IMPLEMENTATION_NAMING_ALIAS": false,
+    "B_INTENTIONAL_SAME_OBJECT": true,
+    "C_HISTORICAL_EXPORT_QUIRK": false,
+    "D_RAW_PREDICTION_OVERWRITTEN_OR_NOT_PRESERVED": false,
+    "E_WRONG_ARTIFACT_PATH_ASSOCIATION": false,
+    "F_OTHER": false,
+    "adjudication": "B_INTENTIONAL_SAME_OBJECT_DUE_IDENTITY_AGGREGATION"
+  },
+  "provenance_recording_bug": false,
+  "scientific_artifact_discrepancy": false,
+  "substantive_discrepancy_confirmed": "NO",
+  "new_substantive_discrepancy": false,
+  "strict_mapping_impact": "No additional impact from equal agg/noagg bytes. The applicable evidence is record-level (2198 rows); ordinary identity/order provenance requirements remain unchanged and were not adjudicated here.",
+  "bootstrap_impact": "None. The aggregated record-level arrays are the metric/bootstrap input; identity aggregation is a no-op for these runs.",
+  "final_metric_impact": "None from this finding. The equality is implementation-defined under the recorded whole-record test configuration.",
+  "remote_object_inspection_required": false,
+  "minimal_future_provenance_remediation": "For future delivery manifests, record input_size_data, stride_valtest, unique idmap count, noagg/agg shapes, and an explicit aggregation_was_identity flag. Do not alter existing scientific artifacts.",
+  "new_inference_started": false,
+  "active_gpu_training_started": false,
+  "locked_upstream_modified": false,
+  "scientific_semantics_changed": false,
+  "global_canonical_files_modified": false,
+  "row_data_file": "ECG_JEPA_AGG_NOAGG_DISCREPANCY_ADJUDICATION.csv"
+}

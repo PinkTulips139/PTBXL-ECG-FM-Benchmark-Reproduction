@@ -1,0 +1,15 @@
+{
+  "phase": "COMPLETE",
+  "eligible_count": 77,
+  "legacy_completed_reused": 50,
+  "blocked_existing_provenance": 5,
+  "new_bootstrap_required": 22,
+  "helper": "upstream/ecg-fm-benchmarking/code/clinical_ts/utils/bootstrap_utils.py::empirical_bootstrap",
+  "contract": "1000 iterations; 95% CI; ECG record; N=2198; locked helper default RNG and invalid-resample behavior",
+  "started_utc": "2026-08-22T08:08:34.758711+00:00",
+  "completed": 72,
+  "blocked": 5,
+  "failed": 0,
+  "pending": 0,
+  "finished_utc": "2026-08-22T08:49:33.219101+00:00"
+}

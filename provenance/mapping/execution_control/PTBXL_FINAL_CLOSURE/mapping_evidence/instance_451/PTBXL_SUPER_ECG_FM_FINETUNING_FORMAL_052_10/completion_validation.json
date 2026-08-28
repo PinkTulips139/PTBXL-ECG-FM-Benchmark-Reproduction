@@ -1,0 +1,37 @@
+{
+  "aggregate_shapes": {
+    "epoch": [],
+    "lbl_itos": [
+      5
+    ],
+    "preds": [
+      2198,
+      5
+    ],
+    "targs": [
+      2198,
+      5
+    ]
+  },
+  "best_checkpoint": "/root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_FM_FINETUNING_FORMAL_052_10/output/version_0/best_model.ckpt",
+  "errors": [],
+  "last_checkpoint": "/root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER_ECG_FM_FINETUNING_FORMAL_052_10/output/version_0/last.ckpt",
+  "raw_shapes": {
+    "epoch": [],
+    "lbl_itos": [
+      5
+    ],
+    "preds": [
+      4396,
+      5
+    ],
+    "targs": [
+      4396,
+      5
+    ]
+  },
+  "return_code": 0,
+  "status": "PASS",
+  "test_macro_auroc": 0.9171172976493835,
+  "validated_at_utc": "2026-08-21T16:52:21.732701+00:00"
+}

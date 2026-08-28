@@ -1,0 +1,36 @@
+{
+  "aggregate_shapes": [
+    [
+      2198,
+      5
+    ],
+    [
+      2198,
+      5
+    ],
+    [
+      5
+    ],
+    []
+  ],
+  "best_checkpoint": "/root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER/PTBXL_SUPER_18_HUBERT_ECG_LINEAR_FORMAL_SUPER3/output/version_0/best_model.ckpt",
+  "errors": [],
+  "last_checkpoint": "/root/autodl-tmp/ECG/formal_runs/PTBXL_SUPER/PTBXL_SUPER_18_HUBERT_ECG_LINEAR_FORMAL_SUPER3/output/version_0/last.ckpt",
+  "primary_test_macro_auroc": 0.8765862584114075,
+  "raw_shapes": [
+    [
+      4396,
+      5
+    ],
+    [
+      4396,
+      5
+    ],
+    [
+      5
+    ],
+    []
+  ],
+  "status": "PASS",
+  "validated_at_utc": "2026-08-20T23:22:39.298285+00:00"
+}

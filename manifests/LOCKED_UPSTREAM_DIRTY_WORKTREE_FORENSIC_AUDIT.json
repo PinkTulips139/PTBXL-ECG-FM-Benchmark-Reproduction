@@ -1,0 +1,511 @@
+{
+  "stage": "LOCKED_UPSTREAM_DIRTY_WORKTREE_FORENSIC_AUDIT",
+  "audit_date": "2026-08-28",
+  "timezone": "Asia/Shanghai",
+  "read_only": true,
+  "output_collision": false,
+  "locked_repo_path": "D:\\桌面文件\\ECG\\upstream\\ecg-fm-benchmarking",
+  "expected_commit": "238409835ef55358a10bbc3459dfa9aaa91ad5e5",
+  "observed_head": "238409835ef55358a10bbc3459dfa9aaa91ad5e5",
+  "head_matches": true,
+  "current_worktree_dirty": true,
+  "tracked_modified_count": 4,
+  "tracked_deleted_count": 1,
+  "untracked_count": 0,
+  "staged_count": 0,
+  "line_ending_only": false,
+  "git_baseline": {
+    "status_porcelain_v1": [
+      " D abstract.svg",
+      " M code/clinical_ts/models/ecg_foundation_models/ecg_fm_config.py",
+      " M code/clinical_ts/models/fm_ecg.py",
+      " M code/main_lite.py",
+      " M code/main_lite_ecg.py"
+    ],
+    "diff_stat": "5 files changed, 163 insertions(+), 3250 deletions(-)",
+    "cached_changes": [],
+    "untracked_files": []
+  },
+  "files": [
+    {
+      "relative_path": "abstract.svg",
+      "status": "D",
+      "current_file_exists": false,
+      "current_size_bytes": null,
+      "current_sha256": null,
+      "filesystem_last_write_time": null,
+      "locked_commit_blob_sha": "ad36864d4514f27b4217171b752db9cfaa2a2ea6",
+      "locked_commit_size_bytes": 3331327,
+      "diff_insertions": 0,
+      "diff_deletions": 3088,
+      "scientific_code_or_config": false,
+      "possible_scientific_semantic_impact_if_executed": "NONE_NON_EXECUTABLE_ILLUSTRATION",
+      "current_worktree_content_summary": "Tracked SVG is absent.",
+      "modification_source": "UNKNOWN",
+      "temporal_relation": "UNRESOLVED",
+      "formal_impact_level": "LEVEL 0: NON_SCIENTIFIC_OR_UNUSED",
+      "formal_use_of_current_windows_file_proven": false,
+      "formal_use_of_equivalent_change_proven": false,
+      "evidence": [
+        "D:\\桌面文件\\ECG\\upstream\\ecg-fm-benchmarking\\README.md",
+        "D:\\桌面文件\\ECG\\execution_control\\PTBXL_FINAL_CLOSURE\\FINAL_ASSET_AND_REPORT_AUDIT_V2.json"
+      ]
+    },
+    {
+      "relative_path": "code/clinical_ts/models/ecg_foundation_models/ecg_fm_config.py",
+      "status": "M",
+      "current_file_exists": true,
+      "current_size_bytes": 1122,
+      "current_sha256": "752c420f5e7d9b57bb7148e635a2956742923a5476f753364e4e03ee7677c0ed",
+      "filesystem_last_write_time": "2026-08-17T11:49:13.8880184+08:00",
+      "locked_commit_blob_sha": "7c4d5fd6d39a1052cec1f3f8785203717ad82922",
+      "locked_commit_size_bytes": 1205,
+      "diff_insertions": 42,
+      "diff_deletions": 42,
+      "scientific_code_or_config": true,
+      "possible_scientific_semantic_impact_if_executed": "Activates ECG-FM configuration and enables model construction; no independent checkpoint/data/metric change.",
+      "current_worktree_content_summary": "Uncomments ECGTransformerFinetuningConfig import and ECG_FM_CONFIG.",
+      "substantive_regions": [
+        {
+          "current_lines": "1-43",
+          "locked_behavior": "ECG-FM config was commented and inactive.",
+          "current_behavior": "ECG-FM config is active.",
+          "affected_model_or_pipeline": "ECG-FM",
+          "corresponds_to_documented_remediation": true
+        }
+      ],
+      "modification_source": "FORMAL_EXECUTION_REMEDIATION",
+      "source_evidence": "D:\\桌面文件\\ECG\\audits\\ecg_fm\\integration_preflight\\source_provenance.md",
+      "temporal_relation": "PRE_FORMAL_POSSIBLE",
+      "formal_impact_level": "LEVEL 2: FORMAL_RUN_USED_IT_BUT_CHANGE_IS_DOCUMENTED_ACCEPTED_EXECUTION_REMEDIATION",
+      "formal_use_of_current_windows_file_proven": false,
+      "formal_use_of_equivalent_change_proven": true
+    },
+    {
+      "relative_path": "code/clinical_ts/models/fm_ecg.py",
+      "status": "M",
+      "current_file_exists": true,
+      "current_size_bytes": 44254,
+      "current_sha256": "4010498cc28b0aa7baa304143739784576181db8244b2a587baa77bd730ac9bb",
+      "filesystem_last_write_time": "2026-08-17T12:21:10.6637481+08:00",
+      "locked_commit_blob_sha": "a2ae161c58f20748ad11ccfb9acd51233e65d5c8",
+      "locked_commit_size_bytes": 43880,
+      "diff_insertions": 110,
+      "diff_deletions": 118,
+      "scientific_code_or_config": true,
+      "possible_scientific_semantic_impact_if_executed": "Model-specific: ST-MEM optimizer grouping, ECGFM-KED checkpoint loading, and ECG-FM integration.",
+      "current_worktree_content_summary": "Composite of three separately approved model-specific hunks; no formal route is proven to have used this entire composite Windows file.",
+      "substantive_regions": [
+        {
+          "current_lines": "412-420",
+          "function_or_class": "StMemWrapper.get_params",
+          "locked_behavior": "Matched encoder parameter names with an erroneous encoder. prefix, leaving all encoder tensors outside intended groups.",
+          "current_behavior": "Matches actual names and assigns early/later parameter groups.",
+          "affected_model_or_pipeline": "ST-MEM Finetuning optimizer grouping",
+          "corresponds_to_documented_remediation": true,
+          "evidence": "D:\\桌面文件\\ECG\\experiments\\ptbxl_all\\st_mem\\remote_audits\\STMEM_119_OPTIMIZER_GROUPING_APPLIED.patch"
+        },
+        {
+          "current_lines": "659",
+          "function_or_class": "EcgFmKEDWrapper.__init__",
+          "locked_behavior": "Interpreted checkpoint top-level keys as the model state dict.",
+          "current_behavior": "Loads checkpoint[\"ecg_model\"] with strict=False.",
+          "affected_model_or_pipeline": "ECGFM-KED pretrained checkpoint loading",
+          "corresponds_to_documented_remediation": true,
+          "evidence": "D:\\桌面文件\\ECG\\audits\\ecgfm_ked\\ECGFM_KED_LOADER_REMEDIATION_PROVENANCE.md"
+        },
+        {
+          "current_lines": "976 onward",
+          "function_or_class": "ECG_FM_Wrapper",
+          "locked_behavior": "Wrapper and fairseq integration were commented/inactive.",
+          "current_behavior": "Wrapper, configuration, optimizer grouping, and forward route are active.",
+          "affected_model_or_pipeline": "ECG-FM",
+          "corresponds_to_documented_remediation": true,
+          "evidence": "D:\\桌面文件\\ECG\\experiments\\ptbxl_all\\ecg_fm\\remote_artifacts\\ecg_fm_ptbxl_all_formal_20260817T104823Z\\evidence\\ecg_fm_minimal_integration.diff"
+        }
+      ],
+      "modification_source": "FORMAL_EXECUTION_REMEDIATION_COMPOSITE",
+      "temporal_relation": "PRE_FORMAL_POSSIBLE",
+      "formal_impact_level": "LEVEL 2 BY DOCUMENTED MODEL-SPECIFIC HUNK",
+      "formal_use_of_current_windows_file_proven": false,
+      "formal_use_of_equivalent_change_proven": true
+    },
+    {
+      "relative_path": "code/main_lite.py",
+      "status": "M",
+      "current_file_exists": true,
+      "current_size_bytes": 28728,
+      "current_sha256": "ff8d2b9ecf8b2e4c55cfb983bdf2fa35cd49fc111cf4f82bc36bd611c68fee87",
+      "filesystem_last_write_time": "2026-08-17T12:18:17.6463788+08:00",
+      "locked_commit_blob_sha": "19a9cc198fe0b1837effd6f97afb3bdd89a78aa0",
+      "locked_commit_size_bytes": 28147,
+      "diff_insertions": 1,
+      "diff_deletions": 1,
+      "scientific_code_or_config": true,
+      "possible_scientific_semantic_impact_if_executed": "Controls resampling to the model-native rate for nonempty memmap metadata.",
+      "current_worktree_content_summary": "Corrects len(memmap_meta)==0 to len(memmap_meta)!=0 in the resampling condition.",
+      "substantive_regions": [
+        {
+          "current_lines": "178",
+          "function_or_class": "Main_Lite.setup",
+          "locked_behavior": "Skipped the metadata-driven resampling branch when metadata was present.",
+          "current_behavior": "Adds Resample(memmap_meta[\"fs\"], fs_model) when rates differ.",
+          "affected_model_or_pipeline": "Shared PTB-XL preprocessing; documented for ST-MEM",
+          "corresponds_to_documented_remediation": true,
+          "evidence": "D:\\桌面文件\\ECG\\experiments\\ptbxl_all\\st_mem\\remote_audits\\STMEM_119_RUNTIME_RESAMPLING_APPLIED.patch"
+        }
+      ],
+      "modification_source": "FORMAL_EXECUTION_REMEDIATION",
+      "temporal_relation": "PRE_FORMAL_POSSIBLE",
+      "formal_impact_level": "LEVEL 2 FOR DOCUMENTED ST-MEM USE; LEVEL U FOR BYTE-LEVEL IDENTITY OF OTHER SHARED ROUTES",
+      "formal_use_of_current_windows_file_proven": false,
+      "formal_use_of_equivalent_change_proven": true
+    },
+    {
+      "relative_path": "code/main_lite_ecg.py",
+      "status": "M",
+      "current_file_exists": true,
+      "current_size_bytes": 21377,
+      "current_sha256": "601162753834ccf1b2e92a90ad5d2628a021df44a036d0621a217b01f8193683",
+      "filesystem_last_write_time": "2026-08-17T11:47:30.1338451+08:00",
+      "locked_commit_blob_sha": "f5884f43717b20d38a1f593d13a218ac4ca158b4",
+      "locked_commit_size_bytes": 20575,
+      "diff_insertions": 10,
+      "diff_deletions": 1,
+      "scientific_code_or_config": true,
+      "possible_scientific_semantic_impact_if_executed": "Enables ECG-FM wrapper dispatch.",
+      "current_worktree_content_summary": "Imports ECG_FM_Wrapper and adds architecture == ecg_fm construction branch.",
+      "substantive_regions": [
+        {
+          "current_lines": "21, 191-200",
+          "function_or_class": "Main_Lite_ECG.__init__",
+          "locked_behavior": "No active ECG-FM dispatch.",
+          "current_behavior": "Constructs ECG_FM_Wrapper for the ECG-FM architecture.",
+          "affected_model_or_pipeline": "ECG-FM",
+          "corresponds_to_documented_remediation": true
+        }
+      ],
+      "modification_source": "FORMAL_EXECUTION_REMEDIATION",
+      "source_evidence": "D:\\桌面文件\\ECG\\audits\\ecg_fm\\integration_preflight\\source_provenance.md",
+      "temporal_relation": "PRE_FORMAL_POSSIBLE",
+      "formal_impact_level": "LEVEL 2: FORMAL_RUN_USED_IT_BUT_CHANGE_IS_DOCUMENTED_ACCEPTED_EXECUTION_REMEDIATION",
+      "formal_use_of_current_windows_file_proven": false,
+      "formal_use_of_equivalent_change_proven": true
+    }
+  ],
+  "modification_provenance": [
+    {
+      "sequence": 1,
+      "change": "ECGFM-KED nested checkpoint loader",
+      "classification": "FORMAL_EXECUTION_REMEDIATION",
+      "authorization_marker": "HUMAN_APPROVED_MINIMAL_ECGFM_KED_NESTED_CHECKPOINT_LOADER_REMEDIATION",
+      "evidence_path": "D:\\桌面文件\\ECG\\audits\\ecgfm_ked\\ECGFM_KED_LOADER_REMEDIATION_PROVENANCE.md",
+      "post_patch_file_sha256": "467d1a774ce8618f23ecbed5ef6972ed5064c3a580bd22d9b0e3485b64d56748"
+    },
+    {
+      "sequence": 2,
+      "change": "ECG-FM minimal integration",
+      "classification": "FORMAL_EXECUTION_REMEDIATION",
+      "authorization_marker": "HUMAN_APPROVED_MINIMAL_ECG_FM_LOCKED_INTEGRATION_REMEDIATION",
+      "evidence_path": "D:\\桌面文件\\ECG\\audits\\ecg_fm\\integration_preflight\\source_provenance.md",
+      "preserved_prior_change": "ECGFM-KED loader"
+    },
+    {
+      "sequence": 3,
+      "change": "ST-MEM runtime resampling and optimizer grouping",
+      "classification": "FORMAL_EXECUTION_REMEDIATION",
+      "authorization_markers": [
+        "HUMAN_APPROVED_MINIMAL_STMEM_RUNTIME_RESAMPLING_REMEDIATION",
+        "HUMAN_APPROVED_MINIMAL_STMEM_OPTIMIZER_GROUPING_REMEDIATION"
+      ],
+      "evidence_path": "D:\\桌面文件\\ECG\\audits\\st_mem\\STMEM_A_E_REMEDIATION_PREFLIGHT_AUDIT.md",
+      "preserved_prior_changes": [
+        "ECGFM-KED loader",
+        "ECG-FM minimal integration"
+      ],
+      "current_hashes_confirmed": true
+    },
+    {
+      "sequence": null,
+      "change": "abstract.svg deletion",
+      "classification": "UNKNOWN",
+      "evidence_path": null
+    }
+  ],
+  "overlay_comparisons": [
+    {
+      "route": "ECG-FM",
+      "comparison": "PARTIAL_OVERLAP_WITH_OVERLAY",
+      "details": "Current local ECG-FM hunks match the approved minimal integration, but the formal Python 3.9 overlay also contains compatibility/import-isolation changes and the local fm_ecg.py contains unrelated ST-MEM/KED hunks.",
+      "evidence": [
+        "D:\\桌面文件\\ECG\\experiments\\ptbxl_all\\ecg_fm\\remote_artifacts\\ecg_fm_ptbxl_all_formal_20260817T104823Z\\evidence\\approved_source_diff.patch",
+        "D:\\桌面文件\\ECG\\experiments\\ptbxl_all\\ecg_fm\\remote_artifacts\\ecg_fm_ptbxl_all_formal_20260817T104823Z\\evidence\\ecg_fm_minimal_integration.diff"
+      ]
+    },
+    {
+      "route": "ST-MEM",
+      "comparison": "CURRENT_HUNKS_MATCH_DOCUMENTED_OVERLAYS",
+      "details": "The current optimizer and resampling hunks match the two archived applied patches; model-specific formal worktrees include additional import/test-stage changes not present in the current local diff.",
+      "evidence": [
+        "D:\\桌面文件\\ECG\\experiments\\ptbxl_all\\st_mem\\remote_audits\\STMEM_119_OPTIMIZER_GROUPING_APPLIED.patch",
+        "D:\\桌面文件\\ECG\\experiments\\ptbxl_all\\st_mem\\remote_audits\\STMEM_119_RUNTIME_RESAMPLING_APPLIED.patch"
+      ]
+    },
+    {
+      "route": "ECGFM-KED",
+      "comparison": "CURRENT_LOADER_HUNK_MATCHES_DOCUMENTED_OVERLAY",
+      "details": "The current nested-loader hunk matches the formal prelaunch patch; formal KED worktrees also had execution-stage/test separation changes not retained in the current main checkout.",
+      "evidence": [
+        "D:\\桌面文件\\ECG\\experiments\\ptbxl_all\\ecgfm_ked\\formal_archive_195\\formal_runs\\ecgfm_ked_ptbxl_all_100e_195\\git_diff_prelaunch.patch",
+        "D:\\桌面文件\\ECG\\experiments\\ptbxl_all\\ecgfm_ked\\formal_archive_195\\audits\\ecgfm_ked_formal_test_remediation\\exact_applied_diff.patch"
+      ]
+    }
+  ],
+  "formal_execution_linkage": {
+    "current_local_dirty_worktree": "NOT_PROVEN",
+    "equivalent_modified_code": "YES_DOCUMENTED_ACCEPTED",
+    "reasoning": "Formal commands use Linux worktree/overlay paths, not the Windows checkout. Exact or equivalent model-specific hunks are preserved in authorized patch/worktree provenance.",
+    "evidence": [
+      "D:\\桌面文件\\ECG\\experiments\\ptbxl_all\\ecg_fm\\remote_artifacts\\ecg_fm_ptbxl_all_formal_20260817T104823Z\\formal_command.sh",
+      "D:\\桌面文件\\ECG\\experiments\\ptbxl_all\\ecg_fm\\remote_artifacts\\ecg_fm_ptbxl_all_formal_20260817T104823Z\\evidence\\git_status_at_launch.txt",
+      "D:\\桌面文件\\ECG\\experiments\\ptbxl_all\\st_mem\\remote_runs\\stmem_ptbxl_all_formal_100_20260817T1834CST\\provenance.txt",
+      "D:\\桌面文件\\ECG\\experiments\\ptbxl_all\\ecgfm_ked\\formal_archive_195\\formal_runs\\ecgfm_ked_ptbxl_all_100e_195\\exact_command.sh",
+      "D:\\桌面文件\\ECG\\docs\\PTBXL_SUB_SUPER_INSTANCE_RESTORE_PLAN.md"
+    ]
+  },
+  "affected_routes": {
+    "ecg_fm": {
+      "formal_run_count_potentially_relevant": 9,
+      "formal_run_ids": [
+        "PTBXL_ALL_ECG_FM_FINETUNING_FORMAL",
+        "PTBXL_ALL_ECG_FM_FROZEN_FORMAL_RUN_015_RETRY_01",
+        "PTBXL_ALL_ECG_FM_LINEAR_FORMAL_RUN_016",
+        "PTBXL_SUB_ECG_FM_FINETUNING_FORMAL_052_07",
+        "PTBXL_SUB_ECG_FM_FROZEN_FORMAL_052_08",
+        "PTBXL_SUB_ECG_FM_LINEAR_FORMAL_052_09",
+        "PTBXL_SUPER_ECG_FM_FINETUNING_FORMAL_052_10",
+        "PTBXL_SUPER_ECG_FM_FROZEN_FORMAL_052_11",
+        "PTBXL_SUPER_ECG_FM_LINEAR_FORMAL_052_12"
+      ],
+      "formal_run_count_with_execution_path_proven": 9,
+      "formal_run_count_with_locked_commit_proven": 9,
+      "formal_run_count_with_external_overlay_proven": 9,
+      "external_route_breakdown": "1 approved dedicated worktree plus 8 Python 3.9 overlay routes",
+      "formal_run_count_with_dirty_local_worktree_use_proven": 0,
+      "formal_run_count_unresolved": 0,
+      "formal_execution_linkage": "EQUIVALENT_APPROVED_WORKTREE_OR_EXTERNAL_OVERLAY_PROVEN_FOR_9_OF_9; CURRENT_WINDOWS_WORKTREE_NOT_PROVEN"
+    },
+    "st_mem": {
+      "formal_run_count_potentially_relevant": 9,
+      "formal_run_ids": [
+        "PTBXL_ALL_ST_MEM_FINETUNING_FORMAL",
+        "PTBXL_ALL_ST_MEM_FROZEN_FORMAL_RUN_005",
+        "PTBXL_ALL_ST_MEM_LINEAR_FORMAL_RUN_006",
+        "PTBXL_SUB_07_ST_MEM_FINETUNING_FORMAL_RETRY_03",
+        "PTBXL_SUB_08_ST_MEM_FROZEN_FORMAL",
+        "PTBXL_SUB_09_ST_MEM_LINEAR_FORMAL",
+        "PTBXL_SUPER_07_ST_MEM_FINETUNING_FORMAL_RETRY_03",
+        "PTBXL_SUPER_08_ST_MEM_FROZEN_FORMAL",
+        "PTBXL_SUPER_09_ST_MEM_LINEAR_FORMAL"
+      ],
+      "formal_run_count_with_execution_path_proven": 9,
+      "formal_run_count_with_locked_commit_proven": 9,
+      "formal_run_count_with_external_overlay_proven": 7,
+      "formal_run_count_with_dirty_local_worktree_use_proven": 0,
+      "formal_run_count_unresolved": 2,
+      "unresolved_runs": [
+        "PTBXL_ALL_ST_MEM_FROZEN_FORMAL_RUN_005",
+        "PTBXL_ALL_ST_MEM_LINEAR_FORMAL_RUN_006"
+      ],
+      "unresolved_scope": "Per-run byte-level source hash only; commands, outputs, shapes, and result provenance are retained.",
+      "formal_execution_linkage": "DOCUMENTED_ACCEPTED_PATCH_PROVEN; TWO_DIRECT_UPSTREAM_SOURCE_HASHES_NOT_RETAINED; CURRENT_WINDOWS_WORKTREE_NOT_PROVEN"
+    },
+    "ecgfm_ked": {
+      "formal_run_count_potentially_relevant": 9,
+      "formal_run_ids": [
+        "PTBXL_ALL_ECGFM_KED_FINETUNING_FORMAL",
+        "PTBXL_ALL_ECGFM_KED_FROZEN_FORMAL_RUN_009",
+        "PTBXL_ALL_ECGFM_KED_LINEAR_FORMAL_RUN_010",
+        "PTBXL_SUB_13_ECGFM_KED_FINETUNING_FORMAL_SUB2",
+        "PTBXL_SUB_14_ECGFM_KED_FROZEN_FORMAL_SUB2",
+        "PTBXL_SUB_15_ECGFM_KED_LINEAR_FORMAL_SUB2",
+        "PTBXL_SUPER_13_ECGFM_KED_FINETUNING_FORMAL_SUPER2",
+        "PTBXL_SUPER_14_ECGFM_KED_FROZEN_FORMAL_SUPER2",
+        "PTBXL_SUPER_15_ECGFM_KED_LINEAR_FORMAL_SUPER2"
+      ],
+      "formal_run_count_with_execution_path_proven": 9,
+      "formal_run_count_with_locked_commit_proven": 9,
+      "formal_run_count_with_external_overlay_proven": 7,
+      "formal_run_count_with_dirty_local_worktree_use_proven": 0,
+      "formal_run_count_unresolved": 2,
+      "unresolved_runs": [
+        "PTBXL_ALL_ECGFM_KED_FROZEN_FORMAL_RUN_009",
+        "PTBXL_ALL_ECGFM_KED_LINEAR_FORMAL_RUN_010"
+      ],
+      "unresolved_scope": "BN-guard commands default to direct upstream and do not retain launch-time source hashes for the nested-loader hunk.",
+      "formal_execution_linkage": "MODEL_SPECIFIC_WORKTREE_PROVEN_FOR_7_OF_9; TWO_DIRECT_UPSTREAM SOURCE HASHES UNRESOLVED; CURRENT_WINDOWS_WORKTREE_NOT_PROVEN"
+    },
+    "main_lite_resampling_condition": {
+      "formal_run_count_potentially_relevant": 39,
+      "models": {
+        "ECG-JEPA": 9,
+        "ST-MEM": 9,
+        "HuBERT-ECG": 9,
+        "ECG-CPC": 9,
+        "S4": 3
+      },
+      "formal_run_count_with_execution_path_proven": 39,
+      "formal_run_count_with_documented_st_mem_overlay": 9,
+      "formal_run_count_with_dirty_local_worktree_use_proven": 0,
+      "formal_run_count_without_per_run_byte_level_hunk_proof": 30,
+      "behavioral_corroboration": [
+        "ST-MEM real-data gate: (12,1200) at 500 Hz -> (12,600) at 250 Hz",
+        "PTB-XL(all) ECG-CPC Frozen/Linear formal logs: input sequence length 600 at 2.5 s/240 Hz",
+        "ECG-JEPA wrapper states an exact 2500-step requirement at 250 Hz"
+      ]
+    }
+  },
+  "temporal_analysis": {
+    "interpretation_rule": "Filesystem LastWriteTime is auxiliary only and cannot prove remote copy or execution.",
+    "ecgfm_ked_loader": {
+      "temporal_relation": "PRE_FORMAL_POSSIBLE",
+      "evidence": "Provenance 2026-08-17 11:36; patch timestamp 11:45; formal KED all-Finetuning started 2026-08-18 00:46 CST."
+    },
+    "ecg_fm_integration": {
+      "temporal_relation": "PRE_FORMAL_POSSIBLE",
+      "evidence": "Current file mtimes 11:47-11:49 CST; ECG-FM all-Finetuning started approximately 18:49 CST on 2026-08-17."
+    },
+    "st_mem_changes": {
+      "temporal_relation": "PRE_FORMAL_POSSIBLE",
+      "evidence": "Current main_lite/fm_ecg mtimes 12:18-12:21 CST; ST-MEM all-Finetuning started approximately 18:49 CST on 2026-08-17."
+    },
+    "abstract_svg": {
+      "temporal_relation": "UNRESOLVED",
+      "evidence": "Deleted file has no current LastWriteTime and no project-local deletion provenance."
+    }
+  },
+  "main_lite_preprocessing_analysis": {
+    "exact_modified_condition": "if(len(memmap_meta)!=0 and self.hparams.fs_model != memmap_meta[\"fs\"])",
+    "locked_condition": "if(len(memmap_meta)==0 and self.hparams.fs_model != memmap_meta[\"fs\"])",
+    "semantic_effect": "Enables metadata-driven Resample from dataset rate to model-native rate when metadata is present.",
+    "ptbxl_formal_branch_use": "PROVEN_FOR_ST_MEM; BEHAVIORALLY_CORROBORATED_FOR_ECG_CPC; BYTE_LEVEL_PER_RUN_PROOF_INCOMPLETE_FOR_OTHER_SHARED ROUTES",
+    "formal_metadata_records_other_script_or_overlay": true,
+    "formal_preprocessing_artifact_independent_validation": [
+      "ST-MEM bounded real-data gate validates 500->250 Hz and (12,1200)->(12,600).",
+      "Formal commands retain records500, fs-data, fs-model, duration, split, and output-label contracts.",
+      "Final aggregate artifacts retain 2198 records and strict mapping/reconstruction evidence."
+    ],
+    "signal_shape_sample_rate_split_aggregation_consistent": true,
+    "current_windows_modification_unrelated_to_all_formal_execution": "NOT_PROVEN; equivalent ST-MEM hunk was used, but the Windows path itself was not.",
+    "evidence": [
+      "D:\\桌面文件\\ECG\\audits\\st_mem\\STMEM_A_E_REMEDIATION_PREFLIGHT_AUDIT.md",
+      "D:\\桌面文件\\ECG\\execution_control\\PTBXL_FINAL_CLOSURE\\mapping_evidence\\instance_451\\PTBXL_ALL_ECG_CPC_FROZEN_FORMAL_RUN_013\\formal_training.log",
+      "D:\\桌面文件\\ECG\\execution_control\\PTBXL_FINAL_CLOSURE\\mapping_evidence\\instance_451\\PTBXL_ALL_ECG_CPC_LINEAR_FORMAL_RUN_014\\formal_training.log"
+    ]
+  },
+  "ecg_fm_analysis": {
+    "dirty_change_relation": "PARTIAL_OVERLAP_WITH_OVERLAY",
+    "all_finetuning_route": "/root/autodl-tmp/ECG/worktrees/ecg_fm_preflight_245",
+    "other_eight_formal_route": "/root/autodl-tmp/ECG/execution_overlays/ecg_fm_py39_compat/ecg-fm-benchmarking",
+    "formal_routes_using_external_overlay_or_dedicated_worktree": 9,
+    "current_windows_worktree_used": "NOT_PROVEN",
+    "scientific_semantics_changed_by_compatibility_overlay": "NO_EVIDENCE",
+    "evidence": [
+      "D:\\桌面文件\\ECG\\experiments\\ptbxl_all\\ecg_fm\\remote_artifacts\\ecg_fm_ptbxl_all_formal_20260817T104823Z\\formal_command.sh",
+      "D:\\桌面文件\\ECG\\experiments\\ptbxl_all\\ecg_fm\\remote_artifacts\\ecg_fm_ptbxl_all_formal_20260817T104823Z\\evidence\\git_status_at_launch.txt",
+      "D:\\桌面文件\\ECG\\execution_control\\PTBXL_FINAL_CLOSURE\\mapping_evidence\\instance_451\\PTBXL_ALL_ECG_FM_FROZEN_FORMAL_RUN_015_RETRY_01\\formal_execution_metadata.json"
+    ]
+  },
+  "st_mem_analysis": {
+    "accepted_remediation_record": true,
+    "remote_formal_execution_use": "PROVEN_FOR_FINETUNING_AND_MODEL_WORKTREE ROUTES; TWO ALL FROZEN/LINEAR DIRECT-UPSTREAM SOURCE HASHES NOT RETAINED",
+    "preflight_only": false,
+    "scientific_semantics": "The fixes implement the declared 500->250 Hz input contract and intended discriminative optimizer grouping; they are documented accepted execution remediations.",
+    "formally_disclosed": true,
+    "outlier_causation_proven": false,
+    "evidence": [
+      "D:\\桌面文件\\ECG\\experiments\\ptbxl_all\\st_mem\\remote_runs\\stmem_ptbxl_all_formal_100_20260817T1834CST\\provenance.txt",
+      "D:\\桌面文件\\ECG\\docs\\PTBXL_SUB_SUPER_INSTANCE_RESTORE_PLAN.md",
+      "D:\\桌面文件\\ECG\\execution_control\\PTBXL_FINAL_CLOSURE\\mapping_evidence\\instance_780\\PTBXL_SUB_07_ST_MEM_FINETUNING_FORMAL_RETRY_03\\exact_formal_command.sh"
+    ]
+  },
+  "ecgfm_ked_analysis": {
+    "accepted_remediation_record": true,
+    "remote_formal_execution_use": "PROVEN_FOR_ALL-FINETUNING_AND SIX SUB/SUPER WORKTREE ROUTES; TWO ALL FROZEN/LINEAR SOURCE HASHES NOT RETAINED",
+    "preflight_only": false,
+    "scientific_semantics": "Loads the official nested ecg_model state dict; validated with 1224 entries and zero missing/unexpected keys.",
+    "formally_disclosed": true,
+    "bn_guard_outlier_causation_proven": false,
+    "evidence": [
+      "D:\\桌面文件\\ECG\\audits\\ecgfm_ked\\ECGFM_KED_LOADER_REMEDIATION_PROVENANCE.md",
+      "D:\\桌面文件\\ECG\\experiments\\ptbxl_all\\ecgfm_ked\\formal_archive_195\\formal_runs\\ecgfm_ked_ptbxl_all_100e_195\\checkpoint_loader_integrity.json",
+      "D:\\桌面文件\\ECG\\execution_control\\PTBXL_FINAL_CLOSURE\\PARALLEL_WORKER_EVIDENCE_BUNDLE\\PTBXL_SUB_13_ECGFM_KED_FINETUNING_FORMAL_SUB2\\exact_formal_command.sh"
+    ]
+  },
+  "formal_scientific_result_impact": "DOCUMENTED_ACCEPTED_EXECUTION_REMEDIATION_ONLY",
+  "formal_execution_used_current_dirty_worktree": "NOT_PROVEN",
+  "formal_execution_used_equivalent_modified_code": "YES_DOCUMENTED_ACCEPTED",
+  "historical_statement_locked_upstream_unmodified": "REQUIRES_QUALIFICATION",
+  "historical_statement_adjudication": {
+    "current_local_checkout_clean": false,
+    "formal_execution_unapproved_source_modification_proven": false,
+    "recommended_qualification": "The executable base was commit 238409835ef55358a10bbc3459dfa9aaa91ad5e5. Formal routes used documented, human-approved execution worktrees/overlays where required. No unapproved scientific source change or finalized-result contradiction has been proven. The present local checkout is dirty and must not be described as a clean working tree."
+  },
+  "scientific_artifact_recomputation_required": "NO",
+  "new_scientific_result_contradiction_found": false,
+  "ambiguous_formal_runs_prior_adjudication": {
+    "count": 9,
+    "classification": "PROVENANCE_IDENTITY_ONLY",
+    "re_audited_in_this_stage": false,
+    "direct_counterevidence_found": false
+  },
+  "findings": [
+    {
+      "finding_id": "F-DW-001",
+      "severity": "MAJOR",
+      "category": "REPOSITORY_STATE_DOCUMENTATION_QUALIFICATION",
+      "affected_artifact_or_run": "D:\\桌面文件\\ECG\\upstream\\ecg-fm-benchmarking and final closure wording",
+      "expected": "Locked commit identity, current checkout cleanliness, and approved execution overlays are stated separately.",
+      "observed": "HEAD matches the locked commit, but the local checkout has five tracked changes while closure wording states that locked upstream was not modified without qualification.",
+      "evidence_path": "D:\\桌面文件\\ECG\\execution_control\\PTBXL_FINAL_CLOSURE\\FINAL_CLOSURE_REPORT_FINAL.md",
+      "scientific_impact": "No result contradiction proven; governance wording is materially overbroad.",
+      "recommended_human_action": "Qualify historical wording and address checkout cleanliness only in a separately authorized remediation stage.",
+      "auto_fixed": false
+    },
+    {
+      "finding_id": "F-DW-002",
+      "severity": "MAJOR",
+      "category": "FORMAL_SOURCE_PROVENANCE_COVERAGE",
+      "affected_artifact_or_run": "Direct-upstream ST-MEM/KED all Frozen/Linear and other shared main_lite routes",
+      "expected": "Exact commit plus source/overlay identity is retained for every formal route.",
+      "observed": "Commands and scientific artifacts are retained, but several direct-upstream runs lack byte-level launch source hashes for the relevant hunks.",
+      "evidence_path": "D:\\桌面文件\\ECG\\execution_control\\PTBXL_FINAL_CLOSURE\\mapping_evidence\\instance_451",
+      "scientific_impact": "Limits proof of exact implementation identity; does not demonstrate artifact corruption or wrong AUROC.",
+      "recommended_human_action": "Preserve the limitation and adjudicate whether existing command, behavior, checkpoint, and artifact evidence is sufficient for handoff.",
+      "auto_fixed": false
+    },
+    {
+      "finding_id": "F-DW-003",
+      "severity": "MINOR",
+      "category": "NON_SCIENTIFIC_TRACKED_ASSET",
+      "affected_artifact_or_run": "abstract.svg",
+      "expected": "Tracked repository assets remain present or have documented local disposition.",
+      "observed": "The SVG is deleted and no project-local deletion provenance was located.",
+      "evidence_path": "D:\\桌面文件\\ECG\\upstream\\ecg-fm-benchmarking",
+      "scientific_impact": "None; non-executable illustration.",
+      "recommended_human_action": "Decide whether to restore it only in a separately authorized repository-cleanup stage.",
+      "auto_fixed": false
+    }
+  ],
+  "recommended_human_remediation": [
+    "Do not mutate the current repository until a separate remediation stage is authorized.",
+    "Qualify historical closure language to distinguish commit identity, checkout cleanliness, and approved overlays.",
+    "Preserve model-specific patch hashes and formal command provenance.",
+    "Record the direct-upstream per-run source-hash gap as a provenance limitation.",
+    "If a later GitHub handoff is approved, use a separately verified clean locked checkout plus explicitly packaged overlays.",
+    "Do not rerun training, inference, preprocessing, mapping, aggregation, or Bootstrap based on this forensic evidence."
+  ],
+  "remediation_performed": false,
+  "github_handoff_allowed_now": false,
+  "next_stage_authorized": false
+}
