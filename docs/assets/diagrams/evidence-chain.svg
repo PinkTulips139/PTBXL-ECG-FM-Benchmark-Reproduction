@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="360" viewBox="0 0 1400 360" role="img" aria-labelledby="title desc">
+  <title id="title">Prediction evidence chain</title>
+  <desc id="desc">Window-level predictions are linked to canonical ECG identity, target alignment, record-level mean aggregation, saved aggregate verification, Macro AUROC, and record-level Bootstrap confidence intervals.</desc>
+  <rect width="1400" height="360" rx="18" fill="#f7fafb" stroke="#cbd8dd"/>
+  <text x="52" y="50" fill="#17313b" font-family="system-ui,'Segoe UI',Arial" font-size="25" font-weight="720">Sample-level evidence chain</text>
+  <g font-family="system-ui,'Segoe UI',Arial" font-size="15" text-anchor="middle">
+    <g fill="#ffffff" stroke="#93aab3"><rect x="46" y="116" width="166" height="76" rx="11"/><rect x="236" y="116" width="166" height="76" rx="11"/><rect x="426" y="116" width="166" height="76" rx="11"/><rect x="616" y="116" width="166" height="76" rx="11"/><rect x="806" y="116" width="166" height="76" rx="11"/><rect x="996" y="116" width="166" height="76" rx="11"/><rect x="1186" y="116" width="166" height="76" rx="11"/></g>
+    <g fill="#17313b" font-weight="700"><text x="129" y="147">Window-level</text><text x="129" y="169">prediction</text><text x="319" y="147">Canonical</text><text x="319" y="169">ECG ID</text><text x="509" y="147">Target</text><text x="509" y="169">alignment</text><text x="699" y="147">Record-level mean</text><text x="699" y="169">aggregation</text><text x="889" y="147">Saved aggregate</text><text x="889" y="169">verification</text><text x="1079" y="158">Macro AUROC</text><text x="1269" y="147">Bootstrap</text><text x="1269" y="169">95% CI</text></g>
+    <g stroke="#5d7a84" stroke-width="3" fill="#5d7a84"><path d="M212 154H236"/><path d="M402 154H426"/><path d="M592 154H616"/><path d="M782 154H806"/><path d="M972 154H996"/><path d="M1162 154H1186"/><path d="M236 154l-10-6v12z"/><path d="M426 154l-10-6v12z"/><path d="M616 154l-10-6v12z"/><path d="M806 154l-10-6v12z"/><path d="M996 154l-10-6v12z"/><path d="M1186 154l-10-6v12z"/></g>
+    <rect x="330" y="245" width="740" height="64" rx="12" fill="#e4f2ef" stroke="#78b8ae"/>
+    <text x="700" y="272" fill="#1c5449" font-size="17" font-weight="720">Formal evaluation unit = one ECG record</text>
+    <text x="700" y="295" fill="#3d6b63" font-size="14">Bootstrap resamples 2,198 ECG records; window rows are supplementary provenance, not formal samples.</text>
+  </g>
+</svg>

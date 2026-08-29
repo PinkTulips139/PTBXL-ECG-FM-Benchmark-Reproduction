@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">PTB-XL experiment matrix</title>
+  <desc id="desc">Finetuning, Frozen, and Linear independently branch from the original pretrained checkpoint and are evaluated on all, sub, and super label spaces for 78 formal experiments.</desc>
+  <rect width="1200" height="420" rx="18" fill="#f7fafb" stroke="#cbd8dd"/>
+  <text x="54" y="52" fill="#17313b" font-family="system-ui,'Segoe UI',Arial" font-size="25" font-weight="720">Experiment matrix · independent branches from pretrained authority</text>
+  <g font-family="system-ui,'Segoe UI',Arial">
+    <rect x="54" y="108" width="260" height="108" rx="13" fill="#133844"/>
+    <text x="184" y="151" text-anchor="middle" fill="#9ddbd4" font-size="14" font-weight="700">STARTING AUTHORITY</text>
+    <text x="184" y="181" text-anchor="middle" fill="#ffffff" font-size="20" font-weight="700">Original pretrained</text>
+    <text x="184" y="204" text-anchor="middle" fill="#ffffff" font-size="20" font-weight="700">checkpoint</text>
+    <g stroke="#5d7a84" stroke-width="3" fill="none"><path d="M314 162H380V105H430"/><path d="M314 162H430"/><path d="M314 162H380V219H430"/></g>
+    <g fill="#5d7a84"><path d="M430 105l-10-6v12z"/><path d="M430 162l-10-6v12z"/><path d="M430 219l-10-6v12z"/></g>
+    <g>
+      <rect x="430" y="73" width="250" height="66" rx="11" fill="#dff2ef" stroke="#78b8ae"/><text x="452" y="103" fill="#17313b" font-size="19" font-weight="720">Finetuning</text><text x="452" y="125" fill="#4d626a" font-size="14">10 models × 3 spaces = 30</text>
+      <rect x="430" y="130" width="250" height="66" rx="11" fill="#e7f0f4" stroke="#8aacbc"/><text x="452" y="160" fill="#17313b" font-size="19" font-weight="720">Frozen</text><text x="452" y="182" fill="#4d626a" font-size="14">8 foundation models × 3 = 24</text>
+      <rect x="430" y="187" width="250" height="66" rx="11" fill="#e7f0f4" stroke="#8aacbc"/><text x="452" y="217" fill="#17313b" font-size="19" font-weight="720">Linear</text><text x="452" y="239" fill="#4d626a" font-size="14">8 foundation models × 3 = 24</text>
+    </g>
+    <g stroke="#5d7a84" stroke-width="3" fill="none"><path d="M680 105H742V162H798"/><path d="M680 162H798"/><path d="M680 220H742V162H798"/></g>
+    <g fill="#5d7a84"><path d="M798 162l-10-6v12z"/></g>
+    <rect x="798" y="105" width="346" height="114" rx="13" fill="#ffffff" stroke="#9eb2ba"/>
+    <text x="971" y="137" text-anchor="middle" fill="#17313b" font-size="18" font-weight="720">Same signals · same split · same test ECGs</text>
+    <g font-size="16" font-weight="700"><text x="851" y="178" fill="#0b6d79">all · 71</text><text x="951" y="178" fill="#0b6d79">sub · 23</text><text x="1056" y="178" fill="#0b6d79">super · 5</text></g>
+    <text x="971" y="204" text-anchor="middle" fill="#566a73" font-size="14">Only the label space changes · N = 2,198</text>
+    <rect x="54" y="300" width="1090" height="68" rx="12" fill="#eef4f6" stroke="#cbd8dd"/>
+    <text x="83" y="329" fill="#17313b" font-size="17" font-weight="720">Formal scope</text>
+    <text x="83" y="352" fill="#52666e" font-size="15">30 Finetuning + 24 Frozen + 24 Linear = 78 experiments. S4 and Net1D participate only in Finetuning.</text>
+  </g>
+</svg>
