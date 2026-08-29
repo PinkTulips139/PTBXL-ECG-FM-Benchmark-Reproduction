@@ -13,26 +13,22 @@
 
 # PTB-XL ECG Foundation Model Benchmark Reproduction
 
-This private review repository packages the clean executable authority, accepted compatibility overlays, formal execution evidence, finalized results, and sample-level inspection assets for the PTB-XL experiments from *Benchmarking ECG FMs: A Reality Check Across Clinical Tasks*. All **78 formal experiments** are complete; **76 canonical record-level bundles** are physically packaged and two historical runs remain visible as provenance-only entries.
+This private project-review repository contains the executable source authority, compatibility overlays, formal results, essential provenance, and sample-level inspection assets for the PTB-XL experiments from *Benchmarking ECG FMs: A Reality Check Across Clinical Tasks*. All **78 formal experiments** are complete; **76 canonical record-level bundles** are physically packaged and two historical runs remain visible as provenance-only entries.
 
-No training, inference, aggregation, mapping, Bootstrap, or scientific-result recomputation was performed solely for repository packaging or presentation enhancement.
+No training, inference, aggregation, mapping, Bootstrap, or scientific-result recomputation was performed solely for repository packaging.
 
 ## Quick Start
 
 | Review item | Open |
 |---|---|
-| Final report | [Final Report V2](docs/Final_Report_V2.docx) |
+| Final report | [Final Report](Final_Report.pdf) |
 | Static sample reviewer | [Open the offline reviewer](review_html/index.html) |
-| Finetuning results | [Final Table 3](results/tables/FINAL_TABLE3_FINETUNING.csv) |
-| Frozen results | [Final Table 4](results/tables/FINAL_TABLE4_FROZEN.csv) |
-| Linear results | [Final Table 5](results/tables/FINAL_TABLE5_LINEAR.csv) |
-| Complete experiment state | [78-run Completion Matrix V2](results/execution_control/PTBXL_FINAL_CLOSURE/PTBXL_GLOBAL_FORMAL_RUN_COMPLETION_MATRIX_V2.csv) |
-| Canonical identities | [Canonical Run ID Map V2](results/execution_control/PTBXL_FINAL_CLOSURE/FINAL_CANONICAL_RUN_ID_MAP_V2.csv) |
-| Mapping and Bootstrap | [Strict Mapping Closure](results/tables/PTBXL_GLOBAL_MAPPING_CLOSURE_STATUS.csv) · [Bootstrap Summary](results/execution_control/PTBXL_FINAL_CLOSURE/FINAL_BOOTSTRAP_SUMMARY.csv) |
-| Known limitations | [Known Limitations](docs/KNOWN_LIMITATIONS.md) |
-| Artifact integrity | [Staged Asset Manifest V4](manifests/STAGED_ASSET_MANIFEST_V4.csv) |
-
-For a guided review sequence, use the [Review Guide](docs/REVIEW_GUIDE.md). The [Repository Overview](docs/REPOSITORY_OVERVIEW.md) explains the canonical, derived, and provenance layers.
+| Finetuning results | [Table 3](results/tables/FINAL_TABLE3_FINETUNING.csv) |
+| Frozen results | [Table 4](results/tables/FINAL_TABLE4_FROZEN.csv) |
+| Linear results | [Table 5](results/tables/FINAL_TABLE5_LINEAR.csv) |
+| Formal experiment state | [Formal Run Completion Matrix](results/FORMAL_RUN_COMPLETION_MATRIX.csv) |
+| Bootstrap status | [Bootstrap Summary](results/BOOTSTRAP_SUMMARY.csv) |
+| Limitations | [Known Limitations](docs/KNOWN_LIMITATIONS.md) |
 
 ## At a Glance
 
@@ -46,28 +42,24 @@ For a guided review sequence, use the [Review Guide](docs/REVIEW_GUIDE.md). The 
 | Window-level bundles packaged | **76/78** |
 | Strict ECG-ID mapping | **77 PASS + 1 historical blocker** |
 | Bootstrap closure | **72 complete / 5 provenance-blocked / 0 failed / 1 mapping-not-eligible** |
-| Emergency-worker evidence | **22/22 bundles recovered** |
-| Remote↔local worker hashes | **88/88 SHA256 PASS** |
-| Canonical identities | **9/9 resolved** |
+| Emergency-worker evidence | **22/22 bundles recovered; 88/88 SHA256 PASS** |
 | Checkpoint binaries packaged | **0** |
 
 ## Project Scope
 
-The handoff is organized for evidence-first review:
+- **Executable authority:** clean export of official commit `238409835ef55358a10bbc3459dfa9aaa91ad5e5` under [`code/locked_upstream/`](code/locked_upstream/).
+- **Compatibility layer:** accepted overlays and execution scripts remain separate under [`code/execution_overlays/`](code/execution_overlays/) and [`code/scripts/`](code/scripts/).
+- **Results:** final comparison tables, formal completion state, canonical run identities, Bootstrap status, and training metadata.
+- **Inspection:** canonical record-level bundles, supplementary window-level data, and an offline static reviewer.
+- **Distribution boundary:** private project review; this repository is not a public dataset mirror or a public upstream release.
 
-- **Executable authority:** a clean export of official commit `238409835ef55358a10bbc3459dfa9aaa91ad5e5` under [`code/locked_upstream/`](code/locked_upstream/).
-- **Execution compatibility:** accepted overlays and scripts remain separate under [`code/execution_overlays/`](code/execution_overlays/) and the provenance layer.
-- **Scientific outputs:** finalized result tables, completion state, canonical identities, mapping, Bootstrap, and training metadata.
-- **Sample inspection:** packaged record-level probabilities and targets plus an offline static reviewer.
-- **Governance boundary:** private project review; this repository is not presented as a public upstream or dataset release.
-
-The pinned commit identity was verified. A later forensic review found that the historical local Windows working tree was not clean; the handoff therefore uses the clean exact-commit export, while documented accepted compatibility remediation remains separately traceable. No scientific-result recomputation was required.
+See [Execution Notes](docs/EXECUTION_NOTES.md) for the concise source and compatibility record, [Citation Instructions](docs/CITATION.md), and [Third-Party Notices](THIRD_PARTY_NOTICES.md).
 
 ## Benchmark Contract
 
 PTB-XL v1.0.3 contains 21,799 twelve-lead ECG records from 18,869 patients, originally sampled at 500 Hz. Folds 1–8 are training (17,418 records), fold 9 is validation (2,183), and fold 10 is test (2,198), with no patient overlap.
 
-| Label space | Outputs | Signals and split |
+| Label space | Outputs | Records and split |
 |---|---:|---|
 | PTB-XL(all) | 71 | Same ECG records and folds |
 | PTB-XL(sub) | 23 | Same ECG records and folds |
@@ -103,11 +95,11 @@ The eight foundation models are **ECGFounder, ECG-JEPA, ST-MEM, MERL, ECGFM-KED,
 | Linear | 8 × 3 | 24 |
 | **Total** |  | **78** |
 
-Finetuning, Frozen, and Linear branch independently from the original pretrained checkpoint. Frozen and Linear do not originate from a finetuned checkpoint.
+The three modes branch independently from the original pretrained checkpoint. Frozen and Linear do not originate from a finetuned checkpoint.
 
 ## Reproduction Results
 
-The finalized tables contain 78 unique model × mode × label-space entries. The following are descriptive reproduction comparisons, not a statistical-equivalence claim.
+The final tables contain 78 unique model × mode × label-space entries. These are descriptive reproduction comparisons, not a statistical-equivalence claim.
 
 | Scope | Entries | Mean \|Δ\| | Median \|Δ\| | Max \|Δ\| |
 |---|---:|---:|---:|---:|
@@ -116,61 +108,47 @@ The finalized tables contain 78 unique model × mode × label-space entries. The
 | Frozen | 24 | 0.008234 | 0.002000 | 0.097321 |
 | Linear | 24 | 0.012568 | 0.001336 | 0.133420 |
 
-- **66/78** entries have `|Δ| < 0.010`.
-- **8/9** dataset × mode panels retain the same paper-top and reproduction-top model.
-- ECGFounder is the most numerically stable reproduced foundation model.
-- Larger differences are concentrated in specific ST-MEM Finetuning, ECGFM-KED Frozen/Linear, ECG-CPC Linear(all), and ECG-FM Linear settings; available evidence does not establish causal root explanations.
-
-Open [Final Table 3](results/tables/FINAL_TABLE3_FINETUNING.csv), [Final Table 4](results/tables/FINAL_TABLE4_FROZEN.csv), and [Final Table 5](results/tables/FINAL_TABLE5_LINEAR.csv) for all entries.
+**66/78** entries have `|Δ| < 0.010`, and **8/9** dataset × mode panels retain the same top model. Larger deviations are concentrated in specific settings; the available evidence does not establish causal root explanations. Open [Table 3](results/tables/FINAL_TABLE3_FINETUNING.csv), [Table 4](results/tables/FINAL_TABLE4_FROZEN.csv), and [Table 5](results/tables/FINAL_TABLE5_LINEAR.csv) for all entries.
 
 ## Static Sample Reviewer
 
-Open [`review_html/index.html`](review_html/index.html) directly in a browser. The reviewer is fully local: no backend, database, CDN, analytics, remote API, network requirement, or data upload. It lazily loads one JavaScript data shard per selected run and preserves direct `file://` use.
+Open [`review_html/index.html`](review_html/index.html) directly in a browser. The reviewer is fully local: no backend, database, CDN, analytics, remote API, network requirement, or data upload. It lazily loads one JavaScript shard per selected run and supports direct `file://` use.
 
-Reviewer capabilities include run filtering, ECG-ID search, previous/next/random navigation, target-positive labels, probability ranking, same-model mode comparison, provenance status, light/dark themes, and keyboard shortcuts. Probability display and top-k ranking are inspection views—not new metrics.
+It provides run filtering, ECG-ID search, previous/next/random navigation, target-positive labels, probability ranking, same-model mode comparison, provenance status, light/dark themes, and keyboard shortcuts. Probability display and top-k ranking are inspection views—not new metrics. No fixed classification threshold is part of the formal Macro AUROC protocol.
 
-> **Interpretation boundary:** no fixed classification threshold is part of the formal Macro AUROC protocol. The interface does not label samples “correct” or “incorrect.”
-
-If local browser policy blocks file scripts, run an optional local server from `review_html/`:
-
-```powershell
-python -m http.server 8000
-```
-
-Then open `http://127.0.0.1:8000`. See the [reviewer documentation](review_html/README.md) and [sample-data dictionary](docs/SAMPLE_DATA_DICTIONARY.md).
+See the [reviewer documentation](review_html/README.md) for controls and an optional local HTTP-server fallback.
 
 ## Sample-Level Data Availability
 
-The formal sample unit is **one ECG record**, not one signal window. A packaged canonical record-level NPZ contains prediction probabilities and ground-truth targets in the same physical file; ECG IDs enter the derived reviewer only through the existing validated mapping evidence.
+The formal sample unit is **one ECG record**, not one signal window. A canonical record-level NPZ contains prediction probabilities and ground-truth targets in the same physical file; ECG IDs enter the derived reviewer only through existing validated mapping evidence.
 
 | Representation | Coverage | Role |
 |---|---:|---|
 | Formal experiment entries | 78/78 | Complete benchmark state |
-| Physical record-level bundles | 76/78 | Canonical sample inspection source |
+| Physical record-level bundles | 76/78 | Canonical sample-inspection source |
 | Metadata-only entries | 2/78 | Provenance-only representation |
 | Window-level bundles | 76/78 | Supplementary provenance |
 
 > [!NOTE]
-> **Packaging limitation, not experiment failure.** Physical canonical sample bundles are unavailable for **ECGFounder / all / Frozen** and **ECGFounder / all / Linear**. No inference, aggregation, mapping, or Bootstrap was rerun to reconstruct them. Both formal results remain represented; the static reviewer shows `PROVENANCE_ONLY_LIMITED` for Frozen and `PROVENANCE_ONLY` for Linear.
+> **Packaging limitation, not experiment failure.** Physical canonical sample bundles are unavailable for **ECGFounder / all / Frozen** and **ECGFounder / all / Linear**. No inference, aggregation, mapping, or Bootstrap was rerun to reconstruct them. The reviewer shows `PROVENANCE_ONLY_LIMITED` for Frozen and `PROVENANCE_ONLY` for Linear.
 
-ECGFounder / all / Frozen is the sole historical mapping blocker (`TARGET_GROUP_CONSISTENCY=False`). Its evidence preserves 2,198 unique ECG IDs, passes aggregation reconstruction, and matches the saved aggregate. The record-level result is not automatically invalid, but highest-grade prediction↔target group provenance is incomplete.
+ECGFounder / all / Frozen is the sole historical mapping blocker (`TARGET_GROUP_CONSISTENCY=False`). Its evidence preserves 2,198 unique ECG IDs, passes aggregation reconstruction, and matches the saved aggregate; highest-grade prediction-to-target group provenance remains incomplete.
 
 Window-level files under [`sample_predictions/window_level/`](sample_predictions/window_level/) are supplementary provenance and are not the formal evaluation unit or the reviewer’s primary data source.
 
 ## Repository Structure
 
 ```text
-code/                 clean locked source, overlays, scripts, and environment specs
-docs/                 final report, review guides, citation, and local visual assets
-logs/                 formal, validation, remediation, and superseded execution evidence
-results/              finalized tables and canonical closure summaries
-sample_predictions/   record-level bundles, window-level provenance, and availability metadata
+Final_Report.pdf       user-selected final report
+code/                  locked source, overlays, scripts, configs, and environment specs
+docs/                  citation, execution notes, limitations, and local visual assets
+logs/                  formal execution and final validation logs
+results/               final tables and canonical result summaries
+sample_predictions/    record-level bundles, window-level provenance, and availability metadata
 review_html/           offline reviewer and verified derived inspection shards
-provenance/            mapping, Bootstrap, worker, hash, remediation, and audit evidence
-manifests/             curated delivery and staged-content manifests
+provenance/            mapping, Bootstrap, worker, and hash evidence
+manifests/             current repository file manifest
 ```
-
-See [Repository Overview](docs/REPOSITORY_OVERVIEW.md) for the layer model and intentional exclusions.
 
 ## Evidence and Provenance
 
@@ -178,65 +156,30 @@ See [Repository Overview](docs/REPOSITORY_OVERVIEW.md) for the layer model and i
   <img src="docs/assets/diagrams/evidence-chain.svg" alt="Evidence chain from window-level prediction through ECG identity, target alignment, record aggregation, saved aggregate verification, Macro AUROC, and record-level Bootstrap CI" width="100%">
 </p>
 
-| Evidence area | Canonical entry point |
+| Evidence area | Entry point |
 |---|---|
-| Formal completion | [Completion Matrix V2](results/execution_control/PTBXL_FINAL_CLOSURE/PTBXL_GLOBAL_FORMAL_RUN_COMPLETION_MATRIX_V2.csv) |
-| Canonical run identity | [Run ID Map V2](results/execution_control/PTBXL_FINAL_CLOSURE/FINAL_CANONICAL_RUN_ID_MAP_V2.csv) |
-| Strict mapping | [Mapping Closure](results/tables/PTBXL_GLOBAL_MAPPING_CLOSURE_STATUS.csv) |
-| Bootstrap | [Final Bootstrap Summary](results/execution_control/PTBXL_FINAL_CLOSURE/FINAL_BOOTSTRAP_SUMMARY.csv) |
-| Training metadata | [Training Metadata Recovery](results/execution_control/PTBXL_FINAL_CLOSURE/FINAL_TRAINING_METADATA_RECOVERY.csv) |
-| Emergency-worker recovery | [22/22 Bundle Recovery](results/execution_control/PTBXL_FINAL_CLOSURE/PARALLEL_WORKER_EVIDENCE_RECOVERY.csv) · [88/88 Hash Closure](results/execution_control/PTBXL_FINAL_CLOSURE/PARALLEL_WORKER_HASH_CLOSURE.csv) |
-| Locked source qualification | [Execution Qualification](docs/source_qualification/LOCKED_UPSTREAM_EXECUTION_QUALIFICATION_V1.md) |
+| Formal completion | [Formal Run Completion Matrix](results/FORMAL_RUN_COMPLETION_MATRIX.csv) |
+| Canonical run identity | [Canonical Run ID Map](results/CANONICAL_RUN_ID_MAP.csv) |
+| Strict mapping | [Mapping Closure](provenance/mapping/MAPPING_CLOSURE_STATUS.csv) |
+| Bootstrap | [Bootstrap Summary](results/BOOTSTRAP_SUMMARY.csv) |
+| Training metadata | [Training Metadata](results/TRAINING_METADATA.csv) |
+| Emergency-worker recovery | [22/22 Bundle Recovery](provenance/workers/WORKER_EVIDENCE_RECOVERY.csv) · [88/88 Hash Closure](provenance/workers/WORKER_HASH_CLOSURE.csv) |
+| Repository integrity | [File Manifest](manifests/FILE_MANIFEST.csv) |
 
-<details>
-<summary><strong>Training metadata and retention completeness</strong></summary>
+## Execution Notes and Limitations
 
-- Best-checkpoint references: 78/78 recovered
-- Best epoch: 50 recovered; 28 not recovered
-- Runtime: 15 recovered; 63 not recovered
-- Checkpoint binaries locally retained: 10 available; 68 unavailable
-- Checkpoint binaries packaged here: 0
+Compatibility work includes the ST-MEM dependency closure, ECG-CPC compatibility route, ECG-FM Python 3.9 overlay, ECG-JEPA identity-aggregation adjudication, the MERL/ECGFM-KED execution-only BN guard, and emergency-worker recovery. These measures are execution and provenance controls; they are not asserted as causes of paper-versus-reproduction differences. Read [Execution Notes](docs/EXECUTION_NOTES.md) for the concise record.
 
-These are metadata/artifact-retention limitations, not scientific-result failures.
+Bootstrap closure is 72 complete, five provenance-blocked, zero failed, and one mapping-not-eligible. Best-epoch, runtime, and checkpoint-binary retention are incomplete. See [Known Limitations](docs/KNOWN_LIMITATIONS.md) for the final qualified list.
 
-</details>
+## Citation and Repository Status
 
-## Accepted Execution Remediations
+For scientific use, cite the original paper and identify the official repository and pinned executable-authority commit. See [Citation Instructions](docs/CITATION.md) and [Third-Party Notices](THIRD_PARTY_NOTICES.md).
 
-Documented compatibility work includes ST-MEM dependency closure, the ECG-CPC compatibility route, the ECG-FM Python 3.9 overlay, ECG-JEPA identity-aggregation adjudication, the MERL/ECGFM-KED execution-only BN guard, infrastructure succession/clone evidence, emergency-worker recovery, and the minimal scientific-evidence retention strategy.
-
-These measures are execution and provenance controls. They are not asserted as proven causes of paper-versus-reproduction differences. Read the [accepted remediation summary](docs/ACCEPTED_REMEDIATIONS.md).
-
-<details>
-<summary><strong>Locked-source qualification</strong></summary>
-
-The executable authority is pinned to commit `238409835ef55358a10bbc3459dfa9aaa91ad5e5`. The current handoff snapshot under `code/locked_upstream/` is a clean export of that commit. A later historical local Windows worktree was found to contain tracked changes; forensic review did not prove that formal runs used that current dirty worktree. Formal execution is supported by documented accepted compatibility-remediation routes, with no new scientific-result contradiction and no recomputation requirement.
-
-</details>
-
-## Known Limitations
-
-- Two physical canonical record-level and window-level bundles are unavailable for packaging.
-- One run has a historical strict-mapping blocker.
-- Bootstrap closure is 72 complete, five provenance-blocked, zero failed, and one mapping-not-eligible.
-- Best-epoch, runtime, and checkpoint-binary retention are incomplete.
-- Larger paper-versus-reproduction differences remain without proven causal explanations.
-- The HTML shards are derived inspection data, not a second independent scientific result set.
-
-See [Known Limitations](docs/KNOWN_LIMITATIONS.md) for the full qualified list.
-
-## Citation and Third-Party Notice
-
-For scientific use, cite the original paper and identify the official repository and pinned executable-authority commit. See [Citation Instructions](docs/CITATION.md). Third-party ownership, the absence of a license file in the pinned snapshot, and the private-review redistribution boundary are documented in [Third-Party Notices](THIRD_PARTY_NOTICES.md).
-
-## Repository Status
-
-- **Visibility intent:** private project review
-- **Published baseline:** `0a47f56353f0024226579cc723c415963daa11aa`
+- **Visibility intent:** Private Project Review
 - **Executable authority:** `238409835ef55358a10bbc3459dfa9aaa91ad5e5`
-- **Current presentation candidate:** uncommitted pending human visual review
 - **Scientific artifact recomputation required:** no
 - **Raw PTB-XL dataset packaged:** no
 - **Checkpoint binaries packaged:** no
 
-The current staged-file inventory is recorded in [STAGED_ASSET_MANIFEST_V4](manifests/STAGED_ASSET_MANIFEST_V4.csv). This repository remains a private reproduction package prepared for project review; it is not presented as a public upstream, public dataset mirror, or fully licensed open-source release.
+This repository is not presented as a public upstream, public dataset mirror, or fully licensed open-source release.

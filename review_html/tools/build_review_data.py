@@ -74,10 +74,10 @@ def main() -> int:
     run_dir.mkdir(parents=True, exist_ok=True)
 
     availability_path = root / "sample_predictions" / "metadata" / "sample_availability.json"
-    matrix_path = root / "results" / "execution_control" / "PTBXL_FINAL_CLOSURE" / "PTBXL_GLOBAL_FORMAL_RUN_COMPLETION_MATRIX_V2.csv"
+    matrix_path = root / "results" / "FORMAL_RUN_COMPLETION_MATRIX.csv"
     mapping_path = root / "sample_predictions" / "metadata" / "test_prediction_index_mapping.csv"
-    bootstrap_path = root / "results" / "execution_control" / "PTBXL_FINAL_CLOSURE" / "FINAL_BOOTSTRAP_SUMMARY.csv"
-    canonical_map_path = root / "results" / "execution_control" / "PTBXL_FINAL_CLOSURE" / "FINAL_CANONICAL_RUN_ID_MAP_V2.csv"
+    bootstrap_path = root / "results" / "BOOTSTRAP_SUMMARY.csv"
+    canonical_map_path = root / "results" / "CANONICAL_RUN_ID_MAP.csv"
 
     availability = json.loads(availability_path.read_text(encoding="utf-8-sig"))
     availability_by_key = {row["canonical_experiment_key"]: row for row in availability["entries"]}
@@ -279,9 +279,9 @@ def main() -> int:
         "derived_data_path", "derived_sha256", "derived_record_count", "output_dim",
         "prediction_roundtrip_max_abs_diff", "target_exact_match", "ecg_id_exact_match", "status",
     ]
-    derivation_csv = data_dir / "REVIEW_DATA_DERIVATION_MANIFEST.csv"
+    derivation_csv = data_dir / "REVIEW_DATA_MANIFEST.csv"
     write_csv(derivation_csv, verification, fields)
-    derivation_json = data_dir / "REVIEW_DATA_DERIVATION_MANIFEST.json"
+    derivation_json = data_dir / "REVIEW_DATA_MANIFEST.json"
     derivation_json.write_text(json.dumps({
         "schema_version": 1,
         "derivation_type": "LOSSLESS_BROWSER_SERIALIZATION_OF_PACKAGED_CANONICAL_RECORD_LEVEL_ASSETS",

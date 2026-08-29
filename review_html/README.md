@@ -37,7 +37,7 @@ Keyboard shortcuts work when focus is not inside a form control:
 
 - `data/manifest.js`: 78 formal experiment entries and authoritative 71/23/5 label sets
 - `data/runs/*.js`: 76 compact, lazily loaded run shards
-- `data/REVIEW_DATA_DERIVATION_MANIFEST.csv` and `.json`: source-to-derived fidelity evidence
+- `data/REVIEW_DATA_MANIFEST.csv` and `.json`: source-to-derived fidelity evidence
 - `assets/app.js`: local interaction logic
 - `assets/styles.css`: local responsive light/dark presentation
 
