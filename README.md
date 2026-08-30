@@ -21,14 +21,15 @@ No training, inference, aggregation, mapping, Bootstrap, or scientific-result re
 
 | Review item | Open |
 |---|---|
+| Interactive reviewer | [Open the offline reviewer](review_html/index.html) |
 | Final report | [Final Report](Final_Report.pdf) |
-| Static sample reviewer | [Open the offline reviewer](review_html/index.html) |
 | Finetuning results | [Table 3](results/tables/FINAL_TABLE3_FINETUNING.csv) |
 | Frozen results | [Table 4](results/tables/FINAL_TABLE4_FROZEN.csv) |
 | Linear results | [Table 5](results/tables/FINAL_TABLE5_LINEAR.csv) |
 | Formal experiment state | [Formal Run Completion Matrix](results/FORMAL_RUN_COMPLETION_MATRIX.csv) |
-| Bootstrap status | [Bootstrap Summary](results/BOOTSTRAP_SUMMARY.csv) |
 | Limitations | [Known Limitations](docs/KNOWN_LIMITATIONS.md) |
+
+The private online reviewer is being prepared. Until access protection is verified, use the offline reviewer above; no public reviewer URL is enabled.
 
 ## At a Glance
 
