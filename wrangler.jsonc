@@ -1,7 +1,7 @@
 {
   "name": "ptbxl-ecg-fm-reviewer",
   "compatibility_date": "2026-08-31",
-  "workers_dev": false,
+  "workers_dev": true,
   "preview_urls": false,
   "assets": {
     "directory": "./review_html"

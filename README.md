@@ -21,15 +21,14 @@ No training, inference, aggregation, mapping, Bootstrap, or scientific-result re
 
 | Review item | Open |
 |---|---|
-| Interactive reviewer | [Open the offline reviewer](review_html/index.html) |
+| Interactive reviewer | [Open Interactive Reviewer](https://ptbxl-ecg-fm-reviewer.lekang-sun.workers.dev) — Cloudflare Access protected |
+| Offline reviewer | [Open the local reviewer](review_html/index.html) |
 | Final report | [Final Report](Final_Report.pdf) |
 | Finetuning results | [Table 3](results/tables/FINAL_TABLE3_FINETUNING.csv) |
 | Frozen results | [Table 4](results/tables/FINAL_TABLE4_FROZEN.csv) |
 | Linear results | [Table 5](results/tables/FINAL_TABLE5_LINEAR.csv) |
 | Formal experiment state | [Formal Run Completion Matrix](results/FORMAL_RUN_COMPLETION_MATRIX.csv) |
 | Limitations | [Known Limitations](docs/KNOWN_LIMITATIONS.md) |
-
-The private online reviewer is being prepared. Until access protection is verified, use the offline reviewer above; no public reviewer URL is enabled.
 
 ## At a Glance
 
@@ -113,7 +112,7 @@ The final tables contain 78 unique model × mode × label-space entries. These a
 
 ## Static Sample Reviewer
 
-Open [`review_html/index.html`](review_html/index.html) directly in a browser. The reviewer is fully local: no backend, database, CDN, analytics, remote API, network requirement, or data upload. It lazily loads one JavaScript shard per selected run and supports direct `file://` use.
+Open the [Access-protected interactive reviewer](https://ptbxl-ecg-fm-reviewer.lekang-sun.workers.dev), or open [`review_html/index.html`](review_html/index.html) directly for offline use. The reviewer has no backend, database, CDN, analytics, remote API, or data upload. It lazily loads one JavaScript shard per selected run and supports direct `file://` use.
 
 It provides run filtering, ECG-ID search, previous/next/random navigation, target-positive labels, probability ranking, same-model mode comparison, provenance status, light/dark themes, and keyboard shortcuts. Probability display and top-k ranking are inspection views—not new metrics. No fixed classification threshold is part of the formal Macro AUROC protocol.
 

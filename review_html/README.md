@@ -4,7 +4,11 @@ This directory contains the offline, read-only inspection interface for finalize
 
 ## Open the reviewer
 
-The simplest method is to double-click [`index.html`](index.html). Core loading does not use `fetch`: `data/manifest.js` is loaded by a normal script tag, and each selected run shard registers through a dynamically inserted local script. This supports direct `file://` use in common browsers.
+**Online:** [Open the Cloudflare Access-protected reviewer](https://ptbxl-ecg-fm-reviewer.lekang-sun.workers.dev).
+
+**Offline:** double-click [`index.html`](index.html).
+
+Core loading does not use `fetch`: `data/manifest.js` is loaded by a normal script tag, and each selected run shard registers through a dynamically inserted local script. This supports direct `file://` use in common browsers.
 
 If a browser policy blocks local scripts, start an optional local server:
 
