@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1440" height="360" viewBox="0 0 1440 360" role="img" aria-labelledby="title desc">
   <title id="title">PTB-XL ECG Foundation Model Benchmark Reproduction</title>
-  <desc id="desc">A restrained research banner with an abstract ECG trace and private project-review status.</desc>
+  <desc id="desc">A restrained research banner with an abstract ECG trace, benchmark title, and private project-review status.</desc>
   <rect width="1440" height="360" rx="24" fill="#0b1f29"/>
   <g stroke="#173844" stroke-width="1" opacity="0.72">
     <path d="M0 72H1440M0 144H1440M0 216H1440M0 288H1440"/>
@@ -17,7 +17,7 @@
   <g transform="translate(960 55)">
     <rect width="410" height="92" rx="14" fill="#102d38" stroke="#2c5562"/>
     <text x="24" y="36" fill="#9bc5ce" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="650" letter-spacing="1.2">EVIDENCE-ORIENTED REPRODUCTION</text>
-    <text x="24" y="65" fill="#ffffff" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="18">78 formal experiments · 2,198 test ECGs/run</text>
+    <text x="24" y="65" fill="#ffffff" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="18">78 experiments · 2,198 test ECGs per run</text>
   </g>
-  <text x="70" y="330" fill="#c8dbe0" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="19">78 formal experiments · Sample-level evidence · Static review interface</text>
+  <text x="70" y="330" fill="#c8dbe0" font-family="system-ui,-apple-system,'Segoe UI',Arial,sans-serif" font-size="19">78 formal experiments · Sample-level predictions · Interactive review</text>
 </svg>

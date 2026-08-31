@@ -15,16 +15,20 @@
       <div class="header-copy">
         <div class="header-flags">
           <span class="scope-chip">Private project review</span>
-          <span class="inspection-chip">Inspection interface · no recomputation</span>
+          <span class="access-chip">Access protected</span>
         </div>
         <h1>PTB-XL ECG Foundation Model Reproduction</h1>
-        <p>Inspect stored record-level probabilities, aligned ground truth, and run provenance across the finalized 78-experiment benchmark.</p>
+        <p class="header-subtitle">Interactive Sample-Level Review</p>
+        <p class="header-description">Explore stored record-level probabilities, aligned ground truth, mode comparisons, and run provenance across the finalized 78-experiment benchmark.</p>
       </div>
       <div class="header-actions">
-        <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch color theme">
-          <span aria-hidden="true">◐</span>
-          <span id="theme-label">Use dark theme</span>
-        </button>
+        <label class="theme-control" for="theme-select"><span>Theme</span>
+          <select id="theme-select" aria-label="Color theme">
+            <option value="system">System</option>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+        </label>
         <div class="commit-card">
           <span>Locked executable authority</span>
           <code>238409835ef…</code>
@@ -35,10 +39,10 @@
 
   <main>
     <section class="summary-grid" aria-label="Formal closure summary">
-      <article class="summary-card"><span class="summary-label">Formal experiments</span><strong>78/78</strong><small>complete</small></article>
-      <article class="summary-card"><span class="summary-label">Physical sample bundles</span><strong>76/78</strong><small>two provenance-only entries</small></article>
-      <article class="summary-card"><span class="summary-label">Strict mapping</span><strong>77 + 1</strong><small>PASS + historical blocker</small></article>
-      <article class="summary-card"><span class="summary-label">Bootstrap</span><strong>72 + 5 + 1</strong><small>complete + provenance-blocked + not eligible</small></article>
+      <article class="summary-card"><span class="summary-label">Formal runs</span><strong>78 / 78</strong><small>complete</small></article>
+      <article class="summary-card"><span class="summary-label">Sample bundles</span><strong>76 / 78</strong><small>two provenance-only entries</small></article>
+      <article class="summary-card"><span class="summary-label">Mapping</span><strong>77 + 1</strong><small>PASS + historical blocker</small></article>
+      <article class="summary-card"><span class="summary-label">Bootstrap complete</span><strong>72</strong><small>5 provenance-blocked · 1 not eligible</small></article>
     </section>
 
     <section class="status-legend" aria-labelledby="legend-title">
@@ -66,26 +70,24 @@
         </div>
 
         <div class="filter-stack">
-          <label for="model-select">Model</label>
-          <select id="model-select"></select>
-          <label for="granularity-select">Granularity</label>
-          <select id="granularity-select"></select>
-          <label for="mode-select">Mode</label>
-          <select id="mode-select"></select>
-          <label for="run-select">Formal run ID</label>
-          <select id="run-select"></select>
+          <label class="filter-field" for="model-select">Model<select id="model-select"></select></label>
+          <label class="filter-field" for="granularity-select">Granularity<select id="granularity-select"></select></label>
+          <label class="filter-field" for="mode-select">Mode<select id="mode-select"></select></label>
+          <label class="filter-field" for="run-select">Formal run ID<select id="run-select"></select></label>
         </div>
 
-        <details class="shortcut-help">
-          <summary>Keyboard shortcuts</summary>
-          <dl>
-            <div><dt><kbd>←</kbd></dt><dd>Previous ECG</dd></div>
-            <div><dt><kbd>→</kbd></dt><dd>Next ECG</dd></div>
-            <div><dt><kbd>/</kbd></dt><dd>Focus ECG search</dd></div>
-          </dl>
-        </details>
-
-        <p class="sidebar-note">Formal sample unit: one ECG record. Window rows are supplementary provenance.</p>
+        <div class="filter-support">
+          <details class="shortcut-help">
+            <summary>Keyboard shortcuts</summary>
+            <dl>
+              <div><dt><kbd>←</kbd></dt><dd>Previous ECG</dd></div>
+              <div><dt><kbd>→</kbd></dt><dd>Next ECG</dd></div>
+              <div><dt><kbd>R</kbd></dt><dd>Random ECG</dd></div>
+              <div><dt><kbd>/</kbd></dt><dd>Focus ECG search</dd></div>
+            </dl>
+          </details>
+          <p class="sidebar-note">Formal sample unit: one ECG record. Window rows are supplementary provenance.</p>
+        </div>
       </aside>
 
       <div class="content-stack">
@@ -110,49 +112,62 @@
             <span id="sample-position" class="position-chip mono"></span>
           </div>
 
-          <div class="sample-controls" role="group" aria-label="ECG sample navigation">
-            <label class="search-field" for="ecg-search">ECG ID
-              <input id="ecg-search" type="search" inputmode="numeric" autocomplete="off" placeholder="Enter an ECG ID">
-            </label>
-            <button id="search-button" class="button primary" type="button">Find ECG</button>
-            <button id="previous-button" class="button" type="button" aria-label="Previous ECG record">Previous</button>
-            <button id="next-button" class="button" type="button" aria-label="Next ECG record">Next</button>
-            <button id="random-button" class="button" type="button" aria-label="Choose a random ECG record">Random</button>
-          </div>
-          <p id="sample-message" class="message" role="status" aria-live="polite"></p>
+          <div class="sample-workspace">
+            <div class="sample-explorer-pane">
+              <p class="section-label">Current ECG</p>
+              <div class="sample-controls" role="group" aria-label="ECG sample navigation">
+                <label class="search-field" for="ecg-search">Search ECG ID
+                  <input id="ecg-search" type="search" inputmode="numeric" autocomplete="off" placeholder="Enter an ECG ID">
+                </label>
+                <button id="search-button" class="button primary" type="button">Find ECG</button>
+                <div class="navigation-buttons">
+                  <button id="previous-button" class="button" type="button" aria-label="Previous ECG record">← Previous</button>
+                  <button id="random-button" class="button" type="button" aria-label="Choose a random ECG record">Random</button>
+                  <button id="next-button" class="button" type="button" aria-label="Next ECG record">Next →</button>
+                </div>
+              </div>
+              <p id="sample-message" class="message" role="status" aria-live="polite"></p>
 
-          <div class="sample-meta">
-            <div><span>ECG ID</span><strong id="current-ecg-id" class="mono">—</strong></div>
-            <div><span>Positive ground-truth labels</span><strong id="positive-labels">—</strong></div>
-          </div>
+              <div class="sample-meta">
+                <div class="ecg-identity"><span>ECG ID</span><strong id="current-ecg-id" class="mono">—</strong></div>
+                <div><span>Ground-truth positive labels</span><strong id="positive-labels">—</strong></div>
+              </div>
+            </div>
 
-          <div class="viewer-toolbar" aria-label="Probability table controls">
-            <label for="row-filter-select">Rows
-              <select id="row-filter-select">
-                <option value="top5">Top 5</option>
-                <option value="top10" selected>Top 10</option>
-                <option value="all">All labels</option>
-                <option value="positive">Ground-truth positive</option>
-              </select>
-            </label>
-            <label for="sort-select">Sort
-              <select id="sort-select">
-                <option value="probability">Probability descending</option>
-                <option value="label">Label alphabetic</option>
-                <option value="target">Ground-truth positive first</option>
-              </select>
-            </label>
-          </div>
+            <div class="prediction-pane">
+              <div class="viewer-toolbar" aria-label="Probability table controls">
+                <div>
+                  <p class="section-label">Prediction probabilities</p>
+                  <p class="toolbar-help">Click a label to compare modes.</p>
+                </div>
+                <label for="row-filter-select">View
+                  <select id="row-filter-select">
+                    <option value="top5">Top 5</option>
+                    <option value="top10" selected>Top 10</option>
+                    <option value="all">All labels</option>
+                    <option value="positive">Ground-truth positive</option>
+                  </select>
+                </label>
+                <label for="sort-select">Sort
+                  <select id="sort-select">
+                    <option value="probability">Probability descending</option>
+                    <option value="label">Label alphabetic</option>
+                    <option value="target">Ground truth first</option>
+                  </select>
+                </label>
+              </div>
 
-          <div class="protocol-note" role="note">
-            <strong>Formal metric boundary.</strong> Prediction probabilities are shown with ground truth. No fixed classification threshold is part of the formal Macro AUROC protocol.
-          </div>
+              <div class="protocol-note" role="note">
+                <strong>Formal metric boundary.</strong> No fixed classification threshold is part of the formal Macro AUROC protocol.
+              </div>
 
-          <div class="table-wrap" tabindex="0" aria-label="Scrollable prediction probability table">
-            <table class="probability-table">
-              <thead><tr><th scope="col">Label</th><th scope="col">Ground truth</th><th scope="col">Probability</th><th scope="col">Probability scale</th></tr></thead>
-              <tbody id="probability-body"></tbody>
-            </table>
+              <div class="table-wrap" tabindex="0" aria-label="Scrollable prediction probability table">
+                <table class="probability-table">
+                  <thead><tr><th scope="col">Label</th><th scope="col">Ground truth</th><th scope="col">Probability</th><th scope="col">Probability scale</th></tr></thead>
+                  <tbody id="probability-body"></tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -160,10 +175,10 @@
           <div class="panel-heading">
             <div>
               <p class="eyebrow">Comparison view</p>
-              <h2 id="comparison-title">Same model · same granularity · same ECG</h2>
+              <h2 id="comparison-title"><span id="comparison-heading-label">Selected label</span> — Mode Comparison</h2>
             </div>
           </div>
-          <p class="muted">Finetuning, Frozen, and Linear are compared only within the same label space. Missing physical bundles remain explicitly marked “Not packaged.”</p>
+          <p class="muted">Same model · same granularity · same ECG. Finetuning, Frozen, and Linear are compared only within the same label space.</p>
           <label class="comparison-label" for="comparison-label-select">Selected label
             <select id="comparison-label-select"></select>
           </label>
@@ -177,17 +192,19 @@
               <h2 id="provenance-title">Evidence references and review boundaries</h2>
             </div>
           </div>
-          <dl id="provenance-grid" class="provenance-grid"></dl>
+          <details class="provenance-details">
+            <summary>View source and evidence references</summary>
+            <dl id="provenance-grid" class="provenance-grid"></dl>
+          </details>
 
-          <details class="limitations" open>
+          <details class="limitations">
             <summary>Known limitations</summary>
             <ul>
-              <li>Two of 78 physical canonical sample bundles are unavailable and appear as provenance-only entries.</li>
-              <li>One run has a historical strict-mapping blocker; five runs have Bootstrap provenance blockers.</li>
-              <li>Checkpoint binaries are not packaged.</li>
-              <li>Reviewer shards are serialized inspection data, not independent scientific results.</li>
-              <li>No fixed threshold defines “correct” or “incorrect” predictions here.</li>
-              <li>Larger paper-versus-reproduction differences are not assigned unproven causal explanations.</li>
+              <li>Two of 78 physical sample bundles are unavailable.</li>
+              <li>One run has a historical strict-mapping blocker.</li>
+              <li>Five runs have Bootstrap provenance blockers.</li>
+              <li>No fixed classification threshold is part of the formal protocol.</li>
+              <li>Larger paper-versus-reproduction differences do not have proven root causes.</li>
             </ul>
           </details>
         </section>
@@ -196,7 +213,7 @@
   </main>
 
   <footer>
-    <p><strong>Offline static reviewer.</strong> No network, analytics, backend, database, or data upload.</p>
+    <p><strong>Static inspection interface.</strong> Access-protected online and fully local offline; no analytics, backend, database, or data upload.</p>
     <p>Executable authority <code>238409835ef55358a10bbc3459dfa9aaa91ad5e5</code> · inspection only</p>
   </footer>
 

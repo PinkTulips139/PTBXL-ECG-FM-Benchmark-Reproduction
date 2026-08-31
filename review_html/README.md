@@ -1,6 +1,6 @@
-# Static Sample Reviewer
+# Interactive Sample Reviewer
 
-This directory contains the offline, read-only inspection interface for finalized PTB-XL record-level prediction bundles. It is designed for private project review and does not perform inference, aggregation, mapping, Bootstrap, threshold optimization, or formal metric recomputation.
+This directory contains the online/offline, read-only inspection workspace for finalized PTB-XL record-level prediction bundles. It is designed for private project review and does not perform inference, aggregation, mapping, Bootstrap, threshold optimization, or formal metric recomputation.
 
 ## Open the reviewer
 
@@ -26,8 +26,9 @@ Then open `http://127.0.0.1:8000`.
 - Inspect positive ground-truth labels and stored probabilities.
 - View Top 5, Top 10, all labels, or ground-truth-positive labels.
 - Sort by probability, label, or ground-truth-positive-first.
-- Compare Finetuning, Frozen, and Linear for the same model, granularity, label, and ECG ID.
-- Switch between light and dark themes; preference remains local to the browser.
+- Click any probability-table label to compare Finetuning, Frozen, and Linear for the same model, granularity, label, and ECG ID.
+- Copy the URL hash to share the current run, ECG, and selected-label view without exposing credentials.
+- Use System, Light, or Dark themes; preference remains local to the browser.
 
 Keyboard shortcuts work when focus is not inside a form control:
 
@@ -35,6 +36,7 @@ Keyboard shortcuts work when focus is not inside a form control:
 |---|---|
 | `←` | Previous ECG |
 | `→` | Next ECG |
+| `R` | Random ECG |
 | `/` | Focus ECG-ID search |
 
 ## Data structure
@@ -43,7 +45,7 @@ Keyboard shortcuts work when focus is not inside a form control:
 - `data/runs/*.js`: 76 compact, lazily loaded run shards
 - `data/REVIEW_DATA_MANIFEST.csv` and `.json`: source-to-derived fidelity evidence
 - `assets/app.js`: local interaction logic
-- `assets/styles.css`: local responsive light/dark presentation
+- `assets/styles.css`: local responsive System/Light/Dark presentation
 
 Each available shard contains ECG IDs, record-level prediction probabilities, and aligned targets. It is serialized directly from the packaged canonical NPZ without normalization, thresholding, calibration, label reordering, remapping, aggregation, or probability rounding. Stored prediction values round-trip exactly to the source dtype.
 
@@ -60,4 +62,4 @@ No scientific computation was rerun to reconstruct either missing physical bundl
 
 One ECG record is the formal test sample. Window-level data are supplementary provenance and are not loaded by this interface. The UI displays probabilities and ground truth without imposing a fixed decision threshold. Probability ranking, top-k display, sorting, and mode comparison are inspection features—not new evaluation metrics, an equivalence test, or a definition of prediction correctness.
 
-The reviewer is fully static: no backend, database, CDN, external library, internet requirement, analytics, remote API, or data upload is used.
+The reviewer is fully static: no backend, database, CDN, external library, analytics, remote API, or data upload is used. The repository copy also supports completely offline use.

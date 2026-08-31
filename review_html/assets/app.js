@@ -39,24 +39,55 @@
     try { window.localStorage.setItem(key, value); } catch (error) { /* Local preference storage is optional. */ }
   }
 
-  function systemTheme() {
-    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  function savedSelection() {
+    try { return JSON.parse(safeStorageGet("ecg-review-selection") || "{}"); } catch (error) { return {}; }
+  }
+
+  function initialReviewState() {
+    const hash = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+    const stored = savedSelection();
+    return {
+      model: hash.get("model") || stored.model,
+      granularity: hash.get("granularity") || stored.granularity,
+      mode: hash.get("mode") || stored.mode,
+      run: hash.get("run"),
+      ecg: hash.get("ecg"),
+      label: hash.get("label")
+    };
+  }
+
+  function updateReviewState() {
+    if (!activeRun) return;
+    const params = new URLSearchParams({
+      model: activeRun.model,
+      granularity: activeRun.granularity,
+      mode: activeRun.mode,
+      run: activeRun.formal_run_id
+    });
+    if (activeData) params.set("ecg", String(activeData.ecg_ids[sampleIndex]));
+    const selectedLabel = el("comparison-label-select").value;
+    if (selectedLabel) params.set("label", selectedLabel);
+    safeStorageSet("ecg-review-selection", JSON.stringify({
+      model: activeRun.model,
+      granularity: activeRun.granularity,
+      mode: activeRun.mode
+    }));
+    try { window.history.replaceState(null, "", `#${params.toString()}`); } catch (error) { /* Hash persistence is optional for local files. */ }
   }
 
   function applyTheme(theme, persist) {
-    const selected = theme === "dark" ? "dark" : "light";
+    const modes = ["system", "light", "dark"];
+    const selected = modes.includes(theme) ? theme : "system";
     document.documentElement.dataset.theme = selected;
-    el("theme-toggle").setAttribute("aria-pressed", String(selected === "dark"));
-    el("theme-label").textContent = selected === "dark" ? "Use light theme" : "Use dark theme";
-    el("theme-toggle").setAttribute("aria-label", selected === "dark" ? "Switch to light theme" : "Switch to dark theme");
+    el("theme-select").value = selected;
     if (persist) safeStorageSet("ecg-review-theme", selected);
   }
 
   function initializeTheme() {
-    applyTheme(safeStorageGet("ecg-review-theme") || systemTheme(), false);
-    el("theme-toggle").addEventListener("click", () => {
-      applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark", true);
-    });
+    const modes = ["system", "light", "dark"];
+    const stored = safeStorageGet("ecg-review-theme");
+    applyTheme(modes.includes(stored) ? stored : "system", false);
+    el("theme-select").addEventListener("change", () => applyTheme(el("theme-select").value, true));
   }
 
   function setOptions(select, values, selected) {
@@ -99,6 +130,28 @@
     selectRun(runs[0]);
   }
 
+  function initializeSelection() {
+    const desired = initialReviewState();
+    const models = manifest.model_order.filter((model) => manifest.runs.some((run) => run.model === model));
+    const model = models.includes(desired.model) ? desired.model : models[0];
+    setOptions(modelSelect, models, model);
+
+    const modelRuns = manifest.runs.filter((run) => run.model === model);
+    const granularities = manifest.granularity_order.filter((granularity) => modelRuns.some((run) => run.granularity === granularity));
+    const granularity = granularities.includes(desired.granularity) ? desired.granularity : granularities[0];
+    setOptions(granularitySelect, granularities, granularity);
+
+    const granularityRuns = modelRuns.filter((run) => run.granularity === granularity);
+    const modes = manifest.mode_order.filter((mode) => granularityRuns.some((run) => run.mode === mode));
+    const mode = modes.includes(desired.mode) ? desired.mode : modes[0];
+    setOptions(modeSelect, modes, mode);
+
+    const runs = manifest.runs.filter((run) => run.model === model && run.granularity === granularity && run.mode === mode);
+    const run = runs.find((candidate) => candidate.formal_run_id === desired.run) || runs[0];
+    setOptions(runSelect, runs.map((candidate) => candidate.formal_run_id), run ? run.formal_run_id : "");
+    selectRun(run, { ecgId: desired.ecg, label: desired.label });
+  }
+
   function classForStatus(value) {
     const status = String(value || "").toUpperCase();
     if (["PASS", "COMPLETE", "FORMAL COMPLETE", "PACKAGED", "SAMPLE DATA AVAILABLE"].includes(status)) return "status-good";
@@ -134,28 +187,28 @@
   }
 
   function renderRunSummary(run) {
-    const fields = [
-      ["Model", run.model],
-      ["Granularity", run.granularity],
-      ["Mode", run.mode],
-      ["Formal run ID", run.formal_run_id, "mono"],
-      ["Formal status", statusChip(run.formal_complete ? "Formal complete" : "Not complete")],
-      ["Ours AUROC", metric(run.ours_auroc)],
-      ["Paper AUROC", metric(run.paper_auroc)],
-      ["Difference", metric(run.difference)],
-      ["Mapping", statusChip(run.mapping_status)],
-      ["Bootstrap", statusChip(run.bootstrap_status)],
-      ["Physical sample", statusChip(run.physical_sample_available ? "Sample data available" : "Sample data not packaged", run.physical_sample_available ? "status-info" : "status-neutral")],
-      ["Review mode", statusChip(run.review_mode, run.review_mode === "PROVENANCE_ONLY_LIMITED" ? "status-warning" : "status-neutral")],
-      ["Record count", run.record_count || "Not packaged"],
-      ["Output dimension", run.output_dim || "Not available"]
-    ];
-    const statusLabels = new Set(["Formal status", "Mapping", "Bootstrap", "Physical sample", "Review mode"]);
-    el("run-summary").innerHTML = fields.map(([label, value, extraClass]) => `
-      <div class="summary-field">
-        <span>${escapeHtml(label)}</span>
-        ${statusLabels.has(label) ? value : `<strong class="${extraClass || ""}">${escapeHtml(value)}</strong>`}
-      </div>`).join("");
+    el("run-summary").innerHTML = `
+      <div class="run-identity-strip">
+        <div><span>Model</span><strong>${escapeHtml(run.model)}</strong></div>
+        <div><span>Granularity</span><strong>${escapeHtml(run.granularity)}</strong></div>
+        <div><span>Mode</span><strong>${escapeHtml(run.mode)}</strong></div>
+        <div><span>Formal status</span>${statusChip(run.formal_complete ? "Formal complete" : "Not complete")}</div>
+      </div>
+      <div class="run-metric-strip">
+        <div><span>Ours AUROC</span><strong class="mono" title="${metric(run.ours_auroc)}">${metric(run.ours_auroc, 4)}</strong></div>
+        <div><span>Paper AUROC</span><strong class="mono" title="${metric(run.paper_auroc)}">${metric(run.paper_auroc, 4)}</strong></div>
+        <div><span>Δ</span><strong class="mono" title="${metric(run.difference)}">${metric(run.difference, 4)}</strong></div>
+      </div>
+      <div class="run-status-strip">
+        <div><span>Mapping</span>${statusChip(run.mapping_status)}</div>
+        <div><span>Bootstrap</span>${statusChip(run.bootstrap_status)}</div>
+        <div><span>Sample availability</span>${statusChip(run.physical_sample_available ? "Sample data available" : "Sample data not packaged", run.physical_sample_available ? "status-info" : "status-neutral")}</div>
+      </div>
+      <div class="run-meta-strip">
+        <div><span>Formal run ID</span><strong class="mono">${escapeHtml(run.formal_run_id)}</strong></div>
+        <div><span>Records</span><strong>${escapeHtml(run.record_count || "Not packaged")}</strong></div>
+        <div><span>Outputs</span><strong>${escapeHtml(run.output_dim || "Not available")}</strong></div>
+      </div>`;
   }
 
   function renderMissing(run) {
@@ -169,12 +222,14 @@
       <h2>Sample data not packaged</h2>
       <p><strong>${escapeHtml(run.model)} / ${escapeHtml(run.granularity)} / ${escapeHtml(run.mode)}</strong> remains part of the finalized 78-run benchmark, but its physical canonical sample bundle was not retained locally.</p>
       <div class="packaging-grid">
-        <div><span>Physical sample data</span><strong>NOT PACKAGED</strong></div>
-        <div><span>Mapping</span><strong>${escapeHtml(displayStatus(run.mapping_status))}</strong></div>
-        <div><span>Review mode</span><strong>${escapeHtml(displayStatus(run.review_mode))}</strong></div>
+        <div><span>Formal run</span>${statusChip("Formal complete")}</div>
+        <div><span>Sample bundle</span>${statusChip("Sample data not packaged", "status-neutral")}</div>
+        <div><span>Mapping</span>${statusChip(run.mapping_status)}</div>
+        <div><span>Review</span>${statusChip(run.review_mode, limited ? "status-warning" : "status-neutral")}</div>
       </div>
       <p>${limited ? "Record-level aggregation evidence remains available, but highest-grade prediction-to-target group provenance is incomplete." : "The formal result and mapping provenance remain available."} No inference, aggregation, or mapping was rerun solely for packaging.</p>`;
     setLoadStatus("Provenance only", "warning");
+    updateReviewState();
   }
 
   function loadRunData(run) {
@@ -202,7 +257,7 @@
     return promise;
   }
 
-  async function selectRun(run) {
+  async function selectRun(run, desiredState = {}) {
     if (!run) return;
     activeRun = run;
     renderRunSummary(run);
@@ -220,20 +275,23 @@
       const payload = await loadRunData(run);
       if (activeRun !== run) return;
       activeData = payload;
-      sampleIndex = 0;
+      const requestedIndex = desiredState.ecgId == null ? -1 : payload.ecg_ids.findIndex((value) => String(value) === String(desiredState.ecgId));
+      sampleIndex = requestedIndex >= 0 ? requestedIndex : 0;
       el("sample-browser").classList.remove("hidden");
       el("comparison-panel").classList.remove("hidden");
       setLoadStatus("Sample data loaded", "good");
       setSampleControlsDisabled(false);
-      populateComparisonLabels();
+      el("row-filter-select").value = run.granularity === "super" ? "all" : "top10";
+      populateComparisonLabels(desiredState.label);
       renderSample();
     } catch (error) {
-      setLoadStatus("Local shard load failed", "warning");
+      console.error("Review shard load failed", error);
+      setLoadStatus("Unable to load sample data", "warning");
       setSampleControlsDisabled(true);
       el("sample-browser").classList.add("hidden");
       el("comparison-panel").classList.add("hidden");
       el("missing-card").classList.remove("hidden");
-      el("missing-card").innerHTML = `<p class="eyebrow">Local loading issue</p><h2>Data shard could not be opened</h2><p>${escapeHtml(error.message)}</p><p>Try the optional local HTTP-server method described in <code>review_html/README.md</code>.</p>`;
+      el("missing-card").innerHTML = `<p class="eyebrow">Review data unavailable</p><h2>Unable to load this review shard</h2><p>Try the optional local HTTP-server method described in <code>review_html/README.md</code>.</p>`;
     }
   }
 
@@ -274,18 +332,19 @@
     const rows = sortedAndFilteredRows(labels, probabilities, targets);
     el("probability-body").innerHTML = rows.length ? rows.map((row) => `
       <tr class="${row.target === 1 ? "target-positive" : ""}">
-        <td>${escapeHtml(row.label)}</td>
+        <td><button class="label-selector" type="button" data-label="${escapeHtml(row.label)}" title="Compare ${escapeHtml(row.label)} across modes">${escapeHtml(row.label)}</button></td>
         <td>${row.target === 1 ? '<span class="target-mark">Positive</span>' : "—"}</td>
-        <td class="probability-cell mono">${row.probability.toFixed(4)}</td>
+        <td class="probability-cell mono" title="${escapeHtml(String(row.probability))}">${row.probability.toFixed(4)}</td>
         <td><div class="bar-track" aria-label="Probability ${escapeHtml(row.probability.toFixed(4))}"><div class="bar-fill" style="width:${Math.max(0, Math.min(100, row.probability * 100))}%"></div></div></td>
       </tr>`).join("") : '<tr><td colspan="4">No labels match the selected view.</td></tr>';
 
     renderComparison(ecgId);
+    updateReviewState();
   }
 
-  function populateComparisonLabels() {
+  function populateComparisonLabels(preferredLabel) {
     const labels = manifest.label_sets[activeRun.granularity];
-    const previous = el("comparison-label-select").value;
+    const previous = preferredLabel || el("comparison-label-select").value;
     setOptions(el("comparison-label-select"), labels, labels.includes(previous) ? previous : labels[0]);
   }
 
@@ -293,6 +352,7 @@
     if (!activeRun || !activeData) return;
     const comparisonRunKey = activeRun.canonical_experiment_key;
     const selectedLabel = el("comparison-label-select").value;
+    el("comparison-heading-label").textContent = selectedLabel || "Selected label";
     const labels = manifest.label_sets[activeRun.granularity];
     const labelIndex = labels.indexOf(selectedLabel);
     const relevantRuns = manifest.mode_order.map((mode) => manifest.runs.find((run) =>
@@ -302,14 +362,15 @@
 
     for (const run of relevantRuns) {
       if (!run.physical_sample_available) {
-        cards.push(`<article class="comparison-card unavailable"><span>${escapeHtml(run.mode)}</span><strong>Not packaged</strong><small>${escapeHtml(displayStatus(run.review_mode))}</small></article>`);
+        cards.push(`<article class="comparison-card unavailable"><span>${escapeHtml(run.mode)}</span><strong>Not packaged</strong><small>Sample bundle unavailable</small><div class="comparison-target">Review <b>${escapeHtml(displayStatus(run.review_mode))}</b></div></article>`);
         continue;
       }
       try {
         const data = await loadRunData(run);
         const index = data.ecg_ids.findIndex((value) => String(value) === String(ecgId));
         const probability = index >= 0 && labelIndex >= 0 ? Number(data.predictions[index][labelIndex]) : NaN;
-        cards.push(`<article class="comparison-card"><span>${escapeHtml(run.mode)}</span><strong>${Number.isFinite(probability) ? probability.toFixed(4) : "ECG not found"}</strong><small>${escapeHtml(selectedLabel)}</small></article>`);
+        const target = index >= 0 && labelIndex >= 0 ? Number(data.targets[index][labelIndex]) : NaN;
+        cards.push(`<article class="comparison-card"><span>${escapeHtml(run.mode)}</span><strong title="${Number.isFinite(probability) ? escapeHtml(String(probability)) : ""}">${Number.isFinite(probability) ? probability.toFixed(4) : "ECG not found"}</strong><small>Prediction probability</small><div class="comparison-target">Ground truth <b>${target === 1 ? "● Positive" : Number.isFinite(target) ? "—" : "Unavailable"}</b></div></article>`);
       } catch (error) {
         cards.push(`<article class="comparison-card unavailable"><span>${escapeHtml(run.mode)}</span><strong>Load unavailable</strong><small>Local shard could not be opened</small></article>`);
       }
@@ -317,11 +378,14 @@
 
     if (activeRun && activeRun.canonical_experiment_key === comparisonRunKey && activeData && String(activeData.ecg_ids[sampleIndex]) === String(ecgId)) {
       el("comparison-grid").innerHTML = cards.join("");
+      updateReviewState();
     }
   }
 
   function renderProvenance(run) {
-    const references = (run.provenance_references || []).map((path) => `<a href="../${encodeURI(path)}">${escapeHtml(path)}</a>`).join("<br>") || "Not listed";
+    const references = (run.provenance_references || []).map((path) => window.location.protocol === "file:"
+      ? `<a href="../${encodeURI(path)}">${escapeHtml(path)}</a>`
+      : `<code>${escapeHtml(path)}</code>`).join("<br>") || "Not listed";
     const fields = [
       ["Canonical key", run.canonical_experiment_key],
       ["Formal run ID", run.formal_run_id],
@@ -366,6 +430,12 @@
     renderSample();
   }
 
+  function randomSample() {
+    if (!activeData) return;
+    sampleIndex = Math.floor(Math.random() * activeData.record_count);
+    renderSample();
+  }
+
   function isTypingTarget(target) {
     if (!target) return false;
     const tag = String(target.tagName || "").toLowerCase();
@@ -381,22 +451,32 @@
     el("ecg-search").addEventListener("keydown", (event) => { if (event.key === "Enter") findEcg(); });
     el("previous-button").addEventListener("click", previousSample);
     el("next-button").addEventListener("click", nextSample);
-    el("random-button").addEventListener("click", () => {
-      if (!activeData) return;
-      sampleIndex = Math.floor(Math.random() * activeData.record_count);
-      renderSample();
-    });
+    el("random-button").addEventListener("click", randomSample);
     ["row-filter-select", "sort-select"].forEach((id) => el(id).addEventListener("change", renderSample));
-    el("comparison-label-select").addEventListener("change", () => activeData && renderComparison(String(activeData.ecg_ids[sampleIndex])));
+    el("comparison-label-select").addEventListener("change", () => {
+      if (!activeData) return;
+      renderComparison(String(activeData.ecg_ids[sampleIndex]));
+      updateReviewState();
+    });
+    el("probability-body").addEventListener("click", (event) => {
+      const button = event.target.closest(".label-selector");
+      if (!button || !activeData) return;
+      const label = button.dataset.label;
+      if (!Array.from(el("comparison-label-select").options).some((option) => option.value === label)) return;
+      el("comparison-label-select").value = label;
+      renderComparison(String(activeData.ecg_ids[sampleIndex]));
+      updateReviewState();
+    });
     document.addEventListener("keydown", (event) => {
       if (isTypingTarget(event.target)) return;
       if (event.key === "ArrowLeft") { event.preventDefault(); previousSample(); }
       else if (event.key === "ArrowRight") { event.preventDefault(); nextSample(); }
+      else if (event.key.toLowerCase() === "r") { event.preventDefault(); randomSample(); }
       else if (event.key === "/") { event.preventDefault(); el("ecg-search").focus(); el("ecg-search").select(); }
     });
   }
 
   initializeTheme();
   bindEvents();
-  refreshSelectors("model");
+  initializeSelection();
 })();
